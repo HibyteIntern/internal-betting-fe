@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
 import { SampleService } from './service/sample.service';
 
 @Component({
@@ -7,13 +9,31 @@ import { SampleService } from './service/sample.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'internal-betting-fe';
+  public isLoggedIn = false;
+  public userProfile: KeycloakProfile | null = null;
+  public response: string | null = null;
 
-  constructor(private sample: SampleService) { }
+  constructor(
+    private keycloak: KeycloakService,
+    private sample: SampleService,
+  ) { }
 
-  ngOnInit() {
-    this.sample.getSample().subscribe((res) => {
-      console.log(res);
-    });
+  public async ngOnInit() {
+    this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.userProfile = await this.keycloak.loadUserProfile();
+      this.sample.getSample().subscribe((data) => {
+        this.response = data;
+      });
+    }
+  }
+
+  public login() {
+    this.keycloak.login();
+  }
+
+  public logout() {
+    this.keycloak.logout();
   }
 }

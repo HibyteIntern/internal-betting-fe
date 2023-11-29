@@ -12,6 +12,6 @@ export class SampleService {
   ) { }
 
   getSample() {
-    return this.http.get(`${environment.baseUrl}/sample`);
+    return this.http.get(`${environment.baseUrl}/sample`, { responseType: 'text'});
   }
 }
