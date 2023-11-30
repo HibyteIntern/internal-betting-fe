@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LoginComponent } from './components/login/login.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -23,12 +26,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     KeycloakAngularModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
   ],
   providers: [
     {
