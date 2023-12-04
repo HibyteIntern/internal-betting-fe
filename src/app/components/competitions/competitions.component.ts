@@ -31,6 +31,6 @@ export class CompetitionsComponent implements OnInit {
 
     // this.competitionsApi.updateCompetition(competition).subscribe((data: Competition) => console.log(data))
 
-    // this.competitionsApi.deleteCompetition(53).subscribe(() => console.log('Competition deleted'))
+    // this.competitionsApi.deleteCompetition(52).subscribe(() => console.log('Competition deleted'))
   }
 }

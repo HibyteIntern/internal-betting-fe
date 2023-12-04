@@ -29,7 +29,7 @@ export class CompetitionService {
     return this.http.put<Competition>(`${environment.baseUrl}/competitions/${competition.id}`,  competition, { responseType: 'json'});
   }
 
-  deleteCompetition(id: number) {
-    return this.http.delete(`${environment.baseUrl}/competitions/${id}`, { responseType: 'json'});
+  deleteCompetition(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.baseUrl}/competitions/${id}`);
   }
 }
