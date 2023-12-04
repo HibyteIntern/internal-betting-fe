@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -26,7 +27,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CompetitionsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
