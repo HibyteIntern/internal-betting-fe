@@ -13,6 +13,8 @@ import { BetTemplateListComponent } from './components/bet-templates-page/bet-te
 import { BetTemplateCardComponent } from './components/bet-templates-page/bet-template-card/bet-template-card.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
+import { MatDialogModule } from '@angular/material/dialog';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -41,6 +43,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatSlideToggleModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     {

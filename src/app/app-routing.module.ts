@@ -5,7 +5,12 @@ import {BetTemplatesPageComponent} from "./components/bet-templates-page/bet-tem
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'bet-templates', component: BetTemplatesPageComponent}
+  { path: 'bet-templates', component: BetTemplatesPageComponent,
+    children: [
+      { path: 'create', component: BetTemplatesPageComponent },
+      { path: 'edit/:id', component: BetTemplatesPageComponent },
+      { path: 'delete/:id', component: BetTemplatesPageComponent }
+    ]}
 ];
 
 @NgModule({

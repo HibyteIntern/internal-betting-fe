@@ -1,3 +1,5 @@
 <div id="page-outer-div">
+  <button mat-raised-button [routerLink]="['create']" id="add-template-button">Add Template</button>
+  <button (click)="openDialog()">Open dialog</button>
   <app-bet-template-list [betTemplateList]="betTemplates"></app-bet-template-list>
 </div>
