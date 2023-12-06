@@ -1,0 +1,20 @@
+#bet-template-outer-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  background-color: var(--secondary-color);
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: #111 5px 5px 10px;
+  padding: 20px;
+  transition: scale 0.3s ease-in-out;
+  p {
+    margin: 0 0 5px;
+  }
+}
+
+#bet-template-outer-div:hover {
+  cursor: pointer;
+  scale: 1.015;
+}

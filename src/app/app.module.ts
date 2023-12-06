@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
+import { BetTemplatesPageComponent } from './components/bet-templates-page/bet-templates-page.component';
+import { BetTemplateListComponent } from './components/bet-templates-page/bet-template-list/bet-template-list.component';
+import { BetTemplateCardComponent } from './components/bet-templates-page/bet-template-card/bet-template-card.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -26,7 +31,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +39,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [
     {
