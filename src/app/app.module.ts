@@ -8,13 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
-import { BetTemplatesPageComponent } from './components/bet-templates-page/bet-templates-page.component';
-import { BetTemplateListComponent } from './components/bet-templates-page/bet-template-list/bet-template-list.component';
-import { BetTemplateCardComponent } from './components/bet-templates-page/bet-template-card/bet-template-card.component';
+import { BetTemplatesPageComponent } from './components/bet-templates/bet-templates-page/bet-templates-page.component';
+import { BetTemplateListComponent } from './components/bet-templates/bet-template-list/bet-template-list.component';
+import { BetTemplateCardComponent } from './components/bet-templates/bet-template-card/bet-template-card.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
+import { BetTemplatesAddFormComponent } from './components/bet-templates/bet-templates-add-form/bet-templates-add-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -33,7 +34,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent],
+  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent, BetTemplatesAddFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

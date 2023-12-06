@@ -1,0 +1,32 @@
+<div id="outer-div">
+  <form>
+    <p style="font-size: 1.3rem">Add a bet template</p>
+    <mat-form-field>
+      <mat-label>Template name</mat-label>
+      <input matInput placeholder="Ex. Red cards" value="">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="selectedOption">
+        <mat-option *ngFor="let option of categoryOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="selectedOption === 'Multiple choice'">
+      <p>Options</p>
+      <mat-form-field *ngFor="let option of multipleChoiceOptions; index as i">
+        <mat-label>{{'Option ' + i}}</mat-label>
+        <input matInput placeholder="Ex. Some cool option" value="">
+      </mat-form-field>
+      <button
+        type="button"
+        mat-button
+        style="background-color: white; margin-bottom: 10px; width: 100%"
+        (click)="addChoice()"
+      >
+        Add option</button>
+    </div>
+    <button mat-button style="background-color: white; margin-bottom: 10px; width: 100%">Submit</button>
+  </form>
+</div>

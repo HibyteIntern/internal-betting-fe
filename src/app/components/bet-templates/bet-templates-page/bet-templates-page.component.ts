@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ThemeService} from "../../service/theme.service";
-import {BetTemplateService} from "../../service/bet-template.service";
-import {BetTemplate} from "../../entity/BetTemplate";
+import {ThemeService} from "../../../service/theme.service";
+import {BetTemplateService} from "../../../service/bet-template.service";
+import {BetTemplate} from "../../../entity/BetTemplate";
 import {MatDialog} from "@angular/material/dialog";
-import {LoginComponent} from "../login/login.component";
+import {BetTemplatesAddFormComponent} from "../bet-templates-add-form/bet-templates-add-form.component";
 
 @Component({
   selector: 'app-bet-templates-page',
@@ -25,10 +25,10 @@ export class BetTemplatesPageComponent implements OnInit {
     })
   }
 
-  openDialog() {
-    let dialogRef = this.dialog.open(LoginComponent, {
-      height: '400px',
-      width: '600px',
+  openAddDialog() {
+    let dialogRef = this.dialog.open(BetTemplatesAddFormComponent, {
+      width: '500px',
+      maxHeight: 'calc(100vh - 100px)'
     });
   }
 }

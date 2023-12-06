@@ -1,5 +1,5 @@
 <div id="bet-template-outer-div">
-  <p style="font-size: 25px">{{betTemplate?.name}}</p>
+  <p style="font-size: 25px; text-align: center">{{betTemplate?.name}}</p>
   <p>{{betTemplate?.type}}</p>
   <div *ngIf="betTemplate?.type === BetTemplateType.MULTIPLE_CHOICE" style="height: 50px">
     <mat-form-field>
