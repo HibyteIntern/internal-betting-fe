@@ -16,6 +16,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import { BetTemplatesAddFormComponent } from './components/bet-templates/bet-templates-add-form/bet-templates-add-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -45,7 +46,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

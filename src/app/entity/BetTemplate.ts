@@ -4,5 +4,5 @@ export interface BetTemplate {
   id?: number;
   name: string;
   type: BetTemplateType;
-  multipleChoiceOptions: string[];
+  multipleChoiceOptions?: string[];
 }
