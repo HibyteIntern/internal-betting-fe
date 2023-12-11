@@ -17,6 +17,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import { BetTemplatesAddFormComponent } from './components/bet-templates/bet-templates-add-form/bet-templates-add-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
+import {NgOptimizedImage} from "@angular/common";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -35,7 +38,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent, BetTemplatesAddFormComponent],
+  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent, BetTemplatesAddFormComponent, NavbarComponent, NavbarUserAccountComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,7 +50,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgOptimizedImage
   ],
   providers: [
     {

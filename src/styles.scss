@@ -1,22 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;500;600;700&display=swap');
+:root {
+  --background-color: #202040;
+  --lighter-background-color: #2C2C4A;
+  --sidebar-color: #191928;
+  --navbar-color: #543864;
+  --card-color: #191933;
+  --accent-color-one: #D78484;
+  --accent-color-two: #E4BA84;
+  --text-color: #FFFFFF;
 
-html, body {
-  --primary-color: #435585;
-  --secondary-color: #818FB4;
-  --background-color: #363062;
-  --text-color: #F5E8C7;
+  --font-fredoka: 'Fredoka', sans-serif;
+  --font-josefin: 'Josefin Sans', sans-serif;
 
-  height: 100%;
+  --box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
+}
 
+.dark {
+  --background-color: #202040;
+  --lighter-background-color: #2C2C4A;
+  --sidebar-color: #191928;
+  --navbar-color: #543864;
+  --card-color: #191933;
+  --accent-color-one : #D78484;
+  --accent-color-two: #E4BA84;
+  --text-color: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-josefin);
   background-color: var(--background-color);
   color: var(--text-color);
+  height: 100%;
 }
-
-.light {
-  --primary-color: #F7EFE5;
-  --secondary-color: #C3ACD0;
-  --background-color: #FFFBF5;
-  --text-color: #7743DB;
-}
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
