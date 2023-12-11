@@ -1,9 +1,9 @@
 name: Run ESLint and Prettier
 
 on:
-  push:
+  pull_request:
     branches:
-      - "*"
+      - main
 
 jobs:
   lint:
