@@ -1,23 +1,31 @@
 <div id="outer-div">
   <form [formGroup]="addBetTemplateForm" (ngSubmit)="submitForm()">
     <p style="font-size: 1.3rem">Add a bet template</p>
-    <mat-form-field>
-      <mat-label>Template name</mat-label>
-      <input formControlName="name" matInput placeholder="Ex. Red cards" value="">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Select an option</mat-label>
-      <mat-select [(value)]="selectedOption" formControlName="type">
-        <mat-option *ngFor="let option of categoryOptions" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div id="test-div">
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Template name</mat-label>
+        <input class="work" formControlName="name" matInput placeholder="Ex. Red cards" value="">
+      </mat-form-field>
+    </div>
+
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selectedOption" formControlName="type">
+          <mat-option *ngFor="let option of categoryOptions" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
     <div *ngIf="selectedOption === 'Multiple choice'">
       <p>Options</p>
-      <mat-form-field *ngFor="let control of this.choices.controls; index as i">
+      <mat-form-field appearance="outline" *ngFor="let control of this.choices.controls; index as i">
         <mat-label>{{'Option ' + (i+1)}}</mat-label>
-        <input matInput placeholder="Ex. Some cool option" value="" [formControl]="$any(control)">
+        <input
+          matInput placeholder="Ex. Some cool option"
+          value=""
+          [formControl]="$any(control)"
+        >
       </mat-form-field>
       <button
         type="button"

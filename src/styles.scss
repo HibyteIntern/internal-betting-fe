@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;500;600;700&display=swap');
+@import 'app/themes/themes';
 :root {
-  --background-color: #202040;
+  --background-color: white;
   --lighter-background-color: #2C2C4A;
   --sidebar-color: #191928;
   --navbar-color: #543864;
@@ -33,4 +34,8 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   height: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: red; /* Change the background color here */
 }
