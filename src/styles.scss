@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+html,
+body {
   --primary-color: #435585;
-  --secondary-color: #818FB4;
+  --secondary-color: #818fb4;
   --background-color: #363062;
-  --text-color: #F5E8C7;
+  --text-color: #f5e8c7;
 
   height: 100%;
 
@@ -13,10 +14,13 @@ html, body {
 }
 
 .light {
-  --primary-color: #F7EFE5;
-  --secondary-color: #C3ACD0;
-  --background-color: #FFFBF5;
-  --text-color: #7743DB;
+  --primary-color: #f7efe5;
+  --secondary-color: #c3acd0;
+  --background-color: #fffbf5;
+  --text-color: #7743db;
 }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
