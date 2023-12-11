@@ -7,13 +7,14 @@ import {BetTemplate} from "../../../entity/BetTemplate";
 @Component({
   selector: 'app-bet-templates-add-form',
   templateUrl: './bet-templates-add-form.component.html',
-  styleUrls: ['./bet-templates-add-form.component.scss']
+  styleUrls: ['./bet-templates-add-form.component.scss'],
 })
 export class BetTemplatesAddFormComponent {
 
   selectedOption = "";
   categoryOptions: string[] = ["Numeric", "String", "Boolean", "Multiple choice"];
   errorMessage: string = "";
+  panelColor = new FormControl('red');
   constructor(private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<BetTemplatesAddFormComponent>,
               private betTemplateService: BetTemplateService

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;500;600;700&display=swap');
-@import 'app/themes/themes';
+@import 'app/themes/input-themes';
+@import 'app/themes/button-themes';
 :root {
   --background-color: white;
   --lighter-background-color: #2C2C4A;
@@ -36,6 +37,11 @@ body {
   height: 100%;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: red; /* Change the background color here */
+.card-color-dropdown.mat-mdc-select-panel {
+  background-color: var(--card-color);
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: green;
+  border-radius: 5px;
 }
