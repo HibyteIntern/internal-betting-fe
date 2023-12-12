@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import {BetTemplate} from "../entity/BetTemplate";
-import {environment} from "../../environments/environment";
-import {catchError, map, Observable, of, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { BetTemplate } from '../entity/BetTemplate';
+import { environment } from '../../environments/environment';
+import { catchError, map, Observable, of, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BetTemplateService {
+  private data: BetTemplate[] = [];
+  private apiUrl: string = environment.baseUrl + '/bet-templates';
+  betTemplatesSubject = new Subject<BetTemplate[]>();
 
-  private data: BetTemplate[] = []
-  private apiUrl: string = environment.baseUrl + "/bet-templates";
-  betTemplatesSubject = new Subject<BetTemplate[]>()
-
-  constructor(private _http:HttpClient) {
+  constructor(private _http: HttpClient) {
     this.fetchBetTemplates();
   }
 
@@ -36,8 +35,8 @@ export class BetTemplateService {
         return true;
       }),
       catchError(() => {
-        return of(false)
-      })
+        return of(false);
+      }),
     );
   }
 }
