@@ -6,7 +6,7 @@ import { SampleService } from '../../service/sample.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   public darkModeChecked = false;
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private keycloak: KeycloakService,
     private sample: SampleService,
-  ) { }
+  ) {}
 
   public async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();

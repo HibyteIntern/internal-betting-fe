@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
 
@@ -14,7 +14,7 @@ export class ThemeService {
       document.body.classList.toggle("dark");
     }
   }
-
+  
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     if(this.isDarkMode) localStorage.setItem('theme', 'dark');
@@ -22,6 +22,7 @@ export class ThemeService {
 
     document.body.classList.toggle("dark");
   }
+  
   getCurrentTheme() {
     if(this.isDarkMode) return "Dark"
     return "Light"
