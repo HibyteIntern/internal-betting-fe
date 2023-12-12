@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ThemeService} from "../../service/theme.service";
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
+  themeService: ThemeService;
+  constructor(themeService: ThemeService) {
+    this.themeService = themeService
+  }
 }

@@ -3,13 +3,13 @@
 
 //Dark theme
 $dark-primary-palette: (
-  100: red,
-  500: red,
-  700: red,
+  100: #E4BA84,
+  500: #E4BA84,
+  700: #E4BA84,
   contrast: (
-    100: green,
-    500: green,
-    700: green,
+    100: white,
+    500: white,
+    700: white,
 ));
 
 $dark-accent-palette: (
@@ -46,9 +46,9 @@ $light-primary-palette: (
   ));
 
 $light-accent-palette: (
-  100: #191928,
-  500: #191928,
-  700: #191928,
+  100: #370055,
+  500: #370055,
+  700: #370055,
   contrast: (
     100: white,
     500: white,
@@ -71,5 +71,3 @@ typography: mat.define-typography-config()
 .dark {
   @include mat.all-component-colors($dark-theme);
 }
-
-

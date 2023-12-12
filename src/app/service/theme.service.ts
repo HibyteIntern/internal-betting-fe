@@ -22,4 +22,8 @@ export class ThemeService {
 
     document.body.classList.toggle("dark");
   }
+  getCurrentTheme() {
+    if(this.isDarkMode) return "Dark"
+    return "Light"
+  }
 }

@@ -33,20 +33,19 @@ $dark-theme: mat.define-dark-theme((color: (
 
 //Light theme
 $light-primary-palette: (
-  100: #EE9595,
-  500: #EE9595,
-  700: #EE9595,
+  100: #E48586,
+  500: #E48586,
+  700: #E48586,
   contrast: (
-    100: white,
-    500: white,
-    700: white
+    100: #370055,
+    500: #370055,
+    700: #370055
   ));
 $light-accent-palette: (
-  100: #E4BA84,
-  500: #E4BA84,
-  700: #E4BA84,
+  100: #37306B,
+  500: #37306B,
+  700: #37306B,
   contrast: (
-    50: white,
     100: white,
     500: white,
     700: white,
@@ -59,14 +58,16 @@ $light-theme: mat.define-light-theme((color: (
   primary: $light-primary,
   accent: $light-accent
 ),
-  typography: mat.define-typography-config(), // Define dark text color here,
+  typography: mat.define-typography-config(),
   density: 0,
 ));
 
 :root {
-  @include mat.button-theme($light-theme);
+  @include mat.button-color($light-theme);
+  @include mat.slider-color($light-theme);
 }
 
 .dark {
-  @include mat.button-theme($dark-theme);
+  @include mat.button-color($dark-theme);
+  @include mat.slider-color($dark-theme);
 }

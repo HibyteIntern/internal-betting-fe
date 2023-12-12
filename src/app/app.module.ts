@@ -8,18 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
-import { BetTemplatesPageComponent } from './components/bet-templates/bet-templates-page/bet-templates-page.component';
-import { BetTemplateListComponent } from './components/bet-templates/bet-template-list/bet-template-list.component';
-import { BetTemplateCardComponent } from './components/bet-templates/bet-template-card/bet-template-card.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
-import { BetTemplatesAddFormComponent } from './components/bet-templates/bet-templates-add-form/bet-templates-add-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import {NgOptimizedImage} from "@angular/common";
+import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
+import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
+import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -38,7 +37,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, BetTemplatesPageComponent, BetTemplateListComponent, BetTemplateCardComponent, BetTemplatesAddFormComponent, NavbarComponent, NavbarUserAccountComponent],
+  declarations: [AppComponent, LoginComponent, NavbarComponent, NavbarUserAccountComponent, EventTemplateBrowserComponent, EventTemplateAddComponent, EventTemplateCardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

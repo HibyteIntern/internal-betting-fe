@@ -1,7 +1,7 @@
 .outer-div {
   background-color: var(--navbar-color);
-  width: 100vw;
-  height: 5rem;
+  width: 100%;
+  height: var(--navbar-heigth);
   z-index: 100;
 
   display: flex;
