@@ -8,7 +8,7 @@ export class ThemeService {
   isDarkMode = false;
 
   constructor() {
-    let theme: string | null = localStorage.getItem('theme')
+    const theme: string | null = localStorage.getItem('theme')
     if(theme === 'dark') {
       this.isDarkMode = true;
       document.body.classList.toggle("dark");
