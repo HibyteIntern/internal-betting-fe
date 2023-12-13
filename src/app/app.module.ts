@@ -19,9 +19,13 @@ import { NgOptimizedImage } from '@angular/common';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
+import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
+import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -48,8 +52,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateBrowserComponent,
     EventTemplateAddComponent,
     EventTemplateCardComponent,
+    EventTemplateListComponent,
     MainframeComponent,
     CreateEventComponent,
+    UserTagBtnComponent,
+    CompetitionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +73,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgOptimizedImage,
     MatLegacyChipsModule,
     FormsModule,
+    MatExpansionModule,
   ],
   providers: [
     {

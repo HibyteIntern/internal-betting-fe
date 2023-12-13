@@ -1,0 +1,13 @@
+#list-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+
+  @media screen and (max-width: 600px) {
+    .column {
+      flex-basis: 100%; // Full width on smaller screens
+      margin-right: 0;
+    }
+  }
+}
