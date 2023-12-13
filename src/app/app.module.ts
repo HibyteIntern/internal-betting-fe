@@ -20,6 +20,10 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { GroupListComponent } from './components/group-list/group-list.component';
+import { GroupComponent } from './components/group/group.component';
+import { GroupCreateComponent } from './components/group-create/group-create.component';
+import { GroupsComponent } from './components/groups/groups.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -47,6 +51,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateAddComponent,
     EventTemplateCardComponent,
     MainframeComponent,
+    GroupListComponent,
+    GroupComponent,
+    GroupCreateComponent,
+    GroupsComponent,
   ],
   imports: [
     BrowserModule,
