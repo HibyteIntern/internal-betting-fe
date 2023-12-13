@@ -1,21 +1,37 @@
 
-<app-mainframe>
-    <form>
+<app-mainframe [title]="'Create event template'">
+    <form class="app-form" [formGroup]="templateFormGroup">
+
       <mat-form-field color="accent" appearance="outline">
         <mat-label>Event template name</mat-label>
-        <input matInput placeholder="Football match" value="Sushi">
+        <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" color="accent">
-        <mat-label>Bet type</mat-label>
-        <mat-select>
-          <mat-option>Numeric</mat-option>
-          <mat-option>Multiple choice</mat-option>
-          <mat-option>Boolean</mat-option>
-          <mat-option>Text</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div *ngFor="let betTemplate of betTemplates.controls; let i=index" [formGroupName]="i">
 
-      <button type="button" mat-raised-button color="primary">Submit</button>
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Bet name</mat-label>
+          <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Bet type</mat-label>
+          <mat-select panelClass="select-dropdown" [formControlName]="'type'">
+            <mat-option value="NUMERIC">Numeric</mat-option>
+            <mat-option value ="MULTIPLE_CHOICE">Multiple choice</mat-option>
+            <mat-option value="BOOLEAN">Boolean</mat-option>
+            <mat-option value="STRING">Text</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="removeBetTemplate(i)">Delete</button>
+      </div>
+
+      <button
+        type="button"
+        mat-raised-button
+        color="accent"
+        style="color: white"
+        (click)="addBetTemplate()">Add bet</button>
+      <button type="button" mat-raised-button color="primary" style="color: var(--text-color)">Submit</button>
     </form>
 </app-mainframe>
