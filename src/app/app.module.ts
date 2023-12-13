@@ -19,6 +19,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
+import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -45,6 +46,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateBrowserComponent,
     EventTemplateAddComponent,
     EventTemplateCardComponent,
+    MainframeComponent,
   ],
   imports: [
     BrowserModule,
