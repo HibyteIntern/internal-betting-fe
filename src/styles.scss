@@ -65,6 +65,11 @@ input {
   color: var(--text-color);
 }
 
+//Background color for Angular material select dropdown
+.select-dropdown.mat-mdc-select-panel {
+  background: var(--background-color);
+}
+
 h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
