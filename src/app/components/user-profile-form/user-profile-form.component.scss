@@ -1,0 +1,16 @@
+form{
+    margin-left: 100px;
+    margin-top: 100px;
+}
+
+.username-field {
+    display: block;
+    width: 25%; /* sau orice altă valoare mai mică decât 100% */
+    margin-bottom: 10px;
+  }
+
+.description-field {
+    display: block;
+    width: 40%;
+    margin-bottom: 10px;
+}  

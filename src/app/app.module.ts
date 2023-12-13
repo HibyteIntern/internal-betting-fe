@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -20,6 +20,10 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileNewComponent } from './components/user-profile-new/user-profile-new.component';
+import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -47,6 +51,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateAddComponent,
     EventTemplateCardComponent,
     MainframeComponent,
+    UserProfileComponent,
+    UserProfileNewComponent,
+    UserProfileEditComponent,
+    UserProfileFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    FormsModule,
+   
   ],
   providers: [
     {

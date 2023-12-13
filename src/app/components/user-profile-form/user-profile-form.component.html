@@ -1,0 +1,15 @@
+<form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">  
+    <h2>User Profile</h2>
+
+    <mat-form-field class="username-field">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="description-field">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <button type="submit">Submit</button>
+</form>
