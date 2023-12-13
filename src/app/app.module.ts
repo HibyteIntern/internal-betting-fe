@@ -20,6 +20,8 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -47,6 +49,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateAddComponent,
     EventTemplateCardComponent,
     MainframeComponent,
+    UserTagBtnComponent,
+    CompetitionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'edit/:id', component: EventTemplateAddComponent },
     ],
   },
+  { path: 'competition', component: CompetitionsComponent },
 ];
 
 @NgModule({
