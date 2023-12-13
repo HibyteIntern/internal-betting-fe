@@ -21,6 +21,7 @@ import { EventTemplateAddComponent } from './components/event-templates/event-te
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -48,6 +49,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateAddComponent,
     EventTemplateCardComponent,
     EventTemplateListComponent,
+    MainframeComponent,
   ],
   imports: [
     BrowserModule,
