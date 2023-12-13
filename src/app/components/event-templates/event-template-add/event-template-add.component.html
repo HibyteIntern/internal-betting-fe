@@ -1,1 +1,19 @@
-<p>event-template-add works!</p>
+<form style="display: flex; flex-direction: column; width: 30%; padding: 5rem">
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Event template name</mat-label>
+    <input matInput placeholder="Football match" value="Sushi">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Bet type</mat-label>
+    <mat-select>
+      <option value="volvo">Numeric</option>
+      <option value="saab">Multiple choice</option>
+      <option value="mercedes">Boolean</option>
+      <option value="audi">Text input</option>
+    </mat-select>
+  </mat-form-field>
+
+  <button type="button" mat-raised-button color="accent">Add bet</button>
+</form>

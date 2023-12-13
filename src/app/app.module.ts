@@ -19,6 +19,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
+import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -45,6 +47,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateBrowserComponent,
     EventTemplateAddComponent,
     EventTemplateCardComponent,
+    EventTemplateListComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    MatExpansionModule,
   ],
   providers: [
     {

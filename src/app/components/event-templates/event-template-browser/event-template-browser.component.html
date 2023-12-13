@@ -1,1 +1,13 @@
-<p>event-template-browser works!</p>
+<div id="outer-div">
+  <div style="width: 100%">
+    <button
+      [routerLink]="['/event-templates/create']"
+      mat-raised-button color="primary"
+      (click)="addEventTemplate()"
+      id="add-event-template-button"
+    >Add Event Template</button>
+  </div>
+  <div *ngIf="eventTemplates.loading" class="lds-dual-ring"></div>
+  <app-event-template-list [eventTemplates]="eventTemplates.entity"></app-event-template-list>
+</div>
+
