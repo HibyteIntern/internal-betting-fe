@@ -67,6 +67,7 @@ h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
   font-weight: bold;
+  margin-bottom: 2rem;
 }
 
 //Loading spinner
@@ -101,7 +102,7 @@ h1 {
 
 body {
   margin: 0;
-  font-family: var(--font-josefin);
+  font-family: var(--font-raleway);
   background-color: var(--background-color);
   color: var(--text-color);
   height: 100%;
