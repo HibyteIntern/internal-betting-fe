@@ -27,7 +27,6 @@ export class EventTemplateAddComponent {
 
   addBetTemplate() {
     const betTemplateForm = this.reactiveFormBuilder.group({
-      name: ['', Validators.required],
       type: ['', Validators.required],
     });
     this.betTemplates.push(betTemplateForm);

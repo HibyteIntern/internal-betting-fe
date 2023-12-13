@@ -7,24 +7,21 @@
         <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
       </mat-form-field>
 
-      <div *ngFor="let betTemplate of betTemplates.controls; let i=index" [formGroupName]="i">
-
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Bet name</mat-label>
-          <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" color="accent">
-          <mat-label>Bet type</mat-label>
-          <mat-select panelClass="select-dropdown" [formControlName]="'type'">
-            <mat-option value="NUMERIC">Numeric</mat-option>
-            <mat-option value ="MULTIPLE_CHOICE">Multiple choice</mat-option>
-            <mat-option value="BOOLEAN">Boolean</mat-option>
-            <mat-option value="STRING">Text</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="removeBetTemplate(i)">Delete</button>
+      <div formArrayName="betTemplates" id="bet-list-container">
+        <div *ngFor="let betTemplate of betTemplates.controls; let i=index" [formGroupName]="i">
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Bet type</mat-label>
+            <mat-select panelClass="select-dropdown" formControlName="type">
+              <mat-option value="NUMERIC">Numeric</mat-option>
+              <mat-option value ="MULTIPLE_CHOICE">Multiple choice</mat-option>
+              <mat-option value="BOOLEAN">Boolean</mat-option>
+              <mat-option value="STRING">Text</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
+
+
 
       <button
         type="button"
