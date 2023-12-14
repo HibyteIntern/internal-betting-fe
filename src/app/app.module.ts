@@ -26,6 +26,8 @@ import { CreateEventComponent } from './components/events/create-event/create-ev
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -74,6 +76,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatLegacyChipsModule,
     FormsModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     {

@@ -1,39 +1,53 @@
-<div id="outer-div">
-  <form (ngSubmit)="submitForm()">
-    <p style="font-size: 1.3rem">Add an Event</p>
-    <mat-form-field>
+<app-mainframe [title]="'Create an event'">
+  <form class="app-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
+    <mat-form-field appearance="outline">
       <mat-label>Event Name</mat-label>
-      <input name="eventName" matInput placeholder="Ex. Event Name" value="">
+      <input name="eventName" matInput placeholder="Ex. Event Name" [(ngModel)]="formData.name" required>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea name="description" matInput placeholder="Ex. Event Description"></textarea>
+      <textarea name="description" matInput placeholder="Ex. Event Description" [(ngModel)]="formData.description" required></textarea>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Creator</mat-label>
-      <input name="creator" matInput placeholder="Ex. Creator" value="">
+      <input name="creator" matInput placeholder="Ex. Creator" [(ngModel)]="formData.creator" required>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tags</mat-label>
-      <input name="tags" matInput placeholder="Ex. Tag1, Tag2" value="">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select</mat-label>
+      <mat-select>
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>User Groups</mat-label>
-      <input name="userGroups" matInput placeholder="Ex. Group1, Group2" value="">
+      <input name="userGroups" matInput placeholder="Ex. Group1, Group2" [(ngModel)]="formData.userGroups">
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>User Profiles</mat-label>
-      <input name="userProfiles" matInput placeholder="Ex. 1, 2, 3" value="">
+      <input name="userProfiles" matInput placeholder="Ex. 1, 2, 3" [(ngModel)]="formData.userProfiles">
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Starts At</mat-label>
-      <input name="startsAt" matInput type="datetime-local">
+      <input matInput [matDatepicker]="startsAtPicker" name="startsAt" placeholder="Select a date and time" [(ngModel)]="formData.startsAt" required>
+      <mat-datepicker-toggle matSuffix [for]="startsAtPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startsAtPicker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Ends At</mat-label>
-      <input name="endsAt" matInput type="datetime-local">
+      <input matInput [matDatepicker]="endsAtPicker" name="endsAt" placeholder="Select a date and time" [(ngModel)]="formData.endsAt" required>
+      <mat-datepicker-toggle matSuffix [for]="endsAtPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endsAtPicker></mat-datepicker>
     </mat-form-field>
-    <button mat-button style="background-color: white; margin-bottom: 10px; width: 100%" type="submit">Submit</button>
-    <!-- Display error message if needed -->
+
+
+    <button mat-raised-button color="accent" type="submit" [disabled]="!eventForm.valid">Submit</button>
   </form>
-</div>
+</app-mainframe>

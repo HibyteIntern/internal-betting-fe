@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {EventRequest} from "../../../entity/EventRequest";
 
 @Component({
   selector: 'app-create-event',
@@ -9,17 +10,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrls: ['./create-event.component.scss']
 })
 export class CreateEventComponent {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  addUserProfile() {
-
-  }
-
-  removeUserProfile(userProfileId: number) {
-  }
-
-  // Implement other methods as needed
+  formData: EventRequest = new EventRequest();
 
   submitForm() {
-    // Handle form submission here
+    console.log('Form Data:', this.formData);
   }
 }

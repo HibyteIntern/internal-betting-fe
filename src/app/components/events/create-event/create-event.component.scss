@@ -1,19 +1,1 @@
 
-#outer-div {
-  min-height: 100%;
-  background-color: var(--primary-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  form {
-    width: 80%;
-    mat-form-field {
-      width: 100%;
-    }
-    mat-input-element {
-      width: 100%;
-      background-color: green;
-    }
-  }
-}
