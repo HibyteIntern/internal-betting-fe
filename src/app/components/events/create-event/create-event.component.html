@@ -16,22 +16,28 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Select</mat-label>
-      <mat-select>
-        <mat-option value="one">First option</mat-option>
-        <mat-option value="two">Second option</mat-option>
+      <mat-label>Event Template</mat-label>
+      <mat-select [(ngModel)]="formData.selectedTemplate" name="selectedTemplate">
+        <mat-option *ngFor="let template of eventTemplates" [value]="template.name">
+          {{ template.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>User Groups</mat-label>
-      <input name="userGroups" matInput placeholder="Ex. Group1, Group2" [(ngModel)]="formData.userGroups">
+      <mat-select [formControl]="userGroupsControl" multiple>
+        <mat-option *ngFor="let group of userGroupsList" [value]="group">{{group}}</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>User Profiles</mat-label>
-      <input name="userProfiles" matInput placeholder="Ex. 1, 2, 3" [(ngModel)]="formData.userProfiles">
+      <mat-select [formControl]="userProfilesControl" multiple>
+        <mat-option *ngFor="let profile of userProfilesList" [value]="profile">{{profile}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
 
     <mat-form-field appearance="outline">
       <mat-label>Starts At</mat-label>
