@@ -24,6 +24,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import {MatIconModule} from "@angular/material/icon";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -69,6 +70,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ReactiveFormsModule,
     NgOptimizedImage,
     MatExpansionModule,
+    MatIconModule,
   ],
   providers: [
     {
