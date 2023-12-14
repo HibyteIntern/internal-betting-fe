@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-profile-edit.component.scss']
 })
 export class UserProfileEditComponent {
-
+  title = "User Profile Edit Account"
 }

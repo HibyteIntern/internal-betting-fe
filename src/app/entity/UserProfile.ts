@@ -1,3 +1,5 @@
+import { Bet } from "./Bet";
+
 export interface UserProfile{
     userId?: number,
     keycloakId?: String,
@@ -5,5 +7,5 @@ export interface UserProfile{
     profilePicture?: number,
     description?: String,
     coins: number,
-    
+    bets?: Bet[],
 }

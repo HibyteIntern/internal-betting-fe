@@ -1,5 +1,5 @@
 form{
-    margin-left: 100px;
+    margin-left: 70px;
     margin-top: 100px;
 }
 
@@ -14,3 +14,14 @@ form{
     width: 40%;
     margin-bottom: 10px;
 }  
+
+button {
+    background-color: var(--accent-color-one);
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }

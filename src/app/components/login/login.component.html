@@ -1,4 +1,4 @@
-<app-mainframe>
+<app-mainframe [title]="'Login'">
   <button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
   <button *ngIf="!isLoggedIn" type="button" (click)="login()">Log in</button>
 
@@ -31,8 +31,16 @@
       <strong>Response: </strong>
       <span>{{ response }}</span>
     </div>
+
+    <div>
+      <strong>Keycloak Id: </strong>
+      <span>{{ userKeycloakId }}</span>
+    </div>
+
   </ng-container>
 
+
 </app-mainframe>
+
 
 <router-outlet></router-outlet>

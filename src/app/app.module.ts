@@ -21,9 +21,12 @@ import { EventTemplateAddComponent } from './components/event-templates/event-te
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserProfileNewComponent } from './components/user-profile-new/user-profile-new.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -52,9 +55,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateCardComponent,
     MainframeComponent,
     UserProfileComponent,
-    UserProfileNewComponent,
     UserProfileEditComponent,
     UserProfileFormComponent,
+    UserTagBtnComponent,
+    CompetitionsComponent,
+
+
   ],
   imports: [
     BrowserModule,
