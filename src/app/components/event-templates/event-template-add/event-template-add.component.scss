@@ -1,6 +1,12 @@
+form {
+  padding-top: 0.5rem;
+}
+
 #bet-list-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow: hidden;
   mat-form-field {
       width: 100%;
   }
@@ -44,4 +50,12 @@
   .delete-bet-button {
     display: flex;
   }
+}
+
+.bet-template-title-container {
+  font-weight: bold;
+  font-size: var(--text-md);
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
 }

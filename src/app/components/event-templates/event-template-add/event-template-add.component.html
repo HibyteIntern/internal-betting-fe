@@ -1,17 +1,25 @@
 <app-mainframe [title]="'Create event template'">
-  <form class="app-form" [formGroup]="templateFormGroup">
+  <form class="app-form" [formGroup]="templateFormGroup" (ngSubmit)="submit()">
+
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Event template name</mat-label>
       <input formControlName="name" matInput placeholder="Football match" value="">
     </mat-form-field>
+
     <div *ngIf="betTemplates.length > 0" style="height: 2.5rem"></div>
     <div formArrayName="betTemplates" id="bet-list-container">
+
       <div *ngFor="let betTemplate of betTemplates.controls; let i=index" [formGroupName]="i">
+        <div class="bet-template-title-container">
+          {{betTemplate.get('name')?.value ? betTemplate.get('name')?.value : 'New bet'}}
+        </div>
         <div class="bet-name-container">
+
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Bet name</mat-label>
-            <input matInput placeholder="Red cards" value="2" formControlName="name">
+            <input maxlength="50" matInput placeholder="Red cards" value="2" formControlName="name">
           </mat-form-field>
+
           <mat-form-field appearance="outline" color="accent">
             <mat-label>Bet type</mat-label>
             <mat-select panelClass="select-dropdown" formControlName="type">
@@ -23,6 +31,18 @@
           </mat-form-field>
           <mat-icon color="warn" fontIcon="delete" (click)="removeBetTemplate(i)"></mat-icon>
         </div>
+
+        <div formArrayName="multipleChoiceOptions" *ngIf="betTemplate.get('type')?.value === 'MULTIPLE_CHOICE' ">
+          <div style="margin-bottom: 1rem; font-weight: bold">Options</div>
+          <div *ngFor="let option of getOptions(i).controls; let j=index">
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>{{"Option " + (j+1)}}</mat-label>
+              <input matInput placeholder="Some option" value="d" [formControlName]="j">
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button type="button" (click)="addMultipleChoiceOptions(i)">Add option</button>
+        </div>
+
         <button
           type="button"
           mat-stroked-button
@@ -32,6 +52,7 @@
         </button>
         <div *ngIf="i !== betTemplates.length - 1" style="height: 1.5rem"></div>
       </div>
+
       <div style="height: 2rem"></div>
     </div>
     <button
@@ -42,7 +63,6 @@
       (click)="addBetTemplate()">Add bet
     </button>
     <button
-      type="button"
       mat-raised-button color="primary"
       style="color: var(--text-color)">Submit
     </button>
