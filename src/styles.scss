@@ -125,6 +125,8 @@ mat-form-field {
   width: clamp(550px, 40%, 1200px);
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
   button {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
@@ -187,6 +189,7 @@ html {
 
 #center-content {
   flex-grow: 1;
+  max-width: calc(100% - 23rem);
 }
 
 #right-sidebar {
@@ -196,6 +199,9 @@ html {
 }
 
 @media (max-width: 768px) {
+  #center-content {
+    max-width: calc(100% - 6rem);
+  }
   #right-sidebar {
     width: 3rem;
   }
