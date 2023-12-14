@@ -4,25 +4,12 @@
 <div
   style="
     display: flex;
-    flex-direction: row;
     min-height: calc(100vh - var(--navbar-heigth));
   "
 >
-  <div
-    style="
-      width: 3rem;
-      min-height: 100%;
-      background-color: var(--sidebar-color);
-    "
-  ></div>
-  <div style="width: calc(100% - 20rem)">
+  <div id="left-sidebar"></div>
+  <div id="center-content">
     <router-outlet></router-outlet>
   </div>
-  <div
-    style="
-      width: 17rem;
-      min-height: 100%;
-      background-color: var(--sidebar-color);
-    "
-  ></div>
+  <div id="right-sidebar"></div>
 </div>
