@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user-tag-btn',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-tag-btn.component.scss']
 })
 export class UserTagBtnComponent {
+  @Output() clickEvent = new EventEmitter<void>();
 
+  onClick(): void {
+    this.clickEvent.emit();
+  }
 }

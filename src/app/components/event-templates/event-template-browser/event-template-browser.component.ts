@@ -19,7 +19,7 @@ export class EventTemplateBrowserComponent {
     });
   }
 
-  addEventTemplate() {
-
+  handleDelete(id: number) {
+    this.eventTemplateService.deleteEventTemplate(id);
   }
 }

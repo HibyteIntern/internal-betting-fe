@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {EventTemplate} from "../../../../entity/EventTemplate";
 
 @Component({
@@ -8,4 +8,5 @@ import {EventTemplate} from "../../../../entity/EventTemplate";
 })
 export class EventTemplateListComponent {
   @Input() eventTemplates: EventTemplate[] = [];
+  @Output() delete = new EventEmitter<number>()
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {EventTemplate} from "../../../entity/EventTemplate";
 
 @Component({
@@ -9,5 +9,6 @@ import {EventTemplate} from "../../../entity/EventTemplate";
 export class EventTemplateCardComponent {
 
   @Input() template?: EventTemplate
-  panelOpenState = false;
+  @Output() delete = new EventEmitter<number>()
+
 }

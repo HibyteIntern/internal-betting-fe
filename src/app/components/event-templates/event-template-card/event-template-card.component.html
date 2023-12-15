@@ -1,26 +1,7 @@
-  <mat-expansion-panel hideToggle style="background-color: var(--card-color);">
-    <mat-expansion-panel-header style="height: 100px">
-      <mat-panel-title>
-        {{template?.name}}
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-    <p>This is the primary content of the panel.</p>
-  </mat-expansion-panel>
-  <br>
-  <br>
+<div id="event-template-container" [routerLink]="['/event-templates', 'edit', template?.id]">
+  <div>{{template?.name}}</div>
+  <button click-stop-propagation mat-stroked-button style="margin-left: 1rem" (click)="delete.emit(template?.id)">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+</div>
