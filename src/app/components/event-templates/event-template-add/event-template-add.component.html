@@ -1,4 +1,4 @@
-<app-mainframe [title]="'Create event template'">
+<app-mainframe [title]="isEditPage ? 'Edit event template' : 'Create event template'">
   <form class="app-form" [formGroup]="templateFormGroup" (ngSubmit)="submit()">
 
     <mat-form-field color="accent" appearance="outline">
@@ -61,10 +61,11 @@
     </button>
     <button
       mat-raised-button color="primary"
-      style="color: var(--text-color)">Submit
+      style="color: var(--text-color)">{{isEditPage ? 'Update' : 'Submit'}}
     </button>
-    <div style="display: flex; flex-direction: row; justify-content: center;">
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
       <div class="lds-dual-ring"></div>
     </div>
+    <div class="form-error-message" *ngIf="errorMessage">{{errorMessage}}</div>
   </form>
 </app-mainframe>
