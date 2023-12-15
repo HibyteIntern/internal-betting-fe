@@ -1,6 +1,30 @@
-.container {
-    display: block;
-    // padding: 0.5em 1em;
+.user-tag-container {
+    position: relative;
+    display: inline-block;
     background-color: var(--accent-color-two);
+    font-size: var(--text-sm);
+    padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
+
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+
+        .content {
+            opacity: 0;
+        }
+
+        .close-icon {
+            opacity: 1;
+        }
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 0.2rem;
+        opacity: 0;
+        right: 50%;
+        transform: translateX(50%);
+    }
 }
+

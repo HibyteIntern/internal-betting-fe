@@ -2,33 +2,37 @@
     background-color: var(--card-color);
     padding: 0.5rem 1rem;
     width: 30rem;
-    height: 15rem;
-}
+    height: 20rem;
+    border-radius: var(--border-radius);
 
-.mat-card-title {
-    font-family: var(--font-raleway);
-    font-weight: bold;
-}
+    .mat-card-title {
+        font-family: var(--font-raleway);
+        font-weight: bold;
+    }
 
-.mat-chip {
-    span {
-        background: red!important;
+    .tags-container {
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .mat-card-content {
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
     }
     
+    p {
+        text-indent: 1rem;
+        display: block;
+        display: -webkit-box;
+        max-width: 100%;
+        margin: 0 auto;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
-.mat-card-content {
-    margin-top: 1rem;
-}
 
-p {
-    text-indent: 1rem;
-    display: block;
-    display: -webkit-box;
-    max-width: 100%;
-    margin: 0 auto;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+
