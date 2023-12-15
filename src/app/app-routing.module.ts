@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'edit/:id', component: EventTemplateAddComponent },
     ],
   },
+    
   { path: 'user-profile', 
     component: UserProfileComponent, 
     children: [

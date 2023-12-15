@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { SampleService } from '../../service/sample.service';
+import { UserProfileService } from 'src/app/service/user-profile.service';
+import { UserProfile } from 'src/app/entity/UserProfile';
+import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-login',
@@ -13,12 +18,20 @@ export class LoginComponent implements OnInit {
 
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
-  public userKeycloakId: string | null = null;
+  public userKeycloakId: string  = '';
+  public username: string = '';
   public response: string | null = null;
+  public appUserProfile: UserProfile | null = null;
+
+  userProfileObs$?: Observable<UserProfile | null>;
+
 
   constructor(
     private keycloak: KeycloakService,
     private sample: SampleService,
+    private userProfileService: UserProfileService,
+
+    
   ) {}
 
   public async ngOnInit() {
@@ -29,11 +42,21 @@ export class LoginComponent implements OnInit {
       const token = await this.keycloak.getToken();
       const payload = this.decodeToken(token);
       this.userKeycloakId = payload.sub;
+
+      this.userProfileObs$ = this.userProfileService.userProfile$;
+      this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
+
+      this.userProfileObs$.subscribe(data => {
+        console.log(data);
+      })
+    
       this.sample.getSample().subscribe((data) => {
         this.response = data;
       });
     }
+
   }
+
 
   private decodeToken(token: string): any {
     const base64Url = token.split('.')[1];

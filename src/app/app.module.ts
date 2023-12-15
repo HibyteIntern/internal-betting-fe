@@ -28,6 +28,7 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 
 
 
+
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
@@ -85,6 +86,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
+  
   ],
   bootstrap: [AppComponent],
 })

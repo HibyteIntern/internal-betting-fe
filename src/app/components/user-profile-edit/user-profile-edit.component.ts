@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserProfile } from 'src/app/entity/UserProfile';
+import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -6,5 +9,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-profile-edit.component.scss']
 })
 export class UserProfileEditComponent {
-  title = "User Profile Edit Account"
+  title = "User Profile" 
+
+  userProfile$?: Observable<UserProfile | null>;
+ 
+  constructor(private userProfileService: UserProfileService){}
+  
+
+  ngOnInit(): void {
+  
+  this.userProfile$ = this.userProfileService.userProfile$;
+    
+  this.userProfile$.subscribe(data => {
+    console.log(data);
+  })
 }
+
+}
+
+
