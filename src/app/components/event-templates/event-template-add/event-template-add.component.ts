@@ -3,6 +3,7 @@ import {EventTemplateService} from "../../../service/event-template.service";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {multipleChoiceValidator} from "../../../shared/validator/multiple-choice.validator";
 import {multipleChoiceOptionValidator} from "../../../shared/validator/multiple-choice-option.validator";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-event-template-add',
@@ -14,13 +15,20 @@ export class EventTemplateAddComponent {
   templateFormGroup: FormGroup;
 
   constructor(private eventTemplateService: EventTemplateService,
-              private reactiveFormBuilder: FormBuilder
+              private reactiveFormBuilder: FormBuilder,
+              private route: ActivatedRoute
   ) {
     this.templateFormGroup = reactiveFormBuilder.group(
       {
         name: ['', Validators.required],
         betTemplates: this.reactiveFormBuilder.array([])
       })
+    if(this.route.snapshot.url[1]?.path === 'edit') {
+      let id = parseInt(this.route.snapshot.params['id']);
+      this.eventTemplateService.get(id).subscribe((response) => {
+        this.eventTemplateService.prepopulateEventTemplateForm(response, this.templateFormGroup);
+      });
+    }
   }
 
   get betTemplates() {

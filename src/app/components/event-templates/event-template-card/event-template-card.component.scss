@@ -1,0 +1,13 @@
+#event-template-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+#event-template-container:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
