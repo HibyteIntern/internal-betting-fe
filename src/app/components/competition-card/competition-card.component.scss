@@ -8,12 +8,13 @@
     .mat-card-title {
         font-family: var(--font-raleway);
         font-weight: bold;
+        font-size: var(--text-md);
+        margin-bottom: 0.7rem;
     }
 
     .tags-container {
         margin-top: 1rem;
         margin-left: 1rem;
-        margin-bottom: 1rem;
     }
 
     .mat-card-content {
