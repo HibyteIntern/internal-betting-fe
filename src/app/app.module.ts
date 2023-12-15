@@ -25,6 +25,7 @@ import { MainframeComponent } from './shared/components/mainframe/mainframe.comp
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import {MatIconModule} from "@angular/material/icon";
+import { TagComponent } from './shared/components/tag/tag.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -55,6 +56,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MainframeComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
+    TagComponent,
   ],
   imports: [
     BrowserModule,
