@@ -138,6 +138,16 @@ mat-form-field {
   }
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  grid-template-columns: repeat(1, 1fr);
+}
+
 @media screen and (max-width: 900px) {
   .app-form {
     width: 100%;
@@ -170,9 +180,21 @@ html {
   }
 }
 
+@media screen and (min-width: 1400px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (min-width: 2000px) {
   html {
     font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
