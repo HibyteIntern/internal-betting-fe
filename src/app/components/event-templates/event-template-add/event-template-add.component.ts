@@ -100,4 +100,5 @@ export class EventTemplateAddComponent {
       }
     });
   }
+  log(val: any) { console.log(val); }
 }

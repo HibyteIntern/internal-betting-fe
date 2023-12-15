@@ -4,10 +4,28 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--card-color);
+  width: 28rem;
+  height: 3rem;
   border-radius: 1rem;
   padding: 1rem;
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+  button {
+    width: 8rem;
+    flex-shrink: 0;
+    color: var(--text-color);
+  }
+  div {
+    overflow: hidden;
+  }
 }
 #event-template-container:hover {
   filter: brightness(1.1);
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  #event-template-container {
+    width: calc(100% - 2rem);
+  }
 }

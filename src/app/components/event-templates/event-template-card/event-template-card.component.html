@@ -1,6 +1,6 @@
 <div id="event-template-container" [routerLink]="['/event-templates', 'edit', template?.id]">
   <div>{{template?.name}}</div>
-  <button click-stop-propagation mat-stroked-button style="margin-left: 1rem" (click)="delete.emit(template?.id)">
+  <button color="accent" click-stop-propagation mat-stroked-button style="margin-left: 1rem" (click)="delete.emit(template?.id)">
     <mat-icon>delete</mat-icon>
     Delete
   </button>

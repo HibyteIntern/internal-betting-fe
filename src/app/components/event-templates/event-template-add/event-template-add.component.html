@@ -15,6 +15,9 @@
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Bet name</mat-label>
             <input maxlength="50" matInput placeholder="Red cards" value="2" formControlName="name">
+            <mat-error *ngIf="betTemplate.errors?.['insufficientOptions']">
+              Must add at least 2 options.
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>Bet type</mat-label>
@@ -35,10 +38,10 @@
                 <mat-label>{{"Option " + (j+1)}}</mat-label>
                 <input matInput placeholder="Some option" value="d" [formControlName]="j">
               </mat-form-field>
-              <mat-icon fontIcon="delete" (click)="removeMultipleChoiceOption(i, j)"></mat-icon>
+              <mat-icon *ngIf="j > 1" fontIcon="delete" (click)="removeMultipleChoiceOption(i, j)"></mat-icon>
             </div>
           </div>
-          <mat-icon style="margin-top: 0.5rem; margin-bottom: 0.5rem" (click)="addMultipleChoiceOptions(i)">add</mat-icon>
+          <mat-icon style="margin-top: 0.5rem; margin-bottom: 0.75rem" (click)="addMultipleChoiceOptions(i)">add</mat-icon>
         </div>
         <button
           type="button"
