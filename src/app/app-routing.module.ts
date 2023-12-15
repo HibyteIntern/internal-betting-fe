@@ -7,15 +7,9 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {
-    path: 'event-templates',
-    component: EventTemplateBrowserComponent,
-    children: [
-      { path: 'create', component: EventTemplateAddComponent },
-      { path: 'edit/:id', component: EventTemplateAddComponent },
-    ],
-  },
-  { path: 'competition', component: CompetitionsComponent },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: "event-templates/create", component: EventTemplateAddComponent },
+  { path: "competitions", component: CompetitionsComponent },
 ];
 
 @NgModule({
