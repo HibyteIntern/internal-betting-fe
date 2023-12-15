@@ -23,7 +23,6 @@ import { EventTemplateListComponent } from './components/event-templates/event-t
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
 import {MatIconModule} from "@angular/material/icon";
 import { TagComponent } from './shared/components/tag/tag.component';
 
@@ -55,7 +54,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateListComponent,
     MainframeComponent,
     UserTagBtnComponent,
-    CompetitionsComponent,
     TagComponent,
   ],
   imports: [
