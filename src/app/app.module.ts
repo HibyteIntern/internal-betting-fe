@@ -22,6 +22,8 @@ import { EventTemplateCardComponent } from './components/event-templates/event-t
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionCardComponent } from './components/competition-card/competition-card.component';
+import { MatCardModule } from '@angular/material/card';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -51,6 +53,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MainframeComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
+    CompetitionCardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    MatCardModule,
   ],
   providers: [
     {
