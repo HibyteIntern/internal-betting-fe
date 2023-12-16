@@ -14,10 +14,10 @@ import { catchError, of, tap } from 'rxjs';
 })
 export class EventTemplateAddComponent {
   templateFormGroup: FormGroup;
-  isEditPage: boolean = false;
+  isEditPage = false;
   editedTemplateId?: number;
-  errorMessage: string = '';
-  isLoading: boolean = false;
+  errorMessage = '';
+  isLoading = false;
   constructor(
     private eventTemplateService: EventTemplateService,
     private formService: FormService,

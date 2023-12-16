@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./mainframe.component.scss'],
 })
 export class MainframeComponent {
-  @Input() title: string = '';
+  @Input() title = '';
 }

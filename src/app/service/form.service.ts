@@ -18,7 +18,7 @@ export class FormService {
     formGroup.patchValue({
       name: eventTemplate.name,
     });
-    let betTemplates = formGroup.get('betTemplates') as FormArray;
+    const betTemplates = formGroup.get('betTemplates') as FormArray;
     eventTemplate.betTemplates.forEach((betTemplate) => {
       betTemplates.push(this.createBetTemplateForm(betTemplate));
     });
@@ -43,7 +43,7 @@ export class FormService {
   }
 
   private createMultipleChoiceOptionForm(betTemplate: BetTemplate): FormArray {
-    let multipleChoiceOptions = this.reactiveFormBuilder.array([]);
+    const multipleChoiceOptions = this.reactiveFormBuilder.array([]);
     if (
       betTemplate.type === 'MULTIPLE_CHOICE' &&
       betTemplate.multipleChoiceOptions
