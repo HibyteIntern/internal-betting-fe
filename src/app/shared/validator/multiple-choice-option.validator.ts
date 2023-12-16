@@ -8,7 +8,7 @@ export function multipleChoiceOptionValidator(): ValidatorFn {
     }
     const type = parent.get('type')?.value;
     if (type === 'MULTIPLE_CHOICE' && !control.value) {
-      return { 'required': true };
+      return { required: true };
     }
     return null;
   };

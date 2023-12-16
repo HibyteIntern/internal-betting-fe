@@ -1,3 +1,7 @@
 <div id="list-wrapper">
-  <app-event-template-card (delete)="delete.emit($event)" *ngFor="let template of eventTemplates" [template]="template"></app-event-template-card>
+  <app-event-template-card
+    (delete)="delete.emit($event)"
+    *ngFor="let template of eventTemplates"
+    [template]="template"
+  ></app-event-template-card>
 </div>

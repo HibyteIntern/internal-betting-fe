@@ -1,4 +1,10 @@
-import {AbstractControl, FormArray, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {
+  AbstractControl,
+  FormArray,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 export function multipleChoiceValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

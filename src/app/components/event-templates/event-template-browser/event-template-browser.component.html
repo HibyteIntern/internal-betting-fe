@@ -3,11 +3,17 @@
     <div style="width: 100%">
       <button
         [routerLink]="['/event-templates/create']"
-        mat-raised-button color="primary"
+        mat-raised-button
+        color="primary"
         id="add-event-template-button"
-      >Add Event Template</button>
+      >
+        Add Event Template
+      </button>
     </div>
     <div *ngIf="eventTemplates.loading" class="lds-dual-ring"></div>
-    <app-event-template-list (delete)="handleDelete($event)" [eventTemplates]="eventTemplates.entity"></app-event-template-list>
+    <app-event-template-list
+      (delete)="handleDelete($event)"
+      [eventTemplates]="eventTemplates.entity"
+    ></app-event-template-list>
   </div>
 </app-mainframe>

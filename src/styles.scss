@@ -4,11 +4,11 @@
 
 //Color declarations for light mode
 :root {
-  --background-color: #E6E6E6;
+  --background-color: #e6e6e6;
   --lighter-background-color: #f3ccff;
   --sidebar-color: #bb9cc0;
   --navbar-color: #c88ea7;
-  --card-color: #E7BCDE;
+  --card-color: #e7bcde;
   --accent-color-one: #e48586;
   --accent-color-two: #37306b;
   --text-color: #370055;
@@ -121,9 +121,9 @@ body {
 }
 
 mat-form-field {
-  font-size: 1rem!important;
+  font-size: 1rem !important;
   input {
-    font-size: clamp(14px, 1rem, 24px)!important;
+    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
@@ -151,8 +151,8 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
-    padding: 1em!important;
-    font-size: clamp(14px, 1rem, 24px)!important;
+    padding: 1em !important;
+    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
