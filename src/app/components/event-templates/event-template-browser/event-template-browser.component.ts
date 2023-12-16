@@ -20,6 +20,6 @@ export class EventTemplateBrowserComponent {
   }
 
   handleDelete(id: number) {
-    this.eventTemplateService.deleteEventTemplate(id);
+    this.eventTemplateService.delete(id);
   }
 }

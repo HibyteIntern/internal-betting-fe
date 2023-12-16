@@ -1,6 +1,5 @@
 <app-mainframe [title]="isEditPage ? 'Edit event template' : 'Create event template'">
   <form class="app-form" [formGroup]="templateFormGroup" (ngSubmit)="submit()">
-
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Event template name</mat-label>
       <input formControlName="name" matInput placeholder="Football match" value="">
@@ -54,7 +53,6 @@
       </div>
       <div style="height: 2rem"></div>
     </div>
-
     <button
       type="button"
       mat-raised-button

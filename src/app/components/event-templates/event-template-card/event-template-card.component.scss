@@ -8,6 +8,7 @@
   height: 3rem;
   border-radius: 1rem;
   padding: 1rem;
+  overflow: hidden;
   color: var(--text-color);
   box-shadow: var(--box-shadow);
   button {
@@ -17,6 +18,7 @@
   }
   div {
     overflow: hidden;
+    padding: 0.5rem;
   }
 }
 #event-template-container:hover {

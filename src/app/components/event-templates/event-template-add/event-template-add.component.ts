@@ -4,6 +4,8 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {multipleChoiceValidator} from "../../../shared/validator/multiple-choice.validator";
 import {multipleChoiceOptionValidator} from "../../../shared/validator/multiple-choice-option.validator";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormService} from "../../../service/form.service";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
   selector: 'app-event-template-add',
@@ -18,9 +20,10 @@ export class EventTemplateAddComponent {
   errorMessage: string = '';
   isLoading: boolean = false;
   constructor(private eventTemplateService: EventTemplateService,
+              private formService: FormService,
               private reactiveFormBuilder: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
   ) {
     this.templateFormGroup = reactiveFormBuilder.group(
       {
@@ -30,9 +33,15 @@ export class EventTemplateAddComponent {
     if(this.route.snapshot.url[1]?.path === 'edit') {
       this.isEditPage = true;
       this.editedTemplateId = parseInt(this.route.snapshot.params['id']);
-      this.eventTemplateService.get(this.editedTemplateId).subscribe((response) => {
-        this.eventTemplateService.prepopulateEventTemplateForm(response, this.templateFormGroup);
-      });
+      this.eventTemplateService.getById(this.editedTemplateId).pipe(
+        tap(response => {
+          this.formService.prepopulateEventTemplateForm(response, this.templateFormGroup);
+        }),
+        catchError(error => {
+          if(error.status === 404) router.navigate(["/event-templates"])
+          return of(null);
+        })
+      ).subscribe();
     }
   }
 
@@ -76,13 +85,13 @@ export class EventTemplateAddComponent {
 
     this.isLoading = true;
     if(this.isEditPage && this.editedTemplateId) {
-      this.eventTemplateService.updateEventTemplate( this.editedTemplateId, this.templateFormGroup.value ).subscribe((success: boolean) => {
+      this.eventTemplateService.update(this.editedTemplateId, this.templateFormGroup.value).subscribe((success: boolean) => {
         if(success) this.router.navigate(['/event-templates']);
         this.isLoading = false;
         this.errorMessage = "Something went wrong. Please try again";
       })
     } else {
-      this.eventTemplateService.addEventTemplate(this.templateFormGroup.value).subscribe((success: boolean) =>{
+      this.eventTemplateService.add(this.templateFormGroup.value).subscribe((success: boolean) =>{
         if(success) this.router.navigate(['/event-templates']);
         this.isLoading = false;
         this.errorMessage = "Something went wrong. Please try again";
@@ -100,5 +109,4 @@ export class EventTemplateAddComponent {
       }
     });
   }
-  log(val: any) { console.log(val); }
 }
