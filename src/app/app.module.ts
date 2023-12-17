@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -26,6 +26,7 @@ import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-b
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -57,6 +58,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserTagBtnComponent,
     TagComponent,
     StopMousePropagationDirective,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgOptimizedImage,
     MatExpansionModule,
     MatIconModule,
+    FormsModule,
   ],
   providers: [
     {
