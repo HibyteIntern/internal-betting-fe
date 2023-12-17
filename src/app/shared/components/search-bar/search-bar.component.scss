@@ -1,8 +1,10 @@
 #outer-div {
   background-color: var(--sidebar-color);
-  padding: .25em;
+  border: 1px solid var(--sidebar-color);
+  padding: .25em .75em .25em .75em;
   height: 2.5rem;
-  width: 100%;
+  min-height: 35px;
+  width: calc(100% - 2rem);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,5 +16,13 @@
     background-color: transparent;
     outline: none;
     border: none;
+  }
+  mat-icon {
+    &:hover {
+      filter: brightness(0.7);
+      cursor: pointer;
+    }
+    flex-shrink: 0;
+    scale: 1.3;
   }
 }
