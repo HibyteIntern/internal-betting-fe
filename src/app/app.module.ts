@@ -29,6 +29,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from "@angular/material/icon";
 import { TagComponent } from './shared/components/tag/tag.component';
+import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -61,6 +62,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CompetitionsComponent,
     CompetitionCardComponent,
     TagComponent,
+    CreateCompetitionComponent,
   ],
   imports: [
     BrowserModule,

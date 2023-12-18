@@ -4,12 +4,14 @@ import { LoginComponent } from './components/login/login.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: "event-templates/create", component: EventTemplateAddComponent },
   { path: "competitions", component: CompetitionsComponent },
+  { path: "create-competition", component: CreateCompetitionComponent },
 ];
 
 @NgModule({
