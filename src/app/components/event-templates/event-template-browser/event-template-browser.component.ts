@@ -21,4 +21,8 @@ export class EventTemplateBrowserComponent {
   handleDelete(id: number) {
     this.eventTemplateService.delete(id);
   }
+
+  search(name: string) {
+    this.eventTemplateService.fetch(name);
+  }
 }
