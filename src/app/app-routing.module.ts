@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: "event-templates/create", component: EventTemplateAddComponent },
-  {path:'create-event',component: CreateEventComponent},
+  { path:'create-event',component: CreateEventComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
 ];
 

@@ -8,6 +8,7 @@ import { UserProfile } from "../../../entity/UserProfile";
 import { Status } from "../../../entity/Status";
 import {EventService} from "../../../service/event.service";
 import {EventTemplateService} from "../../../service/event-template.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-event',
@@ -24,17 +25,26 @@ export class CreateEventComponent implements OnInit {
   userProfilesList: UserProfile[] = [
     { userId: 1, keycloakId: 'key1', username: 'User1', profilePicture: 1, description: 'Description1', bets: [], coins: 50 },
     { userId: 2, keycloakId: 'key2', username: 'User2', profilePicture: 2, description: 'Description2', bets: [], coins: 50 },
-    // Add more profiles as needed
   ];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
-  constructor(private eventTemplateService: EventTemplateService , private eventService :EventService) {}
+  constructor(private eventTemplateService: EventTemplateService ,
+              private eventService :EventService ,
+              private http: HttpClient) {}
 
   ngOnInit() {
     // Call the method from the service to fetch event templates on component initialization
     this.eventTemplateService.getData().subscribe((data: { entity: EventTemplate[]; }) => {
       this.eventTemplates = data.entity;
     });
+    this.http.get<UserProfile[]>('http://localhost:8080/api/user-profiles').subscribe(
+      profiles => {
+        this.userProfilesList = profiles;
+      },
+      error => {
+        console.error('Error fetching user profiles:', error);
+      }
+    );
   }
 
   private convertBetTemplateType(type: BetTemplateType): string {

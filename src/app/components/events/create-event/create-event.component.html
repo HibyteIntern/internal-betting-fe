@@ -1,5 +1,6 @@
 <app-mainframe [title]="'Create an event'">
   <form class="app-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
+    <p></p>
     <mat-form-field appearance="outline">
       <mat-label>Event Name</mat-label>
       <input name="eventName" matInput placeholder="Ex. Event Name" [(ngModel)]="formData.name" required>

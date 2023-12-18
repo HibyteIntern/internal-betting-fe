@@ -25,12 +25,12 @@ import { MainframeComponent } from './shared/components/mainframe/mainframe.comp
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import { ViewEventComponent } from './components/events/view-event/view-event.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -63,6 +63,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserTagBtnComponent,
     TagComponent,
     StopMousePropagationDirective,
+    ViewEventComponent,
   ],
   imports: [
     BrowserModule,
