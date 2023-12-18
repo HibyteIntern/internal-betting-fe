@@ -20,7 +20,7 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
-import {MatExpansionModule} from "@angular/material/expansion";
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
@@ -28,6 +28,9 @@ import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-b
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { MatIconModule } from '@angular/material/icon';
+import { TagComponent } from './shared/components/tag/tag.component';
+import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -58,7 +61,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MainframeComponent,
     CreateEventComponent,
     UserTagBtnComponent,
-    CompetitionsComponent,
+    TagComponent,
+    StopMousePropagationDirective,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
   ],
   providers: [
     {

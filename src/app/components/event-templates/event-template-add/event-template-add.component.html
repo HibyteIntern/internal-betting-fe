@@ -1,37 +1,121 @@
-
-<app-mainframe [title]="'Create event template'">
-    <form class="app-form" [formGroup]="templateFormGroup">
-
-      <mat-form-field color="accent" appearance="outline">
-        <mat-label>Event template name</mat-label>
-        <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
-      </mat-form-field>
-
-      <div *ngFor="let betTemplate of betTemplates.controls; let i=index" [formGroupName]="i">
-
-        <mat-form-field color="accent" appearance="outline">
-          <mat-label>Bet name</mat-label>
-          <input [formControlName]="'name'" matInput placeholder="Football match" value="Sushi">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" color="accent">
-          <mat-label>Bet type</mat-label>
-          <mat-select panelClass="select-dropdown" [formControlName]="'type'">
-            <mat-option value="NUMERIC">Numeric</mat-option>
-            <mat-option value ="MULTIPLE_CHOICE">Multiple choice</mat-option>
-            <mat-option value="BOOLEAN">Boolean</mat-option>
-            <mat-option value="STRING">Text</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="removeBetTemplate(i)">Delete</button>
+<app-mainframe
+  [title]="isEditPage ? 'Edit event template' : 'Create event template'"
+>
+  <form class="app-form" [formGroup]="templateFormGroup" (ngSubmit)="submit()">
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Event template name</mat-label>
+      <input
+        formControlName="name"
+        matInput
+        placeholder="Football match"
+        value=""
+      />
+    </mat-form-field>
+    <div *ngIf="betTemplates.length > 0" style="height: 2.5rem"></div>
+    <div formArrayName="betTemplates" id="bet-list-container">
+      <div
+        *ngFor="let betTemplate of betTemplates.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="bet-template-title-container">
+          {{
+            betTemplate.get("name")?.value
+              ? betTemplate.get("name")?.value
+              : "New bet"
+          }}
+        </div>
+        <div class="bet-name-container">
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Bet name</mat-label>
+            <input
+              maxlength="50"
+              matInput
+              placeholder="Red cards"
+              value="2"
+              formControlName="name"
+            />
+            <mat-error *ngIf="betTemplate.errors?.['insufficientOptions']">
+              Must add at least 2 options.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label>Bet type</mat-label>
+            <mat-select panelClass="select-dropdown" formControlName="type">
+              <mat-option value="NUMERIC">Numeric</mat-option>
+              <mat-option value="MULTIPLE_CHOICE">Multiple choice</mat-option>
+              <mat-option value="BOOLEAN">Boolean</mat-option>
+              <mat-option value="STRING">Text</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-icon fontIcon="delete" (click)="removeBetTemplate(i)"></mat-icon>
+        </div>
+        <div
+          formArrayName="multipleChoiceOptions"
+          *ngIf="betTemplate.get('type')?.value === 'MULTIPLE_CHOICE'"
+        >
+          <div
+            style="
+              margin-bottom: 1rem;
+              font-weight: bold;
+              filter: brightness(0.7);
+            "
+          >
+            Options
+          </div>
+          <div *ngFor="let option of getOptions(i).controls; let j = index">
+            <div class="option-container">
+              <mat-form-field color="accent" appearance="outline">
+                <mat-label>{{ "Option " + (j + 1) }}</mat-label>
+                <input
+                  matInput
+                  placeholder="Some option"
+                  value="d"
+                  [formControlName]="j"
+                />
+              </mat-form-field>
+              <mat-icon
+                *ngIf="j > 1"
+                fontIcon="delete"
+                (click)="removeMultipleChoiceOption(i, j)"
+              ></mat-icon>
+            </div>
+          </div>
+          <mat-icon
+            style="margin-top: 0.5rem; margin-bottom: 0.75rem"
+            (click)="addMultipleChoiceOptions(i)"
+            >add</mat-icon
+          >
+        </div>
+        <button
+          type="button"
+          mat-stroked-button
+          color="primary"
+          class="delete-bet-button"
+          (click)="removeBetTemplate(i)"
+        >
+          Delete
+        </button>
+        <div *ngIf="i !== betTemplates.length - 1" style="height: 1.5rem"></div>
       </div>
-
-      <button
-        type="button"
-        mat-raised-button
-        color="accent"
-        style="color: white"
-        (click)="addBetTemplate()">Add bet</button>
-      <button type="button" mat-raised-button color="primary" style="color: var(--text-color)">Submit</button>
-    </form>
+      <div style="height: 2rem"></div>
+    </div>
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      style="color: white"
+      (click)="addBetTemplate()"
+    >
+      Add bet
+    </button>
+    <button mat-raised-button color="primary" style="color: var(--text-color)">
+      {{ isEditPage ? "Update" : "Submit" }}
+    </button>
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div class="form-error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </form>
 </app-mainframe>
