@@ -1,4 +1,5 @@
 import {CompleteBetType} from "./CompleteBetType";
+import {Status} from "./Status";
 
 export class EventRequest {
   name: string;
@@ -9,6 +10,7 @@ export class EventRequest {
   userProfiles: string[];
   startsAt: Date;
   endsAt: Date;
+  status:Status;
   selectedTemplate: string;
 
   constructor(data: any = {}) {
@@ -20,6 +22,7 @@ export class EventRequest {
     this.userProfiles = data.userProfiles || [];
     this.startsAt = data.startsAt || null;
     this.endsAt = data.endsAt || null;
+    this.status = data.status || Status.DRAFT
     this.selectedTemplate = data.selectedTemplate || '';
   }
 }
