@@ -10,10 +10,12 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./navbar-user-account.component.scss'],
 })
 export class NavbarUserAccountComponent implements OnInit {
+
   keycloakId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
-  onEdit: boolean = false;
+  
+  showAlertBox: boolean = false;
 
   constructor(
     private router: Router,
@@ -50,12 +52,24 @@ export class NavbarUserAccountComponent implements OnInit {
     });
   }
 
-  onUserProfileEdit() {
-    console.log(this.userProfile?.userId);
-    console.log(this.keycloakId);
-    
-    //this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
-
-    this.onEdit = true;
+  
+  onHandleAccount() {
+    this.onUserProfileEdit();
+    this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
+    this.closeAlertBox(); // Call a method to hide the alert box
   }
+
+  onUserProfileEdit() {
+
+    this.showAlertBox = true;
+
+  }
+
+  closeAlertBox() {
+    console.log("hdjashd")
+    this.showAlertBox = false; // Set the state to false to hide the alert box
+  }
+
+  
+
 }

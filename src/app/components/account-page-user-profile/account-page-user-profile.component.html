@@ -1,8 +1,9 @@
 <div class="backdrop"></div>
 <div class="alert-box">
-    <p>Account</p>
+    <h3>Account</h3>
+    <h2>{{username}}</h2>
     <div class="alert-box-actions">
-        <button>Edit Profile</button> 
-        <button>Close</button>
+        <button (click)="onHandleEdit()">Edit Profile</button> 
+        <button>Logout</button>
     </div>
 </div>

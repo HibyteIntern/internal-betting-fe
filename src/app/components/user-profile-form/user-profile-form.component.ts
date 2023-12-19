@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -18,7 +19,8 @@ export class UserProfileFormComponent implements OnChanges{
 
   constructor(
     private formBuilder: FormBuilder,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private router: Router,
   ) {
     this.userProfileForm = this.formBuilder.group({
       username: '',
@@ -59,5 +61,7 @@ export class UserProfileFormComponent implements OnChanges{
     this.userProfileService.update(updatedUserProfile).subscribe((user) => {
       console.log(user);
     });
+
+    this.router.navigate(['home/', this.userProfile?.keycloakId]);
   }
 }
