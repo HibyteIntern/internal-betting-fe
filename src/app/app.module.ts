@@ -26,6 +26,8 @@ import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-b
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from '@angular/material/core';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -58,22 +60,24 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TagComponent,
     StopMousePropagationDirective,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    KeycloakAngularModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    NgOptimizedImage,
-    MatExpansionModule,
-    MatIconModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        KeycloakAngularModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        NgOptimizedImage,
+        MatExpansionModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+    ],
   providers: [
     {
       provide: APP_INITIALIZER,
