@@ -8,22 +8,23 @@ import { UserProfile } from 'src/app/entity/UserProfile';
   templateUrl: './user-profile-form.component.html',
   styleUrls: ['./user-profile-form.component.scss']
 })
-export class UserProfileFormComponent implements OnChanges{
+export class UserProfileFormComponent implements OnInit{
 
   @Input() userProfile?: UserProfile | null;
 
   constructor(private formBuilder: FormBuilder) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.userProfile?.username);
-  }
 
   protected userProfileForm = this.formBuilder.group({
     username: ['', Validators.required],
     description: '',
   })
 
+  ngOnInit(): void {
+    
+  }
+
   onSubmit(){
+    console.log(this.userProfile)
     console.log(this.userProfileForm.value);
   }
 }

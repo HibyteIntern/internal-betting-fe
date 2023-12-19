@@ -7,6 +7,7 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,9 +23,9 @@ const routes: Routes = [
   { path: 'user-profile', 
     component: UserProfileComponent, 
     children: [
-      {path: 'edit', component: UserProfileEditComponent},
-      {path: 'form', component: UserProfileFormComponent},
+      {path: 'edit/:id', component: UserProfileEditComponent},
     ]}, 
+  { path: 'home/:keycloakId', component: HomeComponent},
   { path: 'competition', component: CompetitionsComponent },
 ];
 

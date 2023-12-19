@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -10,19 +11,20 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 })
 export class UserProfileEditComponent {
   title = "User Profile" 
+  userId?: any;
 
   userProfile$?: Observable<UserProfile | null>;
  
-  constructor(private userProfileService: UserProfileService){}
+  constructor(private userProfileService: UserProfileService,
+              private route: ActivatedRoute){}
   
 
   ngOnInit(): void {
+  this.userId = this.route.snapshot.paramMap.get("id");
+  console.log(this.userId);
   
   this.userProfile$ = this.userProfileService.userProfile$;
-    
-  this.userProfile$.subscribe(data => {
-    console.log(data);
-  })
+  this.userProfileService.getById(this.userId);
 }
 
 }

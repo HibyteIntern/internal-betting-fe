@@ -25,6 +25,7 @@ import { UserProfileEditComponent } from './components/user-profile-edit/user-pr
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -60,6 +61,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserProfileFormComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
+    HomeComponent,
 
 
   ],

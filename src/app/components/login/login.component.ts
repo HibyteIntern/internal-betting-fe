@@ -5,6 +5,7 @@ import { SampleService } from '../../service/sample.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -24,13 +25,13 @@ export class LoginComponent implements OnInit {
   public appUserProfile: UserProfile | null = null;
 
   userProfileObs$?: Observable<UserProfile | null>;
-
+  finishLogin: boolean = false;
 
   constructor(
     private keycloak: KeycloakService,
     private sample: SampleService,
     private userProfileService: UserProfileService,
-
+    private router: Router,
     
   ) {}
 
@@ -43,18 +44,21 @@ export class LoginComponent implements OnInit {
       const payload = this.decodeToken(token);
       this.userKeycloakId = payload.sub;
 
-      this.userProfileObs$ = this.userProfileService.userProfile$;
       this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
 
-      this.userProfileObs$.subscribe(data => {
-        console.log(data);
-      })
     
       this.sample.getSample().subscribe((data) => {
         this.response = data;
       });
+
+      this.finishLogin = true;
+
     }
 
+    if(this.finishLogin){
+      this.router.navigate(['/home', this.userKeycloakId]);
+    }
+    
   }
 
 
