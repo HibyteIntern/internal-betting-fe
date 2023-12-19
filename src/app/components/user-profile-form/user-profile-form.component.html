@@ -1,12 +1,12 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">  
     <mat-form-field color="accent" appearance="outline" class="username-field">
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username" [value]="userProfile?.username">
+        <input matInput type="text" formControlName="username">
     </mat-form-field>
 
     <mat-form-field color="accent" appearance="outline" class="description-field">
         <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" [value]="userProfile?.description"></textarea>
+        <textarea matInput type="text" formControlName="description"></textarea>
     </mat-form-field>
 
     <button mat-raised-button color="primary" style="color: var(--text-color)" type="submit">Submit</button>

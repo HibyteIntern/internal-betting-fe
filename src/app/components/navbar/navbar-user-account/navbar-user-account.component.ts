@@ -12,12 +12,12 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 export class NavbarUserAccountComponent implements OnInit {
   keycloakId: any;
   currentPath?: string;
-  userProfile: UserProfile | null = null; // Property to hold user profile data
+  userProfile: UserProfile | null = null; 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private userProfileService: UserProfileService // Injecting the UserProfileService
+    private userProfileService: UserProfileService 
   ) {}
 
   ngOnInit(): void {

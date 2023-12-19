@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
@@ -9,7 +9,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './user-profile-edit.component.html',
   styleUrls: ['./user-profile-edit.component.scss']
 })
-export class UserProfileEditComponent {
+export class UserProfileEditComponent implements OnInit{
   title = "User Profile" 
   userId?: any;
 
@@ -25,6 +25,7 @@ export class UserProfileEditComponent {
   
   this.userProfile$ = this.userProfileService.userProfile$;
   this.userProfileService.getById(this.userId);
+  
 }
 
 }
