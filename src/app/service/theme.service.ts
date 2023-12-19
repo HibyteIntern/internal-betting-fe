@@ -4,7 +4,26 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
+  isDarkMode = false;
+
+  constructor() {
+    const theme: string | null = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      this.isDarkMode = true;
+      document.body.classList.toggle('dark');
+    }
+  }
+
   toggleTheme() {
-    document.body.classList.toggle('light');
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) localStorage.setItem('theme', 'dark');
+    else localStorage.setItem('theme', 'light');
+
+    document.body.classList.toggle('dark');
+  }
+
+  getCurrentTheme() {
+    if (this.isDarkMode) return 'Dark';
+    return 'Light';
   }
 }

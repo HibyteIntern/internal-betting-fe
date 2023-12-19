@@ -1,0 +1,71 @@
+form {
+  padding-top: 0.5rem;
+}
+
+#bet-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.bet-name-container {
+  display: flex;
+  align-items: center;
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+mat-icon {
+  transform: scale(1.5);
+  position: relative;
+  bottom: 0.55rem;
+  margin-left: 0.5rem;
+  display: block;
+  color: white !important;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(80%);
+  }
+}
+
+.delete-bet-button {
+  display: none;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .bet-name-container {
+    display: flex;
+    flex-direction: column;
+    mat-form-field {
+      flex: 2;
+    }
+    mat-icon {
+      display: none;
+    }
+  }
+  .delete-bet-button {
+    display: flex;
+  }
+}
+
+.bet-template-title-container {
+  font-weight: bold;
+  font-size: var(--text-md);
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.option-container {
+  display: flex;
+  align-items: center;
+  mat-form-field {
+    flex: 1;
+  }
+}
