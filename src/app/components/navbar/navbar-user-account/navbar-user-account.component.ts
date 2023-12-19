@@ -13,6 +13,7 @@ export class NavbarUserAccountComponent implements OnInit {
   keycloakId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
+  onEdit: boolean = false;
 
   constructor(
     private router: Router,
@@ -53,6 +54,8 @@ export class NavbarUserAccountComponent implements OnInit {
     console.log(this.userProfile?.userId);
     console.log(this.keycloakId);
     
-    this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
+    //this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
+
+    this.onEdit = true;
   }
 }
