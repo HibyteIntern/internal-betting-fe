@@ -4,11 +4,11 @@
 
 //Color declarations for light mode
 :root {
-  --background-color: #e7bcde;
+  --background-color: #E6E6E6;
   --lighter-background-color: #f3ccff;
   --sidebar-color: #bb9cc0;
   --navbar-color: #c88ea7;
-  --card-color: #916db3;
+  --card-color: #E7BCDE;
   --accent-color-one: #e48586;
   --accent-color-two: #37306b;
   --text-color: #370055;
@@ -24,6 +24,8 @@
   --text-lg: 2rem;
 
   --border-radius: 0.5rem;
+
+  --transition-duration: 200ms;
 }
 
 //color declarations for the dark theme
@@ -133,6 +135,20 @@ mat-form-field {
   flex-direction: column;
   max-width: 100%;
   overflow: hidden;
+  .form-error-message {
+    width: clamp(300px, 60%, 700px);
+    font-size: var(--text-sm);
+    min-font-size: 14px;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .lds-dual-ring-container {
+    width: clamp(300px, 60%, 700px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0.5rem 0 0.5rem 0;
+  }
   button {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
@@ -144,7 +160,6 @@ mat-form-field {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -155,6 +170,12 @@ mat-form-field {
 @media screen and (max-width: 900px) {
   .app-form {
     width: 100%;
+    .form-error-message {
+      width: 100%;
+    }
+    .lds-dual-ring-container {
+      width: 100%;
+    }
     button {
       width: 100%;
     }
