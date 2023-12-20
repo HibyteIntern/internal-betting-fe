@@ -24,6 +24,8 @@
   --text-lg: 2rem;
 
   --border-radius: 0.5rem;
+
+  --transition-duration: 200ms;
 }
 
 //color declarations for the dark theme
@@ -40,6 +42,11 @@
 
 p {
   text-indent: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
 }
 
 h1 {
