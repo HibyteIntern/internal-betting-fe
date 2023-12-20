@@ -44,6 +44,11 @@ p {
   text-indent: 1rem;
 }
 
+label {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
 h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
