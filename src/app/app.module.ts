@@ -27,6 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -59,6 +62,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TagComponent,
     StopMousePropagationDirective,
     SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
   ],
   imports: [
     BrowserModule,

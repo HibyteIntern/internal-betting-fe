@@ -33,7 +33,7 @@
   --sidebar-color: #191928;
   --navbar-color: #543864;
   --card-color: #191933;
-  --accent-color-one: #d78484;
+  --accent-color-one: #ee9595;
   --accent-color-two: #e4ba84;
   --text-color: #ffffff;
 }
@@ -230,26 +230,23 @@ html {
 //styles for the app component
 #left-sidebar {
   width: 3rem;
-  min-height: 100%;
+  height: calc(100vh - var(--navbar-heigth));
+  position: fixed;
+  top: var(--navbar-heigth);
+  left: 0;
+  z-index: 1000;
   background-color: var(--sidebar-color);
 }
 
 #center-content {
   flex-grow: 1;
   max-width: calc(100% - 23rem);
-}
-
-#right-sidebar {
-  width: 20rem;
-  min-height: 100%;
-  background-color: var(--sidebar-color);
+  position: relative;
+  left: 3rem;
 }
 
 @media (max-width: 768px) {
   #center-content {
     max-width: calc(100% - 6rem);
-  }
-  #right-sidebar {
-    width: 3rem;
   }
 }
