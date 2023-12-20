@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -58,10 +58,21 @@ export class UserProfileFormComponent implements OnChanges{
 
     console.log(updatedUserProfile);
 
-    this.userProfileService.update(updatedUserProfile).subscribe((user) => {
-      console.log(user);
-    });
+    this.userProfileService.update(updatedUserProfile).pipe(
+      finalize(() => {
+        this.router.navigate(['home/', this.userProfile?.userId]);
+      })
+    ).subscribe(
+      (user) => {
+        console.log(user);
+      },
+      (error) => {
+        console.error('There was an error updating the profile', error);
+      }
+    );
+  }
 
-    this.router.navigate(['home/', this.userProfile?.keycloakId]);
+  onCancel(){
+    this.router.navigate(['home/', this.userProfile?.userId]);
   }
 }

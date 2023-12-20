@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -9,11 +9,13 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './navbar-user-account.component.html',
   styleUrls: ['./navbar-user-account.component.scss'],
 })
-export class NavbarUserAccountComponent implements OnInit {
+export class NavbarUserAccountComponent implements OnInit{
 
-  keycloakId: any;
+  UserId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
+
+  userProfile$?: Observable<UserProfile | null>;
   
   showAlertBox: boolean = false;
 
@@ -24,6 +26,7 @@ export class NavbarUserAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+   
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -32,31 +35,33 @@ export class NavbarUserAccountComponent implements OnInit {
 
       let childRoute = this.route.firstChild;
       while (childRoute) {
-        if (childRoute.snapshot.paramMap.get("keycloakId")) {
-          this.keycloakId = childRoute.snapshot.paramMap.get("keycloakId");
-          this.fetchUserProfile(this.keycloakId); 
+        if (childRoute.snapshot.paramMap.get("id")) {
+          this.UserId = childRoute.snapshot.paramMap.get("id");
+          this.fetchUserProfile(this.UserId); 
           break;
         }
         childRoute = childRoute.firstChild;
       }
-      console.log('keycloakId:', this.keycloakId);
+      console.log('userId:', this.UserId);
     });
   }
 
-  fetchUserProfile(keycloakId: string): void {
-    this.userProfileService.getByKeycloakId(keycloakId).subscribe(profile => {
-      this.userProfile = profile;
-      console.log('Fetched User Profile:', this.userProfile);
-    }, error => {
-      console.error('Failed to fetch user profile', error);
-    });
-  }
 
+
+  fetchUserProfile(userId: number): void {
+    this.userProfile$ = this.userProfileService.userProfile$;
+    this.userProfileService.getById(userId);
+  
+    this.userProfile$.subscribe(user => {
+      this.userProfile = user;
+    console.log(this.userProfile)});
+
+  }
   
   onHandleAccount() {
     this.onUserProfileEdit();
     this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
-    this.closeAlertBox(); // Call a method to hide the alert box
+    this.closeAlertBox(); 
   }
 
   onUserProfileEdit() {
@@ -66,10 +71,9 @@ export class NavbarUserAccountComponent implements OnInit {
   }
 
   closeAlertBox() {
-    console.log("hdjashd")
-    this.showAlertBox = false; // Set the state to false to hide the alert box
+  
+    this.showAlertBox = false; 
   }
 
   
-
 }

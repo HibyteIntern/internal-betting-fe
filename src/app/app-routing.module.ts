@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       {path: 'edit/:id', component: UserProfileEditComponent},
     ]}, 
-  { path: 'home/:keycloakId', component: HomeComponent},
+  { path: 'home/:id', component: HomeComponent},
   { path: 'competition', component: CompetitionsComponent },
 ];
 

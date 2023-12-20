@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
   public response: string | null = null;
   public appUserProfile: UserProfile | null = null;
 
+
   userProfileObs$?: Observable<UserProfile | null>;
   finishLogin: boolean = false;
+  userId?: number;
+
 
   constructor(
     private keycloak: KeycloakService,
@@ -56,10 +59,14 @@ export class LoginComponent implements OnInit {
     }
 
     if(this.finishLogin){
-      this.router.navigate(['/home', this.userKeycloakId]);
+
+      this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
+        this.router.navigate(['/home', user.userId]);
+      })
+      
     }
-    
   }
+
 
 
   private decodeToken(token: string): any {
