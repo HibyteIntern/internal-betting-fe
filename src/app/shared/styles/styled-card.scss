@@ -1,0 +1,55 @@
+.mat-card {
+    background-color: var(--card-color);
+    padding: 0.5rem 1rem;
+    width: 30rem;
+    height: 20rem;
+    border-radius: var(--border-radius);
+    transition-property: transform;
+    transition-timing-function: ease-in-out;
+    transition-duration: var(--transition-duration);
+
+    &:hover {
+        
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
+    .mat-card-header {
+        transition-property: none;
+        display: flex;
+        justify-content: space-between;
+
+        .icon {
+            transform: scale(0.8) translateY(0.3rem);
+        }
+    }
+
+    .mat-card-title {
+        font-family: var(--font-raleway);
+        font-weight: bold;
+        font-size: var(--text-md);
+        margin-bottom: 0.7rem;
+    }
+
+    .tags-container {
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+
+    .mat-card-content {
+        margin-top: 2rem;
+        padding-bottom: 2.5rem;
+    }
+    
+    p {
+        text-indent: 1rem;
+        display: block;
+        display: -webkit-box;
+        max-width: 100%;
+        margin: 0 auto;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

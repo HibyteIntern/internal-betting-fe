@@ -1,10 +1,19 @@
 <app-mainframe title="Create Competition">
-    form for:
-    -name
-    -description
+    <form class="app-form" [formGroup]="competitionForm">
+        <mat-form-field color="accent" appearance="outline" class="first-field">
+            <mat-label>Competition name</mat-label>
+            <input formControlName="name" matInput placeholder="World Championship" value="">
+        </mat-form-field>
+        
+        <mat-form-field color="accent" appearance="outline">
+            <mat-label>Competition Description</mat-label>
+            <textarea formControlName="name" matInput placeholder="World Championship" value=""></textarea>
+        </mat-form-field>
+    </form>
+    <!-- form for:
     -users
     -userGroups
     -userProfiles
     -events
-    -status
+    -status -->
 </app-mainframe>
