@@ -4,5 +4,5 @@
     [(ngModel)]="value"
     (input)="valueChange.emit(value)"
     (keydown.enter)="onEnterPressed.emit(value)">
-  <mat-icon>search</mat-icon>
+  <mat-icon (click)="onEnterPressed.emit(value)">search</mat-icon>
 </div>
