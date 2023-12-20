@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {EventTemplate} from "../../../entity/EventTemplate";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EventTemplate } from '../../../entity/EventTemplate';
 
 @Component({
   selector: 'app-event-template-card',
@@ -7,7 +7,6 @@ import {EventTemplate} from "../../../entity/EventTemplate";
   styleUrls: ['./event-template-card.component.scss'],
 })
 export class EventTemplateCardComponent {
-
-  @Input() template?: EventTemplate
-  panelOpenState = false;
+  @Input() template?: EventTemplate;
+  @Output() delete = new EventEmitter<number>();
 }

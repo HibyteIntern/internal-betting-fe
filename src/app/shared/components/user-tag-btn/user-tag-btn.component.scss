@@ -1,31 +1,31 @@
 .user-tag-container {
-    position: relative;
-    display: inline-block;
-    background-color: var(--accent-color-two);
-    font-size: var(--text-sm);
-    padding: 0.4rem 1rem;
-    border-radius: var(--border-radius);
-    margin-right: 1.2rem;
-    margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  background-color: var(--accent-color-two);
+  font-size: var(--text-sm);
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius);
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
 
-    &:hover {
-        transform: scale(1.1);
-        cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 
-        .content {
-            opacity: 0;
-        }
-
-        .close-icon {
-            opacity: 1;
-        }
+    .content {
+      opacity: 0;
     }
 
     .close-icon {
-        position: absolute;
-        top: 0.2rem;
-        opacity: 0;
-        right: 50%;
-        transform: translateX(50%);
+      opacity: 1;
     }
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 0.2rem;
+    opacity: 0;
+    right: 50%;
+    transform: translateX(50%);
+  }
 }

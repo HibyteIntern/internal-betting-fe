@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -20,17 +20,19 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
-import { MatExpansionModule } from "@angular/material/expansion";
+import {  MatExpansionModule  } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
+import {  CompetitionsComponent } from './components/competitions/competitions.component';
 import { CompetitionCardComponent } from './components/competition-card/competition-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule  } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
+import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -63,6 +65,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CompetitionsComponent,
     CompetitionCardComponent,
     TagComponent,
+    StopMousePropagationDirective,
+    SearchBarComponent,
     CreateCompetitionComponent,
     EventCardComponent,
   ],
@@ -81,6 +85,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgOptimizedImage,
     MatExpansionModule,
     MatIconModule,
+    FormsModule,
     MatCardModule,
     MatChipsModule,
   ],

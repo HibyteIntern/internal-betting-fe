@@ -10,6 +10,8 @@ import { Status } from 'src/app/entity/Status';
 export class CreateCompetitionComponent {
   competitionForm: FormGroup;
 
+  searchValue = '';
+
   constructor () {
     this.competitionForm = new FormGroup({
       name: new FormControl(''),
@@ -22,4 +24,9 @@ export class CreateCompetitionComponent {
     });
   }
 
+  search(value: string) {
+    this.searchValue = value;
+
+    console.log(this.searchValue)
+  }
 }

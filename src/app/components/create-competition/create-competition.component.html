@@ -9,6 +9,7 @@
             <mat-label>Competition Description</mat-label>
             <textarea formControlName="name" matInput placeholder="World Championship" value=""></textarea>
         </mat-form-field>
+        <app-search-bar (valueChange)="search($event)" (onEnterPressed)="search($event)"></app-search-bar>
     </form>
     <!-- form for:
     -users
