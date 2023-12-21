@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Competition } from 'src/app/entity/Competitions';
+import { Status } from 'src/app/entity/Status';
 
 @Component({
   selector: 'app-competition-card',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./competition-card.component.scss', '../../shared/styles/styled-card.scss']
 })
 export class CompetitionCardComponent {
-
+  @Input() competition: Competition = {
+    name: '',
+    description: '',
+    creator: '',
+    users: [],
+    userGroups: [],
+    userProfiles: [],
+    events: [],
+    created: new Date(),
+    lastModified: new Date(),
+    status: Status.DRAFT
+  };
 }

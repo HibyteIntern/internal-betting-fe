@@ -8,5 +8,5 @@ export interface UserProfile{
     profilePicture?: number,
     description?: String,
     coins?: number,
-    bets?: Bet[],
+    bets?: any[],
 }

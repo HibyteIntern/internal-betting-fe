@@ -33,6 +33,7 @@ import { CreateCompetitionComponent } from './components/create-competition/crea
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -69,6 +70,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SearchBarComponent,
     CreateCompetitionComponent,
     EventCardComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

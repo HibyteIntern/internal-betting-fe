@@ -1,0 +1,49 @@
+<app-mainframe [title]="pageTitle">
+    <div class="search-container">
+        <app-search-bar (valueChange)="search($event)" (onEnterPressed)="search($event)"></app-search-bar>
+    </div>
+
+    <div class="tag-container">
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+        <app-user-tag-btn>Football</app-user-tag-btn>
+    </div>
+    <app-user-tag-btn>Football</app-user-tag-btn>
+    
+    <div *ngIf="competitionService.loading$" class="grid-container">
+        <app-competition-card *ngFor="let competition of competitions" [competition]="competition" />
+    </div>
+</app-mainframe>
