@@ -23,9 +23,9 @@
 
   .close-icon {
     position: absolute;
-    top: 0.2rem;
     opacity: 0;
+    top: 50%;
     right: 50%;
-    transform: translateX(50%);
+    transform: translateX(50%) translateY(calc(-50% + 2px));
   }
 }
