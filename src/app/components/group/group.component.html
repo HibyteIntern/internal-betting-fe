@@ -1,4 +1,8 @@
 <div class="wrapper">
   <h2>{{ group?.groupName }}</h2>
   <p>{{ group?.description }}</p>
+  <h3>Members</h3>
+    <ul>
+        <li *ngFor="let user of group?.users">{{ user.username }}</li>
+    </ul>
 </div>

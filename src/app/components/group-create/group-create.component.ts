@@ -10,28 +10,12 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['./group-create.component.scss']
 })
 export class GroupCreateComponent {
+  constructor(private groupService: GroupService, private router:Router) { }
 
-  @Output() formSubmit = new EventEmitter<UserGroupModel>();
-
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private router:Router) {}
-
-  protected groupForm = this.formBuilder.group({
-    groupName: '',
-    description: ''
-    //users
-  })
-
-  handleSubmit() {
-    const formValue = this.groupForm.value;
-    const newGroup: UserGroupModel = {
-      groupName: formValue.groupName!,
-      description: formValue.description!
-    }
-    this.groupService.create(newGroup).subscribe((data) => {
+  handleSubmit(group: UserGroupModel) {
+    this.groupService.create(group).subscribe((data) => {
       console.log(data)
       this.router.navigate(['/user-groups']);
-    }, (error) => {
-      console.error('Error creating group:', error);
-    })
+    });
   }
 }

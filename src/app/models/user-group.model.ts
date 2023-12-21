@@ -1,7 +1,9 @@
+import {UserProfile} from "./user.profile";
+
 export interface UserGroupModel{
-  userGroupId?: number;
-  groupName: string;
-  profilePicture?: number;
-  description: string;
-  //userProfiles[]
+  userGroupId: number | null
+  groupName: string
+  profilePicture?: number
+  description: string
+  users: UserProfile[]
 }

@@ -22,6 +22,7 @@ export class GroupService {
   }
 
   create(group: UserGroupModel): Observable<UserGroupModel>{
+    console.log(group);
     return this.httpClient.post<UserGroupModel>(this.groupUrl, group);
   }
 

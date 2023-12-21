@@ -1,7 +1,3 @@
-<app-mainframe [title]="'Create User Group:'">
-  <form [formGroup]="groupForm" (ngSubmit)="handleSubmit()">
-    <label>Group Name: <input formControlName="groupName" type="text"></label>
-    <label>Group Description: <input formControlName="description" type="text"></label>
-    <button type="submit">Submit</button>
-  </form>
+<app-mainframe [title]="'Create User Group'">
+  <app-group-form (formSubmit)="handleSubmit($event)"></app-group-form>
 </app-mainframe>
