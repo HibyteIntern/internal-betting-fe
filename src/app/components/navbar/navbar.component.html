@@ -1,14 +1,9 @@
 <div class="outer-div">
 
-  <!-- <mat-slide-toggle
-    style="margin-left: 1rem; margin-right: 5.5rem"
-    color="primary"
-    (change)="themeService.toggleTheme()"
-    >{{ themeService.getCurrentTheme() }}</mat-slide-toggle> -->
   <div class="left-navbar-container">
     <mat-icon class="arrow-right" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back" />
   </div>
-  
+
   <div routerLink="/" id="app-name">HiBet</div>
   <div class="right-navbar-container">
     <img
@@ -20,7 +15,7 @@
       width="50"
       class="moon"
     />
-    
+
     <img
       *ngIf="themeService.getCurrentTheme() === 'Dark'"
       (click)="themeService.toggleTheme()"

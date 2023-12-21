@@ -33,6 +33,9 @@ import { CreateCompetitionComponent } from './components/create-competition/crea
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -68,6 +71,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TagComponent,
     StopMousePropagationDirective,
     SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
     CreateCompetitionComponent,
     EventCardComponent,
     IndexComponent,

@@ -11,6 +11,8 @@ export class IndexComponent implements OnInit {
   selectedCategory = 'Competitions';
   pageTitle = `Current ${this.selectedCategory}`;
 
+  tagSelectorOpened = false;
+
   competitions: Competition[] = [];
 
   constructor(protected competitionService: CompetitionService) { }
@@ -21,5 +23,17 @@ export class IndexComponent implements OnInit {
 
   search(value: string) {
     this.competitionService.getCompetitionsSearch(value).subscribe(competitions => this.competitions = competitions);
+  }
+
+  addTag() {
+    console.log('Add tag');
+  }
+
+  openTagSelector() {
+    this.tagSelectorOpened = true;
+  }
+
+  closeTagSelector() {
+    this.tagSelectorOpened = false;
   }
 }

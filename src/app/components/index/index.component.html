@@ -11,37 +11,14 @@
         <app-user-tag-btn>Football</app-user-tag-btn>
         <app-user-tag-btn>Football</app-user-tag-btn>
         <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
+        <div class="add-icon-container">
+            <mat-icon class="add-icon" (click)="openTagSelector()">add</mat-icon>
+            <div *ngIf="tagSelectorOpened" class="select-tags-container">
+                <mat-icon (click)="closeTagSelector()" class="close-icon">close</mat-icon>
+                <app-tag> miau</app-tag>
+            </div>
+        </div>
     </div>
-    <app-user-tag-btn>Football</app-user-tag-btn>
     
     <div *ngIf="competitionService.loading$" class="grid-container">
         <app-competition-card *ngFor="let competition of competitions" [competition]="competition" />
