@@ -1,4 +1,4 @@
-<div (click)="onUserProfileEdit()" class="outer-div">
+<div (click)="openAlertBox()" class="outer-div">
   <img
     ngSrc="assets/icons/chips-icon.svg"
     alt="credits"
@@ -13,5 +13,6 @@
 <app-account-page-user-profile 
   [username]="userProfile?.username?.toString()"
   *ngIf="showAlertBox" 
-  (edit)="onHandleAccount()">
+  (edit)="onUserProfileEdit()"
+  (logout)="onLogout()">
 </app-account-page-user-profile>

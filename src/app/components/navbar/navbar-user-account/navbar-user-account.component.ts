@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
+import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class NavbarUserAccountComponent implements OnInit{
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private userProfileService: UserProfileService 
+    private userProfileService: UserProfileService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -57,14 +59,19 @@ export class NavbarUserAccountComponent implements OnInit{
     console.log(this.userProfile)});
 
   }
+
+  onLogout(){
+    this.authService.logout();
+    this.closeAlertBox();
+  }
   
-  onHandleAccount() {
-    this.onUserProfileEdit();
+  onUserProfileEdit() {
+  
     this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
-    this.closeAlertBox(); 
+    this.showAlertBox = false;
   }
 
-  onUserProfileEdit() {
+  openAlertBox() {
 
     this.showAlertBox = true;
 

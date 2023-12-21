@@ -1,8 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, filter } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
-import { UserProfileService } from 'src/app/service/user-profile.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-account-page-user-profile',
@@ -10,12 +7,17 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./account-page-user-profile.component.scss']
 })
 export class AccountPageUserProfileComponent{
+  
   @Input() username?: string ;
   @Output() edit = new EventEmitter<boolean>();
+  @Output() logout = new EventEmitter<boolean>();
 
     onHandleEdit(){
-      console.log("dsjiadjs");
       this.edit.emit();
+    }
+
+    onLogout(){
+      this.logout.emit();
     }
 
 }

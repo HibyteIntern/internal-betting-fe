@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { SampleService } from '../../service/sample.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
-
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,43 +28,31 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private keycloak: KeycloakService,
-    private sample: SampleService,
+    private authService: AuthService,
     private userProfileService: UserProfileService,
     private router: Router,
-    
   ) {}
-
+  
   public async ngOnInit() {
-    this.isLoggedIn = await this.keycloak.isLoggedIn();
-
+    this.isLoggedIn = await this.authService.isLoggedIn();
     if (this.isLoggedIn) {
-      this.userProfile = await this.keycloak.loadUserProfile();
-      const token = await this.keycloak.getToken();
-      const payload = this.decodeToken(token);
-      this.userKeycloakId = payload.sub;
+      this.userProfile = await this.authService.loadUserProfile();
+      const token = await this.authService.getToken();
+      this.userKeycloakId = this.decodeToken(token).sub;
 
       this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
 
-    
-      this.sample.getSample().subscribe((data) => {
-        this.response = data;
-      });
-
       this.finishLogin = true;
-
     }
 
     if(this.finishLogin){
-
+      
       this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
         this.router.navigate(['/home', user.userId]);
       })
       
     }
   }
-
-
 
   private decodeToken(token: string): any {
     const base64Url = token.split('.')[1];
@@ -84,10 +69,10 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.keycloak.login();
+    this.authService.login();
   }
-
+  
   public logout() {
-    this.keycloak.logout();
+    this.authService.logout();
   }
 }
