@@ -37,6 +37,24 @@ export class UserProfileFormComponent implements OnChanges{
         }
   }
 
+  onFileSelect(event: Event): void {
+    const element = event.target as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList && fileList.length > 0) {
+      const file = fileList[0];
+      const reader = new FileReader();
+      
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const circle = document.querySelector('.profile-circle') as HTMLElement;
+        if (circle && e.target && e.target.result) {
+          circle.style.backgroundImage = `url(${e.target.result})`;
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   onSubmit() {
     console.log(this.userProfileForm.value);
 

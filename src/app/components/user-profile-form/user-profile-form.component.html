@@ -1,4 +1,12 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">  
+
+    <div class="profile-image-upload">
+        <input type="file" id="profileImage" (change)="onFileSelect($event)" hidden accept="image/*">
+        <label for="profileImage">
+            <div class="profile-circle"></div>
+        </label>
+    </div>
+
     <mat-form-field color="accent" appearance="outline" class="username-field">
         <mat-label>Username</mat-label>
         <input matInput type="text" formControlName="username">
