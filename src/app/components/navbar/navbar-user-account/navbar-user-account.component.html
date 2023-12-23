@@ -12,6 +12,7 @@
 
 <app-account-page-user-profile 
   [username]="userProfile?.username?.toString()"
+  [userId]="userProfile?.userId"
   *ngIf="showAlertBox" 
   (edit)="onUserProfileEdit()"
   (logout)="onLogout()">

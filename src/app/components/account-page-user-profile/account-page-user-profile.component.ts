@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserProfileService } from 'src/app/service/user-profile.service';
 
 
 @Component({
@@ -6,11 +7,34 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './account-page-user-profile.component.html',
   styleUrls: ['./account-page-user-profile.component.scss']
 })
-export class AccountPageUserProfileComponent{
+export class AccountPageUserProfileComponent implements OnInit{
   
   @Input() username?: string ;
+  @Input() userId?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
+
+  constructor(private userProfileService: UserProfileService){}
+
+  ngOnInit(): void {
+    if(this.userId){
+      this.userProfileService.getPhoto(this.userId).subscribe(blob => {
+        console.log(blob);
+        this.displayProfileImage(blob);
+      });
+    }
+  
+  }
+
+  displayProfileImage(blob: Blob) {
+    const url = URL.createObjectURL(blob);
+    const circle = document.querySelector('.profile-circle') as HTMLElement;
+    if (circle) {
+      circle.style.backgroundImage = `url(${url})`;
+      circle.style.backgroundSize = 'cover';
+      circle.style.backgroundPosition = 'center';
+    }
+  }
 
     onHandleEdit(){
       this.edit.emit();

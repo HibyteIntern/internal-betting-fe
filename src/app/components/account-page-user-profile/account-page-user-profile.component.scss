@@ -39,3 +39,37 @@
 .alert-box-actions button:first-child {
   margin-right: 20px;
 }
+
+.profile-image-upload {
+  margin-bottom: 50px;
+  text-align: left; 
+}
+
+.profile-circle {
+  width: 150px; 
+  height: 150px; 
+  background-color: var(--sidebar-color); 
+  border-radius: 50%; 
+  display: inline-block;
+  cursor: pointer; 
+  background-size: cover; 
+  background-position: center center; 
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+.profile-content {
+  margin-top: 50px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.username {
+  margin-bottom: 80px;
+  margin-left: 50px; /* Adjust as needed for spacing */
+}

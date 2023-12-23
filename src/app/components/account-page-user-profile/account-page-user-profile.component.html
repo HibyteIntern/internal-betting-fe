@@ -1,7 +1,15 @@
 <div class="backdrop"></div>
 <div class="alert-box">
-    <h3>Account</h3>
-    <h2>{{username}}</h2>
+    <h2>Account</h2>
+    <div class="profile-content">
+    <div class="profile-image-upload">
+        <input type="file" id="profileImage" hidden accept="image/*">
+        <label for="profileImage">
+            <div class="profile-circle"></div>
+        </label>
+    </div>
+    <h2 class="username">{{username}}</h2>
+    </div>
     <div class="alert-box-actions">
         <button mat-raised-button color="primary" style="color: var(--text-color)" (click)="onHandleEdit()">Edit Profile</button> 
         <button mat-raised-button color="primary" style="color: var(--text-color)" (click)="onLogout()">Logout</button>
