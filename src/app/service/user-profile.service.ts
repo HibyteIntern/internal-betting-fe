@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, delay, map } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
@@ -37,7 +37,6 @@ export class UserProfileService {
       }
       
       this.userProfileSubject.next(userProfile)
-      //console.log(this.userProfileSubject.value);
       this.userProfile = userProfile;
 
     });
@@ -69,6 +68,23 @@ export class UserProfileService {
     return this.http.delete<any>(`${this.userProfileUrl}/${userId}`);
   }
 
+  
+  addPhoto(userId: number, photo: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('photo', photo);
+
+    return this.http.post(`${this.userProfileUrl}/${userId}/addPhoto`, formData, {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    });
+  }
+
+  getPhoto(userId: number): Observable<Blob> {
+    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, { responseType: 'blob' });
+  } 
+
+  
 
 
 } 

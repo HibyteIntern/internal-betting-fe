@@ -5,6 +5,7 @@ import { Observable, finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
+
 @Component({
   selector: 'app-user-profile-form',
   templateUrl: './user-profile-form.component.html',
@@ -14,6 +15,7 @@ export class UserProfileFormComponent implements OnChanges{
   @Input() userProfile?: UserProfile | null;
 
   userProfileForm: FormGroup;
+  uploadedPhotoId?: number;
 
   originalUserProfile?: UserProfile;
 
@@ -34,7 +36,26 @@ export class UserProfileFormComponent implements OnChanges{
           this.originalUserProfile = { ...this.userProfile };
           console.log(this.originalUserProfile);
           this.userProfileForm.patchValue(this.userProfile);
+
+          if (this.userProfile && this.userProfile.userId) {
+            this.userProfileService.getPhoto(this.userProfile?.userId).subscribe(blob => {
+              console.log(blob);
+              this.displayProfileImage(blob);
+            });
+          } else {
+            console.error('User profile or profile picture is undefined.');
+          }
         }
+  }
+
+  displayProfileImage(blob: Blob) {
+    const url = URL.createObjectURL(blob);
+    const circle = document.querySelector('.profile-circle') as HTMLElement;
+    if (circle) {
+      circle.style.backgroundImage = `url(${url})`;
+      circle.style.backgroundSize = 'cover';
+      circle.style.backgroundPosition = 'center';
+    }
   }
 
   onFileSelect(event: Event): void {
@@ -52,7 +73,20 @@ export class UserProfileFormComponent implements OnChanges{
       };
 
       reader.readAsDataURL(file);
+
+      if (typeof this.userProfile?.userId === 'number') {
+        this.userProfileService.addPhoto(this.userProfile.userId, file).subscribe((photoId) => {
+          this.uploadedPhotoId = photoId;
+          console.log(`Photo uploaded successfully with ID: ${photoId}`);
+        });
+      } else {
+        console.error('User ID is undefined');
+      }
+
+      console.log(this.userProfile?.profilePicture);
+    
     }
+   
   }
 
   onSubmit() {
@@ -63,7 +97,7 @@ export class UserProfileFormComponent implements OnChanges{
       userId: this.userProfile?.userId,
       keycloakId: this.userProfile?.keycloakId,
       username: formValue.username !== null && formValue.username !== undefined ? formValue.username : '',
-      profilePicture: this.userProfile?.profilePicture,
+      profilePicture: this.uploadedPhotoId !== undefined ? this.uploadedPhotoId : this.userProfile?.profilePicture,
       description: formValue.description !== null && formValue.description !== undefined ? formValue.description : '',
       coins: this.userProfile?.coins,
       bets: this.userProfile?.bets,
@@ -83,9 +117,6 @@ export class UserProfileFormComponent implements OnChanges{
     ).subscribe(
       (user) => {
         console.log(user);
-      },
-      (error) => {
-        console.error('There was an error updating the profile', error);
       }
     );
   }
