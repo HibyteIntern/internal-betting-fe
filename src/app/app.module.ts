@@ -31,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { ViewEventComponent } from './components/events/view-event/view-event.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -65,26 +66,27 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StopMousePropagationDirective,
     ViewEventComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    KeycloakAngularModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    NgOptimizedImage,
-    MatLegacyChipsModule,
-    FormsModule,
-    MatExpansionModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        KeycloakAngularModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        NgOptimizedImage,
+        MatLegacyChipsModule,
+        FormsModule,
+        MatExpansionModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatIconModule,
+        MatChipsModule,
+    ],
   providers: [
     {
       provide: APP_INITIALIZER,

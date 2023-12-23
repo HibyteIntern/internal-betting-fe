@@ -6,6 +6,7 @@ export class EventRequest {
   description: string;
   creator: string;
   completeBetTypeDtoList: CompleteBetType[];
+  tags:string[];
   userGroups: string[];
   userProfiles: string[];
   startsAt: Date;
@@ -18,6 +19,7 @@ export class EventRequest {
     this.description = data.description || '';
     this.creator = data.creator || '';
     this.completeBetTypeDtoList = data.completeBetTypeDtoList || [];
+    this.tags = data.tags ||[];
     this.userGroups = data.userGroups || [];
     this.userProfiles = data.userProfiles || [];
     this.startsAt = data.startsAt || null;
