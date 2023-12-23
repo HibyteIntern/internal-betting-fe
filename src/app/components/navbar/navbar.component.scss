@@ -23,6 +23,12 @@
   flex-direction: row;
   height: 5rem;
   align-items: center;
+    mat-icon {
+      &:hover {
+        cursor: pointer;
+        filter: brightness(0.7);
+    }
+  }
 }
 
 .right-navbar-container {
@@ -37,7 +43,11 @@
   transform: translateY(-0.2rem);
   margin-right: 1rem;
   transition: all var(--transition-duration) ease-in-out;
-  width: 2.5rem;
+  width: 4.5rem;
+  height: 60%;
+  aspect-ratio: 1/1;
+  position: relative;
+  top: 0.2rem;
 
   &:hover {
     cursor: pointer;
@@ -49,8 +59,11 @@
   transform: translateY(0rem);
   margin-right: 1.2rem;
   transition: all var(--transition-duration) ease-in-out;
-  width: 2.5rem;
-  height: 2rem;
+  width: 4.5rem;
+  height: 40%;
+  aspect-ratio: 1/1;
+  position: relative;
+  top: 0.1rem;
 
   &:hover {
     cursor: pointer;
