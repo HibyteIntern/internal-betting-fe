@@ -235,16 +235,6 @@ html {
 }
 
 //styles for the app component
-#left-sidebar {
-  width: 3rem;
-  height: calc(100vh - var(--navbar-heigth));
-  position: fixed;
-  top: var(--navbar-heigth);
-  left: 0;
-  z-index: 1000;
-  background-color: var(--sidebar-color);
-}
-
 #center-content {
   flex-grow: 1;
   max-width: calc(100% - 23rem);

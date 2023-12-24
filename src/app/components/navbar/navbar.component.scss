@@ -2,12 +2,13 @@
   background-color: var(--navbar-color);
   width: 100%;
   height: var(--navbar-heigth);
-  z-index: 100;
+  z-index: 1000;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
