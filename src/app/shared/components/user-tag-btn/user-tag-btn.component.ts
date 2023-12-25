@@ -6,10 +6,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./user-tag-btn.component.scss'],
 })
 export class UserTagBtnComponent {
+  @Input() id = 0;
   @Input() functionality = 'remove';
-  @Output() clickEvent = new EventEmitter<void>();
+  @Output() clickEvent = new EventEmitter<number>();
 
   onClick(): void {
-    this.clickEvent.emit();
+    this.clickEvent.emit(this.id);
   }
 }

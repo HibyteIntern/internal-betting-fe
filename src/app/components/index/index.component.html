@@ -1,25 +1,22 @@
-<app-mainframe [title]="pageTitle">
+<app-mainframe [title]="'Current ' + selectedCategory">
     <div class="search-container">
         <app-search-bar (valueChange)="search($event)" (onEnterPressed)="search($event)"></app-search-bar>
     </div>
 
     <div class="tag-container">
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <app-user-tag-btn>Football</app-user-tag-btn>
-        <div class="add-icon-container">
-            <mat-icon class="add-icon" (click)="openTagSelector()">add</mat-icon>
+        <app-user-tag-btn [id]="i" (clickEvent)="removeTag($event)" *ngFor="let tag of tagsService.getSelectedTags(); let i = index">{{tag}}</app-user-tag-btn>
+        <div class="add-tags-container">
+            <!-- <div class="center-icon-container"> -->
+              <mat-icon class="add-icon" (click)="openTagSelector()">add</mat-icon>
+            <!-- </div> -->
+
             <div *ngIf="tagSelectorOpened" class="select-tags-container">
-                <mat-icon (click)="closeTagSelector()" class="close-icon">close</mat-icon>
-                <app-tag> miau</app-tag>
+              <app-user-tag-btn [id]="i" (clickEvent)="addTag($event)" [functionality]="'add'" *ngFor="let tag of tagsService.getAvailableTags(); let i = index">{{tag}}</app-user-tag-btn>
+              <mat-icon (click)="closeTagSelector()" class="close-icon">close</mat-icon>
             </div>
         </div>
     </div>
-    
+
     <div *ngIf="competitionService.loading$" class="grid-container">
         <app-competition-card *ngFor="let competition of competitions" [competition]="competition" />
     </div>
