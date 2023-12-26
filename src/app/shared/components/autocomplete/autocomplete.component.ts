@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable, map, startWith } from "rxjs";
 
@@ -8,11 +8,14 @@ import { Observable, map, startWith } from "rxjs";
   styleUrls: ['./autocomplete.component.scss']
 })
 export class AutocompleteComponent implements OnInit {
+  @Input() label = '';
+
   myControl = new FormControl('');
-  @Input() options: string[] = ['One', 'Two', 'Three'];
+  @Input() options: string[] = [];
   filteredOptions: Observable<string[]> = new Observable<string[]>();
 
-  @Output() selectedOptions: string[] = [];
+  selectedOptions: string[] = [];
+  @Output() selectedOptionsEmmiter:EventEmitter<string[]> = new EventEmitter<string[]>();
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -28,17 +31,28 @@ export class AutocompleteComponent implements OnInit {
   }
 
   addItem() {
-    if(this.myControl.value) {
+    let optionsExist = false;
+
+    this.filteredOptions.subscribe(
+      elems => {
+        if(this.myControl.value)
+          elems.indexOf(this.myControl.value) !== -1 ? optionsExist = true : optionsExist = false;
+      }
+    )
+
+    if(this.myControl.value && optionsExist) {
       this.selectedOptions.push(this.myControl.value);
       this.options = this.options.filter(option => option !== this.myControl.value);
       this.myControl.setValue('');
+
+      this.selectedOptionsEmmiter.emit(this.selectedOptions);
     }
-    console.log(this.options)
-    console.log(this.selectedOptions);
   }
 
-  removeItem(option: string) {
-    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
-    this.options.push(option);
+  removeItem(optionIndex: number) {
+    this.options.push(this.selectedOptions[optionIndex]);
+    this.selectedOptions = this.selectedOptions.filter((_, index) => index !== optionIndex);
+
+    this.selectedOptionsEmmiter.emit(this.selectedOptions);
   }
 }

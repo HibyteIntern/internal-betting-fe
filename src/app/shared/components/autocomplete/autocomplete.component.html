@@ -1,6 +1,6 @@
 <div style="width: 30rem; margin-top: 2rem;">
   <mat-form-field class="mat-form-field">
-    <mat-label>Add users</mat-label>
+    <mat-label>{{label}}</mat-label>
     <input type="text"
             placeholder="Pick one"
             aria-label="Add users"
@@ -13,7 +13,7 @@
     </mat-autocomplete>
   </mat-form-field>
   <button (click)="addItem()">Add</button>
-  <app-user-tag-btn *ngFor="let option of selectedOptions">
+  <app-user-tag-btn [id]="i" (clickEvent)="removeItem($event)" *ngFor="let option of selectedOptions; let i = index">
     {{option}}
   </app-user-tag-btn>
 </div>
