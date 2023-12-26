@@ -1,13 +1,19 @@
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Number</mat-label>
+<div style="width: 30rem; margin-top: 2rem;">
+  <mat-form-field class="mat-form-field">
+    <mat-label>Add users</mat-label>
     <input type="text"
             placeholder="Pick one"
-            aria-label="Number"
+            aria-label="Add users"
             matInput
             [formControl]="myControl"
-            [matAutocomplete]="auto">
+            [matAutocomplete]="auto"
+            (keydown.enter)="addItem()">
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       <mat-option *ngFor="let option of filteredOptions | async; track option" [value]="option">{{option}}</mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <button (click)="addItem()">Add</button>
+  <app-user-tag-btn *ngFor="let option of selectedOptions">
+    {{option}}
+  </app-user-tag-btn>
+</div>
