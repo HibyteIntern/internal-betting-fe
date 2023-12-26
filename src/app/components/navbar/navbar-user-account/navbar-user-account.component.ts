@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
@@ -12,13 +12,12 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 })
 export class NavbarUserAccountComponent implements OnInit{
 
-  UserId: any;
+  userId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
-
   userProfile$?: Observable<UserProfile | null>;
-  
   showAlertBox: boolean = false;
+  
 
   constructor(
     private router: Router,
@@ -38,17 +37,35 @@ export class NavbarUserAccountComponent implements OnInit{
       let childRoute = this.route.firstChild;
       while (childRoute) {
         if (childRoute.snapshot.paramMap.get("id")) {
-          this.UserId = childRoute.snapshot.paramMap.get("id");
-          this.fetchUserProfile(this.UserId); 
+          this.userId = childRoute.snapshot.paramMap.get("id");
+          this.fetchUserProfile(this.userId); 
           break;
         }
         childRoute = childRoute.firstChild;
       }
-      console.log('userId:', this.UserId);
+      console.log('userId:', this.userId);
+
+      if(this.userId){
+        this.userProfileService.getPhoto(this.userId).subscribe(blob => {
+          console.log(blob);
+          this.displayProfileImage(blob);
+        });
+      }
+
+
     });
+
   }
-
-
+  
+  displayProfileImage(blob: Blob) {
+    const url = URL.createObjectURL(blob);
+    const circle = document.querySelector('#account-image') as HTMLElement;
+    if (circle) {
+      circle.style.backgroundImage = `url(${url})`;
+      circle.style.backgroundSize = 'cover';
+      circle.style.backgroundPosition = 'center';
+    }
+  }
 
   fetchUserProfile(userId: number): void {
     this.userProfile$ = this.userProfileService.userProfile$;
@@ -56,7 +73,8 @@ export class NavbarUserAccountComponent implements OnInit{
   
     this.userProfile$.subscribe(user => {
       this.userProfile = user;
-    console.log(this.userProfile)});
+    console.log(this.userProfile);
+  });
 
   }
 
