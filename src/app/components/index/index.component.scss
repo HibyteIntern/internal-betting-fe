@@ -2,23 +2,25 @@
     width: 30rem;
 }
 
-.add-icon-container {
+.add-tags-container {
     position: relative;
-    display: inline;
+    display: inline-block;
     height: 100%;
 }
 
 .select-tags-container {
+    display: inline-block;
     position: absolute;
-    top: -1rem;
-    right: -2rem;
-    background: var(--background-color);
-    background: red;
+    top: -1.2rem;
+    left: 0rem;
+    background: var(--lighter-background-color);
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
-    width: 30rem;
-    height: 20rem;
+    width: 20rem;
     z-index: 2200;
+    padding: 1.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
 
     .close-icon {
         position: absolute;
@@ -30,17 +32,33 @@
         &:hover {
             transform: scale(1.2);
         }
+
+        z-index: 10000;
     }
 }
 
+.center-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 1rem;
+}
+
 .add-icon {
-    cursor: pointer;
     position: absolute;
-    top: 50%;
-    transform: translateY(calc(-50% + 0px)) scale(1.2);
+    cursor: pointer;
+    bottom: -50%;
+    transform: translateY(calc(50% - 0.4rem)) scale(1.2);
     transition: all var(--transition-duration) ease-in-out;
 
     &:hover {
-        transform: translateY(calc(-50% + 0px)) scale(1.4);
+        transform: translateY(calc(50% - 0.4rem)) scale(1.4);
     }
+}
+
+@media (max-width: 992px) {
+  .select-tags-container {
+    left: -14.5rem;
+  }
 }
