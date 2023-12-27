@@ -36,6 +36,8 @@ import {SearchBarComponent} from "./shared/components/search-bar/search-bar.comp
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
+import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -74,6 +76,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LeftSidebarListComponent,
     HideScrollbarDirective,
     RightSidebarComponent,
+    AutocompleteComponent,
     CreateCompetitionComponent,
     EventCardComponent,
     IndexComponent,
@@ -94,6 +97,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatExpansionModule,
     MatIconModule,
     FormsModule,
+    MatAutocompleteModule,
     MatCardModule,
     MatChipsModule,
   ],

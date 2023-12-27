@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './service/theme.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,16 @@ import { ThemeService } from './service/theme.service';
 export class AppComponent {
   constructor(private themeService: ThemeService) {}
 
+  options = ['One', 'Two', 'Three'];
+  selectedOptions: string[] = [];
+
   public toggleTheme() {
     this.themeService.toggleTheme();
+  }
+
+  public handleSelectedOptions(selectedOptions: string[]) {
+    this.selectedOptions = selectedOptions;
+
+    console.log(this.selectedOptions)
   }
 }

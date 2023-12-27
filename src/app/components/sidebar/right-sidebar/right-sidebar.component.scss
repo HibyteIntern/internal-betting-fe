@@ -50,6 +50,7 @@
 }
 
 #info-container {
+  overflow: auto;
   padding: 1rem;
   background-color: var(--sidebar-color);
   height: calc(100% - 2rem);
