@@ -9,14 +9,11 @@
             <mat-label>Competition Description</mat-label>
             <textarea formControlName="name" matInput placeholder="World Championship" value=""></textarea>
         </mat-form-field>
-
-        <label>Add Users</label>
-        <app-search-bar (valueChange)="search($event)" (onEnterPressed)="search($event)"></app-search-bar>
+        <app-autocomplete [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect"  />
+        <app-autocomplete [label]="'Add User Groups'" [options]="userGroupOptions" (selectedOptionsEmmiter)="handleUserGroupSelect"  />
+        <app-autocomplete [label]="'Add Events'" [options]="eventOptions" (selectedOptionsEmmiter)="handleEventSelect"  />   
     </form>
+    
     <!-- form for:
-    -users
-    -userGroups
-    -userProfiles
-    -events
     -status -->
 </app-mainframe>
