@@ -44,20 +44,18 @@ export class NavbarUserAccountComponent implements OnInit{
         childRoute = childRoute.firstChild;
       }
       console.log('userId:', this.userId);
-      console.log(this.userProfile?.profilePicture);
       
-      if(this.userId && this.userProfile?.profilePicture){
+      if(this.userId){
         this.userProfileService.getPhoto(this.userId).subscribe(blob => {
           console.log(blob);
           this.displayProfileImage(blob);
         });
       }
 
-
     });
-
   }
-  
+
+
   displayProfileImage(blob: Blob) {
     const url = URL.createObjectURL(blob);
     const circle = document.querySelector('#account-image') as HTMLElement;

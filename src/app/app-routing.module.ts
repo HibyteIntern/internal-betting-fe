@@ -8,6 +8,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,12 +21,13 @@ const routes: Routes = [
     ],
   },
     
-  { path: 'user-profile', 
+  { path: 'user-profile',
+    canActivate: [AuthGuard], 
     component: UserProfileComponent, 
     children: [
       {path: 'edit/:id', component: UserProfileEditComponent},
     ]}, 
-  { path: 'home/:id', component: HomeComponent},
+  { path: 'home/:id', canActivate: [AuthGuard], component: HomeComponent},
   { path: 'competition', component: CompetitionsComponent },
 ];
 
