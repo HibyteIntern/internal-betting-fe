@@ -11,13 +11,14 @@ export class AccountPageUserProfileComponent implements OnInit{
   
   @Input() username?: string ;
   @Input() userId?: number;
+  @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
 
   constructor(private userProfileService: UserProfileService){}
 
   ngOnInit(): void {
-    if(this.userId){
+    if(this.userId && this.profilePicture){
       this.userProfileService.getPhoto(this.userId).subscribe(blob => {
         console.log(blob);
         this.displayProfileImage(blob);

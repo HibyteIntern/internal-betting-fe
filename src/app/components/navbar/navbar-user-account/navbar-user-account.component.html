@@ -13,6 +13,7 @@
 <app-account-page-user-profile 
   [username]="userProfile?.username?.toString()"
   [userId]="userProfile?.userId"
+  [profilePicture]="userProfile?.profilePicture"
   *ngIf="showAlertBox" 
   (edit)="onUserProfileEdit()"
   (logout)="onLogout()">

@@ -44,8 +44,9 @@ export class NavbarUserAccountComponent implements OnInit{
         childRoute = childRoute.firstChild;
       }
       console.log('userId:', this.userId);
-
-      if(this.userId){
+      console.log(this.userProfile?.profilePicture);
+      
+      if(this.userId && this.userProfile?.profilePicture){
         this.userProfileService.getPhoto(this.userId).subscribe(blob => {
           console.log(blob);
           this.displayProfileImage(blob);

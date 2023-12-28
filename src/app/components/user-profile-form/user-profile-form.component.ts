@@ -37,9 +37,8 @@ export class UserProfileFormComponent implements OnChanges{
           console.log(this.originalUserProfile);
           this.userProfileForm.patchValue(this.userProfile);
 
-          if (this.userProfile && this.userProfile.userId) {
+          if (this.userProfile && this.userProfile.userId && this.userProfile.profilePicture) {
             this.userProfileService.getPhoto(this.userProfile?.userId).subscribe(blob => {
-              console.log(blob);
               this.displayProfileImage(blob);
             });
           } else {
