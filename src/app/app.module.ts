@@ -31,7 +31,8 @@ import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -68,6 +69,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    PrizeBrowserComponent,
   ],
   imports: [
     BrowserModule,
