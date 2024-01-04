@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, map } from 'rxjs';
+import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
+import { AvatarService } from './avatar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,34 +13,50 @@ export class UserProfileService {
   userProfile: UserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/user-profile';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private avatarService: AvatarService) { }
 
   private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
   public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
 
   
-  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile){
-    this.getByKeycloakId(userKeycloakId).subscribe((existingProfile) => {
-        
+  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile) {
+    this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
       let userProfile = existingProfile;
   
-      if(userProfile.username == null){
-          userProfile.username = userProfileKeycloak?.username;
-  
-        this.update(userProfile).subscribe((updatedProfile) => {
-          if (updatedProfile) {
-            userProfile = updatedProfile;
-      
-          } else {
-            console.log('Failed to update user profile.');
-          }
-        });
+      if (userProfile.username == null && userProfileKeycloak.username) {
+        userProfile.username = userProfileKeycloak.username;
+        userProfile = await this.updateUserProfile(userProfile);
       }
-      
-      this.userProfileSubject.next(userProfile)
-      this.userProfile = userProfile;
 
+      if (userProfile.profilePicture == null && userProfileKeycloak.username) {
+        try {
+          const avatarSvg = this.avatarService.generateAvatar(userProfileKeycloak.id);
+          const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userProfileKeycloak.id);
+          if (userProfile.userId) {
+            await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
+          }
+        } catch (error) {
+          console.error('Error generating or uploading avatar:', error);
+        } 
+      } else {
+        this.userProfileSubject.next(userProfile);
+      }
     });
+  }
+  
+  private async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
+    const updatedProfile = await this.update(userProfile).toPromise();
+    if (!updatedProfile) {
+      throw new Error('Failed to update user profile.');
+    }
+    return updatedProfile;
+  }
+  
+  private async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File, userProfile: UserProfile) {
+    const photoId = await firstValueFrom(this.addPhoto(userId, avatarFile));
+    userProfile.profilePicture = photoId;
+    this.userProfileSubject.next(userProfile);
   }
 
   getAll(): Observable<UserProfile[]> {
