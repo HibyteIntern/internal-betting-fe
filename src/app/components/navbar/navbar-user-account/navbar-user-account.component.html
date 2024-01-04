@@ -16,5 +16,6 @@
   [profilePicture]="userProfile?.profilePicture"
   *ngIf="showAlertBox" 
   (edit)="onUserProfileEdit()"
-  (logout)="onLogout()">
+  (logout)="onLogout()"
+  (cancel)="onCancel()">
 </app-account-page-user-profile>

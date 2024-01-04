@@ -14,6 +14,7 @@ export class AccountPageUserProfileComponent implements OnInit{
   @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
+  @Output() cancel = new EventEmitter<boolean>();
 
   constructor(private userProfileService: UserProfileService){}
 
@@ -43,6 +44,10 @@ export class AccountPageUserProfileComponent implements OnInit{
 
     onLogout(){
       this.logout.emit();
+    }
+
+    onCancel(){
+      this.cancel.emit();
     }
 
 }

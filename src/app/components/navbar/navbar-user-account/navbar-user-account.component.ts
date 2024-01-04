@@ -88,6 +88,10 @@ export class NavbarUserAccountComponent implements OnInit{
     this.showAlertBox = false;
   }
 
+  onCancel(){
+    this.closeAlertBox();
+  }
+
   openAlertBox() {
 
     this.showAlertBox = true;

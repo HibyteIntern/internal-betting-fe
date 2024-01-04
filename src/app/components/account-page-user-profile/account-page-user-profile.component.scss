@@ -40,6 +40,10 @@
   margin-right: 20px;
 }
 
+.alert-box-actions button:not(:last-child) {
+  margin-right: 20px;
+}
+
 .profile-image-upload {
   margin-bottom: 50px;
   text-align: left; 
@@ -59,7 +63,6 @@
 input[type="file"] {
   display: none;
 }
-
 
 .profile-content {
   margin-top: 50px;
