@@ -1,1 +1,14 @@
-<app-mainframe title="Prizes"></app-mainframe>
+<app-mainframe title="Prize extractions">
+  <button mat-raised-button color="primary" style="color: var(--text-color)">Start new prize extraction</button>
+  <div class="extraction-selector">
+    <button
+      [ngClass]="isActiveExtractionsSelected ? 'selected' : ''"
+      (click)="isActiveExtractionsSelected = true"
+    >Active extractions</button>
+    <button
+      [ngClass]="!isActiveExtractionsSelected ? 'selected' : ''"
+      (click)="isActiveExtractionsSelected = false"
+    >Past extractions</button>
+  </div>
+  <app-prize-list [prizeExtractionList]="prizeExtractionList"></app-prize-list>
+</app-mainframe>

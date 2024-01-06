@@ -1,0 +1,13 @@
+.outer-container {
+  background-color: var(--card-color);
+  width: 40rem;
+  height: 15rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+@media screen and (max-width: 768px) {
+  .outer-container {
+    width: 100%;
+  }
+}

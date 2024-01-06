@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PrizeExtraction} from "../../../entity/PrizeExtraction";
 
 @Component({
   selector: 'app-prize-browser',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./prize-browser.component.scss']
 })
 export class PrizeBrowserComponent {
-
+  isActiveExtractionsSelected = true;
+  prizeExtractionList: PrizeExtraction[] = [{title: "This is a very title"}, {title: "Interesting title"}, {title: "Extra vacation days"}]
 }
