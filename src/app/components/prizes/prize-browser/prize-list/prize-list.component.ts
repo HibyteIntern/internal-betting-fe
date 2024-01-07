@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PrizeExtraction} from "../../../../entity/PrizeExtraction";
+import {PrizeDraw} from "../../../../entity/PrizeDraw";
 
 @Component({
   selector: 'app-prize-list',
@@ -7,5 +7,5 @@ import {PrizeExtraction} from "../../../../entity/PrizeExtraction";
   styleUrls: ['./prize-list.component.scss']
 })
 export class PrizeListComponent {
-  @Input() prizeExtractionList: PrizeExtraction[] = []
+  @Input() prizeDrawList: PrizeDraw[] = []
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {PrizeExtraction} from "../../../entity/PrizeExtraction";
+import {PrizeDraw} from "../../../entity/PrizeDraw";
+import {PrizeDrawService} from "../../../service/prize-draw.service";
+import EntityState from "../../../entity/EntityState";
 
 @Component({
   selector: 'app-prize-browser',
@@ -8,5 +10,12 @@ import {PrizeExtraction} from "../../../entity/PrizeExtraction";
 })
 export class PrizeBrowserComponent {
   isActiveExtractionsSelected = true;
-  prizeExtractionList: PrizeExtraction[] = [{title: "This is a very title"}, {title: "Interesting title"}, {title: "Extra vacation days"}]
+  prizeDraws: EntityState<PrizeDraw[]>;
+
+  constructor(private prizeDrawService: PrizeDrawService) {
+    this.prizeDraws = prizeDrawService.prizeDrawSubject.value
+    this.prizeDrawService.getData().subscribe((data) => {
+      this.prizeDraws = data;
+    })
+  }
 }
