@@ -1,13 +1,65 @@
 .outer-container {
   background-color: var(--card-color);
-  width: 40rem;
-  height: 15rem;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
+
+  display: flex;
+  flex-direction: row;
+  width: 40rem;
+  height: 15rem;
+
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.015);
+    cursor: pointer;
+  }
 }
+
+.left-container {
+  flex-grow: 1;
+  box-sizing: border-box;
+  margin: 1.5em;
+  .title {
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+  .current-leader {
+    margin-bottom: .25rem;
+    display: flex;
+    align-items: center;
+    span {
+      color: var(--accent-color-two);
+      margin-left: .25rem;
+    }
+  }
+  .prize {
+    margin-bottom: 1rem;
+  }
+  .description {
+
+  }
+}
+
+.right-container {
+  box-sizing: border-box;
+  margin: 1.5em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .type-image {
+    width: 10rem;
+    margin-top: 1rem;
+    aspect-ratio: 1/1;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .outer-container {
     width: 100%;
+    flex-direction: column;
   }
 }
