@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EventTemplate } from '../../../../entity/EventTemplate';
+import { EventTemplate } from '../../../../entity/event-template.model';
 
 @Component({
   selector: 'app-event-template-list',

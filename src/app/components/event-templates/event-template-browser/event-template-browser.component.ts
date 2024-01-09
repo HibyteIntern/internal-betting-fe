@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EventTemplateService } from '../../../service/event-template.service';
-import { EventTemplate } from '../../../entity/EventTemplate';
-import EntityState from '../../../entity/EntityState';
+import { EventTemplate } from '../../../entity/event-template.model';
+import EntityState from '../../../entity/entity-state.model';
 
 @Component({
   selector: 'app-event-template-browser',

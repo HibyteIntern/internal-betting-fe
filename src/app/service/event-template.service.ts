@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { EventTemplate } from '../entity/EventTemplate';
-import EntityState from '../entity/EntityState';
+import { EventTemplate } from '../entity/event-template.model';
+import EntityState from '../entity/entity-state.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class EventTemplateService {
     this.data,
   );
 
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.fetchAll();
   }
 
@@ -32,7 +32,7 @@ export class EventTemplateService {
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);
 
-    this._http
+    this.http
       .get<EventTemplate[]>(this.apiUrl)
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -51,14 +51,14 @@ export class EventTemplateService {
   }
 
   getById(id: number): Observable<EventTemplate> {
-    return this._http.get<EventTemplate>(this.apiUrl + '/' + id);
+    return this.http.get<EventTemplate>(this.apiUrl + '/' + id);
   }
 
   add(newEventTemplate: EventTemplate): Observable<boolean> {
     this.data.loading = true;
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);
-    return this._http.post<EventTemplate>(this.apiUrl, newEventTemplate).pipe(
+    return this.http.post<EventTemplate>(this.apiUrl, newEventTemplate).pipe(
       map((response) => {
         this.data.entity.push(response);
         this.data.loading = false;
@@ -78,7 +78,7 @@ export class EventTemplateService {
     this.data.loading = true;
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);
-    return this._http
+    return this.http
       .put<EventTemplate>(this.apiUrl + '/' + id, eventTemplate)
       .pipe(
         map((response) => {
@@ -105,7 +105,7 @@ export class EventTemplateService {
     this.data.loading = true;
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);
-    this._http.delete(this.apiUrl + '/' + id).subscribe(() => {
+    this.http.delete(this.apiUrl + '/' + id).subscribe(() => {
       this.data.entity = this.data.entity.filter(
         (eventTemplate) => eventTemplate.id !== id,
       );
