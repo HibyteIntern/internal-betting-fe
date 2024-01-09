@@ -25,9 +25,7 @@
   text-align: right;
 }
 
-.alert-box-actions button {
-  background-color: var(--accent-color-one); 
-  color: var(--text-color); 
+.alert-box-actions button { 
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -55,7 +53,6 @@
   background-color: var(--sidebar-color); 
   border-radius: 50%; 
   display: inline-block;
-  cursor: pointer; 
   background-size: cover; 
   background-position: center center; 
 }
