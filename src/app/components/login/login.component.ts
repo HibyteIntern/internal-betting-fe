@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       const token = await this.authService.getToken();
       this.userKeycloakId = this.decodeToken(token).sub;
 
-      this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
+      await this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
 
       this.finishLogin = true;
     }

@@ -20,30 +20,34 @@ export class UserProfileService {
   public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
 
   
-  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile) {
-    this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
-      let userProfile = existingProfile;
+  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
+    return new Promise((resolve, reject) => {
+      this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
+        let userProfile = existingProfile;
   
-      if (userProfile.username == null && userProfileKeycloak.username) {
-        userProfile.username = userProfileKeycloak.username;
-        userProfile = await this.updateUserProfile(userProfile);
-      }
-
-      if (userProfile.profilePicture == null && userProfileKeycloak.username) {
         try {
-          const avatarSvg = this.avatarService.generateAvatar(userProfileKeycloak.id);
-          const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userProfileKeycloak.id);
-          if (userProfile.userId) {
-            await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
+          if (userProfile.username == null && userProfileKeycloak.username) {
+            userProfile.username = userProfileKeycloak.username;
+            userProfile = await this.updateUserProfile(userProfile);
           }
+  
+          if (userProfile.profilePicture == null && userProfileKeycloak.username) {
+            const avatarSvg = this.avatarService.generateAvatar(userProfileKeycloak.id);
+            const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userProfileKeycloak.id);
+            if (userProfile.userId) {
+              await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
+            }
+          }
+  
+          resolve(userProfile);
         } catch (error) {
-          console.error('Error generating or uploading avatar:', error);
-        } 
-      } else {
-        this.userProfileSubject.next(userProfile);
-      }
+          console.error('Error in profile update:', error);
+          reject(error);
+        }
+      });
     });
   }
+
   
   private async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
     const updatedProfile = await this.update(userProfile).toPromise();
