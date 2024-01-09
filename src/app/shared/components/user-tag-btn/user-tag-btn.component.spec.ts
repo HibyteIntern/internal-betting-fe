@@ -8,9 +8,8 @@ describe('UserTagBtnComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserTagBtnComponent ]
-    })
-    .compileComponents();
+      declarations: [UserTagBtnComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserTagBtnComponent);
     component = fixture.componentInstance;

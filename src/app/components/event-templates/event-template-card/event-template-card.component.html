@@ -1,1 +1,16 @@
-<p>event-template-card works!</p>
+<div
+  id="event-template-container"
+  [routerLink]="['/event-templates', 'edit', template?.id]"
+>
+  <div>{{ template?.name }}</div>
+  <button
+    color="accent"
+    appClickStopPropagation
+    mat-stroked-button
+    style="margin-left: 1rem"
+    (click)="delete.emit(template?.id)"
+  >
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+</div>

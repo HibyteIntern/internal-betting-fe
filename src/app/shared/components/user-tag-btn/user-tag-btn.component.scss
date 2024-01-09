@@ -1,0 +1,31 @@
+.user-tag-container {
+  position: relative;
+  display: inline-block;
+  background-color: var(--accent-color-two);
+  font-size: var(--text-sm);
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius);
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+
+    .content {
+      opacity: 0;
+    }
+
+    .icon {
+      opacity: 1;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    right: 50%;
+    transform: translateX(50%) translateY(calc(-50% + 2px));
+  }
+}

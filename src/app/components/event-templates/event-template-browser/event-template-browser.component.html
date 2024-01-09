@@ -1,1 +1,22 @@
-<p>event-template-browser works!</p>
+<app-mainframe title="Event templates">
+  <div id="outer-div">
+    <div style="width: 100%">
+      <div id="search-bar-wrapper">
+        <app-search-bar (valueChange)="search($event)"></app-search-bar>
+      </div>
+      <button
+        [routerLink]="['/event-templates/create']"
+        mat-raised-button
+        color="primary"
+        id="add-event-template-button"
+      >
+        Add Event Template
+      </button>
+    </div>
+    <div style="font-size: var(--text-sm); text-align: left" *ngIf="!eventTemplates.entity || eventTemplates.entity.length === 0">No event templates found.</div>
+    <app-event-template-list
+      (delete)="handleDelete($event)"
+      [eventTemplates]="eventTemplates.entity"
+    ></app-event-template-list>
+  </div>
+</app-mainframe>

@@ -2,13 +2,13 @@
 @import "app/themes/input-themes";
 @import "app/themes/button-themes";
 
-//Color declarations for both themes
+//Color declarations for light mode
 :root {
-  --background-color: #FED9ED;
+  --background-color: #e6e6e6;
   --lighter-background-color: #f3ccff;
   --sidebar-color: #bb9cc0;
   --navbar-color: #c88ea7;
-  --card-color: #916db3;
+  --card-color: #e7bcde;
   --accent-color-one: #e48586;
   --accent-color-two: #37306b;
   --text-color: #370055;
@@ -20,47 +20,33 @@
   --navbar-heigth: 5rem;
 
   --text-sm: 1.2rem;
-  --text-md: 1.4rem;
+  --text-md: 1.5rem;
   --text-lg: 2rem;
+
+  --border-radius: 0.5rem;
+
+  --transition-duration: 200ms;
 }
 
+//color declarations for the dark theme
 .dark {
   --background-color: #202040;
   --lighter-background-color: #2c2c4a;
   --sidebar-color: #191928;
   --navbar-color: #543864;
   --card-color: #191933;
-  --accent-color-one: #d78484;
+  --accent-color-one: #ee9595;
   --accent-color-two: #e4ba84;
   --text-color: #ffffff;
 }
 
-//Scrollbar styling
-::-webkit-scrollbar-track {
-  background: var(--sidebar-color); /* Track background color */
+p {
+  text-indent: 1rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--navbar-color); /* Thumb color */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color-one); /* Thumb color on hover */
-}
-::-webkit-scrollbar {
-  width: 10px; /* Vertical scrollbar width */
-  height: 10px; /* Horizontal scrollbar height */
-}
-
-//Override default background and text color for Angular Material form inputs
-.mat-mdc-text-field-wrapper {
-  background-color: var(--sidebar-color) !important;
-}
-mat-label {
-  color: var(--text-color);
-}
-input {
-  color: var(--text-color);
+label {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
 }
 
 h1 {
@@ -68,6 +54,40 @@ h1 {
   font-family: var(--font-raleway);
   font-weight: bold;
   margin-bottom: 2rem;
+}
+
+//Scrollbar styling
+::-webkit-scrollbar-track {
+  background: var(--sidebar-color); //Track background color
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navbar-color); //Thumb color
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color-one); //Thumb color on hover
+}
+::-webkit-scrollbar {
+  width: 10px; // Vertical scrollbar width
+  height: 10px; // Horizontal scrollbar height
+}
+
+//Override default background and text color for Angular Material form inputs
+.mat-mdc-text-field-wrapper {
+  background-color: var(--sidebar-color) !important;
+}
+mat-label {
+  color: var(--text-color) !important;
+}
+input {
+  color: var(--text-color) !important;
+}
+
+h1 {
+  font-size: var(--text-lg);
+  font-family: var(--font-raleway);
+  font-weight: bold;
 }
 
 //Loading spinner
@@ -106,4 +126,125 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   height: 100%;
+}
+
+mat-form-field {
+  font-size: 1rem !important;
+  input {
+    font-size: clamp(14px, 1rem, 24px) !important;
+  }
+}
+
+.app-form {
+  width: clamp(550px, 40%, 1200px);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
+  .form-error-message {
+    width: clamp(300px, 60%, 700px);
+    font-size: var(--text-sm);
+    min-font-size: 14px;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .lds-dual-ring-container {
+    width: clamp(300px, 60%, 700px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+  button {
+    width: clamp(300px, 60%, 700px);
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding: 1em !important;
+    font-size: clamp(14px, 1rem, 24px) !important;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media screen and (max-width: 900px) {
+  .app-form {
+    width: 100%;
+    .form-error-message {
+      width: 100%;
+    }
+    .lds-dual-ring-container {
+      width: 100%;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}
+
+//media queries for setting the font size, which influences every component that uses rem
+html {
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 2000px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 3000px) {
+  html {
+    font-size: 24px;
+  }
+}
+
+//styles for the app component
+#center-content {
+  flex-grow: 1;
+  max-width: calc(100% - 23rem);
+  position: relative;
+  left: 3rem;
+}
+
+@media (max-width: 768px) {
+  #center-content {
+    max-width: calc(100% - 6rem);
+  }
 }

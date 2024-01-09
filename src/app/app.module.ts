@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -19,18 +18,26 @@ import { NgOptimizedImage } from '@angular/common';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
+import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
-import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
-
-
-
+import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { MatIconModule } from '@angular/material/icon';
+import { TagComponent } from './shared/components/tag/tag.component';
+import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
+import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -57,6 +64,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateBrowserComponent,
     EventTemplateAddComponent,
     EventTemplateCardComponent,
+    EventTemplateListComponent,
     MainframeComponent,
     UserProfileComponent,
     UserProfileEditComponent,
@@ -66,7 +74,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HomeComponent,
     AccountPageUserProfileComponent,
     LoadingSpinnerComponent,
-
+    UserTagBtnComponent,
+    TagComponent,
+    StopMousePropagationDirective,
+    SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +97,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ReactiveFormsModule,
     NgOptimizedImage,
     FormsModule,
-   
+    MatExpansionModule,
+    MatIconModule,
+    FormsModule,
+    MatAutocompleteModule,
   ],
   providers: [
     {

@@ -29,6 +29,10 @@ const routes: Routes = [
     ]}, 
   { path: 'home/:id', canActivate: [AuthGuard], component: HomeComponent},
   { path: 'competition', component: CompetitionsComponent },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+
 ];
 
 @NgModule({

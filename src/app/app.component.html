@@ -1,28 +1,12 @@
-<div style="width: 100%; background-color: var(--sidebar-color)">
-  <app-navbar></app-navbar>
-</div>
-<div
-  style="
-    display: flex;
-    flex-direction: row;
-    min-height: calc(100vh - var(--navbar-heigth));
-  "
->
-  <div
-    style="
-      width: 3rem;
-      min-height: 100%;
-      background-color: var(--sidebar-color);
-    "
-  ></div>
-  <div style="width: calc(100% - 20rem)">
-    <router-outlet></router-outlet>
+<div style="max-height: 100vh">
+  <div style="width: 100%; background-color: var(--sidebar-color)">
+    <app-navbar></app-navbar>
   </div>
-  <div
-    style="
-      width: 17rem;
-      min-height: 100%;
-      background-color: var(--sidebar-color);
-    "
-  ></div>
+  <div style="display: flex; overflow: auto; max-height: calc(100vh - var(--navbar-heigth))">
+    <app-left-sidebar-list></app-left-sidebar-list>
+    <div id="center-content">
+      <router-outlet></router-outlet>
+    </div>
+    <app-right-sidebar></app-right-sidebar>
+  </div>
 </div>

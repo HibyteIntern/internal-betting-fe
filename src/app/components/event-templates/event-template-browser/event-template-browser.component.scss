@@ -1,0 +1,28 @@
+@import './../../../themes/_variables';
+
+#outer-div {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#add-event-template-button {
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  padding: 1em;
+  color: var(--text-color);
+}
+
+app-event-template-list {
+  width: 100%;
+}
+
+#search-bar-wrapper {
+  width: 25%;
+  min-width: 300px;
+  margin-bottom: 2rem;
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
+}

@@ -1,0 +1,8 @@
+<div id="outer-div">
+  <input
+    type="text"
+    [(ngModel)]="value"
+    (input)="valueChange.emit(value)"
+    (keydown.enter)="onEnterPressed.emit(value)">
+  <mat-icon>search</mat-icon>
+</div>

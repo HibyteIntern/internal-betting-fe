@@ -1,3 +1,13 @@
-<div>
+<div class="user-tag-container" (click)="onClick()">
+  <div class="content">
     <ng-content></ng-content>
+  </div>
+
+  <span *ngIf="functionality === 'remove'" class="icon">
+    <mat-icon>close</mat-icon>
+  </span>
+
+  <span *ngIf="functionality === 'add'" class="icon">
+    <mat-icon>add</mat-icon>
+  </span>
 </div>
