@@ -1,0 +1,73 @@
+#right-sidebar {
+  z-index: 1000;
+  width: 20rem;
+  flex-direction: row;
+  display: flex;
+  height: calc(100vh - var(--navbar-heigth));
+  position: fixed;
+  top: var(--navbar-heigth);
+  box-sizing: border-box;
+  transition: right 0.2s ease-in-out;
+  #placeholder-groups, #placeholder-bets {
+    box-sizing: border-box;
+    border-radius: 1.5rem;
+    flex-grow: 1;
+  }
+  #placeholder-groups {
+    height: calc(30% - 1rem);
+    min-height: 10rem;
+    margin-bottom: 1rem;
+    background-color: var(--accent-color-one);
+  }
+  #placeholder-bets {
+    height: 70%;
+    min-height: 20rem;
+    background-color: var(--lighter-background-color);
+  }
+  button {
+    flex-shrink: 0;
+  }
+}
+
+#button-container {
+  width: 2rem;
+  display: none;
+  align-items: center;
+  div {
+    background-color: var(--sidebar-color);
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+    img {
+      aspect-ratio: 1/1;
+      height: 1.2rem;
+    }
+  }
+}
+
+#info-container {
+  padding: 1rem;
+  background-color: var(--sidebar-color);
+  height: calc(100% - 2rem);
+  flex-grow: 1;
+}
+
+.extended {
+  right: 0;
+}
+.retracted {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .retracted {
+    right: -18rem;
+  }
+  #button-container {
+    display: flex;
+  }
+}

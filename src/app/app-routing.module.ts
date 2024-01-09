@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'user-groups/edit/:id', component: GroupEditComponent},
 
   { path: 'event-templates', component: EventTemplateBrowserComponent },
-  { path: "event-templates/create", component: EventTemplateAddComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
 ];
 
 @NgModule({

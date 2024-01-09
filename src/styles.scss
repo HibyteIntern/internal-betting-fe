@@ -4,11 +4,11 @@
 
 //Color declarations for light mode
 :root {
-  --background-color: #E6E6E6;
+  --background-color: #e6e6e6;
   --lighter-background-color: #f3ccff;
   --sidebar-color: #bb9cc0;
   --navbar-color: #c88ea7;
-  --card-color: #E7BCDE;
+  --card-color: #e7bcde;
   --accent-color-one: #e48586;
   --accent-color-two: #37306b;
   --text-color: #370055;
@@ -35,13 +35,18 @@
   --sidebar-color: #191928;
   --navbar-color: #543864;
   --card-color: #191933;
-  --accent-color-one: #d78484;
+  --accent-color-one: #ee9595;
   --accent-color-two: #e4ba84;
   --text-color: #ffffff;
 }
 
 p {
   text-indent: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
 }
 
 h1 {
@@ -123,9 +128,9 @@ body {
 }
 
 mat-form-field {
-  font-size: 1rem!important;
+  font-size: 1rem !important;
   input {
-    font-size: clamp(14px, 1rem, 24px)!important;
+    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
@@ -153,8 +158,8 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
-    padding: 1em!important;
-    font-size: clamp(14px, 1rem, 24px)!important;
+    padding: 1em !important;
+    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
@@ -232,26 +237,23 @@ html {
 //styles for the app component
 #left-sidebar {
   width: 3rem;
-  min-height: 100%;
+  height: calc(100vh - var(--navbar-heigth));
+  position: fixed;
+  top: var(--navbar-heigth);
+  left: 0;
+  z-index: 1000;
   background-color: var(--sidebar-color);
 }
 
 #center-content {
   flex-grow: 1;
   max-width: calc(100% - 23rem);
-}
-
-#right-sidebar {
-  width: 20rem;
-  min-height: 100%;
-  background-color: var(--sidebar-color);
+  position: relative;
+  left: 3rem;
 }
 
 @media (max-width: 768px) {
   #center-content {
     max-width: calc(100% - 6rem);
-  }
-  #right-sidebar {
-    width: 3rem;
   }
 }

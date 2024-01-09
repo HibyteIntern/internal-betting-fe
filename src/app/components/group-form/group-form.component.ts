@@ -5,6 +5,7 @@ import {GroupService} from "../../service/group.service";
 import {UserProfile} from "../../models/user.profile";
 import {UserProfileService} from "../../service/user-profile.service";
 import {MatChipInputEvent} from "@angular/material/chips";
+import {map, Observable, startWith} from "rxjs";
 
 @Component({
   selector: 'app-group-form',
@@ -16,6 +17,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
   @Output() formSubmit = new EventEmitter<UserGroupModel>();
 
   userProfiles: UserProfile[] = [];
+  filteredUsers: Observable<UserProfile[]> | undefined;
   userGroupForm: FormGroup;
 
   constructor(
@@ -25,15 +27,21 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.userGroupForm = this.formBuilder.group({
       groupName: '',
       description: '',
-      users: [],
+      selectedUsers: [],
     });
+  }
+
+  private _filter(value: string | UserProfile[]): UserProfile[] {
+    const filterValue = (typeof value === 'string') ? value.toLowerCase() : '';
+
+    return this.userProfiles.filter(user => user.username?.toLowerCase().includes(filterValue));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
       if (this.initialGroup) {
         const {groupName, description, users} = this.initialGroup;
-        this.userGroupForm.patchValue({groupName, description, users});
+        this.userGroupForm.patchValue({groupName, description, selectedUsers: users});
       }
     }
   }
@@ -45,7 +53,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName!,
       description: formValue.description!,
-      users: formValue.users!,
+      users: formValue.selectedUsers!,
     }
     console.log(updatedGroup);
     this.formSubmit.emit(updatedGroup);
@@ -55,6 +63,14 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.userService.getAll().subscribe((data) => {
       this.userProfiles = data;
       console.log(data);
+      this.filteredUsers = this.userGroupForm.get('selectedUsers')?.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
     });
+  }
+
+  displayUsername(user: UserProfile): string | undefined {
+    return user ? user.username : '';
   }
 }

@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -20,20 +20,24 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateCardComponent } from './components/event-templates/event-template-card/event-template-card.component';
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
-import {MatExpansionModule} from "@angular/material/expansion";
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { GroupListComponent } from './components/group-list/group-list.component';
 import { GroupComponent } from './components/group/group.component';
 import { GroupCreateComponent } from './components/group-create/group-create.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
-import {MatIconModule} from "@angular/material/icon";
 import { GroupFormComponent } from './components/group-form/group-form.component';
 import { GroupEditComponent } from './components/group-edit/group-edit.component';
-import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
-import {MatChipsModule} from "@angular/material/chips";
 
+import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -70,6 +74,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TagComponent,
     GroupFormComponent,
     GroupEditComponent,
+    StopMousePropagationDirective,
+    SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
   ],
     imports: [
         BrowserModule,
@@ -86,8 +95,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         NgOptimizedImage,
         MatExpansionModule,
         MatIconModule,
-        MatLegacyChipsModule,
-        MatChipsModule
+        FormsModule,
+        MatAutocompleteModule,
     ],
   providers: [
     {

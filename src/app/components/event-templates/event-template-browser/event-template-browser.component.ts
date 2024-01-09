@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {EventTemplateService} from "../../../service/event-template.service";
-import {EventTemplate} from "../../../entity/EventTemplate";
-import EntityState from "../../../entity/EntityState";
+import { EventTemplateService } from '../../../service/event-template.service';
+import { EventTemplate } from '../../../entity/EventTemplate';
+import EntityState from '../../../entity/EntityState';
 
 @Component({
   selector: 'app-event-template-browser',
@@ -9,8 +9,7 @@ import EntityState from "../../../entity/EntityState";
   styleUrls: ['./event-template-browser.component.scss'],
 })
 export class EventTemplateBrowserComponent {
-
-  eventTemplates: EntityState<EventTemplate[]>
+  eventTemplates: EntityState<EventTemplate[]>;
 
   constructor(private eventTemplateService: EventTemplateService) {
     this.eventTemplates = eventTemplateService.eventTemplateSubject.value;
@@ -19,7 +18,11 @@ export class EventTemplateBrowserComponent {
     });
   }
 
-  addEventTemplate() {
+  handleDelete(id: number) {
+    this.eventTemplateService.delete(id);
+  }
 
+  search(name: string) {
+    this.eventTemplateService.fetch(name);
   }
 }
