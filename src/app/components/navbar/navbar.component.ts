@@ -11,4 +11,8 @@ export class NavbarComponent {
   constructor(themeService: ThemeService) {
     this.themeService = themeService;
   }
+
+  goBack() {
+    window.history.back();
+  }
 }

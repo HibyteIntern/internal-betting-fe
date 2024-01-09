@@ -1,0 +1,11 @@
+<div id="right-sidebar" [class]="isSidebarExtended ? 'extended' : 'retracted'">
+  <div id="button-container">
+    <div (click)="extendSidebar()">
+      <img src="assets/icons/arrow-icon.svg" alt="arrow">
+    </div>
+  </div>
+  <div id="info-container">
+    <div id="placeholder-groups"></div>
+    <div id="placeholder-bets"></div>
+  </div>
+</div>

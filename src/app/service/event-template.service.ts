@@ -20,20 +20,22 @@ export class EventTemplateService {
   );
 
   constructor(private _http: HttpClient) {
-    this.fetchAll();
+    this.fetch();
   }
 
   getData(): Observable<EntityState<EventTemplate[]>> {
     return this.eventTemplateSubject.asObservable();
   }
 
-  fetchAll() {
+  fetch(name?: string) {
+    let apiPath = this.apiUrl;
+    if(name) apiPath = this.apiUrl + `?name=${name}`;
     this.data.loading = true;
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);
 
     this._http
-      .get<EventTemplate[]>(this.apiUrl)
+      .get<EventTemplate[]>(apiPath)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401)

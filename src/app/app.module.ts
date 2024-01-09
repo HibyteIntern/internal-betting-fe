@@ -32,6 +32,12 @@ import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { ViewEventComponent } from './components/events/view-event/view-event.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
+import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -65,6 +71,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TagComponent,
     StopMousePropagationDirective,
     ViewEventComponent,
+    SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
+    AutocompleteComponent,
   ],
     imports: [
         BrowserModule,
