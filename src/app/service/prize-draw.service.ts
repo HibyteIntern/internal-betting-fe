@@ -20,20 +20,20 @@ export class PrizeDrawService {
     this.data,
   );
   constructor(private _http: HttpClient) {
-    this.fetch()
+    this.fetchActive()
   }
 
   getData() {
     return this.prizeDrawSubject.asObservable()
   }
 
-  fetch() {
+  fetch(apiUrl: string) {
     this.data.loading = true;
     this.data.error = null;
     this.prizeDrawSubject.next(this.data);
 
     this._http
-      .get<PrizeDraw[]>(this.apiUrl)
+      .get<PrizeDraw[]>(apiUrl)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401)
@@ -48,5 +48,13 @@ export class PrizeDrawService {
         this.data.entity = prizeDraws;
         this.prizeDrawSubject.next(this.data);
       });
+  }
+
+  fetchActive() {
+    this.fetch(this.apiUrl + "/active")
+  }
+
+  fetchPast() {
+    this.fetch(this.apiUrl + "/past")
   }
 }

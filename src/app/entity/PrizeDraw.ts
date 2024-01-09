@@ -1,6 +1,7 @@
 import {Status} from "./Status";
 import {DrawType} from "./DrawType";
 import {PrizeDrawEntry} from "./PrizeDrawEntry";
+import {UserProfile} from "./UserProfile";
 
 export interface PrizeDraw {
   id: number,
@@ -11,6 +12,7 @@ export interface PrizeDraw {
   endsAt: Date,
   prizeDescription: string,
   type: DrawType,
-  winner: never, //temporary until UserProfile integration
+  winner: UserProfile, //temporary until UserProfile integration
   entries: PrizeDrawEntry[]
+  currentLeader: PrizeDrawEntry | null
 }

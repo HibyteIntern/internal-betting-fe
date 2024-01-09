@@ -24,6 +24,20 @@
   }
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: left;
+  div {
+    margin-bottom: 1rem;
+  }
+}
+
+.message-text {
+  font-weight: bold;
+  font-size: var(--text-sm);
+  margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   button {
     width: 100%;
@@ -33,5 +47,8 @@
     button {
       width: 50%;
     }
+  }
+  .spinner-container {
+    justify-content: center;
   }
 }

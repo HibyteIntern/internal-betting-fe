@@ -2,12 +2,12 @@
   <div class="left-container">
     <div class="title">{{prizeDraw?.title}}</div>
     <div class="current-leader">Current leader:
-      <span>HypnotizedPixel</span>, with 2300
+      <span>{{getCurrentLeaderUsername()}}</span>, with {{getCurrentLeaderPoints()}}
       <img
         ngSrc="assets/icons/chips-icon.svg"
         alt="credits"
         height="18"
-        width="40"/>
+        width="30"/>
     </div>
     <div class="prize">{{"Prize: " + prizeDraw?.prizeDescription}}</div>
     <div class="description">{{prizeDraw?.description}}</div>

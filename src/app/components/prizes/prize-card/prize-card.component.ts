@@ -32,6 +32,17 @@ export class PrizeCardComponent {
       + ` ${hours % 24} `
       + ((hours === 1) ? 'hour' : 'hours');
   }
+  getCurrentLeaderUsername(): String {
+    if(this.prizeDraw?.currentLeader)
+      return this.prizeDraw?.currentLeader.user.username ? this.prizeDraw.currentLeader.user.username : '-'
+    return "-"
+  }
+
+  getCurrentLeaderPoints(): number {
+    if(this.prizeDraw?.currentLeader)
+      return this.prizeDraw?.currentLeader.user.coins ? this.prizeDraw.currentLeader.user.coins : 0
+    return 0
+  }
 
   protected readonly DrawType = DrawType;
 }

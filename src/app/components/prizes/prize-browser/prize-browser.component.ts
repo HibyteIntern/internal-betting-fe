@@ -14,8 +14,19 @@ export class PrizeBrowserComponent {
 
   constructor(private prizeDrawService: PrizeDrawService) {
     this.prizeDraws = prizeDrawService.prizeDrawSubject.value
+    this.prizeDrawService.fetchActive()
     this.prizeDrawService.getData().subscribe((data) => {
       this.prizeDraws = data;
     })
+  }
+
+  handleActiveDrawsFetch() {
+    this.isActiveExtractionsSelected = true
+    this.prizeDrawService.fetchActive();
+  }
+
+  handlePastDrawsFetch() {
+    this.isActiveExtractionsSelected = false;
+    this.prizeDrawService.fetchPast();
   }
 }
