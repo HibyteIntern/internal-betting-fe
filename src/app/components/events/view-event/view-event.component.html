@@ -14,7 +14,22 @@
       {{ tag }}
     </mat-chip>
   </mat-chip-listbox>
-  <div style="margin-top: 30px;">
+  <div style="margin-top: 30px; margin-bottom: 30px;">
     {{eventRequest.description}}
   </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let bet of eventRequest.completeBetTypeDtoList; let last = last">
+      <span matListItemTitle>{{ bet.name }}</span>
+      <span matListItemLine>Type: {{ bet.type }}</span>
+      <span matListItemLine *ngIf="bet.multipleChoiceOptions">
+      Options: {{ bet.multipleChoiceOptions.join(', ') }}
+    </span>
+      <span matListItemLine *ngIf="bet.odds">
+      Odds: {{ bet.odds.join(', ') }}
+    </span>
+      <div *ngIf="!last" style="margin-bottom: 10px;"></div>
+    </mat-list-item>
+  </mat-list>
+
 </app-mainframe>

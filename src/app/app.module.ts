@@ -38,6 +38,8 @@ import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.direct
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import {MatListModule} from "@angular/material/list";
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -76,6 +78,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    AddBetToEventComponent,
   ],
     imports: [
         BrowserModule,
@@ -97,6 +100,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         MatNativeDateModule,
         MatIconModule,
         MatChipsModule,
+        MatAutocompleteModule,
+        MatListModule,
     ],
   providers: [
     {

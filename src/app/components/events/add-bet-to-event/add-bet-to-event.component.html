@@ -1,0 +1,23 @@
+<div>
+  <h3>{{ betType?.name }}</h3>
+  <div *ngIf="betType?.type === 'multipleChoice'">
+    <label>Select an option:</label>
+    <select [(ngModel)]="selectedOption">
+      <option *ngFor="let option of betType?.multipleChoiceOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+  <div *ngIf="betType?.type === 'boolean'">
+    <label>Will it happen?</label>
+    <select [(ngModel)]="selectedBooleanOption">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+  <div *ngIf="betType?.type === 'numeric' || betType?.type === 'string'">
+    <label>Your answer:</label>
+    <input [(ngModel)]="answer" />
+  </div>
+  <label>Bet amount:</label>
+  <input [(ngModel)]="betAmount" type="number" />
+  <button>Place Bet</button>
+</div>
