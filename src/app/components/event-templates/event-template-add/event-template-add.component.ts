@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {EventTemplateService} from '../../../service/event-template.service';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {multipleChoiceValidator} from '../../../shared/validator/multiple-choice.validator';
-import {multipleChoiceOptionValidator} from '../../../shared/validator/multiple-choice-option.validator';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormService} from '../../../service/form.service';
-import {catchError, of} from 'rxjs';
-import {EventTemplate} from "../../../entity/event-template.model";
+import { Component } from '@angular/core';
+import { EventTemplateService } from '../../../service/event-template.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { multipleChoiceValidator } from '../../../shared/validator/multiple-choice.validator';
+import { multipleChoiceOptionValidator } from '../../../shared/validator/multiple-choice-option.validator';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormService } from '../../../service/form.service';
+import { catchError, of } from 'rxjs';
+import { EventTemplate } from '../../../entity/event-template.model';
 
 @Component({
   selector: 'app-event-template-add',
@@ -54,7 +54,9 @@ export class EventTemplateAddComponent {
     this.templateFormGroup.patchValue({
       name: eventTemplate.name,
     });
-    const betTemplates = this.templateFormGroup.get('betTemplates') as FormArray;
+    const betTemplates = this.templateFormGroup.get(
+      'betTemplates',
+    ) as FormArray;
     eventTemplate.betTemplates.forEach((betTemplate) => {
       betTemplates.push(this.formService.createBetTemplateForm(betTemplate));
     });
@@ -74,7 +76,7 @@ export class EventTemplateAddComponent {
           ['', multipleChoiceOptionValidator()],
         ]),
       },
-      {validators: multipleChoiceValidator()},
+      { validators: multipleChoiceValidator() },
     );
     this.validateOptionsOnTypeChange(betTemplateForm);
     this.betTemplates.push(betTemplateForm);
