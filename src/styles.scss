@@ -192,6 +192,32 @@ mat-form-field {
   }
 }
 
+.styled-form {
+  width: 30rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .btn {
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--accent-color-one);
+    border-radius: var(--border-radius);
+    padding: 1rem 3rem;
+    font-size: var(--text-sm);
+    border: none;
+    transition: all ease-in-out var(--transition-duration);
+    cursor: pointer;
+  
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+
 //media queries for setting the font size, which influences every component that uses rem
 html {
   font-size: 12px;

@@ -24,7 +24,6 @@ export class CreateCompetitionComponent {
     'julie',
     'jacob',
   ];
-  selectedUsers: string[] = [];
 
   userGroupOptions = [
     'group1',
@@ -38,7 +37,6 @@ export class CreateCompetitionComponent {
     'group9',
     'group10',
   ];
-  selectedUserGroups: string[] = [];
 
   eventOptions = [
     'event1',
@@ -52,35 +50,51 @@ export class CreateCompetitionComponent {
     'event9',
     'event10',
   ]
-  selectedEvents: string[] = [];
+
+  statusOptions = [
+    { value: Status.DRAFT, label: 'Draft' },
+    { value: Status.OPEN, label: 'Open' },
+    { value: Status.CLOSED, label: 'Closed' },
+  ]
+  selectedStatus = Status.DRAFT;
 
   constructor () {
     this.competitionForm = new FormGroup({
       name: new FormControl(''),
       description: new FormControl(''),
-      users: new FormControl([]),
-      userGroups: new FormControl([]),
-      userProfiles: new FormControl([]),
-      events: new FormControl([]),
+      userProfiles: new FormControl<string[]>([]),
+      userGroups: new FormControl<string[]>([]),
+      events: new FormControl<string[]>([]),
       status: new FormControl(Status.DRAFT),
     });
   }
 
   search(value: string) {
     this.searchValue = value;
-
-    console.log(this.searchValue)
   }
 
   handleUserSelect(users: string[]) {
-    this.selectedUsers = users;
+    this.competitionForm.patchValue({
+      userProfiles: users
+    });
   }
 
   handleUserGroupSelect(userGroups: string[]) {
-    this.selectedUserGroups = userGroups;
+    this.competitionForm.patchValue({
+      userGroups: userGroups
+    });
   }
 
   handleEventSelect(events: string[]) {
-    this.selectedEvents = events;
+    this.competitionForm.patchValue({
+      events: events
+    });
+  }
+
+  onSubmit() {
+    this.competitionForm.patchValue({
+      status: this.selectedStatus
+    });
+    console.log(this.competitionForm.value)
   }
 }

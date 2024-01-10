@@ -1,17 +1,34 @@
 <app-mainframe title="Create Competition">
-    <form class="app-form" [formGroup]="competitionForm">
+    <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()" class="styled-form">
         <mat-form-field color="accent" appearance="outline" class="first-field">
             <mat-label>Competition name</mat-label>
-            <input formControlName="name" matInput placeholder="World Championship" value="">
+            <input formControlName="name" matInput placeholder="World Championship">
         </mat-form-field>
-        
+        <br />
         <mat-form-field color="accent" appearance="outline">
             <mat-label>Competition Description</mat-label>
-            <textarea formControlName="name" matInput placeholder="World Championship" value=""></textarea>
+            <textarea 
+                formControlName="description" 
+                matInput 
+                placeholder="This competition is designed to celebrate and showcase the brilliance of creative thinkers across the globe." 
+                value=""
+            ></textarea>
         </mat-form-field>
-        <app-autocomplete [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect"  />
-        <app-autocomplete [label]="'Add User Groups'" [options]="userGroupOptions" (selectedOptionsEmmiter)="handleUserGroupSelect"  />
-        <app-autocomplete [label]="'Add Events'" [options]="eventOptions" (selectedOptionsEmmiter)="handleEventSelect"  />   
-        
+        <app-autocomplete [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect($event)"  />
+        <app-autocomplete [label]="'Add User Groups'" [options]="userGroupOptions" (selectedOptionsEmmiter)="handleUserGroupSelect($event)"  />
+        <app-autocomplete [label]="'Add Events'" [options]="eventOptions" (selectedOptionsEmmiter)="handleEventSelect($event)"  />   
+        <mat-form-field color="accent" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="selectedStatus" name="food">
+                <mat-option *ngFor="let option of statusOptions" [value]="option.value">{{option.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>     
+        <button
+            class="btn"
+            type="submit"
+            [disabled]="!competitionForm.valid"
+        >
+            Submit
+        </button>   
     </form>
 </app-mainframe>
