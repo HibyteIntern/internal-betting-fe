@@ -10,10 +10,13 @@
         Add Event Template
       </button>
     </div>
-    <div *ngIf="eventTemplates.loading" class="lds-dual-ring"></div>
+    <div *ngIf="loading" class="lds-dual-ring"></div>
+    <div class="message" *ngIf="eventTemplates.length === 0 && !loading">
+      No event templates found.
+    </div>
     <app-event-template-list
       (delete)="handleDelete($event)"
-      [eventTemplates]="eventTemplates.entity"
+      [eventTemplates]="eventTemplates"
     ></app-event-template-list>
   </div>
 </app-mainframe>

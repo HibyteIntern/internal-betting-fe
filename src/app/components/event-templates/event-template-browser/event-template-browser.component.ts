@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
-import EntityState from '../../../entity/entity-state.model';
 
 @Component({
   selector: 'app-event-template-browser',
@@ -9,12 +8,14 @@ import EntityState from '../../../entity/entity-state.model';
   styleUrls: ['./event-template-browser.component.scss'],
 })
 export class EventTemplateBrowserComponent {
-  eventTemplates: EntityState<EventTemplate[]>;
+  eventTemplates: EventTemplate[];
+  loading: boolean = true;
 
   constructor(private eventTemplateService: EventTemplateService) {
     this.eventTemplates = eventTemplateService.eventTemplateSubject.value;
     eventTemplateService.getData().subscribe((data) => {
       this.eventTemplates = data;
+      this.loading = false;
     });
   }
 
