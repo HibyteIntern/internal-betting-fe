@@ -1,5 +1,5 @@
 <app-mainframe title="Prize extractions">
-  <button mat-raised-button color="primary" style="color: var(--text-color)">Start new prize draw</button>
+  <button [routerLink]="['/prizes', 'create']" mat-raised-button color="primary" style="color: var(--text-color)">Start new prize draw</button>
   <div class="extraction-selector">
     <button
       [ngClass]="isActiveExtractionsSelected ? 'selected' : ''"

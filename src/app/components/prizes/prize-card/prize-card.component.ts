@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {PrizeDraw} from "../../../entity/PrizeDraw";
 import {DrawType} from "../../../entity/DrawType";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-prize-card',
@@ -9,6 +10,10 @@ import {DrawType} from "../../../entity/DrawType";
 })
 export class PrizeCardComponent {
   @Input() prizeDraw?: PrizeDraw
+  protected readonly DrawType = DrawType;
+
+  constructor(private router: Router) {
+  }
 
   getTimeRemaining(targetDate: Date | undefined): string {
     if(!targetDate){
@@ -44,5 +49,7 @@ export class PrizeCardComponent {
     return 0
   }
 
-  protected readonly DrawType = DrawType;
+  handleNavigateToPrizeDrawPage() {
+    this.router.navigate(['/prizes', this.prizeDraw?.id])
+  }
 }

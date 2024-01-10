@@ -34,7 +34,9 @@ import { AutocompleteComponent } from './shared/components/autocomplete/autocomp
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
-import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component'
+import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
+import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
+import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -74,6 +76,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeBrowserComponent,
     PrizeCardComponent,
     PrizeListComponent,
+    PrizeDrawAddComponent,
+    PrizeDrawPageComponent,
   ],
   imports: [
     BrowserModule,

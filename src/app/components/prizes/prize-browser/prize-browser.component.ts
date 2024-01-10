@@ -24,11 +24,13 @@ export class PrizeBrowserComponent {
 
   handleActiveDrawsFetch() {
     this.isActiveExtractionsSelected = true
+    this.loading = true;
     this.prizeDrawService.fetchActive();
   }
 
   handlePastDrawsFetch() {
     this.isActiveExtractionsSelected = false;
+    this.loading = true;
     this.prizeDrawService.fetchPast();
   }
 }
