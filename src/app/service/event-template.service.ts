@@ -42,7 +42,7 @@ export class EventTemplateService {
   add(newEventTemplate: EventTemplate): Observable<boolean> {
     return this.http.post<EventTemplate>(this.apiUrl, newEventTemplate).pipe(
       map((response) => {
-        let newList: EventTemplate[] = this.eventTemplateSubject.getValue();
+        const newList: EventTemplate[] = this.eventTemplateSubject.getValue();
         newList.push(response);
         this.eventTemplateSubject.next(newList);
         return true;

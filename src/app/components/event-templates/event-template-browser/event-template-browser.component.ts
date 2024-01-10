@@ -9,7 +9,7 @@ import { EventTemplate } from '../../../entity/event-template.model';
 })
 export class EventTemplateBrowserComponent {
   eventTemplates: EventTemplate[];
-  loading: boolean = true;
+  loading = true;
 
   constructor(private eventTemplateService: EventTemplateService) {
     this.eventTemplates = eventTemplateService.eventTemplateSubject.value;
