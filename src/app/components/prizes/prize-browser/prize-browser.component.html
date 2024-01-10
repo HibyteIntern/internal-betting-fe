@@ -10,10 +10,9 @@
       (click)="handlePastDrawsFetch()"
     >Past draws</button>
   </div>
-  <div class="spinner-container" *ngIf="prizeDraws.loading">
+  <div class="spinner-container" *ngIf="loading">
     <div class="lds-dual-ring"></div>
   </div>
-  <div class="message-text" *ngIf="prizeDraws.error">Something went wrong.</div>
-  <div class="message-text" *ngIf="prizeDraws.entity.length === 0 && !prizeDraws.loading">No draws found.</div>
-  <app-prize-list [prizeDrawList]="prizeDraws.entity"></app-prize-list>
+  <div class="message-text" *ngIf="prizeDraws.length === 0 && !loading">No draws found.</div>
+  <app-prize-list [prizeDrawList]="prizeDraws"></app-prize-list>
 </app-mainframe>
