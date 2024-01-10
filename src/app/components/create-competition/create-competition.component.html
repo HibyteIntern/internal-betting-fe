@@ -19,7 +19,7 @@
         <app-autocomplete [label]="'Add Events'" [options]="eventOptions" (selectedOptionsEmmiter)="handleEventSelect($event)"  />   
         <mat-form-field color="accent" appearance="outline">
             <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="selectedStatus" name="food">
+            <mat-select>
                 <mat-option *ngFor="let option of statusOptions" [value]="option.value">{{option.label}}</mat-option>
             </mat-select>
         </mat-form-field>     

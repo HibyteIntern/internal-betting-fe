@@ -35,7 +35,15 @@ export class IndexComponent implements OnInit {
   }
 
   search(value: string) {
-    this.competitionService.getCompetitionsSearch(value).subscribe(competitions => this.competitions = competitions);
+    this.competitionService.getCompetitionsSearch(value).subscribe(competitions => {
+      this.competitions = competitions;
+      this.selectCompetitions();
+    });
+    this.eventService.getEventsSearch(value).subscribe(events => 
+    {
+      this.events = events;
+      this.selectEvents();
+    })
   }
 
   selectCompetitions() {
