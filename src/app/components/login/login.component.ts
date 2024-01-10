@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
         this.router.navigate(['/home', user.userId]);
       })
-      
+      localStorage.getItem('acc')
     }
   }
 
