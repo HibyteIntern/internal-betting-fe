@@ -16,7 +16,7 @@
     </div>
 
     <div *ngIf="competitionService.loading$ || eventService.loading$" class="grid-container">
-        <app-competition-card (click)="handleCompetitionCardClick(competition.id!)" *ngFor="let competition of selectedCompetitions" [competition]="competition" />
+        <app-competition-card (viewEmitter)="handleCompetitionViewClick(competition.id!)" (editEmitter)="handleCompetitionEditClick(competition.id!)" (deleteEmitter)="handleCompetitionDeleteClick(competition.id!)" *ngFor="let competition of selectedCompetitions" [competition]="competition" />
         <app-event-card *ngFor="let event of selectedEvents" [event]="event" />
     </div>
 </app-mainframe>

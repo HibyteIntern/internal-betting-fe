@@ -120,7 +120,20 @@ export class IndexComponent implements OnInit {
     this.tagSelectorOpened = false;
   }
 
-  handleCompetitionCardClick(competitionId: number) {
+  handleCompetitionViewClick(competitionId: number) {
     this.router.navigate(['/competitions/', competitionId]);
+  }
+
+  handleCompetitionEditClick(competitionId: number) {
+    this.router.navigate(['/competitions/edit/', competitionId]);
+  }
+
+  handleCompetitionDeleteClick(competitionId: number) {
+    this.competitionService.deleteCompetition(competitionId).subscribe(response => {
+      this.competitionService.getCompetitions().subscribe(competitions => {
+        this.competitions = competitions;
+        this.selectCompetitions();
+      });
+    });
   }
 }

@@ -19,7 +19,6 @@ export class TagsService {
 
     constructor(private eventService: EventService) {
       this.eventService.getAllTags().subscribe(tags => {
-        console.log(tags);
         this.availableTags = [...tags];
       });
     }

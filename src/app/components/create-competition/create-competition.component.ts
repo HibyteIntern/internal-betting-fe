@@ -31,18 +31,7 @@ export class CreateCompetitionComponent implements OnInit {
     'group10',
   ];
 
-  eventOptions = [
-    'event1',
-    'event2',
-    'event3',
-    'event4',
-    'event5',
-    'event6',
-    'event7',
-    'event8',
-    'event9',
-    'event10',
-  ];
+  eventOptions:string[] = [];
 
   statusOptions = [
     { value: Status.DRAFT, label: 'Draft' },
@@ -70,7 +59,14 @@ export class CreateCompetitionComponent implements OnInit {
 
   ngOnInit(): void {
     this.userOptions = [];
-    this.eve
+
+    this.eventsService.getEvents().subscribe(events => {
+      events.forEach(event => {
+        if(event.name) {
+          this.eventOptions.push(event.name);
+        }
+      });
+    })
     // this.userProfileService.getAll().subscribe(users => {
     //   console.log(users)
     //   users.forEach(user => {
@@ -104,10 +100,6 @@ export class CreateCompetitionComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.competitionForm.patchValue({
-    //   status: this.selectedStatus
-    // });
-    // console.log(this.competitionForm.value)
     this.competitionService.addCompetition(this.competitionForm.value).subscribe(response => {
       this.router.navigate(['/']);
     });

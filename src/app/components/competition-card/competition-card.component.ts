@@ -1,6 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Competition } from 'src/app/entity/Competitions';
 import { Status } from 'src/app/entity/Status';
+import { StatusIcons } from 'src/app/entity/Status';
 
 @Component({
   selector: 'app-competition-card',
@@ -21,4 +22,26 @@ export class CompetitionCardComponent {
     lastModified: new Date(),
     status: Status.DRAFT
   };
+
+  @Output() deleteEmitter = new EventEmitter<void>();
+  @Output() viewEmitter = new EventEmitter<void>();
+  @Output() editEmitter = new EventEmitter<void>();
+
+  statusIcon = StatusIcons[this.competition.status]
+
+  ngOnInit(): void {
+    this.statusIcon = StatusIcons[this.competition.status]
+  }
+
+  emitViewClick() {
+    this.viewEmitter.emit();
+  }
+
+  emitDeleteButtonClick() {
+    this.deleteEmitter.emit();
+  }
+
+  emitEditButtonClick() {
+    this.editEmitter.emit();
+  }
 }
