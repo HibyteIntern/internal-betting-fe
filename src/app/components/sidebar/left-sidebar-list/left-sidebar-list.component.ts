@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./left-sidebar-list.component.scss']
 })
 export class LeftSidebarListComponent {
+  constructor(protected router:Router) { }
 
+  navigateToIndex() {
+    this.router.navigate(['/']);
+  }
+
+  navigateToCreateCompetition() {
+    this.router.navigate(['/create-competition']);
+  }
 }
