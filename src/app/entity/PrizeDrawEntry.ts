@@ -1,7 +1,7 @@
-import {UserProfile} from "./UserProfile";
+import { UserProfile } from './UserProfile';
 
 export interface PrizeDrawEntry {
-  id: number,
-  user: UserProfile,
-  amount: number
+  id: number;
+  user: UserProfile;
+  amount: number;
 }

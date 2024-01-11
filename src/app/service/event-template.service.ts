@@ -29,7 +29,7 @@ export class EventTemplateService {
 
   fetch(name?: string) {
     let apiPath = this.apiUrl;
-    if(name) apiPath = this.apiUrl + `?name=${name}`;
+    if (name) apiPath = this.apiUrl + `?name=${name}`;
     this.data.loading = true;
     this.data.error = null;
     this.eventTemplateSubject.next(this.data);

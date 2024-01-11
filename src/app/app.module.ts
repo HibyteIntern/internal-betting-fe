@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -26,7 +26,7 @@ import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-b
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
-import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
@@ -38,9 +38,9 @@ import { PrizeListComponent } from './components/prizes/prize-browser/prize-list
 import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
 import { PrizeCategoryListComponent } from './components/prizes/prize-draw-add/prize-category-list/prize-category-list.component';
-import {MatRadioModule} from "@angular/material/radio";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -103,7 +103,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatAutocompleteModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
     {

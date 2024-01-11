@@ -1,18 +1,31 @@
 <app-mainframe title="Prize extractions">
-  <button [routerLink]="['/prizes', 'create']" mat-raised-button color="primary" style="color: var(--text-color)">Start new prize draw</button>
+  <button
+    [routerLink]="['/prizes', 'create']"
+    mat-raised-button
+    color="primary"
+    style="color: var(--text-color)"
+  >
+    Start new prize draw
+  </button>
   <div class="extraction-selector">
     <button
       [ngClass]="isActiveExtractionsSelected ? 'selected' : ''"
       (click)="handleActiveDrawsFetch()"
-    >Active draws</button>
+    >
+      Active draws
+    </button>
     <button
       [ngClass]="!isActiveExtractionsSelected ? 'selected' : ''"
       (click)="handlePastDrawsFetch()"
-    >Past draws</button>
+    >
+      Past draws
+    </button>
   </div>
   <div class="spinner-container" *ngIf="loading">
     <div class="lds-dual-ring"></div>
   </div>
-  <div class="message-text" *ngIf="prizeDraws.length === 0 && !loading">No draws found.</div>
+  <div class="message-text" *ngIf="prizeDraws.length === 0 && !loading">
+    No draws found.
+  </div>
   <app-prize-list [prizeDrawList]="prizeDraws"></app-prize-list>
 </app-mainframe>

@@ -2,7 +2,7 @@
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   overflow: hidden;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   width: fit-content;
   button {
     color: var(--text-color);
@@ -11,7 +11,7 @@
     outline: none;
     border: none;
     background-color: var(--sidebar-color);
-    padding: .75em;
+    padding: 0.75em;
     width: 12rem;
     &:hover {
       cursor: pointer;

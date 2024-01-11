@@ -20,6 +20,6 @@ export class AppComponent {
   public handleSelectedOptions(selectedOptions: string[]) {
     this.selectedOptions = selectedOptions;
 
-    console.log(this.selectedOptions)
+    console.log(this.selectedOptions);
   }
 }

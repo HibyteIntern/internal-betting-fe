@@ -1,29 +1,28 @@
-import {Component, Input} from '@angular/core';
-import {PrizeDraw} from "../../../entity/PrizeDraw";
-import {DrawType} from "../../../entity/DrawType";
-import {Router} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { PrizeDraw } from '../../../entity/PrizeDraw';
+import { DrawType } from '../../../entity/DrawType';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prize-card',
   templateUrl: './prize-card.component.html',
-  styleUrls: ['./prize-card.component.scss']
+  styleUrls: ['./prize-card.component.scss'],
 })
 export class PrizeCardComponent {
-  @Input() prizeDraw?: PrizeDraw
+  @Input() prizeDraw?: PrizeDraw;
   protected readonly DrawType = DrawType;
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   getTimeRemaining(targetDate: Date | undefined): string {
-    if(!targetDate){
+    if (!targetDate) {
       return '';
     }
     const now = new Date();
     const endsAt = new Date(targetDate);
-    const diff = endsAt.getTime()- now.getTime();
+    const diff = endsAt.getTime() - now.getTime();
 
-    if(diff < 0) return 'Expired'
+    if (diff < 0) return 'Expired';
 
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
@@ -32,24 +31,30 @@ export class PrizeCardComponent {
     if (hours < 1) {
       return `${minutes} minutes`;
     }
-    return  `${days} `
-      + ((days === 1) ? 'day' : 'days')
-      + ` ${hours % 24} `
-      + ((hours === 1) ? 'hour' : 'hours');
+    return (
+      `${days} ` +
+      (days === 1 ? 'day' : 'days') +
+      ` ${hours % 24} ` +
+      (hours === 1 ? 'hour' : 'hours')
+    );
   }
   getCurrentLeaderUsername(): String {
-    if(this.prizeDraw?.currentLeader)
-      return this.prizeDraw?.currentLeader.user.username ? this.prizeDraw.currentLeader.user.username : '-'
-    return "-"
+    if (this.prizeDraw?.currentLeader)
+      return this.prizeDraw?.currentLeader.user.username
+        ? this.prizeDraw.currentLeader.user.username
+        : '-';
+    return '-';
   }
 
   getCurrentLeaderPoints(): number {
-    if(this.prizeDraw?.currentLeader)
-      return this.prizeDraw?.currentLeader.user.coins ? this.prizeDraw.currentLeader.user.coins : 0
-    return 0
+    if (this.prizeDraw?.currentLeader)
+      return this.prizeDraw?.currentLeader.user.coins
+        ? this.prizeDraw.currentLeader.user.coins
+        : 0;
+    return 0;
   }
 
   handleNavigateToPrizeDrawPage() {
-    this.router.navigate(['/prizes', this.prizeDraw?.id])
+    this.router.navigate(['/prizes', this.prizeDraw?.id]);
   }
 }

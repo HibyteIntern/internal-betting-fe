@@ -8,7 +8,8 @@
   top: var(--navbar-heigth);
   box-sizing: border-box;
   transition: right 0.2s ease-in-out;
-  #placeholder-groups, #placeholder-bets {
+  #placeholder-groups,
+  #placeholder-bets {
     box-sizing: border-box;
     border-radius: 1.5rem;
     flex-grow: 1;

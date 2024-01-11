@@ -2,7 +2,13 @@
   <div style="width: 100%; background-color: var(--sidebar-color)">
     <app-navbar></app-navbar>
   </div>
-  <div style="display: flex; overflow: auto; max-height: calc(100vh - var(--navbar-heigth))">
+  <div
+    style="
+      display: flex;
+      overflow: auto;
+      max-height: calc(100vh - var(--navbar-heigth));
+    "
+  >
     <app-left-sidebar-list></app-left-sidebar-list>
     <div id="center-content">
       <router-outlet></router-outlet>

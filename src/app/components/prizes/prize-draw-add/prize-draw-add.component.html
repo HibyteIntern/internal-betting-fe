@@ -1,6 +1,10 @@
 <app-mainframe title="Create new prize draw">
-  <app-prize-category-list (categorySelected)="handleCategoryChange($event)"></app-prize-category-list>
-  <div style="margin-top: 1rem; font-weight: bold; font-size: var(--text-sm)">Draw information</div>
+  <app-prize-category-list
+    (categorySelected)="handleCategoryChange($event)"
+  ></app-prize-category-list>
+  <div style="margin-top: 1rem; font-weight: bold; font-size: var(--text-sm)">
+    Draw information
+  </div>
   <form class="app-form" (ngSubmit)="submit()" [formGroup]="prizeDrawFormGroup">
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Prize draw title</mat-label>
@@ -13,34 +17,48 @@
     </mat-form-field>
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea matInput
-                cdkTextareaAutosize
-                formControlName="description"
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="5"
-                cdkAutosizeMaxRows="8"></textarea>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        formControlName="description"
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="8"
+      ></textarea>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Ends at</mat-label>
-      <input
-        matInput [matDatepicker]="picker"
-        formControlName="endDate"
-      >
+      <input matInput [matDatepicker]="picker" formControlName="endDate" />
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field color="accent" appearance="outline" style="margin-top: 1rem">
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+      style="margin-top: 1rem"
+    >
       <mat-label>Prize description</mat-label>
-      <textarea matInput
-                cdkTextareaAutosize
-                formControlName="prizeDescription"
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"></textarea>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        formControlName="prizeDescription"
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+      ></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" style="color: var(--text-color)">
       Submit
     </button>
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div class="form-error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
   </form>
 </app-mainframe>
