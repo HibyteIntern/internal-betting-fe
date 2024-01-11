@@ -1,20 +1,20 @@
 <form [formGroup]="userGroupForm" (ngSubmit)="onSubmit()" class="app-form">
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Group Name</mat-label>
-    <input matInput type="text" formControlName="groupName" required>
+    <input formControlName="name" matInput placeholder="Football Group" required>
   </mat-form-field>
 
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Description</mat-label>
-    <textarea matInput type="text" formControlName="description" required></textarea>
+    <textarea
+      formControlName="description"
+      matInput
+      placeholder="This group is the best one!"
+      value=""
+    ></textarea>
   </mat-form-field>
 
-  <mat-form-field color="accent" appearance="outline">
-    <mat-label>Add Users</mat-label>
-    <mat-select multiple formControlName="users" required>
-      <mat-option *ngFor="let user of userProfiles" [value]="user">{{user.username}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <app-autocomplete [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect($event)"  />
 
   <button mat-raised-button color="primary" style="color: var(--text-color)" type="submit" [disabled]="!userGroupForm.valid">Submit</button>
 </form>

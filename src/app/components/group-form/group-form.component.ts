@@ -16,8 +16,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
   @Input() initialGroup: UserGroupModel | null | undefined;
   @Output() formSubmit = new EventEmitter<UserGroupModel>();
 
-  userProfiles: UserProfile[] = [];
-  filteredUsers: Observable<UserProfile[]> | undefined;
+  userOptions: string[] = ["user1", "user2", "user3"];
   userGroupForm: FormGroup;
 
   constructor(
@@ -29,12 +28,6 @@ export class GroupFormComponent implements OnChanges, OnInit {
       description: '',
       selectedUsers: [],
     });
-  }
-
-  private _filter(value: string | UserProfile[]): UserProfile[] {
-    const filterValue = (typeof value === 'string') ? value.toLowerCase() : '';
-
-    return this.userProfiles.filter(user => user.username?.toLowerCase().includes(filterValue));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,17 +53,21 @@ export class GroupFormComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAll().subscribe((data) => {
-      this.userProfiles = data;
-      console.log(data);
-      this.filteredUsers = this.userGroupForm.get('selectedUsers')?.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    console.log("da");
+    // this.userService.getAll().subscribe((data) => {
+    //   console.log(data);
+    //   data.forEach((user) => {
+    //     if(user.username) {
+    //       this.userOptions.push(user.username);
+    //     }
+    //   });
+    // });
+  }
+  handleUserSelect(users: string[]) {
+    this.userGroupForm.patchValue({
+      selectedUsers: users
     });
   }
 
-  displayUsername(user: UserProfile): string | undefined {
-    return user ? user.username : '';
-  }
+
 }

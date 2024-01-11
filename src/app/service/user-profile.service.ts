@@ -10,7 +10,7 @@ import {UserProfile} from "../models/user.profile";
 export class UserProfileService {
 
   userProfile: UserProfile | null = null;
-  userProifileUrl = 'http://localhost:8080/api/user-profiles';
+  userProifileUrl = 'http://localhost:8080/api/user-profile';
 
   constructor(private http: HttpClient) { }
 
