@@ -36,7 +36,11 @@ import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-b
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
 import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
-import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component'
+import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
+import { PrizeCategoryListComponent } from './components/prizes/prize-draw-add/prize-category-list/prize-category-list.component';
+import {MatRadioModule} from "@angular/material/radio";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -78,6 +82,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeListComponent,
     PrizeDrawAddComponent,
     PrizeDrawPageComponent,
+    PrizeCategoryListComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +101,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatIconModule,
     FormsModule,
     MatAutocompleteModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {

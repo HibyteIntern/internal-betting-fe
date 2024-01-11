@@ -44,11 +44,6 @@ p {
   text-indent: 1rem;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 0.6rem;
-}
-
 h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
@@ -81,6 +76,10 @@ label {
 //Override default background and text color for Angular Material form inputs
 .mat-mdc-text-field-wrapper {
   background-color: var(--sidebar-color) !important;
+}
+
+.mat-calendar {
+  background-color: var(--background-color) !important;
 }
 mat-label {
   color: var(--text-color) !important;
@@ -141,6 +140,7 @@ mat-form-field {
 
 .app-form {
   width: clamp(550px, 40%, 1200px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -163,7 +163,7 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
-    padding: 1em !important;
+    padding: 1em;
     font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
@@ -210,7 +210,7 @@ mat-form-field {
     border: none;
     transition: all ease-in-out var(--transition-duration);
     cursor: pointer;
-  
+
     &:hover {
       transform: scale(1.1);
     }

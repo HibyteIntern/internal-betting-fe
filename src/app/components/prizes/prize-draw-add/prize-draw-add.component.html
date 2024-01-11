@@ -1,1 +1,46 @@
-<p>prize-draw-add works!</p>
+<app-mainframe title="Create new prize draw">
+  <app-prize-category-list (categorySelected)="handleCategoryChange($event)"></app-prize-category-list>
+  <div style="margin-top: 1rem; font-weight: bold; font-size: var(--text-sm)">Draw information</div>
+  <form class="app-form" (ngSubmit)="submit()" [formGroup]="prizeDrawFormGroup">
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Prize draw title</mat-label>
+      <input
+        formControlName="title"
+        matInput
+        placeholder="Extra vacation days"
+        value=""
+      />
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                formControlName="description"
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="5"
+                cdkAutosizeMaxRows="8"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ends at</mat-label>
+      <input
+        matInput [matDatepicker]="picker"
+        formControlName="endDate"
+      >
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline" style="margin-top: 1rem">
+      <mat-label>Prize description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                formControlName="prizeDescription"
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" style="color: var(--text-color)">
+      Submit
+    </button>
+  </form>
+</app-mainframe>

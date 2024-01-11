@@ -12,7 +12,7 @@ export interface PrizeDraw {
   endsAt: Date,
   prizeDescription: string,
   type: DrawType,
-  winner: UserProfile, //temporary until UserProfile integration
+  winner: UserProfile,
   entries: PrizeDrawEntry[]
   currentLeader: PrizeDrawEntry | null
 }

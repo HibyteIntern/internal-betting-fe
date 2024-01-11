@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {PrizeDraw} from "../entity/PrizeDraw";
-import {environment} from "../../environments/environment";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {BehaviorSubject, catchError} from "rxjs";
+import { PrizeDraw } from "../entity/PrizeDraw";
+import { environment } from "../../environments/environment";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { BehaviorSubject, catchError } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class PrizeDrawService {
 
   private apiUrl: string = environment.baseUrl + '/v1/prize-draws';
   prizeDrawSubject = new BehaviorSubject<PrizeDraw[]>([]);
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.fetchActive()
   }
 
@@ -20,7 +20,7 @@ export class PrizeDrawService {
   }
 
   fetch(apiUrl: string) {
-    this._http
+    this.http
       .get<PrizeDraw[]>(apiUrl)
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -41,5 +41,9 @@ export class PrizeDrawService {
 
   fetchPast() {
     this.fetch(this.apiUrl + "/past")
+  }
+
+  getById(id: number) {
+    return this.http.get<PrizeDraw>(this.apiUrl + '/' + id);
   }
 }
