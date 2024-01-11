@@ -20,13 +20,19 @@ export class UserProfileEditComponent implements OnInit{
   
 
   ngOnInit(): void {
-  this.userId = this.route.snapshot.paramMap.get("id");
-  console.log(this.userId);
-  
-  this.userProfile$ = this.userProfileService.userProfile$;
-  this.userProfileService.getById(this.userId);
-  
-}
+    this.userProfileService.userId$.subscribe(userId => {
+      if (userId) {
+        this.userId = userId;
+        this.fetchUserProfile(this.userId); 
+      }
+      console.log('userId:', this.userId);
+    });
+  }
+
+  fetchUserProfile(userId: number): void {
+    this.userProfile$ = this.userProfileService.userProfile$;
+    this.userProfileService.getById(userId);
+  }
 
 }
 

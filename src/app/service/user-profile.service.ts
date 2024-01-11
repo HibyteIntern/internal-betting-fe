@@ -4,21 +4,51 @@ import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserProfileService {
+  private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
+  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
+
+  private userIdSubject = new BehaviorSubject<number | null>(null);
+  userId$ = this.userIdSubject.asObservable(); 
+  userId?: number; 
 
   userProfile: UserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/user-profile';
 
   constructor(private http: HttpClient,
-              private avatarService: AvatarService) { }
-
-  private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
-  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
-
+              private avatarService: AvatarService,
+              private authService: AuthService) { 
+                
+                (async () => { 
+                  console.log(localStorage.getItem('access_token'));
+                  const token = localStorage.getItem('access_token');
+                  if (token) {
+                    const userKeycloakId = this.authService.decodeToken(token).sub;
+                    try {
+                      const user = await this.getByKeycloakId(userKeycloakId).toPromise();
+                      if (user) { 
+                        this.userId = user.userId;
+                        if(this.userId){
+                          this.userIdSubject.next(this.userId); 
+                          console.log(this.userIdSubject);
+                        }
+                      } else {
+                        this.userIdSubject.next(null);
+                      }
+                    } catch (error) {
+                      console.error('Error fetching user:', error);
+                      this.userIdSubject.next(null);
+                    }
+                  }
+                })();
+                
+               
+              }
   
   checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
@@ -56,7 +86,7 @@ export class UserProfileService {
     }
     return updatedProfile;
   }
-  
+
   private async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File, userProfile: UserProfile) {
     const photoId = await firstValueFrom(this.addPhoto(userId, avatarFile));
     userProfile.profilePicture = photoId;
@@ -106,6 +136,11 @@ export class UserProfileService {
   } 
 
   
+  updateUserProfileAfterPhotoChange(userId: number): void {
+    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(userProfile => {
+      this.userProfileSubject.next(userProfile); 
+    });
+  }
 
 
 } 

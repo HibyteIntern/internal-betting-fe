@@ -111,7 +111,7 @@ export class UserProfileFormComponent implements OnChanges{
 
     this.userProfileService.update(updatedUserProfile).pipe(
       finalize(() => {
-        this.router.navigate(['home/', this.userProfile?.userId]);
+        this.router.navigate(['home']);
       })
     ).subscribe(
       (user) => {
@@ -121,6 +121,6 @@ export class UserProfileFormComponent implements OnChanges{
   }
 
   onCancel(){
-    this.router.navigate(['home/', this.userProfile?.userId]);
+    this.router.navigate(['home']);
   }
 }

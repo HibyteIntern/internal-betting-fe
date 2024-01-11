@@ -37,9 +37,10 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = await this.authService.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.authService.loadUserProfile();
+      this.userProfile = await this.authService.loadUserProfile();
       const token = await this.authService.getToken();
-      this.userKeycloakId = this.decodeToken(token).sub;
-
+    
+      this.userKeycloakId = this.authService.decodeToken(token).sub;
       await this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
 
       this.finishLogin = true;
@@ -48,24 +49,10 @@ export class LoginComponent implements OnInit {
     if(this.finishLogin){
       
       this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
-        this.router.navigate(['/home', user.userId]);
+        this.router.navigate(['/home']);
       })
       localStorage.getItem('acc')
     }
-  }
-
-  private decodeToken(token: string): any {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
   }
 
   public login() {

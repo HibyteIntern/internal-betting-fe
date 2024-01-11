@@ -27,7 +27,7 @@ const routes: Routes = [
     children: [
       {path: 'edit/:id', component: UserProfileEditComponent},
     ]}, 
-  { path: 'home/:id', canActivate: [AuthGuard], component: HomeComponent},
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent},
   { path: 'competition', component: CompetitionsComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },

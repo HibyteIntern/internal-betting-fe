@@ -1,6 +1,6 @@
-import { Component, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, filter } from 'rxjs';
+import { Observable, Subscription, filter } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -10,51 +10,61 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './navbar-user-account.component.html',
   styleUrls: ['./navbar-user-account.component.scss'],
 })
-export class NavbarUserAccountComponent implements OnInit{
+export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
   userId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
   userProfile$?: Observable<UserProfile | null>;
   showAlertBox: boolean = false;
-  
+  private userProfileSubscription?: Subscription; 
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private userProfileService: UserProfileService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-   
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.currentPath = this.route.snapshot.firstChild?.routeConfig?.path || '';
-      console.log('Current URL:', this.currentPath);
-
-      let childRoute = this.route.firstChild;
-      while (childRoute) {
-        if (childRoute.snapshot.paramMap.get("id")) {
-          this.userId = childRoute.snapshot.paramMap.get("id");
+      this.userProfileSubscription = this.userProfileService.userId$.subscribe(userId => {
+        if (userId) {
+          this.userId = userId;
           this.fetchUserProfile(this.userId); 
-          break;
         }
-        childRoute = childRoute.firstChild;
-      }
-      console.log('userId:', this.userId);
-      
-      if(this.userId){
-        this.userProfileService.getPhoto(this.userId).subscribe(blob => {
-          console.log(blob);
-          this.displayProfileImage(blob);
-        });
-      }
-
+        console.log('userId:', this.userId);
+      });
     });
+  
+  }
+  
+  ngOnDestroy(): void {
+    if(this.userProfileSubscription){
+      this.userProfileSubscription.unsubscribe();
+    }
   }
 
+  fetchUserProfile(userId: number): void {
+    this.userProfile$ = this.userProfileService.userProfile$;
+    this.userProfileService.getById(userId);
+  
+    this.userProfile$.subscribe(user => {
+      this.userProfile = user;
+    console.log(this.userProfile);
+    if(this.userProfile?.userId){
+      this.fetchProfileImage(this.userProfile?.userId); 
+    }
+  });
+  }
+
+  fetchProfileImage(userId: number) {
+    this.userProfileService.getPhoto(userId).subscribe(blob => {
+      console.log(blob);
+      this.displayProfileImage(blob);
+    });
+  }
 
   displayProfileImage(blob: Blob) {
     const url = URL.createObjectURL(blob);
@@ -66,24 +76,12 @@ export class NavbarUserAccountComponent implements OnInit{
     }
   }
 
-  fetchUserProfile(userId: number): void {
-    this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
-  
-    this.userProfile$.subscribe(user => {
-      this.userProfile = user;
-    console.log(this.userProfile);
-  });
-
-  }
-
   onLogout(){
     this.authService.logout();
     this.closeAlertBox();
   }
   
   onUserProfileEdit() {
-  
     this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
     this.showAlertBox = false;
   }
@@ -93,13 +91,11 @@ export class NavbarUserAccountComponent implements OnInit{
   }
 
   openAlertBox() {
-
     this.showAlertBox = true;
 
   }
 
   closeAlertBox() {
-  
     this.showAlertBox = false; 
   }
 
