@@ -1,11 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserGroupModel} from "../../models/user-group.model";
-import {GroupService} from "../../service/group.service";
-import {UserProfile} from "../../models/user.profile";
 import {UserProfileService} from "../../service/user-profile.service";
-import {MatChipInputEvent} from "@angular/material/chips";
-import {map, Observable, startWith} from "rxjs";
+import {UserProfile} from "../../models/user.profile";
 
 @Component({
   selector: 'app-group-form',
@@ -16,7 +13,8 @@ export class GroupFormComponent implements OnChanges, OnInit {
   @Input() initialGroup: UserGroupModel | null | undefined;
   @Output() formSubmit = new EventEmitter<UserGroupModel>();
 
-  userOptions: string[] = ["user1", "user2", "user3"];
+  userOptions: string[] = [];
+  userProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
 
   constructor(
@@ -41,31 +39,32 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
-    console.log(formValue);
     const updatedGroup: UserGroupModel = {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName!,
       description: formValue.description!,
       users: formValue.selectedUsers!,
     }
-    console.log(updatedGroup);
     this.formSubmit.emit(updatedGroup);
   }
 
   ngOnInit(): void {
-    console.log("da");
-    // this.userService.getAll().subscribe((data) => {
-    //   console.log(data);
-    //   data.forEach((user) => {
-    //     if(user.username) {
-    //       this.userOptions.push(user.username);
-    //     }
-    //   });
-    // });
+    this.userService.getAll().subscribe((data) => {
+      data.forEach((user) => {
+        if(user.username) {
+          this.userOptions.push(user.username);
+          this.userProfiles.push(user);
+        }
+      });
+    });
   }
   handleUserSelect(users: string[]) {
+    const selectedUsers: UserProfile[] = users.map(username => {
+      return this.userProfiles.find(user => user.username === username) || { username };
+    });
+
     this.userGroupForm.patchValue({
-      selectedUsers: users
+      selectedUsers: selectedUsers
     });
   }
 
