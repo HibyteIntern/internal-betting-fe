@@ -7,9 +7,9 @@ import { BehaviorSubject } from "rxjs";
 })
 export class TagsService {
     private availableTags: string[] = [
-      '#fun',
-      '#football',
-      '#basketball',
+      // '#fun',
+      // '#football',
+      // '#basketball',
     ];
 
     private selectedTags: string[] = [
@@ -18,9 +18,10 @@ export class TagsService {
     ];
 
     constructor(private eventService: EventService) {
-      // this.eventService.getAllTags().subscribe(tags => {
-      //   this.availableTags = [...tags];
-      // });
+      this.eventService.getAllTags().subscribe(tags => {
+        console.log(tags);
+        this.availableTags = [...tags];
+      });
     }
 
     public getAvailableTags(): string[] {

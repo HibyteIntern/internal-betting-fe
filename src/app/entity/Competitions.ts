@@ -18,7 +18,7 @@ export interface Competition {
 export interface CompetitionRequest {
     name: string,
     description: string,
-    users: UserProfile[],
+    users: number[],
     userGroups: string[],
     userProfiles: string[],
     events: number[],

@@ -12,9 +12,9 @@ const routes: Routes = [
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
-  { path: "competitions", component: CompetitionsComponent },
+  { path: "competitions/:id", component: CompetitionsComponent },
   { path: "create-competition", component: CreateCompetitionComponent },
-  { path: "", component: IndexComponent }
+  { path: "", component: IndexComponent },
 ];
 
 @NgModule({

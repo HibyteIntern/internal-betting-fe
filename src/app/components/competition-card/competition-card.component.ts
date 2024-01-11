@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Competition } from 'src/app/entity/Competitions';
 import { Status } from 'src/app/entity/Status';
 
@@ -9,6 +9,7 @@ import { Status } from 'src/app/entity/Status';
 })
 export class CompetitionCardComponent {
   @Input() competition: Competition = {
+    id: 0,
     name: '',
     description: '',
     creator: '',

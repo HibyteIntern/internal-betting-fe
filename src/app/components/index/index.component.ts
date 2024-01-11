@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Competition } from 'src/app/entity/Competitions';
 import { EventRequest } from 'src/app/entity/EventRequest';
 import { CompetitionService } from 'src/app/service/competition.service';
@@ -21,7 +22,12 @@ export class IndexComponent implements OnInit {
   events: EventRequest[] = [];
   selectedEvents: EventRequest[] = [];
 
-  constructor(protected competitionService: CompetitionService, protected eventService: EventService, protected tagsService: TagsService) { }
+  constructor(
+    protected competitionService: CompetitionService, 
+    protected eventService: EventService, 
+    protected tagsService: TagsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.competitionService.getCompetitions().subscribe(competitions => {
@@ -112,5 +118,9 @@ export class IndexComponent implements OnInit {
 
   closeTagSelector() {
     this.tagSelectorOpened = false;
+  }
+
+  handleCompetitionCardClick(competitionId: number) {
+    this.router.navigate(['/competitions/', competitionId]);
   }
 }

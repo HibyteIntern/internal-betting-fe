@@ -4,7 +4,7 @@ export interface UserProfile{
     id?: number,
     userId?: number,
     keycloakId?: String ,
-    username?: String,
+    username?: string,
     profilePicture?: number,
     description?: String,
     coins?: number,
