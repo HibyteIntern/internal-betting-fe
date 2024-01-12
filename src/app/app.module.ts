@@ -26,6 +26,8 @@ import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-b
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
@@ -84,6 +86,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgOptimizedImage,
     MatExpansionModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     MatAutocompleteModule,
   ],

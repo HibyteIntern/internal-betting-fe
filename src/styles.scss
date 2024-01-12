@@ -94,6 +94,10 @@ input {
   background: var(--background-color);
 }
 
+mat-calendar {
+  background: var(--background-color);
+}
+
 //Loading spinner
 .lds-dual-ring {
   display: inline-block;
@@ -132,13 +136,6 @@ body {
   height: 100%;
 }
 
-mat-form-field {
-  font-size: 1rem !important;
-  input {
-    font-size: clamp(14px, 1rem, 24px) !important;
-  }
-}
-
 .app-form {
   width: clamp(550px, 40%, 1200px);
   display: flex;
@@ -163,8 +160,6 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
-    padding: 1em !important;
-    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
