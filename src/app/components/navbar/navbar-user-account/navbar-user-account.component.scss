@@ -1,0 +1,25 @@
+.outer-div {
+  background-color: #79588b;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  border-radius: 4rem;
+}
+
+#account-image {
+  border-radius: 50%;
+  height: 80%;
+  aspect-ratio: 1/1;
+  background-color: white;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+#user-credits {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 5px;
+}

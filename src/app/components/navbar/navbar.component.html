@@ -1,0 +1,10 @@
+<div class="outer-div">
+  <mat-slide-toggle
+    style="margin-left: 1rem; margin-right: 5.5rem"
+    color="primary"
+    (change)="themeService.toggleTheme()"
+    >{{ themeService.getCurrentTheme() }}</mat-slide-toggle
+  >
+  <div routerLink="/" id="app-name">HiBet</div>
+  <app-navbar-user-account></app-navbar-user-account>
+</div>

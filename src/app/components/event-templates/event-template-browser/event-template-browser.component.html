@@ -1,0 +1,22 @@
+<app-mainframe title="Event templates">
+  <div id="outer-div">
+    <div style="width: 100%">
+      <button
+        [routerLink]="['/event-templates/create']"
+        mat-raised-button
+        color="primary"
+        id="add-event-template-button"
+      >
+        Add Event Template
+      </button>
+    </div>
+    <div *ngIf="loading" class="lds-dual-ring"></div>
+    <div class="message" *ngIf="eventTemplates.length === 0 && !loading">
+      No event templates found.
+    </div>
+    <app-event-template-list
+      (delete)="handleDelete($event)"
+      [eventTemplates]="eventTemplates"
+    ></app-event-template-list>
+  </div>
+</app-mainframe>
