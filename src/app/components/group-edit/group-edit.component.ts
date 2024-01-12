@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, of} from "rxjs";
-import {UserGroupModel} from "../../models/user-group.model";
+import {UserGroupModel} from "../../entity/user-group.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GroupService} from "../../service/group.service";
 

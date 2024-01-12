@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {UserGroupModel} from "../../models/user-group.model";
+import {UserGroupModel} from "../../entity/user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
-import {UserProfile} from "../../models/user.profile";
+import {UserProfile} from "../../entity/user.profile";
 
 @Component({
   selector: 'app-group-form',
@@ -67,6 +67,4 @@ export class GroupFormComponent implements OnChanges, OnInit {
       selectedUsers: selectedUsers
     });
   }
-
-
 }

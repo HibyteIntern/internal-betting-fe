@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {UserGroupModel} from "../models/user-group.model";
+import {UserGroupModel} from "../entity/user-group.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,6 @@ export class GroupService {
   }
 
   create(group: UserGroupModel): Observable<UserGroupModel>{
-    console.log(group);
     return this.httpClient.post<UserGroupModel>(this.groupUrl, group);
   }
 

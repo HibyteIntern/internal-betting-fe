@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {GroupService} from "../../service/group.service";
 import {Router} from "@angular/router";
-import {UserGroupModel} from "../../models/user-group.model";
-import {FormBuilder} from "@angular/forms";
+import {UserGroupModel} from "../../entity/user-group.model";
 
 @Component({
   selector: 'app-group-create',
@@ -14,7 +13,6 @@ export class GroupCreateComponent {
 
   handleSubmit(group: UserGroupModel) {
     this.groupService.create(group).subscribe((data) => {
-      console.log(data)
       this.router.navigate(['/user-groups']);
     });
   }

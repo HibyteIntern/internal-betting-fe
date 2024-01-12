@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {UserGroupModel} from "../../models/user-group.model";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {UserGroupModel} from "../../entity/user-group.model";
 
 @Component({
   selector: 'app-group',
@@ -8,4 +8,6 @@ import {UserGroupModel} from "../../models/user-group.model";
 })
 export class GroupComponent {
   @Input() group?: UserGroupModel;
+  @Output() delete = new EventEmitter<number>();
+  @Output() edit = new EventEmitter<number>()
 }

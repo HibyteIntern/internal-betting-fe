@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, delay, map } from 'rxjs';
 import { KeycloakProfile } from 'keycloak-js';
-import {UserProfile} from "../models/user.profile";
+import {UserProfile} from "../entity/user.profile";
 
 @Injectable({
   providedIn: 'root'

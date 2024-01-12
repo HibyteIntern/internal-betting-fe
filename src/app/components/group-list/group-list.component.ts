@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {UserGroupModel} from "../../models/user-group.model";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {UserGroupModel} from "../../entity/user-group.model";
+import {Router} from "@angular/router";
+import {GroupService} from "../../service/group.service";
 
 @Component({
   selector: 'app-group-list',
@@ -8,4 +10,21 @@ import {UserGroupModel} from "../../models/user-group.model";
 })
 export class GroupListComponent {
   @Input() groups!: UserGroupModel[] | null;
+  constructor(private groupService: GroupService, private router: Router){}
+
+  handleEdit(id: number) {
+    this.router.navigate(['user-groups/edit', id]);
+  }
+
+  handleDelete(id: number) {
+    this.groupService.delete(id).subscribe(() => {
+      this.groupService.getAll().subscribe((data) => {
+        this.groups = data;
+      })
+    })
+  }
+
+  createGroup() {
+    this.router.navigate(['user-groups/create']);
+  }
 }
