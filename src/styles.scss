@@ -215,6 +215,37 @@ mat-form-field {
   }
 }
 
+.small-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  width: 28rem;
+  height: 3rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+  button {
+    width: 8rem;
+    flex-shrink: 0;
+    color: var(--text-color)!important;
+  }
+  div {
+    overflow: hidden;
+    padding: 0.5rem;
+  }
+  &:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 2rem);
+  }
+}
+
 //media queries for setting the font size, which influences every component that uses rem
 html {
   font-size: 12px;
