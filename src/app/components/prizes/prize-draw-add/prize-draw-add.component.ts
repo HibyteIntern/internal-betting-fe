@@ -15,6 +15,7 @@ export class PrizeDrawAddComponent {
   selectedCategory = '';
   isLoading = false;
   errorMessage = '';
+  minEndsAtDate = new Date();
   constructor(
     private prizeDrawService: PrizeDrawService,
     private reactiveFormBuilder: FormBuilder,

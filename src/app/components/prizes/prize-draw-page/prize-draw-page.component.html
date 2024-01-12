@@ -1,2 +1,18 @@
 <app-mainframe [title]="prizeDraw ? prizeDraw.title : 'Loading'">
+  <div *ngIf="isLoading" class="lds-dual-ring"></div>
+  <div class="outer-container" *ngIf="!isLoading">
+    <div class="info-container">
+      <img
+        ngSrc="assets/icons/calendar-icon.svg"
+        alt="credits"
+        height="22"
+        width="18"
+      />
+      <div>{{getTimeRemainingString(prizeDraw?.endsAt)}}</div>
+    </div>
+    <div class="info-container">{{'You stand to win: ' + prizeDraw?.prizeDescription}}</div>
+    <div class="info-container">{{getWinnerString()}}</div>
+    <div class="info-container">{{'Type: ' + prizeDraw?.type}}</div>
+    <p>{{prizeDraw?.description}}</p>
+  </div>
 </app-mainframe>

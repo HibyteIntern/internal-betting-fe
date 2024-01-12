@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PrizeDraw } from '../../../entity/PrizeDraw';
 import { DrawType } from '../../../entity/DrawType';
 import { Router } from '@angular/router';
+import {PrizeDrawService} from "../../../service/prize-draw.service";
 
 @Component({
   selector: 'app-prize-card',
@@ -12,32 +13,12 @@ export class PrizeCardComponent {
   @Input() prizeDraw?: PrizeDraw;
   protected readonly DrawType = DrawType;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private prizeDrawService: PrizeDrawService
+  ) {}
 
-  getTimeRemaining(targetDate: Date | undefined): string {
-    if (!targetDate) {
-      return '';
-    }
-    const now = new Date();
-    const endsAt = new Date(targetDate);
-    const diff = endsAt.getTime() - now.getTime();
 
-    if (diff < 0) return 'Expired';
-
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(hours / 24);
-
-    if (hours < 1) {
-      return `${minutes} minutes`;
-    }
-    return (
-      `${days} ` +
-      (days === 1 ? 'day' : 'days') +
-      ` ${hours % 24} ` +
-      (hours === 1 ? 'hour' : 'hours')
-    );
-  }
   getCurrentLeaderUsername(): String {
     if (this.prizeDraw?.currentLeader)
       return this.prizeDraw?.currentLeader.user.username
@@ -48,13 +29,17 @@ export class PrizeCardComponent {
 
   getCurrentLeaderPoints(): number {
     if (this.prizeDraw?.currentLeader)
-      return this.prizeDraw?.currentLeader.user.coins
-        ? this.prizeDraw.currentLeader.user.coins
+      return this.prizeDraw?.currentLeader.amount
+        ? this.prizeDraw.currentLeader.amount
         : 0;
     return 0;
   }
 
   handleNavigateToPrizeDrawPage() {
     this.router.navigate(['/prizes', this.prizeDraw?.id]);
+  }
+
+  getTimeRemaining(date: Date | undefined) {
+    return this.prizeDrawService.getTimeRemaining(date);
   }
 }

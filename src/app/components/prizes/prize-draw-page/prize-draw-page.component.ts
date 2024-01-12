@@ -36,4 +36,15 @@ export class PrizeDrawPageComponent implements OnInit {
       this.prizeDraw = data;
     });
   }
+
+  getTimeRemainingString(date: Date | undefined) {
+    const timeRemaining: string = this.prizeDrawService.getTimeRemaining(date);
+    if (timeRemaining === 'Expired') return "This draw is expired.";
+    else return 'Hurry up! This draw ends in ' + timeRemaining;
+  }
+
+  getWinnerString() {
+    if(this.prizeDraw?.currentLeader) return "The current leader is: " + this.prizeDraw.currentLeader.user.username
+    else return "There is no leader yet"
+  }
 }

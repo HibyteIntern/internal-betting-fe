@@ -1,0 +1,19 @@
+p {
+  text-indent: 0;
+}
+
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  width: clamp(500px, 50%, 1200px);
+}
+
+.info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: .75rem;
+  img {
+    margin-right: .5rem;
+  }
+}

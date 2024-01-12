@@ -28,7 +28,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Ends at</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="endDate" />
+      <input matInput [matDatepicker]="picker" formControlName="endDate" [min]="minEndsAtDate"/>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
