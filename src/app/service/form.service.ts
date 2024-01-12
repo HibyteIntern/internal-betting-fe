@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EventTemplate } from '../entity/EventTemplate';
+import { EventTemplate } from '../entity/event-template.model';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BetTemplate } from '../entity/BetTemplate';
+import { BetTemplate } from '../entity/bet-template.model';
 import { multipleChoiceValidator } from '../shared/validator/multiple-choice.validator';
 import { multipleChoiceOptionValidator } from '../shared/validator/multiple-choice-option.validator';
 
@@ -28,7 +28,7 @@ export class FormService {
   // prepopulateEventCreationFormWithEventTemplate(eventTemplate: EventTemplate, formGroup: FormGroup){
   // }
 
-  private createBetTemplateForm(betTemplate: BetTemplate): FormGroup {
+  createBetTemplateForm(betTemplate: BetTemplate): FormGroup {
     return this.reactiveFormBuilder.group(
       {
         name: [

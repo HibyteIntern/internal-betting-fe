@@ -13,6 +13,17 @@
   color: var(--text-color);
 }
 
+.lds-dual-ring {
+  margin-bottom: 1rem;
+}
+
+.message {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: var(--text-sm);
+}
+
 app-event-template-list {
   width: 100%;
 }

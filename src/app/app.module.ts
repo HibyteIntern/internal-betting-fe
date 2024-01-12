@@ -27,6 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
@@ -39,8 +41,6 @@ import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
 import { PrizeCategoryListComponent } from './components/prizes/prize-draw-add/prize-category-list/prize-category-list.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -99,6 +99,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgOptimizedImage,
     MatExpansionModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     MatAutocompleteModule,
     MatRadioModule,

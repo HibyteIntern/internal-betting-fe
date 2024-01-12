@@ -1,4 +1,4 @@
-import { BetTemplate } from './BetTemplate';
+import { BetTemplate } from './bet-template.model';
 
 export interface EventTemplate {
   id?: number;
