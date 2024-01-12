@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserGroupModel} from "../../entity/user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
 import {UserProfile} from "../../entity/user.profile";
@@ -16,15 +16,16 @@ export class GroupFormComponent implements OnChanges, OnInit {
   userOptions: string[] = [];
   userProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
+  submitted = false;
 
   constructor(
       private formBuilder: FormBuilder,
       private userService: UserProfileService
   ) {
     this.userGroupForm = this.formBuilder.group({
-      groupName: '',
+      groupName: ['', Validators.required],
       description: '',
-      selectedUsers: [],
+      selectedUsers: [[], [Validators.required, this.validateSelectedUsers]],
     });
   }
 
@@ -46,6 +47,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
       users: formValue.selectedUsers!,
     }
     this.formSubmit.emit(updatedGroup);
+    this.submitted = true;
   }
 
   ngOnInit(): void {
@@ -66,5 +68,10 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.userGroupForm.patchValue({
       selectedUsers: selectedUsers
     });
+  }
+
+  validateSelectedUsers(control: FormControl) {
+    const selectedUsers = control.value;
+    return selectedUsers && selectedUsers.length > 0 ? null : { noUsersSelected: true };
   }
 }

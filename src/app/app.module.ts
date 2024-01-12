@@ -33,6 +33,8 @@ import { GroupFormComponent } from './components/group-form/group-form.component
 import { GroupEditComponent } from './components/group-edit/group-edit.component';
 
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
@@ -82,24 +84,26 @@ function initializeKeycloak(keycloak: KeycloakService) {
     RightSidebarComponent,
     AutocompleteComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        KeycloakAngularModule,
-        BrowserAnimationsModule,
-        MatSlideToggleModule,
-        MatInputModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        NgOptimizedImage,
-        MatExpansionModule,
-        MatIconModule,
-        FormsModule,
-        MatAutocompleteModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    KeycloakAngularModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+    MatExpansionModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    MatAutocompleteModule,
+  ],
   providers: [
     {
       provide: APP_INITIALIZER,

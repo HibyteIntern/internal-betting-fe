@@ -1,4 +1,18 @@
-.wrapper{
-  display: flex;
+.small-card {
+  height: auto;
+  width: 50rem;
+}
+
+.info{
+  width:35rem;
+}
+
+.buttons{
+  display:flex;
   flex-direction: column;
+}
+
+.small-card .info .description {
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }

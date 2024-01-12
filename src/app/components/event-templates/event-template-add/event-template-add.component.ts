@@ -5,7 +5,8 @@ import { multipleChoiceValidator } from '../../../shared/validator/multiple-choi
 import { multipleChoiceOptionValidator } from '../../../shared/validator/multiple-choice-option.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormService } from '../../../service/form.service';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, of } from 'rxjs';
+import { EventTemplate } from '../../../entity/event-template.model';
 
 @Component({
   selector: 'app-event-template-add',
@@ -18,6 +19,7 @@ export class EventTemplateAddComponent {
   editedTemplateId?: number;
   errorMessage = '';
   isLoading = false;
+
   constructor(
     private eventTemplateService: EventTemplateService,
     private formService: FormService,
@@ -35,19 +37,29 @@ export class EventTemplateAddComponent {
       this.eventTemplateService
         .getById(this.editedTemplateId)
         .pipe(
-          tap((response) => {
-            this.formService.prepopulateEventTemplateForm(
-              response,
-              this.templateFormGroup,
-            );
-          }),
           catchError((error) => {
             if (error.status === 404) router.navigate(['/event-templates']);
             return of(null);
           }),
         )
-        .subscribe();
+        .subscribe((response) => {
+          if (response) {
+            this.prepopulateEventTemplateForm(response);
+          }
+        });
     }
+  }
+
+  private prepopulateEventTemplateForm(eventTemplate: EventTemplate) {
+    this.templateFormGroup.patchValue({
+      name: eventTemplate.name,
+    });
+    const betTemplates = this.templateFormGroup.get(
+      'betTemplates',
+    ) as FormArray;
+    eventTemplate.betTemplates.forEach((betTemplate) => {
+      betTemplates.push(this.formService.createBetTemplateForm(betTemplate));
+    });
   }
 
   get betTemplates() {
@@ -85,11 +97,18 @@ export class EventTemplateAddComponent {
       this.reactiveFormBuilder.control('', multipleChoiceOptionValidator()),
     );
   }
+
   removeMultipleChoiceOption(
     betTemplateIndex: number,
     optionIndex: number,
   ): void {
     this.getOptions(betTemplateIndex).removeAt(optionIndex);
+  }
+
+  handleSubmitSuccess(success: boolean) {
+    if (success) this.router.navigate(['/event-templates']);
+    this.isLoading = false;
+    this.errorMessage = 'Something went wrong. Please try again';
   }
 
   submit() {
@@ -103,19 +122,11 @@ export class EventTemplateAddComponent {
     if (this.isEditPage && this.editedTemplateId) {
       this.eventTemplateService
         .update(this.editedTemplateId, this.templateFormGroup.value)
-        .subscribe((success: boolean) => {
-          if (success) this.router.navigate(['/event-templates']);
-          this.isLoading = false;
-          this.errorMessage = 'Something went wrong. Please try again';
-        });
+        .subscribe((success: boolean) => this.handleSubmitSuccess(success));
     } else {
       this.eventTemplateService
         .add(this.templateFormGroup.value)
-        .subscribe((success: boolean) => {
-          if (success) this.router.navigate(['/event-templates']);
-          this.isLoading = false;
-          this.errorMessage = 'Something went wrong. Please try again';
-        });
+        .subscribe((success: boolean) => this.handleSubmitSuccess(success));
     }
   }
 
