@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-left-sidebar-list',
   templateUrl: './left-sidebar-list.component.html',
-  styleUrls: ['./left-sidebar-list.component.scss']
+  styleUrls: ['./left-sidebar-list.component.scss'],
 })
 export class LeftSidebarListComponent {
-  constructor(protected router:Router) { }
+  constructor(protected router: Router) {}
 
   navigateToIndex() {
     this.router.navigate(['/']);

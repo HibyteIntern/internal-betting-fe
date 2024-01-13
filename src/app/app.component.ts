@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './service/theme.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +19,6 @@ export class AppComponent {
   public handleSelectedOptions(selectedOptions: string[]) {
     this.selectedOptions = selectedOptions;
 
-    console.log(this.selectedOptions)
+    console.log(this.selectedOptions);
   }
 }
