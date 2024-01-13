@@ -1,18 +1,30 @@
-<app-mainframe [title]="prizeDraw ? prizeDraw.title : 'Loading'">
+<app-mainframe [title]="prizeDraw ? prizeDraw?.title + ' (' + prizeDraw.status.toLowerCase() + ')' : 'Loading'">
   <div *ngIf="isLoading" class="lds-dual-ring"></div>
   <div class="outer-container" *ngIf="!isLoading">
-    <div class="info-container">
-      <img
-        ngSrc="assets/icons/calendar-icon.svg"
-        alt="credits"
-        height="22"
-        width="18"
-      />
-      <div>{{getTimeRemainingString(prizeDraw?.endsAt)}}</div>
-    </div>
-    <div class="info-container">{{'You stand to win: ' + prizeDraw?.prizeDescription}}</div>
-    <div class="info-container">{{getWinnerString()}}</div>
+    <app-prize-draw-expiry [expiryDate]="prizeDraw?.endsAt" class="info-container"></app-prize-draw-expiry>
+    <app-prize-draw-prize [prizeDescription]="prizeDraw?.prizeDescription" style="margin-bottom: .5rem"></app-prize-draw-prize>
+    <app-prize-draw-leader [currentLeader]="prizeDraw?.currentLeader" class="info-container"></app-prize-draw-leader>
     <div class="info-container">{{'Type: ' + prizeDraw?.type}}</div>
-    <p>{{prizeDraw?.description}}</p>
+    <div class="description">
+      <div>Description</div>
+      <p>{{prizeDraw?.description}}</p>
+    </div>
+    <div class="entries">
+      <div>Entries</div>
+      <app-prize-draw-entry-input></app-prize-draw-entry-input>
+      <app-prize-draw-user-list [entries]="prizeDraw?.entries"></app-prize-draw-user-list>
+    </div>
+    <div class="admin-area">
+      <p>Manage draw</p>
+      <div class="admin-buttons-container">
+        <button mat-stroked-button color="accent">End draw</button>
+        <button mat-stroked-button color="warn">Delete draw
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-stroked-button color="accent">Edit
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </app-mainframe>

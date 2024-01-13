@@ -1,0 +1,61 @@
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  .submit-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: .5rem;
+    width: 15rem;
+    @media screen and (max-width: 400px) {
+      width: 100%;
+    }
+    div {
+      height: 2.3rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      background-color: var(--card-color);
+      margin-right: .5rem;
+      border-radius: .25rem;
+      overflow: hidden;
+      input {
+        width: 6rem;
+        box-sizing: border-box;
+        flex-grow: 1;
+
+        padding: .65rem .5rem .5rem .5rem;
+        background-color: var(--card-color);
+        outline: none;
+        border: none;
+        font-weight: bold;
+        font-size: 1rem;
+        text-align: right;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        &[type=number] {
+          -moz-appearance: textfield;
+        }
+      }
+      img {
+        width: 1.7rem;
+        box-sizing: border-box;
+        margin-right: .5rem;
+        height: auto;
+      }
+    }
+    button {
+      height: 2.3rem;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+  }
+}

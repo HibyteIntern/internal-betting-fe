@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PrizeDraw } from '../../../entity/PrizeDraw';
+import { PrizeDraw } from '../../../entity/prize-draw.model';
 import { DrawType } from '../../../entity/DrawType';
 import { Router } from '@angular/router';
 import {PrizeDrawService} from "../../../service/prize-draw.service";

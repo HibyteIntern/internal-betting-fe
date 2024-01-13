@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, map } from 'rxjs';
-import { UserProfile } from '../entity/UserProfile';
+import { BehaviorSubject, Observable, delay } from 'rxjs';
+import { UserProfile } from '../entity/user.profile.model';
 import { KeycloakProfile } from 'keycloak-js';
 
 @Injectable({

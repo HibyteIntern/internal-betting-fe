@@ -41,6 +41,12 @@ import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
 import { PrizeCategoryListComponent } from './components/prizes/prize-draw-add/prize-category-list/prize-category-list.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { PrizeDrawLeaderComponent } from './components/prizes/prize-draw-page/prize-draw-leader/prize-draw-leader.component';
+import { PrizeDrawExpiryComponent } from './components/prizes/prize-draw-page/prize-draw-expiry/prize-draw-expiry.component';
+import { PrizeDrawPrizeComponent } from './components/prizes/prize-draw-page/prize-draw-prize/prize-draw-prize.component';
+import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-list.component';
+import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
+import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -83,6 +89,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeDrawAddComponent,
     PrizeDrawPageComponent,
     PrizeCategoryListComponent,
+    PrizeDrawLeaderComponent,
+    PrizeDrawExpiryComponent,
+    PrizeDrawPrizeComponent,
+    PrizeDrawUserListComponent,
+    PrizeDrawUserEntryComponent,
+    PrizeDrawEntryInputComponent,
   ],
   imports: [
     BrowserModule,

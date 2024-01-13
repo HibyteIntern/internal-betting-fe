@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PrizeDraw } from '../../../../entity/PrizeDraw';
+import { PrizeDraw } from '../../../../entity/prize-draw.model';
 
 @Component({
   selector: 'app-prize-list',

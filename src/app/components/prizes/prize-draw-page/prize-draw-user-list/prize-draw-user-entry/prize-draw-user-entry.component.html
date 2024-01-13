@@ -1,0 +1,14 @@
+<div class="outer-container">
+  <div class="username">
+    {{entry?.user?.username ? entry?.user?.username : 'User'}}
+  </div>
+  <div class="amount">
+    {{entry?.amount ? entry?.amount : 'amount'}}
+    <img
+      ngSrc="assets/icons/chips-icon.svg"
+      alt="credits"
+      height="19"
+      width="30"
+    />
+  </div>
+</div>

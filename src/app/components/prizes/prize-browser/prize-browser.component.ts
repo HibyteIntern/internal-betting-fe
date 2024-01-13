@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PrizeDraw } from '../../../entity/PrizeDraw';
+import { PrizeDraw } from '../../../entity/prize-draw.model';
 import { PrizeDrawService } from '../../../service/prize-draw.service';
 import { skip } from 'rxjs';
 

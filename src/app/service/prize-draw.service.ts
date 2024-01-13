@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PrizeDraw } from '../entity/PrizeDraw';
+import { PrizeDraw } from '../entity/prize-draw.model';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
