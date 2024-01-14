@@ -11,14 +11,14 @@
     </div>
     <div class="entries">
       <div>Entries</div>
-      <app-prize-draw-entry-input></app-prize-draw-entry-input>
+      <app-prize-draw-entry-input (amount)="addEntry($event)" *ngIf="showEntryInput()"></app-prize-draw-entry-input>
       <app-prize-draw-user-list [entries]="prizeDraw?.entries"></app-prize-draw-user-list>
     </div>
     <div class="admin-area">
       <p>Manage draw</p>
       <div class="admin-buttons-container">
         <button mat-stroked-button color="accent">End draw</button>
-        <button mat-stroked-button color="warn">Delete draw
+        <button mat-stroked-button color="warn" (click)="deleteDraw()">Delete draw
           <mat-icon>delete</mat-icon>
         </button>
         <button mat-stroked-button color="accent">Edit

@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import PrizeDrawRequest from '../entity/prize-draw-request.model';
+import {PrizeDrawEntry} from "../entity/prize-draw-entry.model";
+import PrizeDrawEntryRequest from "../entity/prize-draw-entry-request.model";
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +61,27 @@ export class PrizeDrawService {
         return of(false);
       }),
     );
+  }
+
+  delete(id: number): Observable<boolean> {
+    return this.http.delete(this.apiUrl + '/' + id).pipe(
+      map(() => {
+        const newList: PrizeDraw[] = this.prizeDrawSubject.getValue();
+        const index = newList.findIndex((prizeDraw) => prizeDraw.id === id);
+        if (index > -1) {
+          newList.splice(index, 1);
+          this.prizeDrawSubject.next(newList);
+        }
+        return true;
+      }),
+      catchError(() => {
+        return of(false);
+      }),
+    );
+  }
+
+  addEntryToDraw(prizeDrawEntryRequest: PrizeDrawEntryRequest): Observable<PrizeDrawEntry> {
+    return this.http.post<PrizeDrawEntry>(this.apiUrl + '/entry', prizeDrawEntryRequest);
   }
 
   getTimeRemaining(targetDate: Date | undefined): string {

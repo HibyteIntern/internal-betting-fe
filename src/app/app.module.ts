@@ -47,6 +47,7 @@ import { PrizeDrawPrizeComponent } from './components/prizes/prize-draw-page/pri
 import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-list.component';
 import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -95,6 +96,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeDrawUserListComponent,
     PrizeDrawUserEntryComponent,
     PrizeDrawEntryInputComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
