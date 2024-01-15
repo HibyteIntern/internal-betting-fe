@@ -1,4 +1,4 @@
-<div class="outer-div">
+<div (click)="openAlertBox()" class="outer-div">
   <img
     ngSrc="assets/icons/chips-icon.svg"
     alt="credits"
@@ -6,6 +6,16 @@
     width="40"
     style="margin-left: 10px"
   />
-  <div id="user-credits">50</div>
+  <p id="user-credits">{{userProfile?.coins}}</p>
   <div id="account-image"></div>
 </div>
+
+<app-account-page-user-profile 
+  [username]="userProfile?.username?.toString()"
+  [userId]="userProfile?.userId"
+  [profilePicture]="userProfile?.profilePicture"
+  *ngIf="showAlertBox" 
+  (edit)="onUserProfileEdit()"
+  (logout)="onLogout()"
+  (cancel)="onCancel()">
+</app-account-page-user-profile>

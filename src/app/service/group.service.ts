@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserGroupModel} from "../entity/user-group.model";
 
@@ -9,7 +9,7 @@ import {UserGroupModel} from "../entity/user-group.model";
 export class GroupService {
   private groupUrl = '';
   constructor(private httpClient: HttpClient) {
-    this.groupUrl = 'http://localhost:8080/api/user-groups';
+    this.groupUrl = 'http://localhost:8080/api/v1/user-groups';
   }
 
   getAll(): Observable<UserGroupModel[]>{
@@ -33,5 +33,20 @@ export class GroupService {
   delete(id: number): Observable<any>{
     const url = `${this.groupUrl}/${id}`;
     return this.httpClient.delete<any>(url);
+  }
+
+  addPhoto(groupId: number, photo: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('photo', photo);
+
+    return this.httpClient.post(`${this.groupUrl}/${groupId}/addPhoto`, formData, {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    });
+  }
+
+  getPhoto(groupId: number): Observable<Blob> {
+    return this.httpClient.get(`${this.groupUrl}/${groupId}/photo`, { responseType: 'blob' });
   }
 }

@@ -1,5 +1,6 @@
 <app-mainframe [title]="'Edit User Group'">
     <app-group-form
             [initialGroup]="group$ | async"
-            (formSubmit)="handleFormEdit($event)"></app-group-form>
+            (formSubmit)="handleFormEdit($event)">
+    </app-group-form>
 </app-mainframe>

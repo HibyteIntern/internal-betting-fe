@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -26,6 +26,13 @@ import { GroupListComponent } from './components/group-list/group-list.component
 import { GroupComponent } from './components/group/group.component';
 import { GroupCreateComponent } from './components/group-create/group-create.component';
 import { GroupsComponent } from './components/groups/groups.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { HomeComponent } from './components/home/home.component';
+import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
@@ -40,7 +47,8 @@ import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BetsListComponent } from './components/bets-list/bets-list.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -73,6 +81,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
     GroupComponent,
     GroupCreateComponent,
     GroupsComponent,
+    UserProfileComponent,
+    UserProfileEditComponent,
+    UserProfileFormComponent,
+    UserTagBtnComponent,
+    CompetitionsComponent,
+    HomeComponent,
+    AccountPageUserProfileComponent,
+    LoadingSpinnerComponent,
     UserTagBtnComponent,
     TagComponent,
     GroupFormComponent,
@@ -83,6 +99,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    BetsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +114,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    FormsModule,
     MatExpansionModule,
     MatIconModule,
     MatDatepickerModule,

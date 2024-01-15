@@ -1,6 +1,10 @@
 <div class="small-card">
   <div class="info">
-    <h2>{{ group?.groupName }}</h2>
+    <div class="name-and-pic">
+      <div class="profile-circle">
+      </div>
+      <h2>{{ group?.groupName }}</h2>
+    </div>
     <p class="description" *ngIf="group?.description">{{ group?.description }}</p>
     <p>Members:</p>
     <ul>

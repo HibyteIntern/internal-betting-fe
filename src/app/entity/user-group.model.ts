@@ -1,4 +1,5 @@
-import {UserProfile} from "./user.profile";
+import {UserProfile} from "./UserProfile";
+
 
 export interface UserGroupModel{
   userGroupId: number | null

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { SampleService } from '../../service/sample.service';
+import { UserProfileService } from 'src/app/service/user-profile.service';
+import { UserProfile } from 'src/app/entity/UserProfile';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,29 +16,50 @@ export class LoginComponent implements OnInit {
 
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
+  public userKeycloakId  = '';
+  public username= '';
   public response: string | null = null;
+  public appUserProfile: UserProfile | null = null;
+
+
+  userProfileObs$?: Observable<UserProfile | null>;
+  finishLogin = false;
+  userId?: number;
+
 
   constructor(
-    private keycloak: KeycloakService,
-    private sample: SampleService,
+    private authService: AuthService,
+    private userProfileService: UserProfileService,
+    private router: Router,
   ) {}
 
   public async ngOnInit() {
-    this.isLoggedIn = await this.keycloak.isLoggedIn();
-
+    this.isLoggedIn = await this.authService.isLoggedIn();
     if (this.isLoggedIn) {
-      this.userProfile = await this.keycloak.loadUserProfile();
-      this.sample.getSample().subscribe((data) => {
-        this.response = data;
-      });
+      this.userProfile = await this.authService.loadUserProfile();
+      this.userProfile = await this.authService.loadUserProfile();
+      const token = await this.authService.getToken();
+
+      this.userKeycloakId = this.authService.decodeToken(token).sub;
+      await this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
+
+      this.finishLogin = true;
+    }
+
+    if(this.finishLogin){
+
+      this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
+        this.router.navigate(['/home']);
+      })
+      localStorage.getItem('acc')
     }
   }
 
   public login() {
-    this.keycloak.login();
+    this.authService.login();
   }
 
   public logout() {
-    this.keycloak.logout();
+    this.authService.logout();
   }
 }

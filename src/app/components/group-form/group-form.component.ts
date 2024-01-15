@@ -2,7 +2,9 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserGroupModel} from "../../entity/user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
-import {UserProfile} from "../../entity/user.profile";
+import {UserProfile} from "../../entity/UserProfile";
+import {firstValueFrom} from "rxjs";
+import {GroupService} from "../../service/group.service";
 
 @Component({
   selector: 'app-group-form',
@@ -17,10 +19,13 @@ export class GroupFormComponent implements OnChanges, OnInit {
   userProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
   submitted = false;
+  isEditMode= false;
+  uploadedPhotoId?: number;
 
   constructor(
       private formBuilder: FormBuilder,
-      private userService: UserProfileService
+      private userService: UserProfileService,
+      private groupService: GroupService,
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: ['', Validators.required],
@@ -31,6 +36,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
+      this.isEditMode = !!this.initialGroup;
       if (this.initialGroup) {
         const {groupName, description, users} = this.initialGroup;
         this.userGroupForm.patchValue({groupName, description, selectedUsers: users});
@@ -73,5 +79,34 @@ export class GroupFormComponent implements OnChanges, OnInit {
   validateSelectedUsers(control: FormControl) {
     const selectedUsers = control.value;
     return selectedUsers && selectedUsers.length > 0 ? null : { noUsersSelected: true };
+  }
+
+  onFileSelect(event: Event): void {
+    const element = event.target as HTMLInputElement;
+    const fileList: FileList | null = element.files;
+    if (fileList && fileList.length > 0) {
+      const file = fileList[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const circle = document.querySelector('.profile-circle') as HTMLElement;
+        if (circle && e.target && e.target.result) {
+          circle.style.backgroundImage = `url(${e.target.result})`;
+        }
+      };
+
+      reader.readAsDataURL(file);
+
+      if (typeof this.initialGroup?.userGroupId === 'number') {
+        this.groupService.addPhoto(this.initialGroup.userGroupId, file).subscribe((photoId) => {
+          this.uploadedPhotoId = photoId;
+          console.log(`Photo uploaded successfully with ID: ${photoId}`);
+        });
+      } else {
+        console.error('User ID is undefined');
+      }
+
+      console.log(this.initialGroup?.profilePicture);
+    }
   }
 }
