@@ -1,7 +1,8 @@
+@import "./../../../themes/_variables";
+
 #outer-div {
   display: flex;
   flex-direction: column;
-  align-items: center;
   overflow: hidden;
 }
 
@@ -25,4 +26,14 @@
 
 app-event-template-list {
   width: 100%;
+}
+
+#search-bar-wrapper {
+  width: 25%;
+  min-width: 300px;
+  margin-bottom: 2rem;
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
 }

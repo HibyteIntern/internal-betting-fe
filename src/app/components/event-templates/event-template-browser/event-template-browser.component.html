@@ -1,6 +1,9 @@
 <app-mainframe title="Event templates">
   <div id="outer-div">
     <div style="width: 100%">
+      <div id="search-bar-wrapper">
+        <app-search-bar (valueChange)="search($event)"></app-search-bar>
+      </div>
       <button
         [routerLink]="['/event-templates/create']"
         mat-raised-button

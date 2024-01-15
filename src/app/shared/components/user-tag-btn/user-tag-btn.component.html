@@ -3,7 +3,11 @@
     <ng-content></ng-content>
   </div>
 
-  <span class="close-icon">
+  <span *ngIf="functionality === 'remove'" class="icon">
     <mat-icon>close</mat-icon>
+  </span>
+
+  <span *ngIf="functionality === 'add'" class="icon">
+    <mat-icon>add</mat-icon>
   </span>
 </div>

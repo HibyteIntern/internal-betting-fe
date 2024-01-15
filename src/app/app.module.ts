@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -28,6 +28,12 @@ import { TagComponent } from './shared/components/tag/tag.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
+import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
+import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
+import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -59,6 +65,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserTagBtnComponent,
     TagComponent,
     StopMousePropagationDirective,
+    SearchBarComponent,
+    LeftSidebarListComponent,
+    HideScrollbarDirective,
+    RightSidebarComponent,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +88,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
+    MatAutocompleteModule,
   ],
   providers: [
     {

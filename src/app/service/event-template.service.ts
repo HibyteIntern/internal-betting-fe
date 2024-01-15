@@ -12,16 +12,18 @@ export class EventTemplateService {
   eventTemplateSubject = new BehaviorSubject<EventTemplate[]>([]);
 
   constructor(private http: HttpClient) {
-    this.fetchAll();
+    this.fetch();
   }
 
   getData(): Observable<EventTemplate[]> {
     return this.eventTemplateSubject.asObservable();
   }
 
-  fetchAll() {
+  fetch(name?: string) {
+    let apiPath = this.apiUrl;
+    if (name) apiPath = this.apiUrl + `?name=${name}`;
     this.http
-      .get<EventTemplate[]>(this.apiUrl)
+      .get<EventTemplate[]>(apiPath)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {

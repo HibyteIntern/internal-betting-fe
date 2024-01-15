@@ -1,0 +1,21 @@
+.mat-form-field {
+  width: 70%;
+}
+
+button {
+  width: 25%;
+  margin-left: 5%;
+  font-weight: bold;
+  color: var(--text-color);
+  background-color: var(--accent-color-one);
+  border-radius: var(--border-radius);
+  padding: 12px 0;
+  font-size: var(--text-sm);
+  border: none;
+  transition: all ease-in-out var(--transition-duration);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

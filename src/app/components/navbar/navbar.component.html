@@ -1,10 +1,35 @@
 <div class="outer-div">
-  <mat-slide-toggle
-    style="margin-left: 1rem; margin-right: 5.5rem"
-    color="primary"
-    (change)="themeService.toggleTheme()"
-    >{{ themeService.getCurrentTheme() }}</mat-slide-toggle
-  >
+  <div class="left-navbar-container">
+    <mat-icon
+      (click)="goBack()"
+      class="arrow-right"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="arrow_back"
+    />
+  </div>
+
   <div routerLink="/" id="app-name">HiBet</div>
-  <app-navbar-user-account></app-navbar-user-account>
+  <div class="right-navbar-container">
+    <img
+      *ngIf="themeService.getCurrentTheme() === 'Light'"
+      (click)="themeService.toggleTheme()"
+      ngSrc="assets/icons/MoonSvgFE.svg"
+      alt="moon-icon"
+      height="50"
+      width="50"
+      class="moon"
+    />
+
+    <img
+      *ngIf="themeService.getCurrentTheme() === 'Dark'"
+      (click)="themeService.toggleTheme()"
+      ngSrc="assets/icons/PantherSvgFE.svg"
+      alt="panther-icon"
+      height="50"
+      width="50"
+      class="panther"
+    />
+    <app-navbar-user-account></app-navbar-user-account>
+  </div>
 </div>
