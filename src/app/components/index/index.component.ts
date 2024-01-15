@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Competition } from 'src/app/entity/Competitions';
+import { Competition } from 'src/app/entity/competitions.model';
 import { EventRequest } from 'src/app/entity/EventRequest';
 import { CompetitionService } from 'src/app/service/competition.service';
 import { EventService } from 'src/app/service/event.service';

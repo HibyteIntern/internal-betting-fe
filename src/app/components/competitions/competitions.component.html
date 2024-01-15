@@ -1,7 +1,9 @@
 <app-mainframe *ngIf="competitionService.loading$" [title]="competition?.name ? competition!.name : ''">
     <span class="status-container"><span class="status">Status:&nbsp;</span>{{ competition?.status }}</span>
     <p>{{competition?.description}}</p>
-    <div class="grid-container">
-        <app-event-card />
+    <div *ngIf="competition" class="grid-container">
+        <app-event-card *ngFor="let event of competition.events" [event]="event" />
     </div>
 </app-mainframe>
+
+<!-- TODO: fix event issue inside competition -->

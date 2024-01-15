@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Competition } from 'src/app/entity/Competitions';
+import { Competition } from 'src/app/entity/competitions.model';
 import { Status } from 'src/app/entity/Status';
 import { StatusIcons } from 'src/app/entity/Status';
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Competition, CompetitionRequest } from "../entity/Competitions";
+import { Competition, CompetitionRequest } from "../entity/competitions.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, catchError, finalize, map } from "rxjs";
 

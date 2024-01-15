@@ -1,3 +1,4 @@
+import { EventRequest } from "./EventRequest";
 import { Status } from "./Status";
 import { UserProfile } from "./UserProfile";
 
@@ -9,7 +10,7 @@ export interface Competition {
     users: UserProfile[],
     userGroups: string[],
     userProfiles: string[],
-    events: Event[],
+    events: EventRequest[],
     created: Date,
     lastModified: Date,
     status: Status
