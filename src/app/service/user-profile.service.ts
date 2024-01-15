@@ -23,10 +23,8 @@ export class UserProfileService {
   constructor(private http: HttpClient,
               private avatarService: AvatarService,
               private authService: AuthService) { 
-                
                 (async () => { 
-                  console.log(localStorage.getItem('access_token'));
-                  const token = localStorage.getItem('access_token');
+                  const token = await this.authService.getToken();
                   if (token) {
                     const userKeycloakId = this.authService.decodeToken(token).sub;
                     try {
@@ -46,15 +44,12 @@ export class UserProfileService {
                     }
                   }
                 })();
-                
-               
-              }
+              } 
   
   checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
       this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
         let userProfile = existingProfile;
-  
         try {
           if (userProfile.username == null && userProfileKeycloak.username) {
             userProfile.username = userProfileKeycloak.username;
@@ -68,7 +63,6 @@ export class UserProfileService {
               await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
             }
           }
-  
           resolve(userProfile);
         } catch (error) {
           console.error('Error in profile update:', error);
@@ -78,7 +72,6 @@ export class UserProfileService {
     });
   }
 
-  
   private async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
     const updatedProfile = await this.update(userProfile).toPromise();
     if (!updatedProfile) {
@@ -119,7 +112,6 @@ export class UserProfileService {
     return this.http.delete<any>(`${this.userProfileUrl}/${userId}`);
   }
 
-  
   addPhoto(userId: number, photo: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
@@ -135,13 +127,11 @@ export class UserProfileService {
     return this.http.get(`${this.userProfileUrl}/${userId}/photo`, { responseType: 'blob' });
   } 
 
-  
   updateUserProfileAfterPhotoChange(userId: number): void {
     this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(userProfile => {
       this.userProfileSubject.next(userProfile); 
     });
   }
-
 
 } 
 
