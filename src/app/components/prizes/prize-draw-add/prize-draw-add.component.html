@@ -1,5 +1,5 @@
-<app-mainframe title="Create new prize draw">
-  <app-prize-category-list
+<app-mainframe [title]="isEditPage && editedPrizeDraw ? '' + editedPrizeDraw?.title : 'Create new prize draw'">
+  <app-prize-category-list *ngIf="!isEditPage"
     (categorySelected)="handleCategoryChange($event)"
   ></app-prize-category-list>
   <div style="margin-top: 1rem; font-weight: bold; font-size: var(--text-sm)">
@@ -52,7 +52,7 @@
       ></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" style="color: var(--text-color)">
-      Submit
+      {{isEditPage ? 'Update' : 'Submit'}}
     </button>
     <div *ngIf="isLoading" class="lds-dual-ring-container">
       <div class="lds-dual-ring"></div>

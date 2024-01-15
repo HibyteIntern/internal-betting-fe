@@ -70,6 +70,10 @@ export class PrizeDrawPageComponent implements OnInit {
     });
   }
 
+  editDraw() {
+    this.router.navigate(['/prizes', 'edit', this.prizeDraw?.id])
+  }
+
   private recalculateLeader(prizeDraw: PrizeDraw) {
     let currentLeader: PrizeDrawEntry | null = null;
     for (let entry of prizeDraw.entries) {

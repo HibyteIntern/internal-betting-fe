@@ -80,6 +80,27 @@ export class PrizeDrawService {
     );
   }
 
+  update(id: number, prizeDrawRequest: PrizeDrawRequest): Observable<boolean> {
+    return this.http
+      .put<PrizeDraw>(this.apiUrl + '/' + id, prizeDrawRequest)
+      .pipe(
+        map((response) => {
+          let updatedList = this.prizeDrawSubject.getValue();
+          updatedList = updatedList.map((prizeDraw) => {
+            if (prizeDraw.id === id) {
+              return response;
+            }
+            return prizeDraw;
+          });
+          this.prizeDrawSubject.next(updatedList);
+          return true;
+        }),
+        catchError(() => {
+          return of(false);
+        }),
+      );
+  }
+
   addEntryToDraw(prizeDrawEntryRequest: PrizeDrawEntryRequest): Observable<PrizeDrawEntry> {
     return this.http.post<PrizeDrawEntry>(this.apiUrl + '/entry', prizeDrawEntryRequest);
   }

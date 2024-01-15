@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
   { path: 'prizes', component: PrizeBrowserComponent },
   { path: 'prizes/create', component: PrizeDrawAddComponent },
+  { path: 'prizes/edit/:id', component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
 ];
 

@@ -1,4 +1,4 @@
-<app-mainframe [title]="prizeDraw ? prizeDraw?.title + ' (' + prizeDraw.status.toLowerCase() + ')' : 'Loading'">
+<app-mainframe [title]="prizeDraw ? prizeDraw.title + ' (' + prizeDraw.status.toLowerCase() + ')' : 'Loading'">
   <div *ngIf="isLoading" class="lds-dual-ring"></div>
   <div class="outer-container" *ngIf="!isLoading">
     <app-prize-draw-expiry [expiryDate]="prizeDraw?.endsAt" class="info-container"></app-prize-draw-expiry>
@@ -21,7 +21,7 @@
         <button mat-stroked-button color="warn" (click)="deleteDraw()">Delete draw
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-stroked-button color="accent">Edit
+        <button mat-stroked-button color="accent" (click)="editDraw()">Edit
           <mat-icon>edit</mat-icon>
         </button>
       </div>
