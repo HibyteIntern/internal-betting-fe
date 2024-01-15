@@ -25,7 +25,7 @@ export class UserProfileFormComponent implements OnChanges{
     private router: Router,
   ) {
     this.userProfileForm = this.formBuilder.group({
-      username: '',
+      username: ['', Validators.required],
       description: '',
     });
   }
@@ -83,14 +83,10 @@ export class UserProfileFormComponent implements OnChanges{
       }
 
       console.log(this.userProfile?.profilePicture);
-    
     }
-   
   }
 
   onSubmit() {
-    console.log(this.userProfileForm.value);
-
     const formValue = this.userProfileForm.value;
     const updatedUserProfile: UserProfile = {
       userId: this.userProfile?.userId,
