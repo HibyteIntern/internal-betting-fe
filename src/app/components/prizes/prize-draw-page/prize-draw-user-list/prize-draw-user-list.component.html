@@ -1,4 +1,9 @@
 <div class="outer-container">
-  <div *ngIf="entries?.length === 0 || !entries">There were no entries found. Be the first to enter the draw.</div>
-  <app-prize-draw-user-entry [entry]="entry" *ngFor="let entry of entries"></app-prize-draw-user-entry>
+  <div *ngIf="entries?.length === 0 || !entries">
+    There were no entries found. Be the first to enter the draw.
+  </div>
+  <app-prize-draw-user-entry
+    [entry]="entry"
+    *ngFor="let entry of entries"
+  ></app-prize-draw-user-entry>
 </div>

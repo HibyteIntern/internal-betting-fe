@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { PrizeDrawService } from '../../../service/prize-draw.service';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import PrizeDrawRequest from '../../../entity/prize-draw-request.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DrawType } from '../../../entity/DrawType';
-import {catchError, of} from "rxjs";
-import {PrizeDraw} from "../../../entity/prize-draw.model";
+import { catchError, of } from 'rxjs';
+import { PrizeDraw } from '../../../entity/prize-draw.model';
 
 @Component({
   selector: 'app-prize-draw-add',
@@ -20,13 +20,13 @@ export class PrizeDrawAddComponent {
   minEndsAtDate = new Date();
 
   isEditPage = false;
-  editedPrizeDraw?: PrizeDraw
+  editedPrizeDraw?: PrizeDraw;
 
   constructor(
     private prizeDrawService: PrizeDrawService,
     private reactiveFormBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.prizeDrawFormGroup = reactiveFormBuilder.group({
       title: ['', Validators.required],
@@ -60,7 +60,7 @@ export class PrizeDrawAddComponent {
       title: prizeDraw.title,
       description: prizeDraw.description,
       endDate: prizeDraw.endsAt,
-      prizeDescription: prizeDraw.prizeDescription
+      prizeDescription: prizeDraw.prizeDescription,
     });
   }
 
@@ -69,14 +69,15 @@ export class PrizeDrawAddComponent {
   }
 
   private createPrizeDrawRequestFromForm(): PrizeDrawRequest {
-    let drawType = DrawType[this.selectedCategory as keyof typeof DrawType]
-    if(this.isEditPage && this.editedPrizeDraw) drawType = this.editedPrizeDraw.type
+    let drawType = DrawType[this.selectedCategory as keyof typeof DrawType];
+    if (this.isEditPage && this.editedPrizeDraw)
+      drawType = this.editedPrizeDraw.type;
     return {
       title: this.prizeDrawFormGroup.get('title')?.value,
       description: this.prizeDrawFormGroup.get('description')?.value,
       endsAt: this.prizeDrawFormGroup.get('endDate')?.value,
       prizeDescription: this.prizeDrawFormGroup.get('prizeDescription')?.value,
-      type: drawType
+      type: drawType,
     };
   }
 
@@ -91,7 +92,8 @@ export class PrizeDrawAddComponent {
   submit() {
     this.errorMessage = '';
     if (!this.prizeDrawFormGroup.valid) return;
-    let prizeDrawRequest: PrizeDrawRequest = this.createPrizeDrawRequestFromForm()
+    let prizeDrawRequest: PrizeDrawRequest =
+      this.createPrizeDrawRequestFromForm();
     this.isLoading = true;
 
     if (this.isEditPage && this.editedPrizeDraw) {

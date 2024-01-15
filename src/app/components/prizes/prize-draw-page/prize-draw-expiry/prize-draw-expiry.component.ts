@@ -1,13 +1,13 @@
-import {Component, Input} from '@angular/core';
-import {PrizeDrawService} from "../../../../service/prize-draw.service";
+import { Component, Input } from '@angular/core';
+import { PrizeDrawService } from '../../../../service/prize-draw.service';
 
 @Component({
   selector: 'app-prize-draw-expiry',
   templateUrl: './prize-draw-expiry.component.html',
-  styleUrls: ['./prize-draw-expiry.component.scss']
+  styleUrls: ['./prize-draw-expiry.component.scss'],
 })
 export class PrizeDrawExpiryComponent {
-  @Input() expiryDate: Date | undefined
+  @Input() expiryDate: Date | undefined;
   constructor(private prizeDrawService: PrizeDrawService) {}
 
   getTimeRemainingString() {

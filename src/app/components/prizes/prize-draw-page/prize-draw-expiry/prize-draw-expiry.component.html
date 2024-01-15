@@ -6,10 +6,12 @@
     width="18"
   />
   <div *ngIf="getTimeRemainingString() === 'Expired'">
-    {{getTimeRemainingString()}}
+    {{ getTimeRemainingString() }}
   </div>
   <div *ngIf="getTimeRemainingString() !== 'Expired'">
     Hurry up! This draw ends in:
-    <span style="color: var(--accent-color-two)">{{getTimeRemainingString()}}</span>
+    <span style="color: var(--accent-color-two)">{{
+      getTimeRemainingString()
+    }}</span>
   </div>
 </div>

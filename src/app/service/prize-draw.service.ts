@@ -4,8 +4,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import PrizeDrawRequest from '../entity/prize-draw-request.model';
-import {PrizeDrawEntry} from "../entity/prize-draw-entry.model";
-import PrizeDrawEntryRequest from "../entity/prize-draw-entry-request.model";
+import { PrizeDrawEntry } from '../entity/prize-draw-entry.model';
+import PrizeDrawEntryRequest from '../entity/prize-draw-entry-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -101,8 +101,13 @@ export class PrizeDrawService {
       );
   }
 
-  addEntryToDraw(prizeDrawEntryRequest: PrizeDrawEntryRequest): Observable<PrizeDrawEntry> {
-    return this.http.post<PrizeDrawEntry>(this.apiUrl + '/entry', prizeDrawEntryRequest);
+  addEntryToDraw(
+    prizeDrawEntryRequest: PrizeDrawEntryRequest,
+  ): Observable<PrizeDrawEntry> {
+    return this.http.post<PrizeDrawEntry>(
+      this.apiUrl + '/entry',
+      prizeDrawEntryRequest,
+    );
   }
 
   getTimeRemaining(targetDate: Date | undefined): string {
@@ -126,7 +131,7 @@ export class PrizeDrawService {
       `${days} ` +
       (days === 1 ? 'day' : 'days') +
       ` ${hours % 24} ` +
-      ((hours % 24) === 1 ? 'hour' : 'hours')
+      (hours % 24 === 1 ? 'hour' : 'hours')
     );
   }
 }

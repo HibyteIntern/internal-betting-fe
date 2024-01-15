@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {PrizeDrawService} from '../../../service/prize-draw.service';
-import {PrizeDraw} from '../../../entity/prize-draw.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PrizeDrawEntry} from "../../../entity/prize-draw-entry.model";
-import PrizeDrawEntryRequest from "../../../entity/prize-draw-entry-request.model";
-import {DrawType} from "../../../entity/DrawType";
-import {ConfirmDialogComponent} from "../../../shared/components/confirm-dialog/confirm-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import { Component, OnInit } from '@angular/core';
+import { PrizeDrawService } from '../../../service/prize-draw.service';
+import { PrizeDraw } from '../../../entity/prize-draw.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PrizeDrawEntry } from '../../../entity/prize-draw-entry.model';
+import PrizeDrawEntryRequest from '../../../entity/prize-draw-entry-request.model';
+import { DrawType } from '../../../entity/DrawType';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-prize-draw-page',
@@ -58,20 +58,24 @@ export class PrizeDrawPageComponent implements OnInit {
 
   deleteDraw() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { title: 'Delete draw', content: 'Are you sure you want to delete this draw? This will not award anyone any prize.' }
+      data: {
+        title: 'Delete draw',
+        content:
+          'Are you sure you want to delete this draw? This will not award anyone any prize.',
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result && this.prizeDraw) {
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && this.prizeDraw) {
         this.prizeDrawService.delete(this.prizeDraw.id).subscribe((success) => {
-          if(success) this.router.navigate(['/prizes']);
+          if (success) this.router.navigate(['/prizes']);
         });
       }
     });
   }
 
   editDraw() {
-    this.router.navigate(['/prizes', 'edit', this.prizeDraw?.id])
+    this.router.navigate(['/prizes', 'edit', this.prizeDraw?.id]);
   }
 
   private recalculateLeader(prizeDraw: PrizeDraw) {
@@ -85,7 +89,7 @@ export class PrizeDrawPageComponent implements OnInit {
   }
 
   showEntryInput(): boolean {
-    if(this.prizeDraw?.type === DrawType.MOST_POINTS) return false;
+    if (this.prizeDraw?.type === DrawType.MOST_POINTS) return false;
     //once the user service will be finished, we will check if the logged-in user has already entered the draw
     return true;
   }

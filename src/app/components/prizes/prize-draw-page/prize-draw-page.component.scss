@@ -15,9 +15,9 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
   img {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }
 
@@ -34,7 +34,7 @@ p {
   div {
     font-weight: bold;
     font-size: var(--text-sm);
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -48,8 +48,8 @@ p {
     flex-direction: row;
     align-items: center;
     button {
-      margin-right: .5rem;
-      color: var(--text-color)
+      margin-right: 0.5rem;
+      color: var(--text-color);
     }
   }
   @media screen and (max-width: 768px) {
@@ -60,11 +60,9 @@ p {
       button {
         width: 100%;
         margin-right: 0;
-        margin-bottom: .5rem;
-        color: var(--text-color)
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
       }
     }
   }
 }
-
-

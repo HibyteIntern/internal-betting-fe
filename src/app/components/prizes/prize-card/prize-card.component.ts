@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PrizeDraw } from '../../../entity/prize-draw.model';
 import { DrawType } from '../../../entity/DrawType';
 import { Router } from '@angular/router';
-import {PrizeDrawService} from "../../../service/prize-draw.service";
+import { PrizeDrawService } from '../../../service/prize-draw.service';
 
 @Component({
   selector: 'app-prize-card',
@@ -15,9 +15,8 @@ export class PrizeCardComponent {
 
   constructor(
     private router: Router,
-    private prizeDrawService: PrizeDrawService
+    private prizeDrawService: PrizeDrawService,
   ) {}
-
 
   getCurrentLeaderUsername(): String {
     if (this.prizeDraw?.currentLeader)
