@@ -8,7 +8,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./account-page-user-profile.component.scss']
 })
 export class AccountPageUserProfileComponent implements OnInit{
-  
   @Input() username?: string ;
   @Input() userId?: number;
   @Input() profilePicture?: number;
@@ -25,7 +24,6 @@ export class AccountPageUserProfileComponent implements OnInit{
         this.displayProfileImage(blob);
       });
     }
-  
   }
 
   displayProfileImage(blob: Blob) {
@@ -38,16 +36,16 @@ export class AccountPageUserProfileComponent implements OnInit{
     }
   }
 
-    onHandleEdit(){
+  onHandleEdit(){
       this.edit.emit();
-    }
+  }
 
-    onLogout(){
+  onLogout(){
       this.logout.emit();
-    }
+  }
 
-    onCancel(){
+  onCancel(){
       this.cancel.emit();
-    }
+  }
 
 }

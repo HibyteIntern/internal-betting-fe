@@ -18,7 +18,7 @@ export class UserProfileService {
   userId?: number; 
 
   userProfile: UserProfile | null = null;
-  userProfileUrl = 'http://localhost:8080/api/user-profile';
+  userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
 
   constructor(private http: HttpClient,
               private avatarService: AvatarService,

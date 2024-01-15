@@ -13,7 +13,6 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent implements OnInit {
   public darkModeChecked = false;
-
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
   public userKeycloakId: string  = '';
@@ -21,11 +20,9 @@ export class LoginComponent implements OnInit {
   public response: string | null = null;
   public appUserProfile: UserProfile | null = null;
 
-
   userProfileObs$?: Observable<UserProfile | null>;
   finishLogin: boolean = false;
   userId?: number;
-
 
   constructor(
     private authService: AuthService,
@@ -47,7 +44,6 @@ export class LoginComponent implements OnInit {
     }
 
     if(this.finishLogin){
-      
       this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
         this.router.navigate(['/home']);
       })

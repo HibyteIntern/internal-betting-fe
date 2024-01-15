@@ -16,7 +16,6 @@ export class UserProfileFormComponent implements OnChanges{
 
   userProfileForm: FormGroup;
   uploadedPhotoId?: number;
-
   originalUserProfile?: UserProfile;
 
   constructor(

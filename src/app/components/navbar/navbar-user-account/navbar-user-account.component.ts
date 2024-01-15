@@ -11,7 +11,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./navbar-user-account.component.scss'],
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy{
-
   userId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null; 
