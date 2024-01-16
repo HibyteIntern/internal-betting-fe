@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventRequest } from 'src/app/entity/EventRequest';
 
 @Component({
@@ -8,4 +8,20 @@ import { EventRequest } from 'src/app/entity/EventRequest';
 })
 export class EventCardComponent {
   @Input() event: EventRequest = new EventRequest();
+
+  @Output() deleteEmitter = new EventEmitter<void>();
+  @Output() viewEmitter = new EventEmitter<void>();
+  @Output() editEmitter = new EventEmitter<void>();
+
+  emitViewClick() {
+    this.viewEmitter.emit();
+  }
+
+  emitDeleteButtonClick() {
+    this.deleteEmitter.emit();
+  }
+
+  emitEditButtonClick() {
+    this.editEmitter.emit();
+  }
 }

@@ -1,6 +1,11 @@
 <mat-card class="mat-card">
     <mat-card-header class="mat-card-header">
         <mat-card-title class="mat-card-title">{{event.name}}</mat-card-title>
+        <div>
+            <mat-icon (click)="emitViewClick()" class="icon-hover">open_in_new</mat-icon>
+            <mat-icon (click)="emitEditButtonClick()" class="icon-hover">edit</mat-icon>
+            <mat-icon (click)="emitDeleteButtonClick()" class="icon-hover">delete</mat-icon>
+        </div>
     </mat-card-header>
 
     <div class="tags-container">

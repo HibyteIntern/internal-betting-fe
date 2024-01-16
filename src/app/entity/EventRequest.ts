@@ -1,4 +1,4 @@
-import {CompleteBetType} from "./CompleteBetType";
+import {CompleteBetType} from "./complete-bet-type.model";
 import {Status} from "./Status";
 
 export class EventRequest {

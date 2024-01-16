@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Competition } from 'src/app/entity/competitions.model';
@@ -6,10 +5,10 @@ import { CompetitionService } from 'src/app/service/competition.service';
 
 @Component({
   selector: 'app-competitions',
-  templateUrl: './competitions.component.html',
-  styleUrls: ['./competitions.component.scss']
+  templateUrl: './view-competition.component.html',
+  styleUrls: ['./view-competition.component.scss']
 })
-export class CompetitionsComponent implements OnInit {
+export class ViewCompetitionsComponent implements OnInit {
   protected competition: Competition | undefined;
 
   constructor(protected competitionService: CompetitionService, private route: ActivatedRoute) { }
@@ -21,7 +20,5 @@ export class CompetitionsComponent implements OnInit {
         console.log(this.competition?.events)
       })
     })
-
-    
   }
 }

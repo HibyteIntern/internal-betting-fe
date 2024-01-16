@@ -40,7 +40,7 @@
     background-color: var(--sidebar-color);
     border-bottom-right-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-    padding: .5rem;
+    padding: 0.5rem;
     position: absolute;
     width: max-content;
     color: var(--text-color);
@@ -48,7 +48,9 @@
     top: 15%;
 
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s ease;
+    transition:
+      opacity 0.3s,
+      transform 0.3s ease;
     transform-origin: left center;
     transform: scaleX(0);
   }

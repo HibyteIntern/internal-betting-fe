@@ -1,10 +1,13 @@
-import {Directive, ElementRef, Renderer2} from '@angular/core';
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appHideScrollbar]'
+  selector: '[appHideScrollbar]',
 })
 export class HideScrollbarDirective {
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+  ) {
     this.renderer.setStyle(this.el.nativeElement, 'overflow', 'auto');
     this.renderer.setStyle(this.el.nativeElement, 'scrollbar-width', 'none'); // For Firefox
     this.renderer.setStyle(this.el.nativeElement, '-ms-overflow-style', 'none'); // For IE and Edge

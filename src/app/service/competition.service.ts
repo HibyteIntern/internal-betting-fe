@@ -75,7 +75,7 @@ export class CompetitionService {
         this.loadingSubject.next(true);
 
         return this.http
-            .put<Competition>(this.apiUrl, competition)
+            .put<Competition>(`${this.apiUrl}/${id}`, competition)
             .pipe(
                 catchError(error => {
                     console.log('Update Competition API Error:', error);

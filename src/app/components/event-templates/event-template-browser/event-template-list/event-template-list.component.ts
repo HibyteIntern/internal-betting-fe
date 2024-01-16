@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EventTemplate } from '../../../../entity/EventTemplate';
+import { EventTemplate } from '../../../../entity/event-template.model';
 
 @Component({
   selector: 'app-event-template-list',
@@ -7,6 +7,6 @@ import { EventTemplate } from '../../../../entity/EventTemplate';
   styleUrls: ['./event-template-list.component.scss'],
 })
 export class EventTemplateListComponent {
-  @Input() eventTemplates: EventTemplate[] = []
+  @Input() eventTemplates: EventTemplate[] = [];
   @Output() delete = new EventEmitter<number>();
 }

@@ -1,6 +1,6 @@
 <app-mainframe [title]="'Current ' + selectedCategory">
     <div class="search-container">
-        <app-search-bar (valueChange)="search($event)" (onEnterPressed)="search($event)"></app-search-bar>
+        <app-search-bar (valueChange)="search($event)" (enterPressed)="search($event)"></app-search-bar>
     </div>
 
     <div class="tag-container">

@@ -7,28 +7,28 @@
         <br />
         <mat-form-field color="accent" appearance="outline">
             <mat-label>Competition Description</mat-label>
-            <textarea 
-                formControlName="description" 
-                matInput 
-                placeholder="This competition is designed to celebrate and showcase the brilliance of creative thinkers across the globe." 
+            <textarea
+                formControlName="description"
+                matInput
+                placeholder="This competition is designed to celebrate and showcase the brilliance of creative thinkers across the globe."
                 value=""
             ></textarea>
         </mat-form-field>
-        <app-autocomplete [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect($event)"  />
-        <app-autocomplete [label]="'Add User Groups'" [options]="userGroupOptions" (selectedOptionsEmmiter)="handleUserGroupSelect($event)"  />
-        <app-autocomplete [label]="'Add Events'" [options]="eventOptions" (selectedOptionsEmmiter)="handleEventSelect($event)"  />   
+        <app-autocomplete [label]="'Add Users'" [options]="userOptions" [selectedOptions]="selectedUsers" (selectedOptionsEmmiter)="handleUserSelect($event)"  />
+        <app-autocomplete [label]="'Add User Groups'" [options]="userGroupOptions" [selectedOptions]="selectedUserGroups" (selectedOptionsEmmiter)="handleUserGroupSelect($event)"  />
+        <app-autocomplete [label]="'Add Events'" [options]="eventOptions" [selectedOptions]="selectedEvents" (selectedOptionsEmmiter)="handleEventSelect($event)"  />
         <mat-form-field color="accent" appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
                 <mat-option *ngFor="let option of statusOptions" [value]="option.value">{{option.label}}</mat-option>
             </mat-select>
-        </mat-form-field>     
+        </mat-form-field>
         <button
             class="btn"
             type="submit"
             [disabled]="!competitionForm.valid"
         >
             Submit
-        </button>   
+        </button>
     </form>
 </app-mainframe>
