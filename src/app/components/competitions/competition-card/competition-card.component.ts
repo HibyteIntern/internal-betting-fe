@@ -6,7 +6,10 @@ import { StatusIcons } from 'src/app/entity/Status';
 @Component({
   selector: 'app-competition-card',
   templateUrl: './competition-card.component.html',
-  styleUrls: ['./competition-card.component.scss', '../../../shared/styles/styled-card.scss']
+  styleUrls: [
+    './competition-card.component.scss',
+    '../../../shared/styles/styled-card.scss',
+  ],
 })
 export class CompetitionCardComponent implements OnInit {
   @Input() competition: Competition = {
@@ -20,17 +23,17 @@ export class CompetitionCardComponent implements OnInit {
     events: [],
     created: new Date(),
     lastModified: new Date(),
-    status: Status.DRAFT
+    status: Status.DRAFT,
   };
 
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() viewEmitter = new EventEmitter<void>();
   @Output() editEmitter = new EventEmitter<void>();
 
-  statusIcon = StatusIcons[this.competition.status]
+  statusIcon = StatusIcons[this.competition.status];
 
   ngOnInit(): void {
-    this.statusIcon = StatusIcons[this.competition.status]
+    this.statusIcon = StatusIcons[this.competition.status];
   }
 
   emitViewClick() {

@@ -1,3 +1,1 @@
-export class Bet{
-    
-}
+export class Bet {}

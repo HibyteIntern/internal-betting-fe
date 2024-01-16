@@ -1,60 +1,60 @@
 .search-container {
-    width: 30rem;
+  width: 30rem;
 }
 
 .add-tags-container {
-    position: relative;
-    display: inline-block;
-    height: 100%;
+  position: relative;
+  display: inline-block;
+  height: 100%;
 }
 
 .select-tags-container {
-    display: inline-block;
+  display: inline-block;
+  position: absolute;
+  top: -1.2rem;
+  left: 0rem;
+  background: var(--lighter-background-color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  width: 20rem;
+  z-index: 2200;
+  padding: 1.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  .close-icon {
     position: absolute;
-    top: -1.2rem;
-    left: 0rem;
-    background: var(--lighter-background-color);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--border-radius);
-    width: 20rem;
-    z-index: 2200;
-    padding: 1.5rem;
-    padding-right: 0.5rem;
-    padding-bottom: 0.5rem;
-
-    .close-icon {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        cursor: pointer;
-        transition: all var(--transition-duration) ease-in-out;
-
-        &:hover {
-            transform: scale(1.2);
-        }
-
-        z-index: 10000;
-    }
-}
-
-.center-icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 1rem;
-}
-
-.add-icon {
-    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     cursor: pointer;
-    bottom: -50%;
-    transform: translateY(calc(50% - 0.4rem)) scale(1.2);
     transition: all var(--transition-duration) ease-in-out;
 
     &:hover {
-        transform: translateY(calc(50% - 0.4rem)) scale(1.4);
+      transform: scale(1.2);
     }
+
+    z-index: 10000;
+  }
+}
+
+.center-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 1rem;
+}
+
+.add-icon {
+  position: absolute;
+  cursor: pointer;
+  bottom: -50%;
+  transform: translateY(calc(50% - 0.4rem)) scale(1.2);
+  transition: all var(--transition-duration) ease-in-out;
+
+  &:hover {
+    transform: translateY(calc(50% - 0.4rem)) scale(1.4);
+  }
 }
 
 @media (max-width: 992px) {

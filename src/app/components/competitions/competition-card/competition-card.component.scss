@@ -1,15 +1,15 @@
 .mat-card {
-    .mat-card-header {
-        .icon {
-            transform: scale(0.8) translateY(0.4rem);
-        }
-
-        .icon-hover {
-            transform: scale(0.8) translateY(0.4rem);
-
-            &:hover {
-                transform: scale(0.9) translateY(0.4rem);
-            }
-        }
+  .mat-card-header {
+    .icon {
+      transform: scale(0.8) translateY(0.4rem);
     }
+
+    .icon-hover {
+      transform: scale(0.8) translateY(0.4rem);
+
+      &:hover {
+        transform: scale(0.9) translateY(0.4rem);
+      }
+    }
+  }
 }

@@ -9,7 +9,10 @@ import { TagsService } from 'src/app/service/tags.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss', '../../shared/styles/tag-container.scss']
+  styleUrls: [
+    './index.component.scss',
+    '../../shared/styles/tag-container.scss',
+  ],
 })
 export class IndexComponent implements OnInit {
   selectedCategory = 'Competitions & Events';
@@ -26,34 +29,35 @@ export class IndexComponent implements OnInit {
     protected competitionService: CompetitionService,
     protected eventService: EventService,
     protected tagsService: TagsService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    this.competitionService.getCompetitions().subscribe(competitions => {
+    this.competitionService.getCompetitions().subscribe((competitions) => {
       this.competitions = competitions;
       this.selectCompetitions();
     });
-    this.eventService.getEvents().subscribe(events => {
+    this.eventService.getEvents().subscribe((events) => {
       this.events = events;
       this.selectEvents();
     });
   }
 
   search(value: string) {
-    this.competitionService.getCompetitionsSearch(value).subscribe(competitions => {
-      this.competitions = competitions;
-      this.selectCompetitions();
-    });
-    this.eventService.getEventsSearch(value).subscribe(events =>
-    {
+    this.competitionService
+      .getCompetitionsSearch(value)
+      .subscribe((competitions) => {
+        this.competitions = competitions;
+        this.selectCompetitions();
+      });
+    this.eventService.getEventsSearch(value).subscribe((events) => {
       this.events = events;
       this.selectEvents();
-    })
+    });
   }
 
   selectCompetitions() {
-    if(this.tagsService.isCompetitionsSelected()) {
+    if (this.tagsService.isCompetitionsSelected()) {
       this.selectedCompetitions = this.competitions;
     } else {
       this.selectedCompetitions = [];
@@ -61,20 +65,23 @@ export class IndexComponent implements OnInit {
   }
 
   selectEvents() {
-    if(this.tagsService.isEventsSelected()) {
-      if(this.isEventsSelectedWithNoTags()) {
+    if (this.tagsService.isEventsSelected()) {
+      if (this.isEventsSelectedWithNoTags()) {
         this.selectedEvents = this.events;
         return;
       } else {
         this.selectedEvents = [];
-        this.events.filter(event =>
-          this.tagsService.getSelectedTags().forEach(
-            tag => {
-              if(event.tags.includes(tag) && !this.selectedEvents.includes(event)) {
-                this.selectedEvents.push(event);
-                return;
-              }
-            }));
+        this.events.filter((event) =>
+          this.tagsService.getSelectedTags().forEach((tag) => {
+            if (
+              event.tags.includes(tag) &&
+              !this.selectedEvents.includes(event)
+            ) {
+              this.selectedEvents.push(event);
+              return;
+            }
+          }),
+        );
       }
     } else {
       this.selectedEvents = [];
@@ -82,15 +89,21 @@ export class IndexComponent implements OnInit {
   }
 
   private isEventsSelectedWithNoTags() {
-    return (this.tagsService.isEventsSelected() && this.tagsService.getSelectedTags().length === 1)
-      || (this.tagsService.isEventsSelected() && this.tagsService.isCompetitionsSelected() && this.tagsService.getSelectedTags().length === 2);
+    return (
+      (this.tagsService.isEventsSelected() &&
+        this.tagsService.getSelectedTags().length === 1) ||
+      (this.tagsService.isEventsSelected() &&
+        this.tagsService.isCompetitionsSelected() &&
+        this.tagsService.getSelectedTags().length === 2)
+    );
   }
 
   addTag(tagIndex: number) {
     this.tagsService.addTag(tagIndex);
 
-    if(this.tagsService.isEventsSelected()
-      && this.tagsService.isCompetitionsSelected()
+    if (
+      this.tagsService.isEventsSelected() &&
+      this.tagsService.isCompetitionsSelected()
     ) {
       this.selectedCategory = 'Competitions & Events';
     }
@@ -102,8 +115,11 @@ export class IndexComponent implements OnInit {
   removeTag(tagIndex: number) {
     this.tagsService.removeTag(tagIndex);
 
-    if(!(this.tagsService.isEventsSelected()
-      && this.tagsService.isCompetitionsSelected())
+    if (
+      !(
+        this.tagsService.isEventsSelected() &&
+        this.tagsService.isCompetitionsSelected()
+      )
     ) {
       this.selectedCategory = this.tagsService.getSelectedTags()[0];
     }
@@ -130,7 +146,7 @@ export class IndexComponent implements OnInit {
 
   handleCompetitionDeleteClick(competitionId: number) {
     this.competitionService.deleteCompetition(competitionId).subscribe(() => {
-      this.competitionService.getCompetitions().subscribe(competitions => {
+      this.competitionService.getCompetitions().subscribe((competitions) => {
         this.competitions = competitions;
         this.selectCompetitions();
       });

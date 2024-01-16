@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
   private addUrl = 'http://localhost:8080/api/v1/events/add';
@@ -31,13 +31,15 @@ export class EventService {
     this.loadingSubject.next(true);
 
     return this.http
-        .get<EventRequest[]>(`${this.getEventsUrl}/get/name`, { params: new HttpParams().set('name', query) })
-        .pipe(
-            catchError(error => {
-                console.log('Competitions Search API Error:', error);
-                throw error;
-            }),
-            finalize(() => this.loadingSubject.next(false))
-        );
+      .get<EventRequest[]>(`${this.getEventsUrl}/get/name`, {
+        params: new HttpParams().set('name', query),
+      })
+      .pipe(
+        catchError((error) => {
+          console.log('Competitions Search API Error:', error);
+          throw error;
+        }),
+        finalize(() => this.loadingSubject.next(false)),
+      );
   }
 }

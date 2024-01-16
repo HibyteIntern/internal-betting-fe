@@ -1,22 +1,30 @@
-<mat-card  class="mat-card">
-    <!-- (click)="emitViewClick()" -->
-    <mat-card-header class="mat-card-header">
-        <mat-card-title class="mat-card-title">{{competition.name}}</mat-card-title>
-        <div style="text-transform: capitalize;">
-            <!-- {{competition.status.toLocaleLowerCase()}}<mat-icon class="icon">{{statusIcon}}</mat-icon> -->
-        </div>
-        <div>
-            <mat-icon (click)="emitViewClick()" class="icon-hover">open_in_new</mat-icon>
-            <mat-icon (click)="emitEditButtonClick()" class="icon-hover">edit</mat-icon>
-            <mat-icon (click)="emitDeleteButtonClick()" class="icon-hover">delete</mat-icon>
-        </div>
-    </mat-card-header>
-
-    <div class="tags-container">
-        <app-tag>Competition</app-tag>
+<mat-card class="mat-card">
+  <!-- (click)="emitViewClick()" -->
+  <mat-card-header class="mat-card-header">
+    <mat-card-title class="mat-card-title">{{
+      competition.name
+    }}</mat-card-title>
+    <div style="text-transform: capitalize">
+      <!-- {{competition.status.toLocaleLowerCase()}}<mat-icon class="icon">{{statusIcon}}</mat-icon> -->
     </div>
+    <div>
+      <mat-icon (click)="emitViewClick()" class="icon-hover"
+        >open_in_new</mat-icon
+      >
+      <mat-icon (click)="emitEditButtonClick()" class="icon-hover"
+        >edit</mat-icon
+      >
+      <mat-icon (click)="emitDeleteButtonClick()" class="icon-hover"
+        >delete</mat-icon
+      >
+    </div>
+  </mat-card-header>
 
-    <mat-card-content class="mat-card-content">
-        <p>{{competition.description}}</p>
-    </mat-card-content>
+  <div class="tags-container">
+    <app-tag>Competition</app-tag>
+  </div>
+
+  <mat-card-content class="mat-card-content">
+    <p>{{ competition.description }}</p>
+  </mat-card-content>
 </mat-card>

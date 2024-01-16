@@ -10,21 +10,21 @@ import { GroupService } from 'src/app/service/group.service';
 @Component({
   selector: 'app-create-competition',
   templateUrl: './create-competition.component.html',
-  styleUrls: ['./create-competition.component.scss']
+  styleUrls: ['./create-competition.component.scss'],
 })
 export class CreateCompetitionComponent implements OnInit {
   competitionForm: FormGroup;
 
   searchValue = '';
 
-  userOptions:string[] = [];
-  selectedUsers:string[] = [];
+  userOptions: string[] = [];
+  selectedUsers: string[] = [];
 
-  userGroupOptions:string[] = [];
-  selectedUserGroups:string[] = [];
+  userGroupOptions: string[] = [];
+  selectedUserGroups: string[] = [];
 
-  eventOptions:string[] = [];
-  selectedEvents:string[] = [];
+  eventOptions: string[] = [];
+  selectedEvents: string[] = [];
 
   isEditPage = false;
 
@@ -32,15 +32,15 @@ export class CreateCompetitionComponent implements OnInit {
     { value: Status.DRAFT, label: 'Draft' },
     { value: Status.OPEN, label: 'Open' },
     { value: Status.CLOSED, label: 'Closed' },
-  ]
+  ];
   selectedStatus = Status.DRAFT;
 
-  constructor (
+  constructor(
     private competitionService: CompetitionService,
     private eventsService: EventService,
     private userProfileService: UserProfileService,
     private userGroupService: GroupService,
-    private router: Router
+    private router: Router,
   ) {
     this.competitionForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -56,47 +56,52 @@ export class CreateCompetitionComponent implements OnInit {
   ngOnInit(): void {
     this.isEditPage = this.router.url.includes('edit');
 
-    if(this.isEditPage) {
-      this.competitionService.getCompetitionById(parseInt(this.router.url.split('/')[3])).subscribe(competition => {
-        this.competitionForm.patchValue({
-          name: competition.name,
-          description: competition.description,
-          users: competition.users,
-          userProfiles: competition.userProfiles,
-          userGroups: competition.userGroups,
-          events: competition.events,
-          status: competition.status,
-        })
+    if (this.isEditPage) {
+      this.competitionService
+        .getCompetitionById(parseInt(this.router.url.split('/')[3]))
+        .subscribe((competition) => {
+          this.competitionForm.patchValue({
+            name: competition.name,
+            description: competition.description,
+            users: competition.users,
+            userProfiles: competition.userProfiles,
+            userGroups: competition.userGroups,
+            events: competition.events,
+            status: competition.status,
+          });
 
-        this.selectedUsers = competition.userProfiles;
-        this.selectedUserGroups = competition.userGroups;
-        this.selectedEvents = competition.events.map(event => event.name);
-      });
+          this.selectedUsers = competition.userProfiles;
+          this.selectedUserGroups = competition.userGroups;
+          this.selectedEvents = competition.events.map((event) => event.name);
+        });
     }
 
     this.eventOptions = [];
     this.userOptions = [];
     this.userGroupOptions = [];
 
-    this.eventsService.getEvents().subscribe(events => {
-      events.forEach(event => {
-        if(event.name && !this.selectedEvents.includes(event.name)) {
+    this.eventsService.getEvents().subscribe((events) => {
+      events.forEach((event) => {
+        if (event.name && !this.selectedEvents.includes(event.name)) {
           this.eventOptions.push(event.name);
         }
       });
     });
 
-    this.userProfileService.getAll().subscribe(users => {
-      users.forEach(user => {
-        if(user.username && !this.selectedUsers.includes(user.username)) {
+    this.userProfileService.getAll().subscribe((users) => {
+      users.forEach((user) => {
+        if (user.username && !this.selectedUsers.includes(user.username)) {
           this.userOptions.push(user.username);
         }
       });
     });
 
-    this.userGroupService.getAll().subscribe(groups => {
-      groups.forEach(group => {
-        if(group.groupName && !this.selectedUserGroups.includes(group.groupName)) {
+    this.userGroupService.getAll().subscribe((groups) => {
+      groups.forEach((group) => {
+        if (
+          group.groupName &&
+          !this.selectedUserGroups.includes(group.groupName)
+        ) {
           this.userGroupOptions.push(group.groupName);
         }
       });
@@ -109,31 +114,38 @@ export class CreateCompetitionComponent implements OnInit {
 
   handleUserSelect(users: string[]) {
     this.competitionForm.patchValue({
-      userProfiles: users
+      userProfiles: users,
     });
   }
 
   handleUserGroupSelect(userGroups: string[]) {
     this.competitionForm.patchValue({
-      userGroups: userGroups
+      userGroups: userGroups,
     });
   }
 
   handleEventSelect(events: string[]) {
     this.competitionForm.patchValue({
-      events: events
+      events: events,
     });
   }
 
   onSubmit() {
-    if(this.isEditPage) {
-      this.competitionService.updateCompetition(parseInt(this.router.url.split('/')[3]), this.competitionForm.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+    if (this.isEditPage) {
+      this.competitionService
+        .updateCompetition(
+          parseInt(this.router.url.split('/')[3]),
+          this.competitionForm.value,
+        )
+        .subscribe(() => {
+          this.router.navigate(['/']);
+        });
     } else {
-      this.competitionService.addCompetition(this.competitionForm.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.competitionService
+        .addCompetition(this.competitionForm.value)
+        .subscribe(() => {
+          this.router.navigate(['/']);
+        });
     }
   }
 }

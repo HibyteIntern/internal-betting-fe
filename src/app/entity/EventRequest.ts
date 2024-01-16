@@ -1,17 +1,17 @@
-import {CompleteBetType} from "./complete-bet-type.model";
-import {Status} from "./Status";
+import { CompleteBetType } from './complete-bet-type.model';
+import { Status } from './Status';
 
 export class EventRequest {
   name: string;
   description: string;
   creator: string;
   completeBetTypeDtoList: CompleteBetType[];
-  tags:string[];
+  tags: string[];
   userGroups: string[];
   userProfiles: string[];
   startsAt: Date;
   endsAt: Date;
-  status:Status;
+  status: Status;
   selectedTemplate: string;
 
   constructor(data: any = {}) {
@@ -19,12 +19,12 @@ export class EventRequest {
     this.description = data.description || '';
     this.creator = data.creator || '';
     this.completeBetTypeDtoList = data.completeBetTypeDtoList || [];
-    this.tags = data.tags ||[];
+    this.tags = data.tags || [];
     this.userGroups = data.userGroups || [];
     this.userProfiles = data.userProfiles || [];
     this.startsAt = data.startsAt || null;
     this.endsAt = data.endsAt || null;
-    this.status = data.status || Status.DRAFT
+    this.status = data.status || Status.DRAFT;
     this.selectedTemplate = data.selectedTemplate || '';
   }
 }
