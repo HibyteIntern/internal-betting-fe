@@ -75,13 +75,10 @@ export class UserProfileFormComponent implements OnChanges{
       if (typeof this.userProfile?.userId === 'number') {
         this.userProfileService.addPhoto(this.userProfile.userId, file).subscribe((photoId) => {
           this.uploadedPhotoId = photoId;
-          console.log(`Photo uploaded successfully with ID: ${photoId}`);
         });
       } else {
         console.error('User ID is undefined');
       }
-
-      console.log(this.userProfile?.profilePicture);
     }
   }
 
@@ -101,8 +98,6 @@ export class UserProfileFormComponent implements OnChanges{
       updatedUserProfile.username = updatedUserProfile.username || this.originalUserProfile.username || '';
       updatedUserProfile.description = updatedUserProfile.description || this.originalUserProfile.description || '';
     }
-
-    console.log(updatedUserProfile);
 
     this.userProfileService.update(updatedUserProfile).pipe(
       finalize(() => {

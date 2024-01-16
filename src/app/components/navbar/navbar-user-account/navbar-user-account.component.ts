@@ -34,7 +34,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
           this.userId = userId;
           this.fetchUserProfile(this.userId); 
         }
-        console.log('userId:', this.userId);
       });
     });
     
@@ -53,7 +52,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   
     this.userProfile$.subscribe(user => {
       this.userProfile = user;
-    console.log(this.userProfile);
     if(this.userProfile?.userId){
       this.fetchProfileImage(this.userProfile?.userId); 
     }
@@ -62,7 +60,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
   fetchProfileImage(userId: number) {
     this.userProfileService.getPhoto(userId).subscribe(blob => {
-      console.log(blob);
       this.displayProfileImage(blob);
     });
   }
@@ -93,7 +90,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
   openAlertBox() {
     this.showAlertBox = true;
-
   }
 
   closeAlertBox() {

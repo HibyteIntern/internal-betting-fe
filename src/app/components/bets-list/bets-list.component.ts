@@ -26,10 +26,6 @@ export class BetsListComponent implements OnInit, OnDestroy{
   fetchUserProfile(userId: number): void {
     this.userProfile$ = this.userProfileService.userProfile$;
     this.userProfileService.getById(userId);
-  
-    this.userProfile$.subscribe(user => {
-    console.log(user);
-  });
   }
 
   ngOnDestroy(): void {

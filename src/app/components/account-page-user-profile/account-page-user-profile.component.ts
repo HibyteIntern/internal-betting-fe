@@ -20,7 +20,6 @@ export class AccountPageUserProfileComponent implements OnInit{
   ngOnInit(): void {
     if(this.userId && this.profilePicture){
       this.userProfileService.getPhoto(this.userId).subscribe(blob => {
-        console.log(blob);
         this.displayProfileImage(blob);
       });
     }
@@ -34,18 +33,6 @@ export class AccountPageUserProfileComponent implements OnInit{
       circle.style.backgroundSize = 'cover';
       circle.style.backgroundPosition = 'center';
     }
-  }
-
-  onHandleEdit(){
-      this.edit.emit();
-  }
-
-  onLogout(){
-      this.logout.emit();
-  }
-
-  onCancel(){
-      this.cancel.emit();
   }
 
 }

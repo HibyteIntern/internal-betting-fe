@@ -23,7 +23,6 @@ export class UserProfileEditComponent implements OnInit{
         this.userId = userId;
         this.fetchUserProfile(this.userId); 
       }
-      console.log('userId:', this.userId);
     });
   }
 
@@ -33,5 +32,4 @@ export class UserProfileEditComponent implements OnInit{
   }
 
 }
-
 
