@@ -35,16 +35,4 @@ export class CompetitionCardComponent implements OnInit {
   ngOnInit(): void {
     this.statusIcon = StatusIcons[this.competition.status];
   }
-
-  emitViewClick() {
-    this.viewEmitter.emit();
-  }
-
-  emitDeleteButtonClick() {
-    this.deleteEmitter.emit();
-  }
-
-  emitEditButtonClick() {
-    this.editEmitter.emit();
-  }
 }

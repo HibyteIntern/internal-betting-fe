@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
   providedIn: 'root',
 })
 export class CompetitionService {
-  private apiUrl = environment.baseUrl + '/v2/competitions';
+  private apiUrl = environment.baseUrl + '/v1/competitions';
 
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$: Observable<boolean> = this.loadingSubject.asObservable();

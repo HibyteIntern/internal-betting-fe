@@ -15,16 +15,4 @@ export class EventCardComponent {
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() viewEmitter = new EventEmitter<void>();
   @Output() editEmitter = new EventEmitter<void>();
-
-  emitViewClick() {
-    this.viewEmitter.emit();
-  }
-
-  emitDeleteButtonClick() {
-    this.deleteEmitter.emit();
-  }
-
-  emitEditButtonClick() {
-    this.editEmitter.emit();
-  }
 }

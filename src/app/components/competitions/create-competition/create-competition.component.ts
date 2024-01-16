@@ -27,6 +27,7 @@ export class CreateCompetitionComponent implements OnInit {
   selectedEvents: string[] = [];
 
   isEditPage = false;
+  title = 'Create Competition';
 
   statusOptions = [
     { value: Status.DRAFT, label: 'Draft' },

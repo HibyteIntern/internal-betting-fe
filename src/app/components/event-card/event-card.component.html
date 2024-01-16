@@ -2,13 +2,13 @@
   <mat-card-header class="mat-card-header">
     <mat-card-title class="mat-card-title">{{ event.name }}</mat-card-title>
     <div>
-      <mat-icon (click)="emitViewClick()" class="icon-hover"
+      <mat-icon (click)="this.viewEmitter.emit()" class="icon-hover"
         >open_in_new</mat-icon
       >
-      <mat-icon (click)="emitEditButtonClick()" class="icon-hover"
+      <mat-icon (click)="this.deleteEmitter.emit()" class="icon-hover"
         >edit</mat-icon
       >
-      <mat-icon (click)="emitDeleteButtonClick()" class="icon-hover"
+      <mat-icon (click)="this.editEmitter.emit()" class="icon-hover"
         >delete</mat-icon
       >
     </div>

@@ -1,4 +1,4 @@
-<app-mainframe title="Create Competition">
+<app-mainframe [title]="isEditPage ? 'Edit Competition' : 'Create Competition'">
   <form
     [formGroup]="competitionForm"
     (ngSubmit)="onSubmit()"

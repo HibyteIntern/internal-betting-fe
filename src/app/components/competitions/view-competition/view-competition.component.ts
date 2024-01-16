@@ -22,7 +22,6 @@ export class ViewCompetitionsComponent implements OnInit {
         .getCompetitionById(params['id'])
         .subscribe((competition) => {
           this.competition = competition;
-          console.log(this.competition?.events);
         });
     });
   }
