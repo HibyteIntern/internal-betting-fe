@@ -82,7 +82,8 @@ export class PrizeDrawAddComponent {
   }
 
   private handleSubmitSuccess(success: boolean) {
-    if (success) this.router.navigate(['/prizes', this.editedPrizeDraw?.id]);
+    if (success && this.editedPrizeDraw) this.router.navigate(['/prizes', this.editedPrizeDraw?.id]);
+    else if(success) this.router.navigate(['/prizes']);
     else {
       this.isLoading = false;
       this.errorMessage = 'Something went wrong. Please try again.';
