@@ -3,10 +3,10 @@ import { Bet } from "./Bet";
 export interface UserProfile{
     id?: number,
     userId?: number,
-    keycloakId?: String ,
+    keycloakId?: string ,
     username?: string,
     profilePicture?: number,
-    description?: String,
+    description?: string,
     coins?: number,
     bets?: any[],
 }

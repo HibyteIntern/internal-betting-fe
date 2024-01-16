@@ -7,8 +7,6 @@ import * as style from '@dicebear/avatars-bottts-sprites';
 })
 export class AvatarService {
 
-  constructor() { }
-
   generateAvatar(seed?: string): string {
     return createAvatar(style, {
       seed: seed,
@@ -26,14 +24,14 @@ export class AvatarService {
         canvas.width = img.width;
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
-        
+
         if (!ctx) {
           reject(new Error('Could not get 2D context from canvas'));
           return;
         }
-      
+
         ctx.drawImage(img, 0, 0);
-      
+
         canvas.toBlob(blob => {
           if (blob) {
             const file = new File([blob], `avatar-${userId}.png`, { type: 'image/png' });
