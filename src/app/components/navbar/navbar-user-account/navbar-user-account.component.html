@@ -10,7 +10,8 @@
   <div id="account-image"></div>
 </div>
 
-<app-account-page-user-profile 
+<div *ngIf="this.isLoggedIn">
+  <app-account-page-user-profile
   [username]="userProfile?.username?.toString()"
   [userId]="userProfile?.userId"
   [profilePicture]="userProfile?.profilePicture"
@@ -19,3 +20,6 @@
   (logout)="onLogout()"
   (cancel)="onCancel()">
 </app-account-page-user-profile>
+</div>
+
+
