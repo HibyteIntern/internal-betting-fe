@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { omit } from '@dicebear/avatars/dist/utils/helper';
 import { Competition } from 'src/app/entity/competitions.model';
 import { Status } from 'src/app/entity/Status';
 import { StatusIcons } from 'src/app/entity/Status';
