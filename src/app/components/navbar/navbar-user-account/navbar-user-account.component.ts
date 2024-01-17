@@ -74,6 +74,10 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
     }
   }
 
+  onLogin(){
+    this.router.navigate(["/login"]);
+  }
+
   onLogout(){
     this.authService.logout();
     this.closeAlertBox();

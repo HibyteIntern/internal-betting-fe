@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
 
       this.finishLogin = true;
     }
+    if(!this.isLoggedIn){
+      this.authService.login();
+    }
 
     if(this.finishLogin){
       this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
