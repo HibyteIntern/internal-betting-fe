@@ -40,6 +40,7 @@ import { AutocompleteComponent } from './shared/components/autocomplete/autocomp
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import {MatListModule} from "@angular/material/list";
 import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -79,6 +80,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     RightSidebarComponent,
     AutocompleteComponent,
     AddBetToEventComponent,
+    EditEventComponent,
   ],
     imports: [
         BrowserModule,

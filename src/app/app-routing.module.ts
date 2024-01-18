@@ -7,14 +7,16 @@ import {
 } from './components/event-templates/event-template-browser/event-template-browser.component';
 import {CreateEventComponent} from "./components/events/create-event/create-event.component";
 import {ViewEventComponent} from "./components/events/view-event/view-event.component";
+import {EditEventComponent} from "./components/events/edit-event/edit-event.component";
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: "event-templates/create", component: EventTemplateAddComponent },
   { path: 'create-event',component: CreateEventComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
-  { path: 'view-event' , component: ViewEventComponent}
+  { path: 'view-event/:eventId' , component: ViewEventComponent },
+  { path: 'edit-event/:eventId' , component: EditEventComponent }
 ];
 
 @NgModule({
