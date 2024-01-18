@@ -30,7 +30,6 @@ export class ViewEventComponent implements OnInit {
   fetchEventData() {
     this.http.get(`http://localhost:8080/api/v1/events/get/${this.eventId}`).subscribe(
       (data: any) => {
-        // Assuming the response contains the event data
         this.eventRequest = new EventRequest(data);
       },
       (error) => {
@@ -39,7 +38,6 @@ export class ViewEventComponent implements OnInit {
     );
   }
   navigateToEditEvent() {
-    // Navigate to the edit-event page with the eventId as a route parameter
     this.router.navigate(['/edit-event', this.eventId]);
   }
 }

@@ -39,12 +39,11 @@ export class EditEventComponent {
       .subscribe(
         (response) => {
           console.log('Event updated successfully:', response);
-          // You may want to navigate to a different page or handle success accordingly
+          this.router.navigate(['/view-event', this.eventId]);
         },
         (error) => {
           console.error('Error updating event:', error);
         }
       );
-     this.router.navigate(['/view-event', this.eventId]);
   }
 }
