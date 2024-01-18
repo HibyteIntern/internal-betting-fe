@@ -25,12 +25,12 @@ export class PrizeDrawPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    let idString = this.route.snapshot.paramMap.get('id');
+    const idString = this.route.snapshot.paramMap.get('id');
     if (idString === null) {
       this.router.navigate(['/']);
       return;
     }
-    let id = parseInt(idString, 10);
+    const id = parseInt(idString, 10);
     if (isNaN(id)) {
       this.router.navigate(['/']);
       return;
@@ -43,17 +43,16 @@ export class PrizeDrawPageComponent implements OnInit {
   }
 
   addEntry(amount: number) {
-    if (this.prizeDraw === undefined) {
-      return;
+    if (this.prizeDraw !== undefined) {
+      const body: PrizeDrawEntryRequest = {
+        prizeDrawId: this.prizeDraw.id,
+        amount: amount,
+      };
+      this.prizeDrawService.addEntryToDraw(body).subscribe((data) => {
+        this.prizeDraw!.entries.push(data);
+        this.recalculateLeader(this.prizeDraw!);
+      });
     }
-    let body: PrizeDrawEntryRequest = {
-      prizeDrawId: this.prizeDraw.id,
-      amount: amount,
-    };
-    this.prizeDrawService.addEntryToDraw(body).subscribe((data) => {
-      this.prizeDraw!.entries.push(data);
-      this.recalculateLeader(this.prizeDraw!);
-    });
   }
 
   deleteDraw() {
@@ -80,7 +79,7 @@ export class PrizeDrawPageComponent implements OnInit {
 
   private recalculateLeader(prizeDraw: PrizeDraw) {
     let currentLeader: PrizeDrawEntry | null = null;
-    for (let entry of prizeDraw.entries) {
+    for (const entry of prizeDraw.entries) {
       if (currentLeader === null || entry.amount > currentLeader.amount) {
         currentLeader = entry;
       }

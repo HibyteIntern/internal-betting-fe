@@ -8,7 +8,7 @@ import { MatRadioButton } from '@angular/material/radio';
 })
 export class PrizeCategoryListComponent implements OnInit {
   @Output() categorySelected: EventEmitter<string> = new EventEmitter();
-  selectedCategory: string = 'MOST_POINTS';
+  selectedCategory = 'MOST_POINTS';
 
   ngOnInit() {
     this.categorySelected.emit('MOST_POINTS');

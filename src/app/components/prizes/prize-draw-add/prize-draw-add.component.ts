@@ -37,7 +37,7 @@ export class PrizeDrawAddComponent {
 
     if (this.route.snapshot.url[1]?.path === 'edit') {
       this.isEditPage = true;
-      let id = parseInt(this.route.snapshot.params['id']);
+      const id = parseInt(this.route.snapshot.params['id']);
       this.prizeDrawService
         .getById(id)
         .pipe(
@@ -94,7 +94,7 @@ export class PrizeDrawAddComponent {
   submit() {
     this.errorMessage = '';
     if (!this.prizeDrawFormGroup.valid) return;
-    let prizeDrawRequest: PrizeDrawRequest =
+    const prizeDrawRequest: PrizeDrawRequest =
       this.createPrizeDrawRequestFromForm();
     this.isLoading = true;
 

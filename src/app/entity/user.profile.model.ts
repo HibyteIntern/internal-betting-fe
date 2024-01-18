@@ -1,8 +1,8 @@
 export interface UserProfile {
   userId?: number;
-  keycloakId?: String;
-  username?: String;
+  keycloakId?: string;
+  username?: string;
   profilePicture?: number;
-  description?: String;
+  description?: string;
   coins?: number;
 }

@@ -18,7 +18,7 @@ export class PrizeCardComponent {
     private prizeDrawService: PrizeDrawService,
   ) {}
 
-  getCurrentLeaderUsername(): String {
+  getCurrentLeaderUsername(): string {
     if (this.prizeDraw?.currentLeader)
       return this.prizeDraw?.currentLeader.user.username
         ? this.prizeDraw.currentLeader.user.username
