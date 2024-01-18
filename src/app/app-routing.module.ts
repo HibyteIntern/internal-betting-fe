@@ -6,6 +6,7 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
+import {NotFoundPageComponent} from "./components/not-found-page/not-found-page.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'prizes/create', component: PrizeDrawAddComponent },
   { path: 'prizes/edit/:id', component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
+  { path: '**', pathMatch: 'full',
+    component: NotFoundPageComponent },
 ];
 
 @NgModule({
