@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../service/group.service";
-import {UserGroupModel} from "../../entity/user-group.model";
+import {FullUserGroupModel} from "../../entity/full-user-group.model";
 
 @Component({
   selector: 'app-groups',
@@ -8,7 +8,7 @@ import {UserGroupModel} from "../../entity/user-group.model";
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
-  groups: UserGroupModel[] = [];
+  groups: FullUserGroupModel[] = [];
   constructor(public groupService: GroupService) { }
 
   ngOnInit(): void {

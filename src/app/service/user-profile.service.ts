@@ -11,14 +11,14 @@ import { AuthService } from './auth.service';
 })
 export class UserProfileService {
   private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
-  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
+  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable();
 
   private userIdSubject = new BehaviorSubject<number | null>(null);
   userId$ = this.userIdSubject.asObservable();
   userId?: number;
 
   userProfile: UserProfile | null = null;
-  userProfileUrl = 'http://localhost:8080/api/user-profile';
+  userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
 
   constructor(private http: HttpClient,
               private avatarService: AvatarService,
@@ -91,7 +91,8 @@ export class UserProfileService {
   }
 
   getById(userId: number) {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(user => {
+    console.log(userId);
+    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}/full-dto`).subscribe(user => {
       this.userProfileSubject.next(user);
     });
   }

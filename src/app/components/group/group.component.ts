@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserGroupModel} from "../../entity/user-group.model";
+import {FullUserGroupModel} from "../../entity/full-user-group.model";
 import {GroupService} from "../../service/group.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {GroupService} from "../../service/group.service";
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit{
-  @Input() group?: UserGroupModel;
+  @Input() group?: FullUserGroupModel;
   @Output() delete = new EventEmitter<number>();
   @Output() edit = new EventEmitter<number>()
 

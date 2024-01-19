@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {UserGroupModel} from "../../entity/user-group.model";
+import {FullUserGroupModel} from "../../entity/full-user-group.model";
 import {Router} from "@angular/router";
 import {GroupService} from "../../service/group.service";
 
@@ -9,7 +9,7 @@ import {GroupService} from "../../service/group.service";
   styleUrls: ['./group-list.component.scss']
 })
 export class GroupListComponent {
-  @Input() groups!: UserGroupModel[] | null;
+  @Input() groups!: FullUserGroupModel[] | null;
   constructor(private groupService: GroupService, private router: Router){}
 
   handleEdit(id: number) {

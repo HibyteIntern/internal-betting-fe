@@ -13,14 +13,18 @@ export class BetsListComponent implements OnInit{
   userId?: any;
 
   userProfile$?: Observable<UserProfile | null>;
- 
+
   constructor(private userProfileService: UserProfileService,
               private route: ActivatedRoute){}
-              
+
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get("id");
     console.log(this.userId);
-    
+
+    if(this.userId){
+      return;
+    }
+
     this.userProfile$ = this.userProfileService.userProfile$;
     this.userProfileService.getById(this.userId);
   }

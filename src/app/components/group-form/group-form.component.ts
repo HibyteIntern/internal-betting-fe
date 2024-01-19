@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserGroupModel} from "../../entity/user-group.model";
+import {FullUserGroupModel} from "../../entity/full-user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
 import {UserProfile} from "../../entity/UserProfile";
 import {firstValueFrom} from "rxjs";
@@ -12,8 +12,8 @@ import {GroupService} from "../../service/group.service";
   styleUrls: ['./group-form.component.scss']
 })
 export class GroupFormComponent implements OnChanges, OnInit {
-  @Input() initialGroup: UserGroupModel | null | undefined;
-  @Output() formSubmit = new EventEmitter<UserGroupModel>();
+  @Input() initialGroup: FullUserGroupModel | null | undefined;
+  @Output() formSubmit = new EventEmitter<FullUserGroupModel>();
 
   userOptions: string[] = [];
   userProfiles: UserProfile[] = [];
@@ -46,7 +46,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
-    const updatedGroup: UserGroupModel = {
+    const updatedGroup: FullUserGroupModel = {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName!,
       description: formValue.description!,

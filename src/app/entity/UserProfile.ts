@@ -1,5 +1,5 @@
 import { Bet } from "./Bet";
-import {UserGroupModel} from "./user-group.model";
+import {FullUserGroupModel} from "./full-user-group.model";
 
 export interface UserProfile{
     userId?: number,
@@ -9,5 +9,5 @@ export interface UserProfile{
     description?: string,
     coins?: number,
     bets?: Bet[],
-    groups?: UserGroupModel[]
+    groups?: number[] | FullUserGroupModel[]
 }

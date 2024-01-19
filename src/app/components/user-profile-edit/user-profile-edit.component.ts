@@ -10,20 +10,20 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./user-profile-edit.component.scss']
 })
 export class UserProfileEditComponent implements OnInit{
-  title = "User Profile" 
+  title = "User Profile"
   userId?: any;
 
   userProfile$?: Observable<UserProfile | null>;
- 
+
   constructor(private userProfileService: UserProfileService,
               private route: ActivatedRoute){}
-  
+
 
   ngOnInit(): void {
     this.userProfileService.userId$.subscribe(userId => {
       if (userId) {
         this.userId = userId;
-        this.fetchUserProfile(this.userId); 
+        this.fetchUserProfile(this.userId);
       }
       console.log('userId:', this.userId);
     });

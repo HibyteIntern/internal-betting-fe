@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {FullUserGroupModel} from "../entity/full-user-group.model";
 import {UserGroupModel} from "../entity/user-group.model";
 
 @Injectable({
@@ -12,22 +13,22 @@ export class GroupService {
     this.groupUrl = 'http://localhost:8080/api/v1/user-groups';
   }
 
-  getAll(): Observable<UserGroupModel[]>{
-    return this.httpClient.get<UserGroupModel[]>(this.groupUrl);
+  getAll(): Observable<FullUserGroupModel[]>{
+    return this.httpClient.get<FullUserGroupModel[]>(this.groupUrl);
   }
 
-  getOne(id: number): Observable<UserGroupModel>{
+  getOneFull(id: number): Observable<FullUserGroupModel>{
     const url = `${this.groupUrl}/${id}`;
-    return this.httpClient.get<UserGroupModel>(url);
+    return this.httpClient.get<FullUserGroupModel>(url);
   }
 
-  create(group: UserGroupModel): Observable<UserGroupModel>{
-    return this.httpClient.post<UserGroupModel>(this.groupUrl, group);
+  create(group: FullUserGroupModel): Observable<FullUserGroupModel>{
+    return this.httpClient.post<FullUserGroupModel>(this.groupUrl, group);
   }
 
-  update(group: UserGroupModel): Observable<UserGroupModel>{
+  update(group: FullUserGroupModel): Observable<FullUserGroupModel>{
     const url = `${this.groupUrl}/${group.userGroupId}`;
-    return this.httpClient.put<UserGroupModel>(url, group);
+    return this.httpClient.put<FullUserGroupModel>(url, group);
   }
 
   delete(id: number): Observable<any>{

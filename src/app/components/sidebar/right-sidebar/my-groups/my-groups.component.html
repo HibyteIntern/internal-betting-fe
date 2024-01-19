@@ -1,0 +1,11 @@
+<div *ngIf="userProfile$ | async as userProfile">
+  <div>
+    <h3>My Groups</h3>
+    <div *ngIf="userProfile.groups">
+      <div *ngFor="let group of groupsEntity">
+        <p>{{ group.groupName }}</p>
+        <p>{{ group.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
