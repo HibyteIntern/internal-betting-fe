@@ -19,8 +19,8 @@
     ></textarea>
   </mat-form-field>
   <app-autocomplete *ngIf="userOptions.length > 0" [label]="'Add Users'" [options]="userOptions" (selectedOptionsEmmiter)="handleUserSelect($event)" />
-  <div *ngIf="userGroupForm.get('selectedUsers')?.hasError('noUsersSelected') && userGroupForm.get('selectedUsers')?.touched">
-    <mat-error>Please add at least one user.</mat-error>
-  </div>
+  <mat-error *ngIf="userGroupForm.get('selectedUsers')?.hasError('noUsersSelected')">
+    Please add at least 2 users.
+  </mat-error>
   <button class="btn" type="submit" [disabled]="!userGroupForm.valid">Submit</button>
 </form>

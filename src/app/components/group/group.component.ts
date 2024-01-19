@@ -1,22 +1,24 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FullUserGroupModel} from "../../entity/full-user-group.model";
-import {GroupService} from "../../service/group.service";
+import { Component, EventEmitter, Input, Output, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { FullUserGroupModel } from "../../entity/full-user-group.model";
+import { GroupService } from "../../service/group.service";
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.scss']
 })
-export class GroupComponent implements OnInit{
+export class GroupComponent implements  AfterViewInit {
   @Input() group?: FullUserGroupModel;
   @Output() delete = new EventEmitter<number>();
-  @Output() edit = new EventEmitter<number>()
+  @Output() edit = new EventEmitter<number>();
 
-  constructor(private groupService: GroupService) {}
-  ngOnInit(): void {
-    if(this.group?.userGroupId && this.group?.profilePicture){
+  @ViewChild('profileCircle') profileCircle?: ElementRef;
+
+  constructor(private groupService: GroupService) { }
+
+  ngAfterViewInit(): void {
+    if (this.group?.userGroupId && this.group?.profilePicture && this.profileCircle) {
       this.groupService.getPhoto(this.group.userGroupId).subscribe(blob => {
-        console.log()
         this.displayGroupImage(blob);
       });
     }
@@ -24,8 +26,8 @@ export class GroupComponent implements OnInit{
 
   private displayGroupImage(blob: Blob) {
     const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
+    if (this.profileCircle) {
+      const circle = this.profileCircle.nativeElement as HTMLElement;
       circle.style.backgroundImage = `url(${url})`;
       circle.style.backgroundSize = 'cover';
       circle.style.backgroundPosition = 'center';

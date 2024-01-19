@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, finalize } from 'rxjs';
+import { finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -16,7 +16,6 @@ export class UserProfileFormComponent implements OnChanges{
 
   userProfileForm: FormGroup;
   uploadedPhotoId?: number;
-
   originalUserProfile?: UserProfile;
 
   constructor(
@@ -76,13 +75,10 @@ export class UserProfileFormComponent implements OnChanges{
       if (typeof this.userProfile?.userId === 'number') {
         this.userProfileService.addPhoto(this.userProfile.userId, file).subscribe((photoId) => {
           this.uploadedPhotoId = photoId;
-          console.log(`Photo uploaded successfully with ID: ${photoId}`);
         });
       } else {
         console.error('User ID is undefined');
       }
-
-      console.log(this.userProfile?.profilePicture);
     }
   }
 
@@ -102,8 +98,6 @@ export class UserProfileFormComponent implements OnChanges{
       updatedUserProfile.username = updatedUserProfile.username || this.originalUserProfile.username || '';
       updatedUserProfile.description = updatedUserProfile.description || this.originalUserProfile.description || '';
     }
-
-    console.log(updatedUserProfile);
 
     this.userProfileService.update(updatedUserProfile).pipe(
       finalize(() => {

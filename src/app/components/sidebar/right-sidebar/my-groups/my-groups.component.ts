@@ -3,7 +3,6 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
 import { UserProfile } from '../../../../entity/UserProfile';
 import { UserProfileService } from '../../../../service/user-profile.service';
-import { GroupService } from '../../../../service/group.service';
 import { FullUserGroupModel } from '../../../../entity/full-user-group.model';
 
 @Component({
@@ -17,7 +16,7 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private userProfileService: UserProfileService, private groupService: GroupService) { }
+  constructor(private userProfileService: UserProfileService) { }
 
   ngOnInit(): void {
     this.userProfile$ = this.userProfileService.userId$.pipe(
@@ -33,7 +32,6 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
     this.userProfile$.pipe(
       takeUntil(this.destroy$)
     ).subscribe(user => {
-      console.log(user);
       if (user?.groups) {
         this.groupsEntity = user.groups as FullUserGroupModel[];
       }

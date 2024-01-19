@@ -1,10 +1,11 @@
 <div *ngIf="userProfile$ | async as userProfile">
   <div>
-    <h3>My Groups</h3>
+    <h2>My Groups</h2>
     <div *ngIf="userProfile.groups">
-      <div *ngFor="let group of groupsEntity">
-        <p>{{ group.groupName }}</p>
-        <p>{{ group.description }}</p>
+      <div *ngFor="let group of groupsEntity; let last = last">
+        <p class="name">{{ group.groupName }}</p>
+        <p class="description">{{ group.description }}</p>
+        <div *ngIf="!last" class="divider"></div>
       </div>
     </div>
   </div>

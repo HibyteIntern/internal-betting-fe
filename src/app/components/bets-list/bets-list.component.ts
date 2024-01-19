@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -9,23 +8,26 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './bets-list.component.html',
   styleUrls: ['./bets-list.component.scss']
 })
-export class BetsListComponent implements OnInit{
-  userId?: any;
-
+export class BetsListComponent implements OnInit, OnDestroy{
   userProfile$?: Observable<UserProfile | null>;
+  private userProfileSubscription?: Subscription;
 
-  constructor(private userProfileService: UserProfileService,
-              private route: ActivatedRoute){}
+  constructor(private userProfileService: UserProfileService){}
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get("id");
-    console.log(this.userId);
+    this.userProfileSubscription = this.userProfileService.userId$.subscribe(userId => {
+      if (userId) {
+        this.fetchUserProfile(userId);
+      }
+    });
+  }
 
-    if(this.userId){
-      return;
-    }
-
+  fetchUserProfile(userId: number): void {
     this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(this.userId);
+    this.userProfileService.getById(userId);
+  }
+
+  ngOnDestroy(): void {
+    this.userProfileSubscription?.unsubscribe();
   }
 }

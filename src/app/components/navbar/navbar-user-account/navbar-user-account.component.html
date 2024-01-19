@@ -10,12 +10,23 @@
   <div id="account-image"></div>
 </div>
 
-<app-account-page-user-profile 
+<div *ngIf="this.isLoggedIn">
+  <app-account-page-user-profile
+  *ngIf="showAlertBox" 
   [username]="userProfile?.username?.toString()"
   [userId]="userProfile?.userId"
   [profilePicture]="userProfile?.profilePicture"
-  *ngIf="showAlertBox" 
   (edit)="onUserProfileEdit()"
   (logout)="onLogout()"
   (cancel)="onCancel()">
 </app-account-page-user-profile>
+</div>
+
+<div *ngIf="!this.isLoggedIn">
+  <app-login-alert
+  *ngIf="showAlertBox"
+  (login)="onLogin()"
+  (cancel)="onCancel()"
+  ></app-login-alert>
+</div>
+

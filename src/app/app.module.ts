@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -49,6 +48,7 @@ import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component'
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -101,6 +101,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     RightSidebarComponent,
     AutocompleteComponent,
     BetsListComponent,
+    LoginAlertComponent,
     MyGroupsComponent,
   ],
   imports: [
@@ -131,6 +132,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
+
   ],
   bootstrap: [AppComponent],
 })

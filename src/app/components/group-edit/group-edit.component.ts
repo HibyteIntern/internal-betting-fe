@@ -19,14 +19,9 @@ export class GroupEditComponent implements OnInit{
   ) { }
   ngOnInit(): void {
     const stringId = this.route.snapshot.paramMap.get("id");
-    this.group$.subscribe(group => console.log(group));
-
     if (stringId) {
       const id = Number.parseInt(stringId);
-
-      this.group$ = this.groupService.getOneFull(id);
-    } else {
-      this.group$ = of(undefined);
+      this.groupService.getOneFull(id).subscribe(group => { this.group$ = of(group); });
     }
   }
   protected handleFormEdit(group: FullUserGroupModel) {

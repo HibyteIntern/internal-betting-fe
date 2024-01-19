@@ -12,7 +12,7 @@ import { AuthService } from "../service/auth.service";
        if (await this.authService.isLoggedIn()) {
           return true;
        } else {
-          this.router.navigate(["/login"]);
+          this.router.navigate([""]);
           return false;
        }
     }

@@ -8,7 +8,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./account-page-user-profile.component.scss']
 })
 export class AccountPageUserProfileComponent implements OnInit{
-  
   @Input() username?: string ;
   @Input() userId?: number;
   @Input() profilePicture?: number;
@@ -21,11 +20,9 @@ export class AccountPageUserProfileComponent implements OnInit{
   ngOnInit(): void {
     if(this.userId && this.profilePicture){
       this.userProfileService.getPhoto(this.userId).subscribe(blob => {
-        console.log(blob);
         this.displayProfileImage(blob);
       });
     }
-  
   }
 
   displayProfileImage(blob: Blob) {
@@ -37,17 +34,5 @@ export class AccountPageUserProfileComponent implements OnInit{
       circle.style.backgroundPosition = 'center';
     }
   }
-
-    onHandleEdit(){
-      this.edit.emit();
-    }
-
-    onLogout(){
-      this.logout.emit();
-    }
-
-    onCancel(){
-      this.cancel.emit();
-    }
 
 }

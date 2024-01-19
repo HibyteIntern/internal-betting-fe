@@ -1,5 +1,20 @@
-h3{
+h2{
   margin-left: 1rem;
   margin-top: 1rem;
   margin-bottom: 0;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.description {
+  font-size: 0.875rem; /* Adjust font size as needed */
+}
+
+.divider {
+  border-top: 0.0625rem solid #ccc; /* Adjust color as needed */
+  margin-top: 0.625rem; /* Adjust margin as needed */
+  margin-right: 1rem;
+  margin-left: 1rem;
 }

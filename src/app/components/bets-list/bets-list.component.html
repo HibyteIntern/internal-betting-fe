@@ -1,11 +1,22 @@
 <div class="content" *ngIf="userProfile$ | async as userProfile">
+    <br>
     <p class="title">Placed bets</p>
-    <div *ngFor="let bet of userProfile.bets; let last = last" class="bet-item">
+    <div *ngFor="let bet of userProfile.bets; let last = last">
         <p class="title-bet">Title</p>
+        <div class="bet-item">
+          <img
+          ngSrc="assets/icons/chips-icon.svg"
+          alt="credits"
+          height="28"
+          width="25"
+          style="margin-left: 10px"
+        />
         <p>{{ bet.amount }}</p>
+        </div>
         <p>{{ bet.odds }}</p>
         <p>{{ bet.value }}</p>
         <div class="custom-line" *ngIf="!last"></div>
       </div>
 </div>
+
  

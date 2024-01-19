@@ -12,7 +12,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 export class UserProfileEditComponent implements OnInit{
   title = "User Profile"
   userId?: any;
-
   userProfile$?: Observable<UserProfile | null>;
 
   constructor(private userProfileService: UserProfileService,
@@ -25,7 +24,6 @@ export class UserProfileEditComponent implements OnInit{
         this.userId = userId;
         this.fetchUserProfile(this.userId);
       }
-      console.log('userId:', this.userId);
     });
   }
 
@@ -35,5 +33,4 @@ export class UserProfileEditComponent implements OnInit{
   }
 
 }
-
 

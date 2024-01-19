@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -33,7 +33,6 @@ export class UserProfileService {
                         this.userId = user.userId;
                         if(this.userId){
                           this.userIdSubject.next(this.userId);
-                          console.log(this.userIdSubject);
                         }
                       } else {
                         this.userIdSubject.next(null);
@@ -91,7 +90,6 @@ export class UserProfileService {
   }
 
   getById(userId: number) {
-    console.log(userId);
     this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}/full-dto`).subscribe(user => {
       this.userProfileSubject.next(user);
     });

@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Observable, Subscription, filter } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
@@ -11,12 +11,12 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./navbar-user-account.component.scss'],
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy{
-
   userId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null;
   userProfile$?: Observable<UserProfile | null>;
   showAlertBox = false;
+  isLoggedIn = false;
   private userProfileSubscription?: Subscription;
 
   constructor(
@@ -25,7 +25,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -34,10 +34,9 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
           this.userId = userId;
           this.fetchUserProfile(this.userId);
         }
-        console.log('userId:', this.userId);
       });
     });
-
+this.isLoggedIn = await this.authService.isLoggedIn();
   }
 
   ngOnDestroy(): void {
@@ -52,7 +51,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
     this.userProfile$.subscribe(user => {
       this.userProfile = user;
-    console.log(this.userProfile);
     if(this.userProfile?.userId){
       this.fetchProfileImage(this.userProfile?.userId);
     }
@@ -61,7 +59,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
   fetchProfileImage(userId: number) {
     this.userProfileService.getPhoto(userId).subscribe(blob => {
-      console.log(blob);
       this.displayProfileImage(blob);
     });
   }
@@ -74,6 +71,10 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
       circle.style.backgroundSize = 'cover';
       circle.style.backgroundPosition = 'center';
     }
+  }
+
+  onLogin(){
+    this.router.navigate(["/login"]);
   }
 
   onLogout(){
@@ -92,7 +93,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
 
   openAlertBox() {
     this.showAlertBox = true;
-
   }
 
   closeAlertBox() {
