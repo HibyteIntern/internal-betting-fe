@@ -20,12 +20,12 @@ const routes: Routes = [
   { path: 'prizes/create', component: PrizeDrawAddComponent },
   { path: 'prizes/edit/:id', component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
-  { path: '**', pathMatch: 'full',
-    component: NotFoundPageComponent },
   { path: 'competitions/create', component: CreateCompetitionComponent },
   { path: 'competitions/edit/:id', component: CreateCompetitionComponent },
   { path: 'competitions/:id', component: ViewCompetitionsComponent },
   { path: '', component: IndexComponent },
+  { path: '**', pathMatch: 'full',
+    component: NotFoundPageComponent },
 ];
 
 @NgModule({
