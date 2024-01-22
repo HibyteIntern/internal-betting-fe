@@ -1,0 +1,30 @@
+<mat-card class="mat-card">
+  <!-- (click)="emitViewClick()" -->
+  <mat-card-header class="mat-card-header">
+    <mat-card-title class="mat-card-title">{{
+      competition.name
+    }}</mat-card-title>
+    <div style="text-transform: capitalize">
+      <!-- {{competition.status.toLocaleLowerCase()}}<mat-icon class="icon">{{statusIcon}}</mat-icon> -->
+    </div>
+    <div>
+      <mat-icon (click)="this.viewEmitter.emit()" class="icon-hover"
+        >open_in_new</mat-icon
+      >
+      <mat-icon (click)="this.editEmitter.emit()" class="icon-hover"
+        >edit</mat-icon
+      >
+      <mat-icon (click)="this.deleteEmitter.emit()" class="icon-hover"
+        >delete</mat-icon
+      >
+    </div>
+  </mat-card-header>
+
+  <div class="tags-container">
+    <app-tag>Competition</app-tag>
+  </div>
+
+  <mat-card-content class="mat-card-content">
+    <p>{{ competition.description }}</p>
+  </mat-card-content>
+</mat-card>

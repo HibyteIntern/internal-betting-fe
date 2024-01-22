@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, delay } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
+import { AvatarService } from './avatar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserProfileService {
   userProfile: UserProfile | null = null;
-  userProifileUrl = 'http://localhost:8080/api/user-profile';
+  userProfileUrl = 'http://localhost:8080/api/user-profile';
 
   constructor(private http: HttpClient) {}
 
@@ -45,12 +46,12 @@ export class UserProfileService {
   }
 
   getAll(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(this.userProifileUrl);
+    return this.http.get<UserProfile[]>(this.userProfileUrl);
   }
 
   getById(userId: number) {
     this.http
-      .get<UserProfile>(`${this.userProifileUrl}/${userId}`)
+      .get<UserProfile>(`${this.userProfileUrl}/${userId}`)
       .subscribe((user) => {
         this.userProfileSubject.next(user);
       });
@@ -58,22 +59,22 @@ export class UserProfileService {
 
   getByKeycloakId(keycloakId: string): Observable<UserProfile> {
     return this.http.get<UserProfile>(
-      `${this.userProifileUrl}/byKeycloakId/${keycloakId}`,
+      `${this.userProfileUrl}/byKeycloakId/${keycloakId}`,
     );
   }
 
   create(userProfile: UserProfile): Observable<UserProfile> {
-    return this.http.post<UserProfile>(this.userProifileUrl, userProfile);
+    return this.http.post<UserProfile>(this.userProfileUrl, userProfile);
   }
 
   update(userProfile: UserProfile): Observable<UserProfile> {
     return this.http.put<UserProfile>(
-      `${this.userProifileUrl}/${userProfile.userId}`,
+      `${this.userProfileUrl}/${userProfile.userId}`,
       userProfile,
     );
   }
 
   delete(userId: number): Observable<any> {
-    return this.http.delete<any>(`${this.userProifileUrl}/${userId}`);
+    return this.http.delete(`${this.userProfileUrl}/${userId}`);
   }
 }
