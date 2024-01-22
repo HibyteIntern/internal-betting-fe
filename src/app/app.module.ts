@@ -58,8 +58,8 @@ import { IndexComponent } from './components/index/index.component';
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
-  NgxMatTimepickerModule
-} from "@angular-material-components/datetime-picker";
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>

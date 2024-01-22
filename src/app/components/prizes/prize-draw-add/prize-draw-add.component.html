@@ -35,13 +35,17 @@
     </mat-form-field>
     <mat-form-field>
       <input
-        matInput [ngxMatDatetimePicker]="picker"
+        matInput
+        [ngxMatDatetimePicker]="picker"
         placeholder="Choose a date"
         [min]="minEndsAtDate"
         formControlName="endDate"
-      >
+      />
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="$any(picker)"
+      ></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
     </mat-form-field>
     <mat-form-field
