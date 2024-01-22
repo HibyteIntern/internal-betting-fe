@@ -23,8 +23,14 @@ import { EventTemplateListComponent } from './components/event-templates/event-t
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
+import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
+import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -34,6 +40,7 @@ import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.direct
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -63,6 +70,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateListComponent,
     MainframeComponent,
     UserTagBtnComponent,
+    ViewCompetitionsComponent,
+    CompetitionCardComponent,
     TagComponent,
     StopMousePropagationDirective,
     SearchBarComponent,
@@ -70,6 +79,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +102,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatNativeDateModule,
     FormsModule,
     MatAutocompleteModule,
+    MatCardModule,
+    MatChipsModule,
   ],
   providers: [
     {

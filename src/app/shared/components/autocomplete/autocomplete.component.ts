@@ -14,7 +14,7 @@ export class AutocompleteComponent implements OnInit {
   @Input() options: string[] = [];
   filteredOptions: Observable<string[]> = new Observable<string[]>();
 
-  selectedOptions: string[] = [];
+  @Input() selectedOptions: string[] = [];
   @Output() selectedOptionsEmmiter: EventEmitter<string[]> = new EventEmitter<
     string[]
   >();
