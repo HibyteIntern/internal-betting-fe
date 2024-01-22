@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
+import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 
@@ -17,11 +18,13 @@ export class UserProfileFormComponent implements OnChanges{
   userProfileForm: FormGroup;
   uploadedPhotoId?: number;
   originalUserProfile?: UserProfile;
+  file: File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
     private router: Router,
+    private avatarService: AvatarService,
   ) {
     this.userProfileForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -29,7 +32,7 @@ export class UserProfileFormComponent implements OnChanges{
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {    
     if (this.userProfile) {
 
           this.originalUserProfile = { ...this.userProfile };
@@ -49,7 +52,7 @@ export class UserProfileFormComponent implements OnChanges{
   displayProfileImage(blob: Blob) {
     const url = URL.createObjectURL(blob);
     const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
+    if (circle) { 
       circle.style.backgroundImage = `url(${url})`;
       circle.style.backgroundSize = 'cover';
       circle.style.backgroundPosition = 'center';
@@ -60,7 +63,7 @@ export class UserProfileFormComponent implements OnChanges{
     const element = event.target as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList && fileList.length > 0) {
-      const file = fileList[0];
+      this.file = fileList[0];
       const reader = new FileReader();
       
       reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -70,19 +73,21 @@ export class UserProfileFormComponent implements OnChanges{
         }
       };
 
-      reader.readAsDataURL(file);
-
-      if (typeof this.userProfile?.userId === 'number') {
-        this.userProfileService.addPhoto(this.userProfile.userId, file).subscribe((photoId) => {
-          this.uploadedPhotoId = photoId;
-        });
-      } else {
-        console.error('User ID is undefined');
-      }
+      reader.readAsDataURL(this.file);
     }
+
   }
 
   onSubmit() {
+
+    if (typeof this.userProfile?.userId === 'number' && this.file) {
+      this.userProfileService.addPhoto(this.userProfile.userId, this.file).subscribe((photoId) => {
+        this.uploadedPhotoId = photoId;
+      });
+    } else {
+      console.error('User ID is undefined');
+    }
+
     const formValue = this.userProfileForm.value;
     const updatedUserProfile: UserProfile = {
       userId: this.userProfile?.userId,
@@ -92,6 +97,7 @@ export class UserProfileFormComponent implements OnChanges{
       description: formValue.description !== null && formValue.description !== undefined ? formValue.description : '',
       coins: this.userProfile?.coins,
       bets: this.userProfile?.bets,
+      
     };
 
     if (this.originalUserProfile) {
@@ -112,5 +118,16 @@ export class UserProfileFormComponent implements OnChanges{
 
   onCancel(){
     this.router.navigate(['home']);
+  }
+
+  async onAddAvatar(){
+    const userId = String(this.userProfile?.userId);
+    const avatarSvg = this.avatarService.generateAvatar(userId);
+    const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userId);
+    if(this.userProfile?.userId){
+      await this.userProfileService.uploadAvatarAndUpdateProfile(this.userProfile?.userId, avatarFile);
+    }
+
+    location.reload();
   }
 }

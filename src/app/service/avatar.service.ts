@@ -6,10 +6,12 @@ import * as style from '@dicebear/avatars-bottts-sprites';
   providedIn: 'root'
 })
 export class AvatarService {
+  loadedAvatar = false;
 
   constructor() { }
 
   generateAvatar(seed?: string): string {
+    this.loadedAvatar = true;
     return createAvatar(style, {
       seed: seed,
     });

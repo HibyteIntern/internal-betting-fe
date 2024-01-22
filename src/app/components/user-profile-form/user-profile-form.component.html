@@ -1,10 +1,16 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">  
 
+    <div>
+        <button mat-raised-button color="primary" style="color: var(--text-color)" type="button" (click)="onAddAvatar()">Add avatar</button>
+    </div>
+    <br>
+
     <div class="profile-image-upload">
         <input type="file" id="profileImage" (change)="onFileSelect($event)" hidden accept="image/*">
         <label for="profileImage">
             <div class="profile-circle"></div>
         </label>
+
     </div>
 
     <mat-form-field color="accent" appearance="outline" class="username-field">

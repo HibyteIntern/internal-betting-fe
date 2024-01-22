@@ -46,7 +46,7 @@ export class UserProfileService {
                 })();
               } 
   
-  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
+  async checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
       this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
         let userProfile = existingProfile;
@@ -56,12 +56,15 @@ export class UserProfileService {
             userProfile = await this.updateUserProfile(userProfile);
           }
   
-          if (userProfile.profilePicture == null && userProfileKeycloak.username) {
-            const avatarSvg = this.avatarService.generateAvatar(userProfileKeycloak.id);
-            const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userProfileKeycloak.id);
+          if (userProfile.profilePicture == null && userProfileKeycloak.username && userProfile.userId) {
+            const userId = String(userProfile.userId);
+            const avatarSvg = this.avatarService.generateAvatar(userId);
+            const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userId);
+            
             if (userProfile.userId) {
-              await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
+              await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile);
             }
+
           }
           resolve(userProfile);
         } catch (error) {
@@ -72,7 +75,7 @@ export class UserProfileService {
     });
   }
 
-  private async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
+  async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
     const updatedProfile = await this.update(userProfile).toPromise();
     if (!updatedProfile) {
       throw new Error('Failed to update user profile.');
@@ -80,10 +83,8 @@ export class UserProfileService {
     return updatedProfile;
   }
 
-  private async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File, userProfile: UserProfile) {
-    const photoId = await firstValueFrom(this.addPhoto(userId, avatarFile));
-    userProfile.profilePicture = photoId;
-    this.userProfileSubject.next(userProfile);
+  async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File) {
+    await firstValueFrom(this.addPhoto(userId, avatarFile));
   }
 
   getAll(): Observable<UserProfile[]> {
@@ -132,6 +133,7 @@ export class UserProfileService {
       this.userProfileSubject.next(userProfile); 
     });
   }
+
 
 } 
 
