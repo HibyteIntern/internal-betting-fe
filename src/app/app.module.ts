@@ -23,8 +23,14 @@ import { EventTemplateListComponent } from './components/event-templates/event-t
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
+import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
+import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -49,6 +55,7 @@ import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -78,6 +85,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateListComponent,
     MainframeComponent,
     UserTagBtnComponent,
+    ViewCompetitionsComponent,
+    CompetitionCardComponent,
     TagComponent,
     StopMousePropagationDirective,
     SearchBarComponent,
@@ -85,6 +94,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
     PrizeBrowserComponent,
     PrizeCardComponent,
     PrizeListComponent,
@@ -119,6 +131,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatNativeDateModule,
     FormsModule,
     MatAutocompleteModule,
+    MatCardModule,
+    MatChipsModule,
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
