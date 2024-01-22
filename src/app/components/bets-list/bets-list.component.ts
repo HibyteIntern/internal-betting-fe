@@ -22,13 +22,13 @@ export class BetsListComponent implements OnInit, OnDestroy{
       }
     });
   }
+  
+  ngOnDestroy(): void {
+    this.userProfileSubscription?.unsubscribe();
+  }
 
   fetchUserProfile(userId: number): void {
     this.userProfile$ = this.userProfileService.userProfile$;
     this.userProfileService.getById(userId);
-  }
-
-  ngOnDestroy(): void {
-    this.userProfileSubscription?.unsubscribe();
   }
 }

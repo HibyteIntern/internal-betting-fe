@@ -17,7 +17,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   userProfile$?: Observable<UserProfile | null>;
   showAlertBox: boolean = false;
   isLoggedIn = false;
-  private userProfileSubscription?: Subscription; 
+  private subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -26,24 +26,23 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.userProfileSubscription = this.userProfileService.userId$.subscribe(userId => {
-        if (userId) {
-          this.userId = userId;
-          this.fetchUserProfile(this.userId); 
-        }
-      });
-    });
+    this.subscriptions.add(
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.subscriptions.add(this.userProfileService.userId$.subscribe(userId => {
+            if (userId) {
+              this.userId = userId;
+              this.fetchUserProfile(this.userId);
+            }
+          }));
+        })
+    );
     
     this.isLoggedIn = await this.authService.isLoggedIn();
   }
   
   ngOnDestroy(): void {
-    if(this.userProfileSubscription){
-      this.userProfileSubscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   fetchUserProfile(userId: number): void {

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 
@@ -7,7 +8,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './account-page-user-profile.component.html',
   styleUrls: ['./account-page-user-profile.component.scss']
 })
-export class AccountPageUserProfileComponent implements OnInit{
+export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
   @Input() username?: string ;
   @Input() userId?: number;
   @Input() profilePicture?: number;
@@ -15,13 +16,21 @@ export class AccountPageUserProfileComponent implements OnInit{
   @Output() logout = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<boolean>();
 
+  private photoSubscription?: Subscription;
+
   constructor(private userProfileService: UserProfileService){}
 
   ngOnInit(): void {
-    if(this.userId && this.profilePicture){
-      this.userProfileService.getPhoto(this.userId).subscribe(blob => {
+    if (this.userId && this.profilePicture) {
+      this.photoSubscription = this.userProfileService.getPhoto(this.userId).subscribe(blob => {
         this.displayProfileImage(blob);
       });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.photoSubscription) {
+      this.photoSubscription.unsubscribe();
     }
   }
 

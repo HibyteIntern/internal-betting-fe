@@ -79,7 +79,6 @@ export class UserProfileFormComponent implements OnChanges{
   }
 
   onSubmit() {
-
     if (typeof this.userProfile?.userId === 'number' && this.file) {
       this.userProfileService.addPhoto(this.userProfile.userId, this.file).subscribe((photoId) => {
         this.uploadedPhotoId = photoId;
