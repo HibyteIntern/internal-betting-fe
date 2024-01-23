@@ -22,7 +22,7 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     if (this.userId && this.profilePicture) {
-      this.photoSubscription = this.userProfileService.getPhoto(this.userId).subscribe(blob => {
+      this.photoSubscription = this.userProfileService.getPhoto().subscribe(blob => {
         this.displayProfileImage(blob);
       });
     }

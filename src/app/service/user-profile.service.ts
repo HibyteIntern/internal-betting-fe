@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,42 +12,15 @@ export class UserProfileService {
   private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
   public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
 
-  private userIdSubject = new BehaviorSubject<number | null>(null);
-  userId$ = this.userIdSubject.asObservable(); 
-  userId?: number; 
-
   userProfile: UserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
 
   constructor(private http: HttpClient,
-              private avatarService: AvatarService,
-              private authService: AuthService) { 
-                (async () => { 
-                  const token = await this.authService.getToken();
-                  if (token) {
-                    const userKeycloakId = this.authService.decodeToken(token).sub;
-                    try {
-                      const user = await this.getByKeycloakId(userKeycloakId).toPromise();
-                      if (user) { 
-                        this.userId = user.userId;
-                        if(this.userId){
-                          this.userIdSubject.next(this.userId); 
-                          console.log(this.userIdSubject);
-                        }
-                      } else {
-                        this.userIdSubject.next(null);
-                      }
-                    } catch (error) {
-                      console.error('Error fetching user:', error);
-                      this.userIdSubject.next(null);
-                    }
-                  }
-                })();
-              } 
+              private avatarService: AvatarService) {} 
   
-  async checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
+  async checkUserProfile(userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
-      this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
+      this.getMe().subscribe(async (existingProfile) => {
         let userProfile = existingProfile;
         try {
           if (userProfile.username == null && userProfileKeycloak.username) {
@@ -62,7 +34,7 @@ export class UserProfileService {
             const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userId);
             
             if (userProfile.userId) {
-              await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile);
+              await this.uploadAvatarAndUpdateProfile(avatarFile);
             }
 
           }
@@ -83,22 +55,22 @@ export class UserProfileService {
     return updatedProfile;
   }
 
-  async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File) {
-    await firstValueFrom(this.addPhoto(userId, avatarFile));
+  async uploadAvatarAndUpdateProfile(avatarFile: File) {
+    await firstValueFrom(this.addPhoto(avatarFile));
   }
 
   getAll(): Observable<UserProfile[]> {
     return this.http.get<UserProfile[]>(this.userProfileUrl);
   }
 
-  getById(userId: number) {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(user => {
+  getUserProfile() {
+    this.http.get<UserProfile>(`${this.userProfileUrl}/getMe`).subscribe(user => {
       this.userProfileSubject.next(user);
     });
   }
 
-  getByKeycloakId(keycloakId: string): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.userProfileUrl}/byKeycloakId/${keycloakId}`);
+  getMe(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.userProfileUrl}/getMe`);
   }
 
   create(userProfile: UserProfile): Observable<UserProfile>{
@@ -106,34 +78,27 @@ export class UserProfileService {
   }
 
   update(userProfile: UserProfile): Observable<UserProfile>{
-    return this.http.put<UserProfile>(`${this.userProfileUrl}/${userProfile.userId}`, userProfile);
+    return this.http.put<UserProfile>(`${this.userProfileUrl}`, userProfile);
   }
 
-  delete(userId: number):  Observable<any> {
-    return this.http.delete<any>(`${this.userProfileUrl}/${userId}`);
+  delete(): Observable<any> {
+    return this.http.delete<any>(`${this.userProfileUrl}`);
   }
 
-  addPhoto(userId: number, photo: File): Observable<any> {
+  addPhoto(photo: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
 
-    return this.http.post(`${this.userProfileUrl}/${userId}/addPhoto`, formData, {
+    return this.http.post(`${this.userProfileUrl}/addPhoto`, formData, {
       headers: new HttpHeaders({
         'enctype': 'multipart/form-data'
       })
     });
   }
 
-  getPhoto(userId: number): Observable<Blob> {
-    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, { responseType: 'blob' });
+  getPhoto(): Observable<Blob> {
+    return this.http.get(`${this.userProfileUrl}/getPhoto`, { responseType: 'blob' });
   } 
-
-  updateUserProfileAfterPhotoChange(userId: number): void {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(userProfile => {
-      this.userProfileSubject.next(userProfile); 
-    });
-  }
-
 
 } 
 

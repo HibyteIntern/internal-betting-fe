@@ -36,9 +36,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.isLoggedIn) {
       this.userProfile = await this.authService.loadUserProfile();
       const token = await this.authService.getToken();
-    
-      this.userKeycloakId = this.authService.decodeToken(token).sub;
-      await this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
+      
+      await this.userProfileService.checkUserProfile(this.userProfile);
 
       this.finishLogin = true;
     }
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     if(this.finishLogin){
-      this.subscription = this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
+      this.subscription = this.userProfileService.getMe().subscribe(user => {
         this.router.navigate(['/home']);
       });
       localStorage.getItem('acc')

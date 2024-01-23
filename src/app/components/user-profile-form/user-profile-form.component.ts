@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,7 +26,8 @@ export class UserProfileFormComponent implements OnChanges{
     private userProfileService: UserProfileService,
     private router: Router,
     private avatarService: AvatarService,
-  ) {
+    private location: Location
+      ) {
     this.userProfileForm = this.formBuilder.group({
       username: ['', Validators.required],
       description: '',
@@ -40,7 +42,7 @@ export class UserProfileFormComponent implements OnChanges{
           this.userProfileForm.patchValue(this.userProfile);
 
           if (this.userProfile && this.userProfile.userId && this.userProfile.profilePicture) {
-            this.userProfileService.getPhoto(this.userProfile?.userId).subscribe(blob => {
+            this.userProfileService.getPhoto().subscribe(blob => {
               this.displayProfileImage(blob);
             });
           } else {
@@ -80,7 +82,7 @@ export class UserProfileFormComponent implements OnChanges{
 
   onSubmit() {
     if (typeof this.userProfile?.userId === 'number' && this.file) {
-      this.userProfileService.addPhoto(this.userProfile.userId, this.file).subscribe((photoId) => {
+      this.userProfileService.addPhoto(this.file).subscribe((photoId) => {
         this.uploadedPhotoId = photoId;
       });
     } else {
@@ -106,17 +108,17 @@ export class UserProfileFormComponent implements OnChanges{
 
     this.userProfileService.update(updatedUserProfile).pipe(
       finalize(() => {
-        this.router.navigate(['home']);
+        this.location.back();
       })
     ).subscribe(
       (user) => {
         console.log(user);
-      }
+            }
     );
   }
 
   onCancel(){
-    this.router.navigate(['home']);
+    this.location.back();
   }
 
   async onAddAvatar(){
@@ -124,7 +126,7 @@ export class UserProfileFormComponent implements OnChanges{
     const avatarSvg = this.avatarService.generateAvatar(userId);
     const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userId);
     if(this.userProfile?.userId){
-      await this.userProfileService.uploadAvatarAndUpdateProfile(this.userProfile?.userId, avatarFile);
+      await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
     }
 
     location.reload();

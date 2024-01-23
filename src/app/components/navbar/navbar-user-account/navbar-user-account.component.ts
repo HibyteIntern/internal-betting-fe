@@ -29,12 +29,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
     this.subscriptions.add(
       this.router.events.pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(() => {
-          this.subscriptions.add(this.userProfileService.userId$.subscribe(userId => {
-            if (userId) {
-              this.userId = userId;
-              this.fetchUserProfile(this.userId);
-            }
-          }));
+          this.fetchUserProfile();
         })
     );
     
@@ -45,9 +40,9 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
     this.subscriptions.unsubscribe();
   }
 
-  fetchUserProfile(userId: number): void {
+  fetchUserProfile(): void {
     this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
+    this.userProfileService.getUserProfile();
   
     this.userProfile$.subscribe(user => {
       this.userProfile = user;
@@ -58,7 +53,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   }
 
   fetchProfileImage(userId: number) {
-    this.userProfileService.getPhoto(userId).subscribe(blob => {
+    this.userProfileService.getPhoto().subscribe(blob => {
       this.displayProfileImage(blob);
     });
   }

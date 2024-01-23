@@ -9,33 +9,21 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './user-profile-edit.component.html',
   styleUrls: ['./user-profile-edit.component.scss']
 })
-export class UserProfileEditComponent implements OnInit, OnDestroy{
+export class UserProfileEditComponent implements OnInit{
   title = "User Profile" 
   userId?: any;
   userProfile$?: Observable<UserProfile | null>;
-  private subscription = new Subscription();
  
   constructor(private userProfileService: UserProfileService,
               private route: ActivatedRoute){}
   
   ngOnInit(): void {
-    this.subscription.add(
-      this.userProfileService.userId$.subscribe(userId => {
-        if (userId) {
-          this.userId = userId;
-          this.fetchUserProfile(this.userId);
-        }
-      })
-    );
+    this.fetchUserProfile();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  fetchUserProfile(userId: number): void {
+  fetchUserProfile(): void {
     this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
+    this.userProfileService.getUserProfile();
   }
 
 }
