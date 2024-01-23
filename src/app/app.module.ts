@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -29,15 +29,24 @@ import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
+import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
+import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
+import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
-import {SearchBarComponent} from "./shared/components/search-bar/search-bar.component";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IndexComponent } from './components/index/index.component';;
 import { BetsListComponent } from './components/bets-list/bets-list.component';
 import { LoginAlertComponent } from './components/login-alert/login-alert.component'
 
@@ -77,6 +86,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AccountPageUserProfileComponent,
     LoadingSpinnerComponent,
     UserTagBtnComponent,
+    ViewCompetitionsComponent,
+    CompetitionCardComponent,
     TagComponent,
     StopMousePropagationDirective,
     SearchBarComponent,
@@ -84,6 +95,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
     BetsListComponent,
     LoginAlertComponent,
   ],
@@ -103,8 +117,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     FormsModule,
     MatExpansionModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     MatAutocompleteModule,
+    MatCardModule,
+    MatChipsModule,
   ],
   providers: [
     {

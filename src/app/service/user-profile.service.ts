@@ -6,7 +6,7 @@ import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserProfileService {
   private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
@@ -60,6 +60,7 @@ export class UserProfileService {
   }
 
   getAll(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(this.userProfileUrl);
     return this.http.get<UserProfile[]>(this.userProfileUrl);
   }
 

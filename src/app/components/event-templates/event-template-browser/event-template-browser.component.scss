@@ -1,4 +1,4 @@
-@import './../../../themes/_variables';
+@import "./../../../themes/_variables";
 
 #outer-div {
   display: flex;
@@ -11,6 +11,17 @@
   font-size: 1rem;
   padding: 1em;
   color: var(--text-color);
+}
+
+.lds-dual-ring {
+  margin-bottom: 1rem;
+}
+
+.message {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: var(--text-sm);
 }
 
 app-event-template-list {

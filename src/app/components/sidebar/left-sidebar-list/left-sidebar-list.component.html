@@ -1,26 +1,34 @@
 <div id="outer-container">
   <div class="icon">
-    <img src="assets/icons/created-events-icon.svg" alt="credits"/>
+    <img
+      (click)="navigateToIndex()"
+      src="assets/icons/created-events-icon.svg"
+      alt="credits"
+    />
     <div class="info-container">Events and competitions</div>
   </div>
   <div class="icon">
-    <img src="assets/icons/create-event-icon.svg" alt="credits"/>
+    <img src="assets/icons/create-event-icon.svg" alt="credits" />
     <div class="info-container">Create event</div>
   </div>
   <div class="icon">
-    <img src="assets/icons/create-competition-icon.svg" alt="credits"/>
+    <img
+      (click)="navigateToCreateCompetition()"
+      src="assets/icons/create-competition-icon.svg"
+      alt="credits"
+    />
     <div class="info-container">Create competition</div>
   </div>
   <div class="icon" [routerLink]="['event-templates']">
-    <img src="assets/icons/event-template-icon.svg" alt="credits"/>
+    <img src="assets/icons/event-template-icon.svg" alt="credits" />
     <div class="info-container">Event templates</div>
   </div>
   <div class="icon">
-    <img src="assets/icons/user-icon.svg" alt="credits"/>
+    <img src="assets/icons/user-icon.svg" alt="credits" />
     <div class="info-container">Users</div>
   </div>
   <div class="icon">
-    <img src="assets/icons/user-group-icon.svg" alt="credits"/>
+    <img src="assets/icons/user-group-icon.svg" alt="credits" />
     <div class="info-container">User groups</div>
   </div>
 </div>

@@ -56,6 +56,11 @@ h1 {
   margin-bottom: 2rem;
 }
 
+label {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
 //Scrollbar styling
 ::-webkit-scrollbar-track {
   background: var(--sidebar-color); //Track background color
@@ -88,6 +93,10 @@ h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
   font-weight: bold;
+}
+
+mat-calendar {
+  background: var(--background-color);
 }
 
 //Loading spinner
@@ -128,13 +137,6 @@ body {
   height: 100%;
 }
 
-mat-form-field {
-  font-size: 1rem !important;
-  input {
-    font-size: clamp(14px, 1rem, 24px) !important;
-  }
-}
-
 .app-form {
   width: clamp(550px, 40%, 1200px);
   display: flex;
@@ -159,8 +161,6 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
-    padding: 1em !important;
-    font-size: clamp(14px, 1rem, 24px) !important;
   }
 }
 
@@ -185,6 +185,62 @@ mat-form-field {
     button {
       width: 100%;
     }
+  }
+}
+
+.styled-form {
+  width: 30rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .btn {
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--accent-color-one);
+    border-radius: var(--border-radius);
+    padding: 1rem 3rem;
+    font-size: var(--text-sm);
+    border: none;
+    transition: all ease-in-out var(--transition-duration);
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.small-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  width: 28rem;
+  height: 3rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+  button {
+    width: 8rem;
+    flex-shrink: 0;
+    color: var(--text-color) !important;
+  }
+  div {
+    overflow: hidden;
+    padding: 0.5rem;
+  }
+  &:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 2rem);
   }
 }
 
