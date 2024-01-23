@@ -5,8 +5,8 @@ import { EventRequest } from 'src/app/entity/EventRequest';
 import { CompetitionService } from 'src/app/service/competition.service';
 import { EventService } from 'src/app/service/event.service';
 import { TagsService } from 'src/app/service/tags.service';
-import {ConfirmDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-index',
@@ -113,7 +113,8 @@ export class IndexComponent implements OnInit {
 
     this.selectCompetitions();
     this.selectEvents();
-    if(this.tagsService.getAvailableTags().length === 0) this.closeTagSelector();
+    if (this.tagsService.getAvailableTags().length === 0)
+      this.closeTagSelector();
   }
 
   removeTag(tagIndex: number) {
@@ -148,24 +149,25 @@ export class IndexComponent implements OnInit {
     this.router.navigate(['/competitions/edit/', competitionId]);
   }
 
-
-
   handleCompetitionDeleteClick(competitionId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Delete competition',
-        content:
-          'Are you sure you want to delete this competition?',
+        content: 'Are you sure you want to delete this competition?',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.competitionService.deleteCompetition(competitionId).subscribe(() => {
-          this.competitionService.getCompetitions().subscribe((competitions) => {
-            this.competitions = competitions;
-            this.selectCompetitions();
+        this.competitionService
+          .deleteCompetition(competitionId)
+          .subscribe(() => {
+            this.competitionService
+              .getCompetitions()
+              .subscribe((competitions) => {
+                this.competitions = competitions;
+                this.selectCompetitions();
+              });
           });
-        });
       }
     });
   }

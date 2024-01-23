@@ -49,5 +49,6 @@
     <button class="btn" type="submit" [disabled]="!competitionForm.valid">
       Submit
     </button>
+    <div class="lds-dual-ring" *ngIf="isLoading"></div>
   </form>
 </app-mainframe>

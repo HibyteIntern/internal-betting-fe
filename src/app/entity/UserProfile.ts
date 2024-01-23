@@ -1,5 +1,3 @@
-import { Bet } from './Bet';
-
 export interface UserProfile {
   id?: number;
   userId?: number;

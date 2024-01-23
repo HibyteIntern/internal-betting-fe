@@ -95,7 +95,7 @@ input {
 }
 
 .mat-mdc-autocomplete-panel {
-  background-color: var(--background-color)!important;
+  background-color: var(--background-color) !important;
 }
 
 //Loading spinner
@@ -210,7 +210,7 @@ mat-form-field {
     color: var(--text-color);
     background-color: var(--accent-color-one);
     border-radius: var(--border-radius);
-    padding: .65em 3em;
+    padding: 0.65em 3em;
     font-size: clamp(12px, var(--text-sm), 22px);
     border: none;
     transition: all ease-in-out var(--transition-duration);

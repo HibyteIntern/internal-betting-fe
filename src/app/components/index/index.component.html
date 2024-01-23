@@ -14,7 +14,12 @@
       >{{ tag }}</app-user-tag-btn
     >
     <div class="add-tags-container">
-      <mat-icon *ngIf="tagsService.getAvailableTags().length > 0" class="add-icon" (click)="openTagSelector()">add</mat-icon>
+      <mat-icon
+        *ngIf="tagsService.getAvailableTags().length > 0"
+        class="add-icon"
+        (click)="openTagSelector()"
+        >add</mat-icon
+      >
 
       <div *ngIf="tagSelectorOpened" class="select-tags-container">
         <app-user-tag-btn
