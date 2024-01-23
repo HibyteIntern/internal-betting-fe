@@ -1,11 +1,11 @@
-import { Bet } from "./Bet";
+import { Bet } from './Bet';
 
-export interface UserProfile{
-    userId?: number,
-    keycloakId?: string ,
-    username?: string,
-    profilePicture?: number,
-    description?: string,
-    coins?: number,
-    bets?: Bet[],
+export interface UserProfile {
+  userId?: number;
+  keycloakId?: string;
+  username?: string;
+  profilePicture?: number;
+  description?: string;
+  coins?: number;
+  bets?: Bet[];
 }

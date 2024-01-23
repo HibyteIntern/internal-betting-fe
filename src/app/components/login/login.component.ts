@@ -15,44 +15,44 @@ export class LoginComponent implements OnInit, OnDestroy {
   public darkModeChecked = false;
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
-  public userKeycloakId: string  = '';
-  public username: string = '';
+  public userKeycloakId = '';
+  public username = '';
   public response: string | null = null;
   public appUserProfile: UserProfile | null = null;
   private subscription?: Subscription;
 
   userProfileObs$?: Observable<UserProfile | null>;
-  finishLogin: boolean = false;
+  finishLogin = false;
   userId?: number;
 
   constructor(
     private authService: AuthService,
     private userProfileService: UserProfileService,
-    private router: Router
+    private router: Router,
   ) {}
-  
+
   public async ngOnInit() {
     this.isLoggedIn = await this.authService.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.authService.loadUserProfile();
       const token = await this.authService.getToken();
-      
+
       await this.userProfileService.checkUserProfile(this.userProfile);
 
       this.finishLogin = true;
     }
-    if(!this.isLoggedIn){
+    if (!this.isLoggedIn) {
       this.authService.login();
     }
 
-    if(this.finishLogin){
-      this.subscription = this.userProfileService.getMe().subscribe(user => {
+    if (this.finishLogin) {
+      this.subscription = this.userProfileService.getMe().subscribe((user) => {
         this.router.navigate(['/home']);
       });
-      localStorage.getItem('acc')
+      localStorage.getItem('acc');
     }
   }
-  
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public login() {
     this.authService.login();
   }
-  
+
   public logout() {
     this.authService.logout();
   }

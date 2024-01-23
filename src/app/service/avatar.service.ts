@@ -3,12 +3,9 @@ import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-bottts-sprites';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AvatarService {
-
-  constructor() { }
-
   generateAvatar(seed?: string): string {
     return createAvatar(style, {
       seed: seed,
@@ -17,7 +14,9 @@ export class AvatarService {
 
   convertSvgToImageFile(svg: string, userId?: string): Promise<File> {
     return new Promise((resolve, reject) => {
-      const svgElement = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const svgElement = new Blob([svg], {
+        type: 'image/svg+xml;charset=utf-8',
+      });
       const url = URL.createObjectURL(svgElement);
       const img = new Image();
 
@@ -26,17 +25,19 @@ export class AvatarService {
         canvas.width = img.width;
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
-        
+
         if (!ctx) {
           reject(new Error('Could not get 2D context from canvas'));
           return;
         }
-      
+
         ctx.drawImage(img, 0, 0);
-      
-        canvas.toBlob(blob => {
+
+        canvas.toBlob((blob) => {
           if (blob) {
-            const file = new File([blob], `avatar-${userId}.png`, { type: 'image/png' });
+            const file = new File([blob], `avatar-${userId}.png`, {
+              type: 'image/png',
+            });
             resolve(file);
           } else {
             reject(new Error('Canvas toBlob returned null'));

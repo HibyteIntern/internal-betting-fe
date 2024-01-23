@@ -1,15 +1,21 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-
 
 @Component({
   selector: 'app-account-page-user-profile',
   templateUrl: './account-page-user-profile.component.html',
-  styleUrls: ['./account-page-user-profile.component.scss']
+  styleUrls: ['./account-page-user-profile.component.scss'],
 })
-export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
-  @Input() username?: string ;
+export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
+  @Input() username?: string;
   @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
@@ -17,13 +23,15 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
 
   private photoSubscription?: Subscription;
 
-  constructor(private userProfileService: UserProfileService){}
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
     if (this.profilePicture) {
-      this.photoSubscription = this.userProfileService.getPhoto().subscribe(blob => {
-        this.displayProfileImage(blob);
-      });
+      this.photoSubscription = this.userProfileService
+        .getPhoto()
+        .subscribe((blob) => {
+          this.displayProfileImage(blob);
+        });
     }
   }
 
@@ -42,5 +50,4 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
       circle.style.backgroundPosition = 'center';
     }
   }
-
 }

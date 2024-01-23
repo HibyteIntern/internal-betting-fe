@@ -18,14 +18,14 @@ const routes: Routes = [
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
-    
-  { path: 'user-profile',
-    canActivate: [AuthGuard], 
-    component: UserProfileComponent, 
-    children: [
-      {path: 'edit/:id', component: UserProfileEditComponent},
-    ]}, 
-  { path: 'home', canActivate: [AuthGuard], component: HomeComponent},
+
+  {
+    path: 'user-profile',
+    canActivate: [AuthGuard],
+    component: UserProfileComponent,
+    children: [{ path: 'edit/:id', component: UserProfileEditComponent }],
+  },
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'competition', component: CompetitionsComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },

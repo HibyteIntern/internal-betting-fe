@@ -9,16 +9,23 @@ import { AvatarService } from './avatar.service';
   providedIn: 'root',
 })
 export class UserProfileService {
-  private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
-  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable().pipe(delay(100));
+  private userProfileSubject: BehaviorSubject<UserProfile | null> =
+    new BehaviorSubject<UserProfile | null>(null);
+  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject
+    .asObservable()
+    .pipe(delay(100));
 
   userProfile: UserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
 
-  constructor(private http: HttpClient,
-              private avatarService: AvatarService) {} 
-  
-  async checkUserProfile(userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
+  constructor(
+    private http: HttpClient,
+    private avatarService: AvatarService,
+  ) {}
+
+  async checkUserProfile(
+    userProfileKeycloak: KeycloakProfile,
+  ): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
       this.getMe().subscribe(async (existingProfile) => {
         let userProfile = existingProfile;
@@ -27,16 +34,22 @@ export class UserProfileService {
             userProfile.username = userProfileKeycloak.username;
             userProfile = await this.updateUserProfile(userProfile);
           }
-  
-          if (userProfile.profilePicture == null && userProfileKeycloak.username && userProfile.userId) {
+
+          if (
+            userProfile.profilePicture == null &&
+            userProfileKeycloak.username &&
+            userProfile.userId
+          ) {
             const userId = String(userProfile.userId);
             const avatarSvg = this.avatarService.generateAvatar(userId);
-            const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userId);
-            
+            const avatarFile = await this.avatarService.convertSvgToImageFile(
+              avatarSvg,
+              userId,
+            );
+
             if (userProfile.userId) {
               await this.uploadAvatarAndUpdateProfile(avatarFile);
             }
-
           }
           resolve(userProfile);
         } catch (error) {
@@ -65,20 +78,22 @@ export class UserProfileService {
   }
 
   getUserProfile() {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/getMe`).subscribe(user => {
-      this.userProfileSubject.next(user);
-    });
+    this.http
+      .get<UserProfile>(`${this.userProfileUrl}/getMe`)
+      .subscribe((user) => {
+        this.userProfileSubject.next(user);
+      });
   }
 
   getMe(): Observable<UserProfile> {
     return this.http.get<UserProfile>(`${this.userProfileUrl}/getMe`);
   }
 
-  create(userProfile: UserProfile): Observable<UserProfile>{
+  create(userProfile: UserProfile): Observable<UserProfile> {
     return this.http.post<UserProfile>(this.userProfileUrl, userProfile);
   }
 
-  update(userProfile: UserProfile): Observable<UserProfile>{
+  update(userProfile: UserProfile): Observable<UserProfile> {
     return this.http.put<UserProfile>(`${this.userProfileUrl}`, userProfile);
   }
 
@@ -92,15 +107,14 @@ export class UserProfileService {
 
     return this.http.post(`${this.userProfileUrl}/addPhoto`, formData, {
       headers: new HttpHeaders({
-        'enctype': 'multipart/form-data'
-      })
+        enctype: 'multipart/form-data',
+      }),
     });
   }
 
   getPhoto(): Observable<Blob> {
-    return this.http.get(`${this.userProfileUrl}/getPhoto`, { responseType: 'blob' });
-  } 
-
-} 
-
-
+    return this.http.get(`${this.userProfileUrl}/getPhoto`, {
+      responseType: 'blob',
+    });
+  }
+}

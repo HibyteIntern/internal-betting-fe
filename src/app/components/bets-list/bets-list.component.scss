@@ -1,21 +1,21 @@
-.content{
-    margin-top: 10px;
+.content {
+  margin-top: 10px;
 }
 
 .custom-line {
-    width: 90%;
-    height: 2px;
-    background: var(--background-color); 
-    border-radius: 2px; 
-    margin: 0 auto 20px auto; 
-  }
-
-.title{
-  font-size: 19px;
-  font-weight: bold; 
+  width: 90%;
+  height: 2px;
+  background: var(--background-color);
+  border-radius: 2px;
+  margin: 0 auto 20px auto;
 }
 
-.title-bet{
+.title {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.title-bet {
   font-size: 18px;
   font-weight: bold;
 }
@@ -23,5 +23,5 @@
 .bet-item {
   display: flex;
   align-items: center;
-  gap: 0.5px; 
+  gap: 0.5px;
 }

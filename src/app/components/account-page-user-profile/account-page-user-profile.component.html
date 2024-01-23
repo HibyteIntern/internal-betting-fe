@@ -1,14 +1,35 @@
 <div class="alert-box">
-    <h2>Account</h2>
-    <div class="profile-content">
+  <h2>Account</h2>
+  <div class="profile-content">
     <div class="profile-image-upload">
-        <div class="profile-circle"></div>
+      <div class="profile-circle"></div>
     </div>
-    <h2 class="username">{{username}}</h2>
-    </div>
-    <div class="alert-box-actions">
-        <button mat-raised-button color="accent" style="color: var(--text-color)" (click)="this.edit.emit()">Edit Profile</button> 
-        <button mat-raised-button color="primary" style="color: var(--text-color)" (click)="this.logout.emit()">Logout</button>
-        <button mat-raised-button color="accent" style="color: var(--text-color)" (click)="this.cancel.emit()">Cancel</button>
-    </div>
+    <h2 class="username">{{ username }}</h2>
+  </div>
+  <div class="alert-box-actions">
+    <button
+      mat-raised-button
+      color="accent"
+      style="color: var(--text-color)"
+      (click)="this.edit.emit()"
+    >
+      Edit Profile
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      style="color: var(--text-color)"
+      (click)="this.logout.emit()"
+    >
+      Logout
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      style="color: var(--text-color)"
+      (click)="this.cancel.emit()"
+    >
+      Cancel
+    </button>
+  </div>
 </div>

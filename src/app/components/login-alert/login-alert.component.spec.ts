@@ -8,9 +8,8 @@ describe('LoginAlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginAlertComponent ]
-    })
-    .compileComponents();
+      declarations: [LoginAlertComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginAlertComponent);
     component = fixture.componentInstance;

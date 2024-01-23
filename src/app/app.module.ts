@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {  FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarUserAccountComponent } from './components/navbar/navbar-user-account/navbar-user-account.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -46,9 +46,9 @@ import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.direct
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { IndexComponent } from './components/index/index.component';;
+import { IndexComponent } from './components/index/index.component';
 import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component'
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -131,7 +131,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
-  
   ],
   bootstrap: [AppComponent],
 })
