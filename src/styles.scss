@@ -20,7 +20,7 @@
   --box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
   --navbar-heigth: 5rem;
 
-  --text-sm: 1.2rem;
+  --text-sm: 1.1rem;
   --text-md: 1.5rem;
   --text-lg: 2rem;
 
@@ -92,6 +92,10 @@ input {
 //Background color for the Angular material select dropdown
 .select-dropdown.mat-mdc-select-panel {
   background: var(--background-color);
+}
+
+.mat-mdc-autocomplete-panel {
+  background-color: var(--background-color)!important;
 }
 
 //Loading spinner
@@ -204,14 +208,14 @@ mat-form-field {
     color: var(--text-color);
     background-color: var(--accent-color-one);
     border-radius: var(--border-radius);
-    padding: 1rem 3rem;
-    font-size: var(--text-sm);
+    padding: .65em 3em;
+    font-size: clamp(12px, var(--text-sm), 22px);
     border: none;
     transition: all ease-in-out var(--transition-duration);
     cursor: pointer;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     @media (max-width: $mobile-threshold) {

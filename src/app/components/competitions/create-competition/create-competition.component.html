@@ -38,7 +38,7 @@
     />
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Status</mat-label>
-      <mat-select formControlName="status">
+      <mat-select formControlName="status" panelClass="select-dropdown">
         <mat-option
           *ngFor="let option of statusOptions"
           [value]="option.value"

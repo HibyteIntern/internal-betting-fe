@@ -8,8 +8,8 @@
 
 #add-event-template-button {
   margin-bottom: 2.5rem;
-  font-size: 1rem;
-  padding: 1em;
+  font-size: clamp(12px, 0.9rem, 20px);
+  padding: 1.5em;
   color: var(--text-color);
 }
 

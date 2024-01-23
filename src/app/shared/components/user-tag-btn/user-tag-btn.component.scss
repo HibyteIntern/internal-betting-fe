@@ -2,14 +2,15 @@
   position: relative;
   display: inline-block;
   background-color: var(--accent-color-two);
-  font-size: var(--text-sm);
-  padding: 0.4rem 1rem;
+  font-size: clamp(14px, var(--text-sm), 20px);
+  padding: 0.4em 1em;
   border-radius: var(--border-radius);
   margin-right: 1.2rem;
   margin-bottom: 1rem;
+  transition: transform 0.15s ease-in-out;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.07);
     cursor: pointer;
 
     .content {
@@ -27,5 +28,10 @@
     top: 50%;
     right: 50%;
     transform: translateX(50%) translateY(calc(-50% + 2px));
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  .content {
+    transition: opacity 0.1s ease-in-out;
   }
 }
