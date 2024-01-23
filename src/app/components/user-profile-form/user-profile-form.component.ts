@@ -24,7 +24,6 @@ export class UserProfileFormComponent implements OnChanges{
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private router: Router,
     private avatarService: AvatarService,
     private location: Location
       ) {
@@ -80,21 +79,23 @@ export class UserProfileFormComponent implements OnChanges{
 
   }
 
-  onSubmit() {
-    if (typeof this.userProfile?.userId === 'number' && this.file) {
-      this.userProfileService.addPhoto(this.file).subscribe((photoId) => {
-        this.uploadedPhotoId = photoId;
-      });
-    } else {
-      console.error('User ID is undefined');
-    }
+  async onSubmit() {
+    if (this.file) {
+      try {
+          const photoId = await this.userProfileService.addPhoto(this.file).toPromise();
+          this.uploadedPhotoId = photoId;
+      } catch (error) {
+          console.error('Error uploading photo:', error);
+          return;
+      }
+  } 
 
     const formValue = this.userProfileForm.value;
     const updatedUserProfile: UserProfile = {
       userId: this.userProfile?.userId,
       keycloakId: this.userProfile?.keycloakId,
       username: formValue.username !== null && formValue.username !== undefined ? formValue.username : '',
-      profilePicture: this.uploadedPhotoId !== undefined ? this.uploadedPhotoId : this.userProfile?.profilePicture,
+      profilePicture: this.uploadedPhotoId !== undefined && this.uploadedPhotoId !== null ? this.uploadedPhotoId : this.userProfile?.profilePicture,
       description: formValue.description !== null && formValue.description !== undefined ? formValue.description : '',
       coins: this.userProfile?.coins,
       bets: this.userProfile?.bets,
@@ -108,6 +109,7 @@ export class UserProfileFormComponent implements OnChanges{
 
     this.userProfileService.update(updatedUserProfile).pipe(
       finalize(() => {
+        location.reload();
         this.location.back();
       })
     ).subscribe(

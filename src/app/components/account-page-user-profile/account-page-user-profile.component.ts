@@ -10,7 +10,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 })
 export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
   @Input() username?: string ;
-  @Input() userId?: number;
   @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
@@ -21,7 +20,7 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy{
   constructor(private userProfileService: UserProfileService){}
 
   ngOnInit(): void {
-    if (this.userId && this.profilePicture) {
+    if (this.profilePicture) {
       this.photoSubscription = this.userProfileService.getPhoto().subscribe(blob => {
         this.displayProfileImage(blob);
       });

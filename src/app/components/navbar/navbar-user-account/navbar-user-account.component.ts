@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, Subscription, filter } from 'rxjs';
+import { Observable, Subject, Subscription, filter, takeUntil } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -11,13 +11,10 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./navbar-user-account.component.scss'],
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy{
-  userId: any;
-  currentPath?: string;
-  userProfile: UserProfile | null = null; 
-  userProfile$?: Observable<UserProfile | null>;
+  private unsubscribe$ = new Subject<void>();
+  userProfile: UserProfile | null = null;
   showAlertBox: boolean = false;
   isLoggedIn = false;
-  private subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -26,36 +23,50 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.subscriptions.add(
-      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(() => {
-          this.fetchUserProfile();
-        })
-    );
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.unsubscribe$)
+    ).subscribe(() => {
+      this.fetchUserProfile();
+    });
     
     this.isLoggedIn = await this.authService.isLoggedIn();
+    this.fetchUserProfile();
+
+    this.userProfileService.userProfile$.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((profile) => {
+      this.userProfile = profile;
+      if (profile?.userId) {
+          this.fetchProfileImage(); 
+      }
+    });
   }
   
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   fetchUserProfile(): void {
-    this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getUserProfile();
-  
-    this.userProfile$.subscribe(user => {
-      this.userProfile = user;
-    if(this.userProfile?.userId){
-      this.fetchProfileImage(this.userProfile?.userId); 
-    }
-  });
+    this.userProfileService.getUserProfile(); 
   }
 
-  fetchProfileImage(userId: number) {
-    this.userProfileService.getPhoto().subscribe(blob => {
-      this.displayProfileImage(blob);
-    });
+  fetchProfileImage() {
+    this.userProfileService.getPhoto().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(
+      blob => {
+        if (blob.size > 0) {
+          this.displayProfileImage(blob);
+        } else {
+          console.error('Fetched blob is empty.');
+        }
+      },
+      error => {
+        console.error('Error fetching profile image:', error);
+      }
+    );
   }
 
   displayProfileImage(blob: Blob) {
