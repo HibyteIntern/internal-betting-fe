@@ -15,14 +15,9 @@ import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {
-    path: 'event-templates',
-    component: EventTemplateBrowserComponent,
-    children: [
-      { path: 'create', component: EventTemplateAddComponent },
-      { path: 'edit/:id', component: EventTemplateAddComponent },
-    ],
-  },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
     
   { path: 'user-profile',
     canActivate: [AuthGuard], 
