@@ -46,6 +46,7 @@
     img {
       aspect-ratio: 1/1;
       height: 1.2rem;
+      transition: transform 0.2s ease-in-out
     }
   }
 }
@@ -60,6 +61,13 @@
 
 .extended {
   right: 0;
+  div {
+    div {
+      img {
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
 .retracted {
   right: 0;

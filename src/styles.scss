@@ -144,7 +144,7 @@ mat-form-field {
 }
 
 .app-form {
-  width: clamp(550px, 40%, 1200px);
+  width: clamp(550px, 40%, 800px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -168,6 +168,8 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
+    font-size: clamp(14px, 1rem, 22px);
+    padding: 1em 2em;
   }
 }
 
@@ -245,6 +247,8 @@ mat-form-field {
     width: 8rem;
     flex-shrink: 0;
     color: var(--text-color) !important;
+    font-size: 1rem;
+    padding: clamp(8px, 1em, 30px);
   }
   div {
     overflow: hidden;
