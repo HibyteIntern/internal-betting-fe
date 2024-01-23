@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;700&display=swap");
 @import "app/themes/input-themes";
 @import "app/themes/button-themes";
+@import "./app/themes/_variables";
 
 //Color declarations for light mode
 :root {
@@ -212,6 +213,14 @@ mat-form-field {
     &:hover {
       transform: scale(1.1);
     }
+
+    @media (max-width: $mobile-threshold) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
   }
 }
 
