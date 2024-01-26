@@ -56,6 +56,11 @@ import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -110,6 +115,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeDrawUserEntryComponent,
     PrizeDrawEntryInputComponent,
     ConfirmDialogComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
     NotFoundPageComponent,
   ],
   imports: [
@@ -136,6 +144,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMatTimepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
   ],
   providers: [
     {

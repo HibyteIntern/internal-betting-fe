@@ -34,19 +34,19 @@
       ></textarea>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Ends at</mat-label>
       <input
         matInput
-        [matDatepicker]="picker"
-        formControlName="endDate"
+        [ngxMatDatetimePicker]="picker"
+        placeholder="Choose a date"
         [min]="minEndsAtDate"
+        formControlName="endDate"
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
+        matSuffix
+        [for]="$any(picker)"
       ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
     </mat-form-field>
     <mat-form-field
       color="accent"
