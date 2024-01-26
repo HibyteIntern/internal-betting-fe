@@ -7,6 +7,6 @@ import { EventTemplate } from '../../../../entity/event-template.model';
   styleUrls: ['./event-template-list.component.scss'],
 })
 export class EventTemplateListComponent {
-  @Input() eventTemplates: EventTemplate[] = []
+  @Input() eventTemplates: EventTemplate[] = [];
   @Output() delete = new EventEmitter<number>();
 }

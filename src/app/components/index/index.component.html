@@ -1,0 +1,47 @@
+<app-mainframe [title]="'Current ' + selectedCategory">
+  <div class="search-container">
+    <app-search-bar
+      (valueChange)="search($event)"
+      (enterPressed)="search($event)"
+    ></app-search-bar>
+  </div>
+
+  <div class="tag-container">
+    <app-user-tag-btn
+      [id]="i"
+      (clickEvent)="removeTag($event)"
+      *ngFor="let tag of tagsService.getSelectedTags(); let i = index"
+      >{{ tag }}</app-user-tag-btn
+    >
+    <div class="add-tags-container">
+      <mat-icon class="add-icon" (click)="openTagSelector()">add</mat-icon>
+
+      <div *ngIf="tagSelectorOpened" class="select-tags-container">
+        <app-user-tag-btn
+          [id]="i"
+          (clickEvent)="addTag($event)"
+          [functionality]="'add'"
+          *ngFor="let tag of tagsService.getAvailableTags(); let i = index"
+          >{{ tag }}</app-user-tag-btn
+        >
+        <mat-icon (click)="closeTagSelector()" class="close-icon"
+          >close</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="competitionService.loading$ || eventService.loading$"
+    class="grid-container"
+  >
+    <app-competition-card
+      (viewEmitter)="handleCompetitionViewClick(competition.id!)"
+      (editEmitter)="handleCompetitionEditClick(competition.id!)"
+      (deleteEmitter)="handleCompetitionDeleteClick(competition.id!)"
+      *ngFor="let competition of selectedCompetitions"
+      [competition]="competition"
+    />
+    <app-event-card *ngFor="let event of selectedEvents" [event]="event" />
+  </div>
+</app-mainframe>

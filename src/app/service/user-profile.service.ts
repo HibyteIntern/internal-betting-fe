@@ -23,27 +23,27 @@ export class UserProfileService {
   constructor(private http: HttpClient,
               private avatarService: AvatarService,
               private authService: AuthService) {
-                (async () => {
-                  const token = await this.authService.getToken();
-                  if (token) {
-                    const userKeycloakId = this.authService.decodeToken(token).sub;
-                    try {
-                      const user = await this.getByKeycloakId(userKeycloakId).toPromise();
-                      if (user) {
-                        this.userId = user.userId;
-                        if(this.userId){
-                          this.userIdSubject.next(this.userId);
-                        }
-                      } else {
-                        this.userIdSubject.next(null);
-                      }
-                    } catch (error) {
-                      console.error('Error fetching user:', error);
-                      this.userIdSubject.next(null);
-                    }
-                  }
-                })();
-              }
+    (async () => {
+      const token = await this.authService.getToken();
+      if (token) {
+        const userKeycloakId = this.authService.decodeToken(token).sub;
+        try {
+          const user = await this.getByKeycloakId(userKeycloakId).toPromise();
+          if (user) {
+            this.userId = user.userId;
+            if (this.userId) {
+              this.userIdSubject.next(this.userId);
+            }
+          } else {
+            this.userIdSubject.next(null);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error);
+          this.userIdSubject.next(null);
+        }
+      }
+    })();
+  }
 
   checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
@@ -99,16 +99,19 @@ export class UserProfileService {
     return this.http.get<UserProfile>(`${this.userProfileUrl}/byKeycloakId/${keycloakId}`);
   }
 
-  create(userProfile: UserProfile): Observable<UserProfile>{
+  create(userProfile: UserProfile): Observable<UserProfile> {
     return this.http.post<UserProfile>(this.userProfileUrl, userProfile);
   }
 
-  update(userProfile: UserProfile): Observable<UserProfile>{
-    return this.http.put<UserProfile>(`${this.userProfileUrl}/${userProfile.userId}`, userProfile);
+  update(userProfile: UserProfile): Observable<UserProfile> {
+    return this.http.put<UserProfile>(
+      `${this.userProfileUrl}/${userProfile.userId}`,
+      userProfile,
+    );
   }
 
-  delete(userId: number):  Observable<any> {
-    return this.http.delete<any>(`${this.userProfileUrl}/${userId}`);
+  delete(userId: number): Observable<any> {
+    return this.http.delete(`${this.userProfileUrl}/${userId}`);
   }
 
   addPhoto(userId: number, photo: File): Observable<any> {
@@ -123,7 +126,7 @@ export class UserProfileService {
   }
 
   getPhoto(userId: number): Observable<Blob> {
-    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, { responseType: 'blob' });
+    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, {responseType: 'blob'});
   }
 
   updateUserProfileAfterPhotoChange(userId: number): void {
@@ -131,7 +134,4 @@ export class UserProfileService {
       this.userProfileSubject.next(userProfile);
     });
   }
-
 }
-
-

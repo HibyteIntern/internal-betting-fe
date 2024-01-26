@@ -12,6 +12,9 @@ import { UserProfileEditComponent } from './components/user-profile-edit/user-pr
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
+import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
+import { IndexComponent } from './components/index/index.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +34,10 @@ const routes: Routes = [
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+  { path: 'competitions/create', component: CreateCompetitionComponent },
+  { path: 'competitions/edit/:id', component: CreateCompetitionComponent },
+  { path: 'competitions/:id', component: ViewCompetitionsComponent },
+  { path: '', component: IndexComponent },
 ];
 
 @NgModule({

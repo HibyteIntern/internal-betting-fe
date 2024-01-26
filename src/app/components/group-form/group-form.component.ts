@@ -4,6 +4,7 @@ import {FullUserGroupModel} from "../../entity/full-user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
 import {UserProfile} from "../../entity/UserProfile";
 import {GroupService} from "../../service/group.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-form',
@@ -15,32 +16,37 @@ export class GroupFormComponent implements OnChanges, OnInit {
   @Output() formSubmit = new EventEmitter<FullUserGroupModel>();
 
   userOptions: string[] = [];
+  selectedUsers: string[] = [];
   userProfiles: UserProfile[] = [];
+  selectedUserProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
-  submitted = false;
   isEditMode= false;
   uploadedPhotoId?: number;
-  userGroup?: FullUserGroupModel;
 
   constructor(
       private formBuilder: FormBuilder,
       private userService: UserProfileService,
       private groupService: GroupService,
+      private router: Router,
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
       description: this.initialGroup?.description || '',
-      selectedUsers: [this.initialGroup?.users || [], [Validators.required, this.validateSelectedUsers]]
+      users: [this.initialGroup?.users || [], [Validators.required, this.validateSelectedUsers]]
     });
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
-      this.isEditMode = !!this.initialGroup;
       if (this.initialGroup) {
-        this.userGroup = {...this.initialGroup};
-        this.userGroupForm.patchValue(this.initialGroup);
+        this.userGroupForm.patchValue({
+        groupName: this.initialGroup.groupName || '',
+        description: this.initialGroup.description || '',
+        users: this.initialGroup.users || [],
+      });
+        console.log('Form values:', this.userGroupForm.value);
+
         if (this.initialGroup && this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
           this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe(blob => {
             this.displayProfileImage(blob);
@@ -59,17 +65,17 @@ export class GroupFormComponent implements OnChanges, OnInit {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
-      users: formValue.selectedUsers?? [],
+      users: formValue.users?? [],
       profilePicture: this.uploadedPhotoId !== undefined ? this.uploadedPhotoId : this.initialGroup?.profilePicture,
     }
     this.formSubmit.emit(updatedGroup);
-    this.submitted = true;
   }
 
   ngOnInit(): void {
+    this.isEditMode = this.router.url.includes('edit');
     this.userService.getAll().subscribe((data) => {
       data.forEach((user) => {
-        if(user.username) {
+        if(user.username && !this.selectedUsers.includes(user.username)) {
           this.userOptions.push(user.username);
           this.userProfiles.push(user);
         }
@@ -77,12 +83,12 @@ export class GroupFormComponent implements OnChanges, OnInit {
     });
   }
   handleUserSelect(users: string[]) {
-    const selectedUsers: UserProfile[] = users.map(username => {
+    const userProfiles: UserProfile[] = users.map(username => {
       return this.userProfiles.find(user => user.username === username) || { username };
     });
 
       this.userGroupForm.patchValue({
-        selectedUsers: selectedUsers
+        users: userProfiles
       });
   }
 

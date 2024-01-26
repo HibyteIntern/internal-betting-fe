@@ -21,7 +21,7 @@ export class EventTemplateService {
 
   fetch(name?: string) {
     let apiPath = this.apiUrl;
-    if(name) apiPath = this.apiUrl + `?name=${name}`;
+    if (name) apiPath = this.apiUrl + `?name=${name}`;
     this.http
       .get<EventTemplate[]>(apiPath)
       .pipe(
