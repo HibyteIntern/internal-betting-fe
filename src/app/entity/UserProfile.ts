@@ -1,3 +1,5 @@
+import {Bet} from "./Bet";
+
 export interface UserProfile {
   userId?: number;
   keycloakId?: string;

@@ -25,7 +25,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
-import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
@@ -68,6 +67,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -101,7 +101,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserProfileFormComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
-    HomeComponent,
     AccountPageUserProfileComponent,
     UserTagBtnComponent,
     ViewCompetitionsComponent,
@@ -135,6 +134,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NotFoundPageComponent,
     BetsListComponent,
     LoginAlertComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
