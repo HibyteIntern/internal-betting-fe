@@ -13,9 +13,7 @@ export class UserProfileEditComponent implements OnInit {
   userId?: any;
   userProfile$?: Observable<UserProfile | null>;
 
-  constructor(
-    private userProfileService: UserProfileService,
-  ) {}
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
     this.fetchUserProfile();

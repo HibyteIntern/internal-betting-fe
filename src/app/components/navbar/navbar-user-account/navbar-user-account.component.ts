@@ -1,10 +1,6 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subject,filter, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
