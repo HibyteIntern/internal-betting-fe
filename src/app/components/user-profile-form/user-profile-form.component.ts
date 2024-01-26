@@ -3,12 +3,10 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable, finalize } from 'rxjs';
+import { finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -41,7 +39,6 @@ export class UserProfileFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
-      console.log(this.originalUserProfile);
       this.userProfileForm.patchValue(this.userProfile);
 
       if (

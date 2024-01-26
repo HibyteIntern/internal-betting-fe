@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
+import { BehaviorSubject, Observable, delay, firstValueFrom } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';

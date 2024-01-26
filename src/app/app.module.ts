@@ -27,7 +27,6 @@ import { UserProfileFormComponent } from './components/user-profile-form/user-pr
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
-import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
@@ -84,7 +83,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CompetitionsComponent,
     HomeComponent,
     AccountPageUserProfileComponent,
-    LoadingSpinnerComponent,
     UserTagBtnComponent,
     ViewCompetitionsComponent,
     CompetitionCardComponent,

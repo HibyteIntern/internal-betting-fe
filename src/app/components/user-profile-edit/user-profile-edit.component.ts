@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -16,7 +15,6 @@ export class UserProfileEditComponent implements OnInit {
 
   constructor(
     private userProfileService: UserProfileService,
-    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {

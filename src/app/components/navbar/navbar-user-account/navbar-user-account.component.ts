@@ -1,13 +1,10 @@
 import {
   Component,
-  OnChanges,
   OnDestroy,
   OnInit,
-  Output,
-  SimpleChanges,
 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, Subject, Subscription, filter, takeUntil } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subject,filter, takeUntil } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
