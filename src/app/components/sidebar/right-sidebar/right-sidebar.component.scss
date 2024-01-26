@@ -24,6 +24,7 @@
     height: 70%;
     min-height: 20rem;
     background-color: var(--lighter-background-color);
+    overflow-y: auto;
   }
   button {
     flex-shrink: 0;

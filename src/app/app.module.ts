@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -22,6 +21,12 @@ import { EventTemplateCardComponent } from './components/event-templates/event-t
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { HomeComponent } from './components/home/home.component';
+import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
@@ -41,6 +46,8 @@ import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IndexComponent } from './components/index/index.component';
+import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -89,6 +96,13 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateCardComponent,
     EventTemplateListComponent,
     MainframeComponent,
+    UserProfileComponent,
+    UserProfileEditComponent,
+    UserProfileFormComponent,
+    UserTagBtnComponent,
+    CompetitionsComponent,
+    HomeComponent,
+    AccountPageUserProfileComponent,
     UserTagBtnComponent,
     ViewCompetitionsComponent,
     CompetitionCardComponent,
@@ -119,6 +133,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventCardComponent,
     IndexComponent,
     NotFoundPageComponent,
+    BetsListComponent,
+    LoginAlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +149,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    FormsModule,
     MatExpansionModule,
     MatIconModule,
     MatDatepickerModule,
