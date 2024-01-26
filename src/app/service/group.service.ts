@@ -22,6 +22,11 @@ export class GroupService {
     return this.httpClient.get<FullUserGroupModel>(url);
   }
 
+  getOne(id: number): Observable<UserGroupModel>{
+    const url = `${this.groupUrl}/${id}`;
+    return this.httpClient.get<UserGroupModel>(url);
+  }
+
   create(group: FullUserGroupModel): Observable<FullUserGroupModel>{
     return this.httpClient.post<FullUserGroupModel>(this.groupUrl, group);
   }

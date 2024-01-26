@@ -47,6 +47,9 @@ export class GroupFormComponent implements OnChanges, OnInit {
       });
         console.log('Form values:', this.userGroupForm.value);
 
+        this.selectedUsers = this.initialGroup.users.map(user => user.username);
+        this.selectedUserProfiles = this.initialGroup.users;
+
         if (this.initialGroup && this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
           this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe(blob => {
             this.displayProfileImage(blob);
@@ -83,13 +86,14 @@ export class GroupFormComponent implements OnChanges, OnInit {
     });
   }
   handleUserSelect(users: string[]) {
-    const userProfiles: UserProfile[] = users.map(username => {
-      return this.userProfiles.find(user => user.username === username) || { username };
+    const newUserProfiles: UserProfile[] = this.userProfiles.filter(user => users.includes(user.username));
+    this.selectedUserProfiles = [
+      ...this.selectedUserProfiles,
+      ...newUserProfiles
+    ];
+    this.userGroupForm.patchValue({
+      users: this.selectedUserProfiles
     });
-
-      this.userGroupForm.patchValue({
-        users: userProfiles
-      });
   }
 
   validateSelectedUsers(control: FormControl) {
