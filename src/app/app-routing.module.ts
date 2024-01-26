@@ -9,9 +9,27 @@ import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/priz
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { IndexComponent } from './components/index/index.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+
+  {
+    path: 'user-profile',
+    canActivate: [AuthGuard],
+    component: UserProfileComponent,
+    children: [{ path: 'edit/:id', component: UserProfileEditComponent }],
+  },
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'competition', component: CompetitionsComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
