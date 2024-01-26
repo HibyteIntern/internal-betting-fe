@@ -117,4 +117,11 @@ export class UserProfileService {
       responseType: 'blob',
     });
   }
+
+  isUsernameTaken(username: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
+      params: { username: username },
+    });
+  }
+
 }
