@@ -4,11 +4,24 @@ import { Subject, filter, takeUntil } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-navbar-user-account',
   templateUrl: './navbar-user-account.component.html',
   styleUrls: ['./navbar-user-account.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(100)
+      ]),
+      transition(':leave', [
+        animate(100, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
