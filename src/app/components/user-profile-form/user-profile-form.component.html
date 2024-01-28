@@ -35,24 +35,27 @@
     <textarea matInput type="text" formControlName="description"></textarea>
   </mat-form-field>
 
-  <button
-    mat-raised-button
-    class="end-button"
-    color="primary"
-    style="color: var(--text-color)"
-    type="submit"
-    [disabled]="!userProfileForm.valid"
-  >
-    Submit
-  </button>
-  <button
-    mat-raised-button
-    class="end-button"
-    color="accent"
-    style="color: var(--text-color)"
-    type="button"
-    (click)="onCancel()"
-  >
-    Cancel
-  </button>
+  <div style="margin-bottom: 1rem">
+    <button
+      mat-raised-button
+      class="end-button"
+      color="primary"
+      style="color: var(--text-color)"
+      type="submit"
+      [disabled]="!userProfileForm.valid"
+    >
+      Submit
+    </button>
+    <button
+      mat-raised-button
+      class="end-button"
+      color="accent"
+      style="color: var(--text-color)"
+      type="button"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+  </div>
+  <div class="lds-dual-ring" *ngIf="isLoading"></div>
 </form>

@@ -1,5 +1,10 @@
 @import "./../../themes/_variables";
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 button {
   color: var(--text-color);
   font-weight: bold;
@@ -88,6 +93,12 @@ button {
   }
 }
 
+.lds-dual-ring {
+  @media (max-width: $mobile-threshold) {
+    position: relative;
+    left: calc(50% - 40px);
+  }
+}
 
 button[type="submit"] {
   margin-right: 1rem;
