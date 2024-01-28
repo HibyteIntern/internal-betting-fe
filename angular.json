@@ -28,7 +28,13 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "js-sha256",
+              "base64-js",
+              "@dicebear/avatars",
+              "@dicebear/avatars-bottts-sprites"
+            ]
           },
           "configurations": {
             "production": {

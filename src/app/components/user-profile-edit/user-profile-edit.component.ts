@@ -10,7 +10,6 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 })
 export class UserProfileEditComponent implements OnInit {
   title = 'User Profile';
-  userId?: any;
   userProfile$?: Observable<UserProfile | null>;
 
   constructor(private userProfileService: UserProfileService) {}

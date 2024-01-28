@@ -1,42 +1,71 @@
-form {
-  margin-top: 4rem;
-  //margin-left: 4rem;
+@import "./../../themes/_variables";
+
+button {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: clamp(13px, 0.9rem, 16px);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.avatar-button {
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+  width: 11rem;
+  min-width: 150px;
+}
+
+.end-button {
+  width: 6rem;
+  @media (max-width: $mobile-threshold) {
+    width: calc(50% - .5rem);
+  }
+  @media (max-width: 400px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.username-field, .description-field {
+  display: block;
+  margin-bottom: .8rem;
 }
 
 .username-field {
-  display: block;
-  width: 25%; /* sau orice altă valoare mai mică decât 100% */
-  margin-bottom: 10px;
+  width: clamp(300px, 25%, 700px);
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
 }
 
 .description-field {
-  display: block;
-  width: 40%;
-  margin-bottom: 10px;
-}
-
-button {
-  background-color: var(--accent-color-one);
-  color: var(--text-color);
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-button[type="submit"] {
-  margin-right: 20px;
+  width: clamp(450px, 37.5%, 800px);
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
 }
 
 .profile-image-upload {
-  margin-bottom: 50px;
   text-align: left;
   width: fit-content;
   aspect-ratio: 1/1;
   position: relative;
   border-radius: 50%;
+
+  .profile-circle {
+    width: 11rem;
+    min-width: 150px;
+    aspect-ratio: 1/1;
+    position: relative;
+    background-color: var(--sidebar-color);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center center;
+    transition: filter 0.2s ease-in-out;
+  }
+
   .edit-icon {
     pointer-events: none;
     position: absolute;
@@ -59,17 +88,9 @@ button[type="submit"] {
   }
 }
 
-.profile-circle {
-  width: 175px;
-  height: 175px;
-  position: relative;
-  background-color: var(--sidebar-color);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center center;
-  transition: filter 0.2s ease-in-out;
+
+button[type="submit"] {
+  margin-right: 1rem;
 }
 
 input[type="file"] {

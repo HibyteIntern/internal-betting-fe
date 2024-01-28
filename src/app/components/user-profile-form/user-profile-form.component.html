@@ -1,16 +1,4 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-  <div>
-    <button
-      mat-raised-button
-      color="primary"
-      style="color: var(--text-color)"
-      type="button"
-      (click)="onAddAvatar()"
-    >
-      Add avatar
-    </button>
-  </div>
-  <br />
 
   <div class="profile-image-upload">
     <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
@@ -26,6 +14,17 @@
     </label>
   </div>
 
+  <button
+    mat-raised-button
+    color="primary"
+    class="avatar-button"
+    style="color: var(--text-color)"
+    type="button"
+    (click)="onAddAvatar()"
+  >
+    Add avatar
+  </button>
+
   <mat-form-field color="accent" appearance="outline" class="username-field">
     <mat-label>Username</mat-label>
     <input matInput type="text" formControlName="username" />
@@ -38,6 +37,7 @@
 
   <button
     mat-raised-button
+    class="end-button"
     color="primary"
     style="color: var(--text-color)"
     type="submit"
@@ -47,6 +47,7 @@
   </button>
   <button
     mat-raised-button
+    class="end-button"
     color="accent"
     style="color: var(--text-color)"
     type="button"

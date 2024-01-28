@@ -28,7 +28,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   userProfile: UserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
-
   constructor(
     private router: Router,
     private userProfileService: UserProfileService,
@@ -105,7 +104,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   }
 
   onUserProfileEdit() {
-    this.router.navigate(['/user-profile/edit/', this.userProfile?.userId]);
+    this.router.navigate(['/user-profile/edit']);
     this.showAlertBox = false;
   }
 
