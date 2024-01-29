@@ -151,11 +151,10 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    const userId = String(this.userProfile?.userId);
-    const avatarSvg = this.avatarService.generateAvatar(userId);
+    const avatarSvg = this.avatarService.generateAvatar(this.userProfile?.keycloakId);
     const avatarFile = await this.avatarService.convertSvgToImageFile(
       avatarSvg,
-      userId,
+      this.userProfile?.keycloakId,
     );
     if (this.userProfile?.userId) {
       await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);

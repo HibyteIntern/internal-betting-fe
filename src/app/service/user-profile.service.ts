@@ -41,10 +41,10 @@ export class UserProfileService {
             userProfile.userId
           ) {
             
-            const avatarSvg = this.avatarService.generateAvatar(userProfile.username);
+            const avatarSvg = this.avatarService.generateAvatar(userProfile.keycloakId);
             const avatarFile = await this.avatarService.convertSvgToImageFile(
               avatarSvg,
-              userProfile.username,
+              userProfile.keycloakId,
             );
 
             if (userProfile.userId) {
