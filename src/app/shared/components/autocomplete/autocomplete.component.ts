@@ -1,29 +1,33 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import {Observable, map, startWith, BehaviorSubject, merge} from 'rxjs';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() label = '';
 
   myControl = new FormControl('');
   @Input() options: string[] = [];
   filteredOptions: Observable<string[]> = new Observable<string[]>();
 
-  @Input() selectedOptions: string[] = [];
+  filteredOptionsSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  filteredOptions2: Observable<string[]> = this.filteredOptionsSubject.asObservable();
+
+  @Input() chips: string[] = [];
   @Output() selectedOptionsEmmiter: EventEmitter<string[]> = new EventEmitter<
     string[]
   >();
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = merge(this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || '')),
-    );
+    ), this.filteredOptions2);
+
   }
 
   private _filter(value: string): string[] {
@@ -45,22 +49,29 @@ export class AutocompleteComponent implements OnInit {
     });
 
     if (this.myControl.value && optionsExist) {
-      this.selectedOptions.push(this.myControl.value);
+      this.chips.push(this.myControl.value);
       this.options = this.options.filter(
         (option) => option !== this.myControl.value,
       );
       this.myControl.setValue('');
 
-      this.selectedOptionsEmmiter.emit(this.selectedOptions);
+      this.selectedOptionsEmmiter.emit(this.chips);
     }
   }
 
   removeItem(optionIndex: number) {
-    this.options.push(this.selectedOptions[optionIndex]);
-    this.selectedOptions = this.selectedOptions.filter(
+    this.options.push(this.chips[optionIndex]);
+    this.chips = this.chips.filter(
       (_, index) => index !== optionIndex,
     );
 
-    this.selectedOptionsEmmiter.emit(this.selectedOptions);
+    this.selectedOptionsEmmiter.emit(this.chips);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options']) {
+      console.log("from autocomplete: ", this.options);
+      this.filteredOptionsSubject.next(this.options);
+    }
   }
 }

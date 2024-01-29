@@ -1,6 +1,6 @@
 <div *ngIf="userProfile$ | async as userProfile">
   <div>
-    <h2>My Groups</h2>
+    <p class="title">My Groups</p>
     <div *ngIf="userProfile.groups">
       <div *ngFor="let group of groupsEntity; let last = last">
         <p class="name">{{ group.groupName }}</p>

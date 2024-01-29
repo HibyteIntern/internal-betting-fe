@@ -1,4 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FullUserGroupModel} from "../../entity/full-user-group.model";
 import {UserProfileService} from "../../service/user-profile.service";
@@ -17,7 +25,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
-  userProfiles: UserProfile[] = [];
+  allUserProfiles: UserProfile[] = [];
   selectedUserProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
   isEditMode= false;
@@ -32,10 +40,9 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
       description: this.initialGroup?.description || '',
-      users: [this.initialGroup?.users || [], [Validators.required, this.validateSelectedUsers]]
+      users: [this.initialGroup?.users || [], [Validators.required, this.validateSelectedUsers.bind(this)]],
     });
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
@@ -45,11 +52,8 @@ export class GroupFormComponent implements OnChanges, OnInit {
         description: this.initialGroup.description || '',
         users: this.initialGroup.users || [],
       });
-        console.log('Form values:', this.userGroupForm.value);
-
         this.selectedUsers = this.initialGroup.users.map(user => user.username);
         this.selectedUserProfiles = this.initialGroup.users;
-
         if (this.initialGroup && this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
           this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe(blob => {
             this.displayProfileImage(blob);
@@ -77,28 +81,25 @@ export class GroupFormComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.isEditMode = this.router.url.includes('edit');
     this.userService.getAll().subscribe((data) => {
+      this.allUserProfiles = data;
       data.forEach((user) => {
         if(user.username && !this.selectedUsers.includes(user.username)) {
-          this.userOptions.push(user.username);
-          this.userProfiles.push(user);
+          this.userOptions = [...this.userOptions, user.username]
         }
       });
     });
   }
+
   handleUserSelect(users: string[]) {
-    const newUserProfiles: UserProfile[] = this.userProfiles.filter(user => users.includes(user.username));
-    this.selectedUserProfiles = [
-      ...this.selectedUserProfiles,
-      ...newUserProfiles
-    ];
+    this.selectedUserProfiles = this.allUserProfiles.filter(user => users.includes(user.username));
     this.userGroupForm.patchValue({
       users: this.selectedUserProfiles
     });
   }
 
-  validateSelectedUsers(control: FormControl) {
-    const selectedUsers = control.value;
-    return selectedUsers && selectedUsers.length > 1 ? null : { noUsersSelected: true };
+  validateSelectedUsers(control: FormControl): {[key: string]: boolean} | null {
+    const users = control.value;
+    return users && users.length >= 2 ? null : { noUsersSelected: true };
   }
 
   onFileSelect(event: Event): void {
@@ -107,26 +108,20 @@ export class GroupFormComponent implements OnChanges, OnInit {
     if (fileList && fileList.length > 0) {
       const file = fileList[0];
       const reader = new FileReader();
-
       reader.onload = (e: ProgressEvent<FileReader>) => {
         const circle = document.querySelector('.profile-circle') as HTMLElement;
         if (circle && e.target && e.target.result) {
           circle.style.backgroundImage = `url(${e.target.result})`;
         }
       };
-
       reader.readAsDataURL(file);
-
       if (typeof this.initialGroup?.userGroupId === 'number') {
         this.groupService.addPhoto(this.initialGroup.userGroupId, file).subscribe((photoId) => {
           this.uploadedPhotoId = photoId;
-          console.log(`Photo uploaded successfully with ID: ${photoId}`);
         });
       } else {
         console.error('User ID is undefined');
       }
-
-      console.log(this.initialGroup?.profilePicture);
     }
   }
 
