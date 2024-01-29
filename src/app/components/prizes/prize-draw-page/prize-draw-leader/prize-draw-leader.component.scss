@@ -1,0 +1,16 @@
+.outer-container {
+  display: inline;
+  height: fit-content;
+  align-items: center;
+  box-sizing: border-box;
+  img {
+    position: relative;
+    height: 1.25rem;
+    width: auto;
+    top: 0.25rem;
+  }
+  span {
+    color: var(--accent-color-two);
+    margin-left: 0.25rem;
+  }
+}

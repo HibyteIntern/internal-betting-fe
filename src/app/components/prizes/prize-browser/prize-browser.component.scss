@@ -1,0 +1,60 @@
+.start-button {
+  color: white;
+  padding: 1.2em 1.5em;
+  font-size: 1rem;
+}
+
+.extraction-selector {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  width: fit-content;
+  button {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: bolder;
+    outline: none;
+    border: none;
+    background-color: var(--sidebar-color);
+    padding: 0.75em;
+    width: 12rem;
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.85);
+    }
+  }
+  .selected {
+    color: white;
+    background-color: var(--accent-color-two);
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: left;
+  div {
+    margin-bottom: 1rem;
+  }
+}
+
+.message-text {
+  font-weight: bold;
+  font-size: var(--text-sm);
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    width: 100%;
+  }
+  .extraction-selector {
+    width: 100%;
+    button {
+      width: 50%;
+    }
+  }
+  .spinner-container {
+    justify-content: center;
+  }
+}

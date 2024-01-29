@@ -25,6 +25,7 @@ export class UserProfileFormComponent implements OnChanges {
   uploadedPhotoId?: number;
   originalUserProfile?: UserProfile;
   file: File | null = null;
+  isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -136,10 +137,12 @@ export class UserProfileFormComponent implements OnChanges {
         '';
     }
 
+    this.isLoading = true;
     this.userProfileService
       .update(updatedUserProfile)
       .pipe(
         finalize(() => {
+          this.isLoading = false;
           location.reload();
           this.location.back();
         }),
@@ -164,7 +167,7 @@ export class UserProfileFormComponent implements OnChanges {
     if (this.userProfile?.userId) {
       await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
     }
-
+    this.isLoading = false;
     location.reload();
   }
 }

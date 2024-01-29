@@ -6,7 +6,7 @@
     ></app-search-bar>
   </div>
 
-  <div class="tag-container">
+  <div class="tag-container" style="margin-bottom: 0.5rem">
     <app-user-tag-btn
       [id]="i"
       (clickEvent)="removeTag($event)"
@@ -14,7 +14,12 @@
       >{{ tag }}</app-user-tag-btn
     >
     <div class="add-tags-container">
-      <mat-icon class="add-icon" (click)="openTagSelector()">add</mat-icon>
+      <mat-icon
+        *ngIf="tagsService.getAvailableTags().length > 0"
+        class="add-icon"
+        (click)="openTagSelector()"
+        >add</mat-icon
+      >
 
       <div *ngIf="tagSelectorOpened" class="select-tags-container">
         <app-user-tag-btn
@@ -30,7 +35,7 @@
       </div>
     </div>
   </div>
-
+  <div *ngIf="selectedEvents.length === 0 && selectedCompetitions.length === 0">No results found</div>
   <div
     *ngIf="competitionService.loading$ || eventService.loading$"
     class="grid-container"

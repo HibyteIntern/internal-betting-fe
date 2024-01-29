@@ -1,19 +1,21 @@
-<div (click)="openAlertBox()" class="outer-div">
+<div (click)="openAlertBox()" class="outer-div" appClickStopPropagation>
   <img
     ngSrc="assets/icons/chips-icon.svg"
     alt="credits"
     height="26"
     width="40"
-    style="margin-left: 10px"
+    style="margin-left: .75rem"
   />
-  <p id="user-credits">{{ userProfile?.coins }}</p>
+  <div id="user-credits">{{ userProfile?.coins}}</div>
   <div id="account-image"></div>
 </div>
 
 <div *ngIf="this.isLoggedIn">
   <app-account-page-user-profile
     *ngIf="showAlertBox"
-    [username]="userProfile?.username?.toString()"
+    [@fadeInOut]=""
+    [username]="userProfile?.username"
+    [description]="userProfile?.description"
     [profilePicture]="userProfile?.profilePicture"
     (edit)="onUserProfileEdit()"
     (logout)="onLogout()"
@@ -25,6 +27,7 @@
 <div *ngIf="!this.isLoggedIn">
   <app-login-alert
     *ngIf="showAlertBox"
+    [@fadeInOut]=""
     (login)="onLogin()"
     (cancel)="onCancel()"
   ></app-login-alert>

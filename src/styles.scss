@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;700&display=swap");
 @import "app/themes/input-themes";
 @import "app/themes/button-themes";
+@import "./app/themes/_variables";
 
 //Color declarations for light mode
 :root {
@@ -19,7 +20,7 @@
   --box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
   --navbar-heigth: 5rem;
 
-  --text-sm: 1.2rem;
+  --text-sm: 1.1rem;
   --text-md: 1.5rem;
   --text-lg: 2rem;
 
@@ -42,11 +43,6 @@
 
 p {
   text-indent: 1rem;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 0.6rem;
 }
 
 h1 {
@@ -82,6 +78,15 @@ label {
 .mat-mdc-text-field-wrapper {
   background-color: var(--sidebar-color) !important;
 }
+
+.mat-calendar {
+  background-color: var(--background-color) !important;
+}
+
+.time-container {
+  background-color: var(--background-color) !important;
+}
+
 mat-label {
   color: var(--text-color) !important;
 }
@@ -94,8 +99,8 @@ input {
   background: var(--background-color);
 }
 
-mat-calendar {
-  background: var(--background-color);
+.mat-mdc-autocomplete-panel {
+  background-color: var(--background-color) !important;
 }
 
 //Loading spinner
@@ -136,8 +141,16 @@ body {
   height: 100%;
 }
 
+mat-form-field {
+  font-size: 1rem !important;
+  input {
+    font-size: clamp(14px, 1rem, 24px) !important;
+  }
+}
+
 .app-form {
-  width: clamp(550px, 40%, 1200px);
+  width: clamp(550px, 40%, 800px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -160,16 +173,27 @@ body {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
+    font-size: clamp(14px, 1rem, 22px);
+    padding: 1em 2em;
   }
 }
 
 .grid-container {
-  display: grid;
-  grid-gap: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-
-  grid-template-columns: repeat(1, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 0.5rem);
+    margin-right: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -200,15 +224,23 @@ body {
     color: var(--text-color);
     background-color: var(--accent-color-one);
     border-radius: var(--border-radius);
-    padding: 1rem 3rem;
-    font-size: var(--text-sm);
+    padding: 0.65em 3em;
+    font-size: clamp(12px, var(--text-sm), 22px);
     border: none;
     transition: all ease-in-out var(--transition-duration);
     cursor: pointer;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
+
+    @media (max-width: $mobile-threshold) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
   }
 }
 
@@ -229,6 +261,8 @@ body {
     width: 8rem;
     flex-shrink: 0;
     color: var(--text-color) !important;
+    font-size: 1rem;
+    padding: clamp(8px, 1em, 30px);
   }
   div {
     overflow: hidden;

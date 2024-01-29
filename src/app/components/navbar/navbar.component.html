@@ -10,6 +10,7 @@
   </div>
 
   <div routerLink="/" id="app-name">HiBet</div>
+
   <div class="right-navbar-container">
     <img
       *ngIf="themeService.getCurrentTheme() === 'Light'"
@@ -20,7 +21,6 @@
       width="50"
       class="moon"
     />
-
     <img
       *ngIf="themeService.getCurrentTheme() === 'Dark'"
       (click)="themeService.toggleTheme()"
@@ -29,6 +29,14 @@
       height="50"
       width="50"
       class="panther"
+    />
+    <img
+      (click)="router.navigate(['/prizes'])"
+      ngSrc="assets/icons/gift-icon.svg"
+      alt="prizes"
+      height="50"
+      width="50"
+      class="nav-icon"
     />
     <app-navbar-user-account></app-navbar-user-account>
   </div>

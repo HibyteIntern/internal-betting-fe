@@ -114,7 +114,6 @@ export class EventTemplateAddComponent {
   submit() {
     this.errorMessage = '';
     if (!this.templateFormGroup.valid) {
-      console.log('invalid form');
       return;
     }
 
