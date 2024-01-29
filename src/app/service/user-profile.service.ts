@@ -40,8 +40,9 @@ export class UserProfileService {
             userProfileKeycloak.username &&
             userProfile.userId
           ) {
-            
-            const avatarSvg = this.avatarService.generateAvatar(userProfile.keycloakId);
+            const avatarSvg = this.avatarService.generateAvatar(
+              userProfile.keycloakId,
+            );
             const avatarFile = await this.avatarService.convertSvgToImageFile(
               avatarSvg,
               userProfile.keycloakId,
@@ -123,5 +124,4 @@ export class UserProfileService {
       params: { username: username },
     });
   }
-
 }

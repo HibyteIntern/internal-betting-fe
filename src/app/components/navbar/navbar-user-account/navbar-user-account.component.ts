@@ -24,26 +24,25 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.isLoggedIn = await this.authService.isLoggedIn();
-    if(this.isLoggedIn){
+    if (this.isLoggedIn) {
       this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(() => {
-        this.fetchUserProfile();
-      });
+        .pipe(
+          filter((event) => event instanceof NavigationEnd),
+          takeUntil(this.unsubscribe$),
+        )
+        .subscribe(() => {
+          this.fetchUserProfile();
+        });
 
-    this.userProfileService.userProfile$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((profile) => {
-        this.userProfile = profile;
-        if (profile?.userId) {
-          this.fetchProfileImage();
-        }
-      });
+      this.userProfileService.userProfile$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((profile) => {
+          this.userProfile = profile;
+          if (profile?.userId) {
+            this.fetchProfileImage();
+          }
+        });
     }
-  
   }
 
   ngOnDestroy(): void {

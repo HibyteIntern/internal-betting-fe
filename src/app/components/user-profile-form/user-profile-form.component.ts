@@ -1,6 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { AvatarService } from 'src/app/service/avatar.service';
@@ -26,11 +33,7 @@ export class UserProfileFormComponent implements OnChanges {
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
-      username: [
-        '',
-        [Validators.required],
-        [this.usernameTakenValidator()]
-      ],
+      username: ['', [Validators.required], [this.usernameTakenValidator()]],
       description: '',
     });
   }
@@ -57,8 +60,8 @@ export class UserProfileFormComponent implements OnChanges {
   private usernameTakenValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return this.userProfileService.isUsernameTaken(control.value).pipe(
-        map(isTaken => (isTaken ? { usernameTaken: true } : null)),
-        catchError(() => of(null))
+        map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
+        catchError(() => of(null)),
       );
     };
   }
@@ -151,7 +154,9 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    const avatarSvg = this.avatarService.generateAvatar(this.userProfile?.keycloakId);
+    const avatarSvg = this.avatarService.generateAvatar(
+      this.userProfile?.keycloakId,
+    );
     const avatarFile = await this.avatarService.convertSvgToImageFile(
       avatarSvg,
       this.userProfile?.keycloakId,
