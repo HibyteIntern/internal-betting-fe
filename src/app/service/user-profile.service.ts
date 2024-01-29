@@ -7,11 +7,13 @@ import { AvatarService } from './avatar.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserProfileService {
-  private userProfileSubject: BehaviorSubject<UserProfile | null> = new BehaviorSubject<UserProfile | null>(null);
-  public userProfile$: Observable<UserProfile | null> = this.userProfileSubject.asObservable();
+  private userProfileSubject: BehaviorSubject<UserProfile | null> =
+    new BehaviorSubject<UserProfile | null>(null);
+  public userProfile$: Observable<UserProfile | null> =
+    this.userProfileSubject.asObservable();
 
   private userIdSubject = new BehaviorSubject<number | null>(null);
   userId$ = this.userIdSubject.asObservable();
@@ -20,9 +22,11 @@ export class UserProfileService {
   userProfile: UserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
 
-  constructor(private http: HttpClient,
-              private avatarService: AvatarService,
-              private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private avatarService: AvatarService,
+    private authService: AuthService,
+  ) {
     (async () => {
       const token = await this.authService.getToken();
       if (token) {
@@ -45,33 +49,52 @@ export class UserProfileService {
     })();
   }
 
-  checkUserProfile(userKeycloakId: string, userProfileKeycloak: KeycloakProfile): Promise<UserProfile> {
+  checkUserProfile(
+    userKeycloakId: string,
+    userProfileKeycloak: KeycloakProfile,
+  ): Promise<UserProfile> {
     return new Promise((resolve, reject) => {
-      this.getByKeycloakId(userKeycloakId).subscribe(async (existingProfile) => {
-        let userProfile = existingProfile;
-        try {
-          if (userProfile.username == null && userProfileKeycloak.username) {
-            userProfile.username = userProfileKeycloak.username;
-            userProfile = await this.updateUserProfile(userProfile);
-          }
-
-          if (userProfile.profilePicture == null && userProfileKeycloak.username) {
-            const avatarSvg = this.avatarService.generateAvatar(userProfileKeycloak.id);
-            const avatarFile = await this.avatarService.convertSvgToImageFile(avatarSvg, userProfileKeycloak.id);
-            if (userProfile.userId) {
-              await this.uploadAvatarAndUpdateProfile(userProfile.userId, avatarFile, userProfile);
+      this.getByKeycloakId(userKeycloakId).subscribe(
+        async (existingProfile) => {
+          let userProfile = existingProfile;
+          try {
+            if (userProfile.username == null && userProfileKeycloak.username) {
+              userProfile.username = userProfileKeycloak.username;
+              userProfile = await this.updateUserProfile(userProfile);
             }
+
+            if (
+              userProfile.profilePicture == null &&
+              userProfileKeycloak.username
+            ) {
+              const avatarSvg = this.avatarService.generateAvatar(
+                userProfileKeycloak.id,
+              );
+              const avatarFile = await this.avatarService.convertSvgToImageFile(
+                avatarSvg,
+                userProfileKeycloak.id,
+              );
+              if (userProfile.userId) {
+                await this.uploadAvatarAndUpdateProfile(
+                  userProfile.userId,
+                  avatarFile,
+                  userProfile,
+                );
+              }
+            }
+            resolve(userProfile);
+          } catch (error) {
+            console.error('Error in profile update:', error);
+            reject(error);
           }
-          resolve(userProfile);
-        } catch (error) {
-          console.error('Error in profile update:', error);
-          reject(error);
-        }
-      });
+        },
+      );
     });
   }
 
-  private async updateUserProfile(userProfile: UserProfile): Promise<UserProfile> {
+  private async updateUserProfile(
+    userProfile: UserProfile,
+  ): Promise<UserProfile> {
     const updatedProfile = await this.update(userProfile).toPromise();
     if (!updatedProfile) {
       throw new Error('Failed to update user profile.');
@@ -79,7 +102,11 @@ export class UserProfileService {
     return updatedProfile;
   }
 
-  private async uploadAvatarAndUpdateProfile(userId: number, avatarFile: File, userProfile: UserProfile) {
+  private async uploadAvatarAndUpdateProfile(
+    userId: number,
+    avatarFile: File,
+    userProfile: UserProfile,
+  ) {
     const photoId = await firstValueFrom(this.addPhoto(userId, avatarFile));
     userProfile.profilePicture = photoId;
     this.userProfileSubject.next(userProfile);
@@ -90,13 +117,17 @@ export class UserProfileService {
   }
 
   getById(userId: number) {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}/full-dto`).subscribe(user => {
-      this.userProfileSubject.next(user);
-    });
+    this.http
+      .get<UserProfile>(`${this.userProfileUrl}/${userId}/full-dto`)
+      .subscribe((user) => {
+        this.userProfileSubject.next(user);
+      });
   }
 
   getByKeycloakId(keycloakId: string): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.userProfileUrl}/byKeycloakId/${keycloakId}`);
+    return this.http.get<UserProfile>(
+      `${this.userProfileUrl}/byKeycloakId/${keycloakId}`,
+    );
   }
 
   create(userProfile: UserProfile): Observable<UserProfile> {
@@ -118,20 +149,28 @@ export class UserProfileService {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
 
-    return this.http.post(`${this.userProfileUrl}/${userId}/addPhoto`, formData, {
-      headers: new HttpHeaders({
-        'enctype': 'multipart/form-data'
-      })
-    });
+    return this.http.post(
+      `${this.userProfileUrl}/${userId}/addPhoto`,
+      formData,
+      {
+        headers: new HttpHeaders({
+          enctype: 'multipart/form-data',
+        }),
+      },
+    );
   }
 
   getPhoto(userId: number): Observable<Blob> {
-    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, {responseType: 'blob'});
+    return this.http.get(`${this.userProfileUrl}/${userId}/photo`, {
+      responseType: 'blob',
+    });
   }
 
   updateUserProfileAfterPhotoChange(userId: number): void {
-    this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`).subscribe(userProfile => {
-      this.userProfileSubject.next(userProfile);
-    });
+    this.http
+      .get<UserProfile>(`${this.userProfileUrl}/${userId}`)
+      .subscribe((userProfile) => {
+        this.userProfileSubject.next(userProfile);
+      });
   }
 }

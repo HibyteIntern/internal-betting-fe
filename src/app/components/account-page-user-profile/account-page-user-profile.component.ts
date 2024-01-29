@@ -1,25 +1,24 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
-
 @Component({
   selector: 'app-account-page-user-profile',
   templateUrl: './account-page-user-profile.component.html',
-  styleUrls: ['./account-page-user-profile.component.scss']
+  styleUrls: ['./account-page-user-profile.component.scss'],
 })
-export class AccountPageUserProfileComponent implements OnInit{
-  @Input() username?: string ;
+export class AccountPageUserProfileComponent implements OnInit {
+  @Input() username?: string;
   @Input() userId?: number;
   @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<boolean>();
 
-  constructor(private userProfileService: UserProfileService){}
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    if(this.userId && this.profilePicture){
-      this.userProfileService.getPhoto(this.userId).subscribe(blob => {
+    if (this.userId && this.profilePicture) {
+      this.userProfileService.getPhoto(this.userId).subscribe((blob) => {
         this.displayProfileImage(blob);
       });
     }
@@ -34,5 +33,4 @@ export class AccountPageUserProfileComponent implements OnInit{
       circle.style.backgroundPosition = 'center';
     }
   }
-
 }

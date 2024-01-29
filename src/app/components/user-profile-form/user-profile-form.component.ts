@@ -1,17 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
-
 @Component({
   selector: 'app-user-profile-form',
   templateUrl: './user-profile-form.component.html',
-  styleUrls: ['./user-profile-form.component.scss']
+  styleUrls: ['./user-profile-form.component.scss'],
 })
-export class UserProfileFormComponent implements OnChanges{
+export class UserProfileFormComponent implements OnChanges {
   @Input() userProfile?: UserProfile | null;
 
   userProfileForm: FormGroup;
@@ -29,21 +28,26 @@ export class UserProfileFormComponent implements OnChanges{
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.userProfile) {
+      this.originalUserProfile = { ...this.userProfile };
+      console.log(this.originalUserProfile);
+      this.userProfileForm.patchValue(this.userProfile);
 
-          this.originalUserProfile = { ...this.userProfile };
-          console.log(this.originalUserProfile);
-          this.userProfileForm.patchValue(this.userProfile);
-
-          if (this.userProfile && this.userProfile.userId && this.userProfile.profilePicture) {
-            this.userProfileService.getPhoto(this.userProfile?.userId).subscribe(blob => {
-              this.displayProfileImage(blob);
-            });
-          } else {
-            console.error('User profile or profile picture is undefined.');
-          }
-        }
+      if (
+        this.userProfile &&
+        this.userProfile.userId &&
+        this.userProfile.profilePicture
+      ) {
+        this.userProfileService
+          .getPhoto(this.userProfile?.userId)
+          .subscribe((blob) => {
+            this.displayProfileImage(blob);
+          });
+      } else {
+        console.error('User profile or profile picture is undefined.');
+      }
+    }
   }
 
   displayProfileImage(blob: Blob) {
@@ -73,9 +77,11 @@ export class UserProfileFormComponent implements OnChanges{
       reader.readAsDataURL(file);
 
       if (typeof this.userProfile?.userId === 'number') {
-        this.userProfileService.addPhoto(this.userProfile.userId, file).subscribe((photoId) => {
-          this.uploadedPhotoId = photoId;
-        });
+        this.userProfileService
+          .addPhoto(this.userProfile.userId, file)
+          .subscribe((photoId) => {
+            this.uploadedPhotoId = photoId;
+          });
       } else {
         console.error('User ID is undefined');
       }
@@ -87,30 +93,44 @@ export class UserProfileFormComponent implements OnChanges{
     const updatedUserProfile: UserProfile = {
       userId: this.userProfile?.userId,
       keycloakId: this.userProfile?.keycloakId,
-      username: formValue.username !== null && formValue.username !== undefined ? formValue.username : '',
-      profilePicture: this.uploadedPhotoId !== undefined ? this.uploadedPhotoId : this.userProfile?.profilePicture,
-      description: formValue.description !== null && formValue.description !== undefined ? formValue.description : '',
+      username:
+        formValue.username !== null && formValue.username !== undefined
+          ? formValue.username
+          : '',
+      profilePicture:
+        this.uploadedPhotoId !== undefined
+          ? this.uploadedPhotoId
+          : this.userProfile?.profilePicture,
+      description:
+        formValue.description !== null && formValue.description !== undefined
+          ? formValue.description
+          : '',
       coins: this.userProfile?.coins,
       bets: this.userProfile?.bets,
     };
 
     if (this.originalUserProfile) {
-      updatedUserProfile.username = updatedUserProfile.username || this.originalUserProfile.username || '';
-      updatedUserProfile.description = updatedUserProfile.description || this.originalUserProfile.description || '';
+      updatedUserProfile.username =
+        updatedUserProfile.username || this.originalUserProfile.username || '';
+      updatedUserProfile.description =
+        updatedUserProfile.description ||
+        this.originalUserProfile.description ||
+        '';
     }
 
-    this.userProfileService.update(updatedUserProfile).pipe(
-      finalize(() => {
-        this.router.navigate(['home']);
-      })
-    ).subscribe(
-      (user) => {
+    this.userProfileService
+      .update(updatedUserProfile)
+      .pipe(
+        finalize(() => {
+          this.router.navigate(['home']);
+        }),
+      )
+      .subscribe((user) => {
         console.log(user);
-      }
-    );
+      });
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['home']);
   }
 }

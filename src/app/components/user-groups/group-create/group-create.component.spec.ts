@@ -8,9 +8,8 @@ describe('GroupCreateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupCreateComponent ]
-    })
-    .compileComponents();
+      declarations: [GroupCreateComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GroupCreateComponent);
     component = fixture.componentInstance;

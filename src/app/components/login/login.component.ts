@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   public darkModeChecked = false;
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
-  public userKeycloakId  = '';
-  public username= '';
+  public userKeycloakId = '';
+  public username = '';
   public response: string | null = null;
   public appUserProfile: UserProfile | null = null;
 
@@ -38,20 +38,24 @@ export class LoginComponent implements OnInit {
       const token = await this.authService.getToken();
 
       this.userKeycloakId = this.authService.decodeToken(token).sub;
-      await this.userProfileService.checkUserProfile(this.userKeycloakId, this.userProfile);
+      await this.userProfileService.checkUserProfile(
+        this.userKeycloakId,
+        this.userProfile,
+      );
 
       this.finishLogin = true;
     }
-    if(!this.isLoggedIn){
+    if (!this.isLoggedIn) {
       this.authService.login();
     }
 
-    if(this.finishLogin){
-
-      this.userProfileService.getByKeycloakId(this.userKeycloakId).subscribe(user => {
-        this.router.navigate(['/home']);
-      })
-      localStorage.getItem('acc')
+    if (this.finishLogin) {
+      this.userProfileService
+        .getByKeycloakId(this.userKeycloakId)
+        .subscribe(() => {
+          this.router.navigate(['/home']);
+        });
+      localStorage.getItem('acc');
     }
   }
 

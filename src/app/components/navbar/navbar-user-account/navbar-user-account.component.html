@@ -6,27 +6,27 @@
     width="40"
     style="margin-left: 10px"
   />
-  <p id="user-credits">{{userProfile?.coins}}</p>
+  <p id="user-credits">{{ userProfile?.coins }}</p>
   <div id="account-image"></div>
 </div>
 
 <div *ngIf="this.isLoggedIn">
   <app-account-page-user-profile
-  *ngIf="showAlertBox" 
-  [username]="userProfile?.username?.toString()"
-  [userId]="userProfile?.userId"
-  [profilePicture]="userProfile?.profilePicture"
-  (edit)="onUserProfileEdit()"
-  (logout)="onLogout()"
-  (cancel)="onCancel()">
-</app-account-page-user-profile>
+    *ngIf="showAlertBox"
+    [username]="userProfile?.username?.toString()"
+    [userId]="userProfile?.userId"
+    [profilePicture]="userProfile?.profilePicture"
+    (edit)="onUserProfileEdit()"
+    (logout)="onLogout()"
+    (cancel)="onCancel()"
+  >
+  </app-account-page-user-profile>
 </div>
 
 <div *ngIf="!this.isLoggedIn">
   <app-login-alert
-  *ngIf="showAlertBox"
-  (login)="onLogin()"
-  (cancel)="onCancel()"
+    *ngIf="showAlertBox"
+    (login)="onLogin()"
+    (cancel)="onCancel()"
   ></app-login-alert>
 </div>
-

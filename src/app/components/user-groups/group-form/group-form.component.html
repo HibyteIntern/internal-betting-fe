@@ -1,13 +1,19 @@
 <form [formGroup]="userGroupForm" (ngSubmit)="onSubmit()" class="styled-form">
   <div *ngIf="isEditMode" class="profile-image-upload">
-    <input type="file" id="profileImage" (change)="onFileSelect($event)" hidden accept="image/*">
+    <input
+      type="file"
+      id="profileImage"
+      (change)="onFileSelect($event)"
+      hidden
+      accept="image/*"
+    />
     <label for="profileImage">
       <div class="profile-circle"></div>
     </label>
   </div>
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Group Name</mat-label>
-    <input formControlName="groupName" matInput placeholder="Football Group">
+    <input formControlName="groupName" matInput placeholder="Football Group" />
   </mat-form-field>
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Description</mat-label>
@@ -18,10 +24,16 @@
       value=""
     ></textarea>
   </mat-form-field>
-  <app-autocomplete [label]="'Add Users'" [options]="userOptions" [chips]="selectedUsers" (selectedOptionsEmmiter)="handleUserSelect($event)" />
+  <app-autocomplete
+    [label]="'Add Users'"
+    [options]="userOptions"
+    [chips]="selectedUsers"
+    (selectedOptionsEmmiter)="handleUserSelect($event)"
+  />
   <mat-error *ngIf="userGroupForm.get('users')?.hasError('noUsersSelected')">
     Please add at least 2 users.
   </mat-error>
-<!--  TODO: add a "touched" field in app-autocomplete -->
-  <button class="btn" type="submit" [disabled]="!userGroupForm.valid">Submit</button>
+  <button class="btn" type="submit" [disabled]="!userGroupForm.valid">
+    Submit
+  </button>
 </form>

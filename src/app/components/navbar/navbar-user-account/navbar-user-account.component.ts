@@ -10,7 +10,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './navbar-user-account.component.html',
   styleUrls: ['./navbar-user-account.component.scss'],
 })
-export class NavbarUserAccountComponent implements OnInit, OnDestroy{
+export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   userId: any;
   currentPath?: string;
   userProfile: UserProfile | null = null;
@@ -22,25 +22,26 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     private userProfileService: UserProfileService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.userProfileSubscription = this.userProfileService.userId$.subscribe(userId => {
-        if (userId) {
-          this.userId = userId;
-          this.fetchUserProfile(this.userId);
-        }
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.userProfileSubscription =
+          this.userProfileService.userId$.subscribe((userId) => {
+            if (userId) {
+              this.userId = userId;
+              this.fetchUserProfile(this.userId);
+            }
+          });
       });
-    });
-this.isLoggedIn = await this.authService.isLoggedIn();
+    this.isLoggedIn = await this.authService.isLoggedIn();
   }
 
   ngOnDestroy(): void {
-    if(this.userProfileSubscription){
+    if (this.userProfileSubscription) {
       this.userProfileSubscription.unsubscribe();
     }
   }
@@ -49,16 +50,16 @@ this.isLoggedIn = await this.authService.isLoggedIn();
     this.userProfile$ = this.userProfileService.userProfile$;
     this.userProfileService.getById(userId);
 
-    this.userProfile$.subscribe(user => {
+    this.userProfile$.subscribe((user) => {
       this.userProfile = user;
-    if(this.userProfile?.userId){
-      this.fetchProfileImage(this.userProfile?.userId);
-    }
-  });
+      if (this.userProfile?.userId) {
+        this.fetchProfileImage(this.userProfile?.userId);
+      }
+    });
   }
 
   fetchProfileImage(userId: number) {
-    this.userProfileService.getPhoto(userId).subscribe(blob => {
+    this.userProfileService.getPhoto(userId).subscribe((blob) => {
       this.displayProfileImage(blob);
     });
   }
@@ -73,11 +74,11 @@ this.isLoggedIn = await this.authService.isLoggedIn();
     }
   }
 
-  onLogin(){
-    this.router.navigate(["/login"]);
+  onLogin() {
+    this.router.navigate(['/login']);
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
     this.closeAlertBox();
   }
@@ -87,7 +88,7 @@ this.isLoggedIn = await this.authService.isLoggedIn();
     this.showAlertBox = false;
   }
 
-  onCancel(){
+  onCancel() {
     this.closeAlertBox();
   }
 
@@ -98,6 +99,4 @@ this.isLoggedIn = await this.authService.isLoggedIn();
   closeAlertBox() {
     this.showAlertBox = false;
   }
-
-
 }

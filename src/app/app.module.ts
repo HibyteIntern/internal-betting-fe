@@ -21,10 +21,10 @@ import { EventTemplateCardComponent } from './components/event-templates/event-t
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
-import { GroupListComponent } from './components/group-list/group-list.component';
-import { GroupComponent } from './components/group/group.component';
-import { GroupCreateComponent } from './components/group-create/group-create.component';
-import { GroupsComponent } from './components/groups/groups.component';
+import { GroupListComponent } from './components/user-groups/group-list/group-list.component';
+import { GroupComponent } from './components/user-groups/group/group.component';
+import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
+import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
@@ -41,8 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
-import { GroupFormComponent } from './components/group-form/group-form.component';
-import { GroupEditComponent } from './components/group-edit/group-edit.component';
+import { GroupFormComponent } from './components/user-groups/group-form/group-form.component';
+import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
 
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -54,8 +54,8 @@ import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component'
-import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component'
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import { IndexComponent } from './components/index/index.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -146,7 +146,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
-
   ],
   bootstrap: [AppComponent],
 })

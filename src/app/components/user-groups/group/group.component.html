@@ -4,21 +4,33 @@
       <div class="profile-circle" #profileCircle></div>
       <h2>{{ group?.groupName }}</h2>
     </div>
-    <p class="description" *ngIf="group?.description">{{ group?.description }}</p>
+    <p class="description" *ngIf="group?.description">
+      {{ group?.description }}
+    </p>
     <p>Members:</p>
     <ul>
       <li *ngFor="let user of group?.users">{{ user.username }}</li>
     </ul>
   </div>
   <div class="buttons">
-    <button color="accent" appClickStopPropagation mat-stroked-button style="margin-left: 1rem"
-            (click)="delete.emit(group?.userGroupId!!)">
+    <button
+      color="accent"
+      appClickStopPropagation
+      mat-stroked-button
+      style="margin-left: 1rem"
+      (click)="delete.emit(group?.userGroupId!!)"
+    >
       <mat-icon>delete</mat-icon>
       Delete
     </button>
-    <br>
-    <button color="accent" appClickStopPropagation mat-stroked-button style="margin-left: 1rem"
-            (click)="edit.emit(group?.userGroupId!!)">
+    <br />
+    <button
+      color="accent"
+      appClickStopPropagation
+      mat-stroked-button
+      style="margin-left: 1rem"
+      (click)="edit.emit(group?.userGroupId!!)"
+    >
       <mat-icon>edit</mat-icon>
       Edit
     </button>

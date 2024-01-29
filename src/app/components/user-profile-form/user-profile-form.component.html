@@ -1,23 +1,42 @@
-<form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">  
+<form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+  <div class="profile-image-upload">
+    <input
+      type="file"
+      id="profileImage"
+      (change)="onFileSelect($event)"
+      hidden
+      accept="image/*"
+    />
+    <label for="profileImage">
+      <div class="profile-circle"></div>
+    </label>
+  </div>
 
-    <div class="profile-image-upload">
-        <input type="file" id="profileImage" (change)="onFileSelect($event)" hidden accept="image/*">
-        <label for="profileImage">
-            <div class="profile-circle"></div>
-        </label>
-    </div>
+  <mat-form-field color="accent" appearance="outline" class="username-field">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" formControlName="username" />
+  </mat-form-field>
 
-    <mat-form-field color="accent" appearance="outline" class="username-field">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" formControlName="username">
-    </mat-form-field>
+  <mat-form-field color="accent" appearance="outline" class="description-field">
+    <mat-label>Description</mat-label>
+    <textarea matInput type="text" formControlName="description"></textarea>
+  </mat-form-field>
 
-    <mat-form-field color="accent" appearance="outline" class="description-field">
-        <mat-label>Description</mat-label>
-        <textarea matInput type="text" formControlName="description"></textarea>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" style="color: var(--text-color)" type="submit" [disabled]="!userProfileForm.valid">Submit</button>
-    <button mat-raised-button color="accent" style="color: var(--text-color)" (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    style="color: var(--text-color)"
+    type="submit"
+    [disabled]="!userProfileForm.valid"
+  >
+    Submit
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    style="color: var(--text-color)"
+    (click)="onCancel()"
+  >
+    Cancel
+  </button>
 </form>
-

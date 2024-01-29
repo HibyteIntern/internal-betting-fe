@@ -1,21 +1,21 @@
 .alert-box {
   position: fixed;
-  top: 50%; 
-  left: 50%; 
-  width: 500px; 
-  padding: 30px; 
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  padding: 30px;
   z-index: 100;
-  background:  var(--navbar-color);
+  background: var(--navbar-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 }
 
 .alert-box-actions {
   text-align: right;
 }
 
-.alert-box-actions button { 
+.alert-box-actions button {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -34,17 +34,17 @@
 
 .profile-image-upload {
   margin-bottom: 50px;
-  text-align: left; 
+  text-align: left;
 }
 
 .profile-circle {
-  width: 150px; 
-  height: 150px; 
-  background-color: var(--sidebar-color); 
-  border-radius: 50%; 
+  width: 150px;
+  height: 150px;
+  background-color: var(--sidebar-color);
+  border-radius: 50%;
   display: inline-block;
-  background-size: cover; 
-  background-position: center center; 
+  background-size: cover;
+  background-position: center center;
 }
 
 input[type="file"] {
@@ -61,6 +61,5 @@ input[type="file"] {
 
 .username {
   margin-bottom: 80px;
-  margin-left: 50px; 
+  margin-left: 50px;
 }
-

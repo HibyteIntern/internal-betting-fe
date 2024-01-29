@@ -8,9 +8,8 @@ describe('GroupEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupEditComponent ]
-    })
-    .compileComponents();
+      declarations: [GroupEditComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GroupEditComponent);
     component = fixture.componentInstance;

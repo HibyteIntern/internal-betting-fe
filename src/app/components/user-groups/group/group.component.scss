@@ -3,12 +3,12 @@
   width: 50rem;
 }
 
-.info{
-  width:35rem;
+.info {
+  width: 35rem;
 }
 
-.buttons{
-  display:flex;
+.buttons {
+  display: flex;
   flex-direction: column;
 }
 
@@ -18,9 +18,9 @@
 }
 
 .profile-circle {
-  height:2rem;
+  height: 2rem;
   width: 2rem;
-  margin-right:1rem;
+  margin-right: 1rem;
   background-color: var(--sidebar-color);
   border-radius: 50%;
   display: inline-block;
@@ -29,9 +29,8 @@
   background-position: center center;
 }
 
-.name-and-pic{
-  display:flex;
+.name-and-pic {
+  display: flex;
   flex-direction: row;
   align-items: center;
 }
-

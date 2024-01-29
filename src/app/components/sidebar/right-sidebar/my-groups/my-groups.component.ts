@@ -8,7 +8,7 @@ import { FullUserGroupModel } from '../../../../entity/full-user-group.model';
 @Component({
   selector: 'app-my-groups',
   templateUrl: './my-groups.component.html',
-  styleUrls: ['./my-groups.component.scss']
+  styleUrls: ['./my-groups.component.scss'],
 })
 export class MyGroupsComponent implements OnInit, OnDestroy {
   userProfile$?: Observable<UserProfile | null>;
@@ -16,22 +16,20 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private userProfileService: UserProfileService) { }
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
     this.userProfile$ = this.userProfileService.userId$.pipe(
       takeUntil(this.destroy$),
-      switchMap(userId => {
+      switchMap((userId) => {
         if (userId) {
           return this.userProfileService.userProfile$;
         }
         return [];
-      })
+      }),
     );
 
-    this.userProfile$.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(user => {
+    this.userProfile$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
       if (user?.groups) {
         this.groupsEntity = user.groups as FullUserGroupModel[];
       }

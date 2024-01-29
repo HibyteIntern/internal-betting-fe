@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ThemeService } from './service/theme.service';
-import { KeycloakService } from 'keycloak-angular';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +19,6 @@ export class AppComponent {
   public handleSelectedOptions(selectedOptions: string[]) {
     this.selectedOptions = selectedOptions;
 
-    console.log(this.selectedOptions)
+    console.log(this.selectedOptions);
   }
 }

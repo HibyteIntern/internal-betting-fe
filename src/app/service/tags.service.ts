@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { EventService } from './event.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

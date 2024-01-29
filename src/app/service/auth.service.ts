@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private keycloakService: KeycloakService,
-              private router: Router) {}
+  constructor(
+    private keycloakService: KeycloakService
+  ) {}
 
   isLoggedIn(): Promise<boolean> {
     return this.keycloakService.isLoggedIn();
@@ -39,10 +38,8 @@ export class AuthService {
         .map(function (c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         })
-        .join('')
+        .join(''),
     );
     return JSON.parse(jsonPayload);
   }
-
-
 }

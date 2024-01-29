@@ -5,19 +5,24 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {FullUserGroupModel} from "../../entity/full-user-group.model";
-import {UserProfileService} from "../../service/user-profile.service";
-import {UserProfile} from "../../entity/UserProfile";
-import {GroupService} from "../../service/group.service";
-import {Router} from "@angular/router";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { FullUserGroupModel } from '../../../entity/full-user-group.model';
+import { UserProfileService } from '../../../service/user-profile.service';
+import { UserProfile } from '../../../entity/UserProfile';
+import { GroupService } from '../../../service/group.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-form',
   templateUrl: './group-form.component.html',
-  styleUrls: ['./group-form.component.scss']
+  styleUrls: ['./group-form.component.scss'],
 })
 export class GroupFormComponent implements OnChanges, OnInit {
   @Input() initialGroup: FullUserGroupModel | null | undefined;
@@ -28,19 +33,22 @@ export class GroupFormComponent implements OnChanges, OnInit {
   allUserProfiles: UserProfile[] = [];
   selectedUserProfiles: UserProfile[] = [];
   userGroupForm: FormGroup;
-  isEditMode= false;
+  isEditMode = false;
   uploadedPhotoId?: number;
 
   constructor(
-      private formBuilder: FormBuilder,
-      private userService: UserProfileService,
-      private groupService: GroupService,
-      private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserProfileService,
+    private groupService: GroupService,
+    private router: Router,
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
       description: this.initialGroup?.description || '',
-      users: [this.initialGroup?.users || [], [Validators.required, this.validateSelectedUsers.bind(this)]],
+      users: [
+        this.initialGroup?.users || [],
+        [Validators.required, this.validateSelectedUsers.bind(this)],
+      ],
     });
   }
 
@@ -48,19 +56,26 @@ export class GroupFormComponent implements OnChanges, OnInit {
     if (changes['initialGroup']) {
       if (this.initialGroup) {
         this.userGroupForm.patchValue({
-        groupName: this.initialGroup.groupName || '',
-        description: this.initialGroup.description || '',
-        users: this.initialGroup.users || [],
-      });
-        this.selectedUsers = this.initialGroup.users.map(user => user.username);
+          groupName: this.initialGroup.groupName || '',
+          description: this.initialGroup.description || '',
+          users: this.initialGroup.users || [],
+        });
+        this.selectedUsers = this.initialGroup.users.map(
+          (user) => user.username,
+        );
         this.selectedUserProfiles = this.initialGroup.users;
-        if (this.initialGroup && this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
-          this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe(blob => {
-            this.displayProfileImage(blob);
-          });
-        }
-      else {
-        console.error('User profile or profile picture is undefined.');
+        if (
+          this.initialGroup &&
+          this.initialGroup.userGroupId &&
+          this.initialGroup.profilePicture
+        ) {
+          this.groupService
+            .getPhoto(this.initialGroup?.userGroupId)
+            .subscribe((blob) => {
+              this.displayProfileImage(blob);
+            });
+        } else {
+          console.error('User profile or profile picture is undefined.');
         }
       }
     }
@@ -72,9 +87,12 @@ export class GroupFormComponent implements OnChanges, OnInit {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
-      users: formValue.users?? [],
-      profilePicture: this.uploadedPhotoId !== undefined ? this.uploadedPhotoId : this.initialGroup?.profilePicture,
-    }
+      users: formValue.users ?? [],
+      profilePicture:
+        this.uploadedPhotoId !== undefined
+          ? this.uploadedPhotoId
+          : this.initialGroup?.profilePicture,
+    };
     this.formSubmit.emit(updatedGroup);
   }
 
@@ -83,21 +101,25 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.userService.getAll().subscribe((data) => {
       this.allUserProfiles = data;
       data.forEach((user) => {
-        if(user.username && !this.selectedUsers.includes(user.username)) {
-          this.userOptions = [...this.userOptions, user.username]
+        if (user.username && !this.selectedUsers.includes(user.username)) {
+          this.userOptions = [...this.userOptions, user.username];
         }
       });
     });
   }
 
   handleUserSelect(users: string[]) {
-    this.selectedUserProfiles = this.allUserProfiles.filter(user => users.includes(user.username));
+    this.selectedUserProfiles = this.allUserProfiles.filter((user) =>
+      users.includes(user.username),
+    );
     this.userGroupForm.patchValue({
-      users: this.selectedUserProfiles
+      users: this.selectedUserProfiles,
     });
   }
 
-  validateSelectedUsers(control: FormControl): {[key: string]: boolean} | null {
+  validateSelectedUsers(
+    control: FormControl,
+  ): { [key: string]: boolean } | null {
     const users = control.value;
     return users && users.length >= 2 ? null : { noUsersSelected: true };
   }
@@ -116,9 +138,11 @@ export class GroupFormComponent implements OnChanges, OnInit {
       };
       reader.readAsDataURL(file);
       if (typeof this.initialGroup?.userGroupId === 'number') {
-        this.groupService.addPhoto(this.initialGroup.userGroupId, file).subscribe((photoId) => {
-          this.uploadedPhotoId = photoId;
-        });
+        this.groupService
+          .addPhoto(this.initialGroup.userGroupId, file)
+          .subscribe((photoId) => {
+            this.uploadedPhotoId = photoId;
+          });
       } else {
         console.error('User ID is undefined');
       }

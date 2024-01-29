@@ -6,20 +6,22 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 @Component({
   selector: 'app-bets-list',
   templateUrl: './bets-list.component.html',
-  styleUrls: ['./bets-list.component.scss']
+  styleUrls: ['./bets-list.component.scss'],
 })
-export class BetsListComponent implements OnInit, OnDestroy{
+export class BetsListComponent implements OnInit, OnDestroy {
   userProfile$?: Observable<UserProfile | null>;
   private userProfileSubscription?: Subscription;
 
-  constructor(private userProfileService: UserProfileService){}
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    this.userProfileSubscription = this.userProfileService.userId$.subscribe(userId => {
-      if (userId) {
-        this.fetchUserProfile(userId);
-      }
-    });
+    this.userProfileSubscription = this.userProfileService.userId$.subscribe(
+      (userId) => {
+        if (userId) {
+          this.fetchUserProfile(userId);
+        }
+      },
+    );
   }
 
   fetchUserProfile(userId: number): void {
