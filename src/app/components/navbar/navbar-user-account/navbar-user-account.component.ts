@@ -23,7 +23,9 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.router.events
+    this.isLoggedIn = await this.authService.isLoggedIn();
+    if(this.isLoggedIn){
+      this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         takeUntil(this.unsubscribe$),
@@ -31,9 +33,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.fetchUserProfile();
       });
-
-    this.isLoggedIn = await this.authService.isLoggedIn();
-    this.fetchUserProfile();
 
     this.userProfileService.userProfile$
       .pipe(takeUntil(this.unsubscribe$))
@@ -43,6 +42,8 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
           this.fetchProfileImage();
         }
       });
+    }
+  
   }
 
   ngOnDestroy(): void {

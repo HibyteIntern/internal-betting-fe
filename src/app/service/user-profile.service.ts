@@ -40,11 +40,11 @@ export class UserProfileService {
             userProfileKeycloak.username &&
             userProfile.userId
           ) {
-            const userId = String(userProfile.userId);
-            const avatarSvg = this.avatarService.generateAvatar(userId);
+            
+            const avatarSvg = this.avatarService.generateAvatar(userProfile.username);
             const avatarFile = await this.avatarService.convertSvgToImageFile(
               avatarSvg,
-              userId,
+              userProfile.username,
             );
 
             if (userProfile.userId) {
