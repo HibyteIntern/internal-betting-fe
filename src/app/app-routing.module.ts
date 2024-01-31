@@ -13,6 +13,7 @@ import { IndexComponent } from './components/index/index.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { AuthGuard } from './guard/auth.guard';
+import { LeaderboardFormComponent } from './components/leaderboard-form/leaderboard-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'prizes/create', component: PrizeDrawAddComponent },
   { path: 'prizes/edit/:id', component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
+  { path: 'leaderboard-form', component: LeaderboardFormComponent},
   { path: '', component: IndexComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
