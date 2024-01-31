@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProfileService } from "../../../service/user-profile.service";
+import { Role } from "../../../entity/Role";
+import { UserProfile } from "../../../entity/UserProfile";
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -7,7 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./left-sidebar-list.component.scss'],
 })
 export class LeftSidebarListComponent {
-  constructor(protected router: Router) {}
+  userProfile: UserProfile | null = null;
+  constructor(
+    protected router: Router,
+    protected userProfileService: UserProfileService
+  ) {
+  this.userProfileService.userProfile$.subscribe((userProfile) => {
+      this.userProfile = userProfile;
+    });
+  }
 
   navigateToIndex() {
     this.router.navigate(['/']);
@@ -16,4 +27,6 @@ export class LeftSidebarListComponent {
   navigateToCreateCompetition() {
     this.router.navigate(['/competitions/create']);
   }
+
+  protected readonly Role = Role;
 }

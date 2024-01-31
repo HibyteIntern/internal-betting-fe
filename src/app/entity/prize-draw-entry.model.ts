@@ -1,4 +1,5 @@
-import { UserProfile } from './user.profile.model';
+import { UserProfile } from "./UserProfile";
+
 
 export interface PrizeDrawEntry {
   id: number;

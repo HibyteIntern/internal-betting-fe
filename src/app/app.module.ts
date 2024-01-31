@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
@@ -61,13 +61,15 @@ import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/
 import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { NotFoundPageComponent } from './components/error-pages/not-found-page/not-found-page.component';
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
+import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
+import {authInterceptor} from "./interceptor/auth.interceptor";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -134,7 +136,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NotFoundPageComponent,
     BetsListComponent,
     LoginAlertComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    AccessDeniedPageComponent
   ],
   imports: [
     BrowserModule,
@@ -173,6 +176,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
+    provideHttpClient(
+      withInterceptors([authInterceptor])),
   ],
   bootstrap: [AppComponent],
 })

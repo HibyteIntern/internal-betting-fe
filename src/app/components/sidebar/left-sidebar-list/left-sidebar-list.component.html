@@ -19,15 +19,15 @@
     />
     <div class="info-container">Create competition</div>
   </div>
-  <div class="icon" [routerLink]="['event-templates']">
+  <div class="icon" [routerLink]="['event-templates']" *ngIf="userProfile?.roles?.includes(Role.ADMIN)">
     <img src="assets/icons/event-template-icon.svg" alt="credits" />
     <div class="info-container">Event templates</div>
   </div>
-  <div class="icon">
+  <div class="icon" *ngIf="userProfile?.roles?.includes(Role.ADMIN)">
     <img src="assets/icons/user-icon.svg" alt="credits" />
     <div class="info-container">Users</div>
   </div>
-  <div class="icon">
+  <div class="icon" *ngIf="userProfile?.roles?.includes(Role.ADMIN)">
     <img src="assets/icons/user-group-icon.svg" alt="credits" />
     <div class="info-container">User groups</div>
   </div>
