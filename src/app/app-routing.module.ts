@@ -7,9 +7,13 @@ import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-b
 import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
 import { NotFoundPageComponent } from './components/error-pages/not-found-page/not-found-page.component';
+import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { ViewEventComponent } from './components/events/view-event/view-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { IndexComponent } from './components/index/index.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { authGuard } from './guard/auth.guard';
@@ -33,6 +37,9 @@ const routes: Routes = [
   { path: 'prizes/create', canActivate: [authGuard], component: PrizeDrawAddComponent },
   { path: 'prizes/edit/:id', canActivate: [authGuard], component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
+  { path: 'view-event/:eventId', component: ViewEventComponent },
+  { path: 'edit-event/:eventId', component: EditEventComponent },
+  { path: 'create-event', component: CreateEventComponent },
   { path: '', component: IndexComponent },
   { path: 'denied', component: AccessDeniedPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
