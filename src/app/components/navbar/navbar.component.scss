@@ -24,10 +24,10 @@
   flex-direction: row;
   height: 5rem;
   align-items: center;
-    mat-icon {
-      &:hover {
-        cursor: pointer;
-        filter: brightness(0.7);
+  mat-icon {
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.7);
     }
   }
 }
@@ -88,6 +88,6 @@ app-navbar-user-account {
 
 @media (max-width: 500px) {
   #app-name {
-   display: none;
+    display: none;
   }
 }

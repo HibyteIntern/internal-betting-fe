@@ -1,8 +1,9 @@
-export class Bet{
-  betId: number | null = null;
-  user: number | null = null;
-  betType: number | null = null;
-  amount: number | null = null;
-  odds: number | null = null;
-  value: string | null = null;
+import { UserProfile } from './UserProfile';
+
+export interface Bet {
+  betId?: number;
+  user?: UserProfile;
+  amount: number;
+  odds: number;
+  value: string;
 }
