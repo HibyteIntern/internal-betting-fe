@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { EventRequest } from "../../../entity/EventRequest";
-import { EventTemplate } from "../../../entity/EventTemplate";
-import { CompleteBetType } from "../../../entity/CompleteBetType";
-import { BetTemplateType } from "../../../entity/BetTemplateType";
 import { UserProfile } from "../../../entity/UserProfile";
 import { Status } from "../../../entity/Status";
 import { EventService } from "../../../service/event.service";
 import { EventTemplateService } from "../../../service/event-template.service";
+import { EventTemplate } from "../../../entity/event-template.model";
+import { BetTemplateType } from "../../../entity/bet-template-type";
+import { CompleteBetType } from "../../../entity/complete-bet-type.model";
 
 @Component({
   selector: 'app-create-event',
@@ -28,9 +28,14 @@ export class CreateEventComponent implements OnInit {
               private eventService: EventService) {}
 
   ngOnInit() {
-    this.eventTemplateService.getData().subscribe((data: { entity: EventTemplate[]; }) => {
-      this.eventTemplates = data.entity;
-    });
+    this.eventTemplateService.getData().subscribe(
+      (data: EventTemplate[]) => {
+        this.eventTemplates = data;
+      },
+      (error) => {
+        console.error('Error fetching event templates:', error);
+      }
+    );
 
     this.eventService.getUserProfiles().subscribe(
       profiles => {
@@ -62,7 +67,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   submitForm() {
-    this.convertBetTemplatesToCompleteBetTypes()
+    this.convertBetTemplatesToCompleteBetTypes();
     this.eventService.addEvent(this.formData).subscribe(
       error => {
         console.error('Error adding event:', error);

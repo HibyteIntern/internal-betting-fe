@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CompleteBetType} from "../../../entity/CompleteBetType";
+import {CompleteBetType} from "../../../entity/complete-bet-type.model";
 
 @Component({
   selector: 'app-add-bet-to-event',
