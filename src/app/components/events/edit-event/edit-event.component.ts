@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { EventRequest } from "../../../entity/EventRequest";
-import { EventService } from "../../../service/event.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { EventRequest } from '../../../entity/EventRequest';
+import { EventService } from '../../../service/event.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
-  styleUrls: ['./edit-event.component.scss']
+  styleUrls: ['./edit-event.component.scss'],
 })
 export class EditEventComponent implements OnInit {
   eventId!: string;
@@ -14,7 +14,11 @@ export class EditEventComponent implements OnInit {
   eventTemplates: any[] = []; // Add this line
   statusOptions: string[] = ['DRAFT', 'PUBLISHED', 'CANCELLED'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventService: EventService,
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -26,9 +30,8 @@ export class EditEventComponent implements OnInit {
         },
         (error) => {
           console.error('Error fetching event data:', error);
-        }
+        },
       );
-
     });
   }
 
@@ -39,7 +42,7 @@ export class EditEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating event:', error);
-      }
+      },
     );
   }
 }

@@ -2,48 +2,92 @@
   <form class="styled-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Event Name</mat-label>
-      <input name="eventName" matInput placeholder="{{ formData.name || 'Ex. Event Name' }}" [(ngModel)]="formData.name" required>
+      <input
+        name="eventName"
+        matInput
+        placeholder="{{ formData.name || 'Ex. Event Name' }}"
+        [(ngModel)]="formData.name"
+        required
+      />
     </mat-form-field>
-    <br/>
+    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea name="description" matInput placeholder="{{ formData.description || 'Ex. Event Description' }}" [(ngModel)]="formData.description" required></textarea>
+      <textarea
+        name="description"
+        matInput
+        placeholder="{{ formData.description || 'Ex. Event Description' }}"
+        [(ngModel)]="formData.description"
+        required
+      ></textarea>
     </mat-form-field>
-    <br/>
+    <br />
 
     <!--  creator should be gotten automatically to be implemented when userProfile is complete  -->
     <mat-form-field appearance="outline">
       <mat-label>Creator</mat-label>
-      <input name="creator" matInput placeholder="{{ formData.creator || 'Ex. Creator' }}" [(ngModel)]="formData.creator" required>
+      <input
+        name="creator"
+        matInput
+        placeholder="{{ formData.creator || 'Ex. Creator' }}"
+        [(ngModel)]="formData.creator"
+        required
+      />
     </mat-form-field>
-    <br/>
+    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Event Template</mat-label>
-      <mat-select [(ngModel)]="formData.selectedTemplate" name="selectedTemplate">
-        <mat-option *ngFor="let template of eventTemplates" [value]="template.name">
+      <mat-select
+        [(ngModel)]="formData.selectedTemplate"
+        name="selectedTemplate"
+      >
+        <mat-option
+          *ngFor="let template of eventTemplates"
+          [value]="template.name"
+        >
           {{ template.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br/>
+    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Starts At</mat-label>
-      <input matInput [matDatepicker]="startsAtPicker" name="startsAt" placeholder="Select a date and time" [(ngModel)]="formData.startsAt" required>
-      <mat-datepicker-toggle matSuffix [for]="startsAtPicker"></mat-datepicker-toggle>
+      <input
+        matInput
+        [matDatepicker]="startsAtPicker"
+        name="startsAt"
+        placeholder="Select a date and time"
+        [(ngModel)]="formData.startsAt"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startsAtPicker"
+      ></mat-datepicker-toggle>
       <mat-datepicker #startsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br/>
+    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Ends At</mat-label>
-      <input matInput [matDatepicker]="endsAtPicker" name="endsAt" placeholder="Select a date and time" [(ngModel)]="formData.endsAt" required>
-      <mat-datepicker-toggle matSuffix [for]="endsAtPicker"></mat-datepicker-toggle>
+      <input
+        matInput
+        [matDatepicker]="endsAtPicker"
+        name="endsAt"
+        placeholder="Select a date and time"
+        [(ngModel)]="formData.endsAt"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="endsAtPicker"
+      ></mat-datepicker-toggle>
       <mat-datepicker #endsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br/>
+    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Status</mat-label>
@@ -53,9 +97,15 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br/>
+    <br />
 
-    <button mat-raised-button color="accent" type="submit" [disabled]="!eventForm.valid">Submit</button>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="!eventForm.valid"
+    >
+      Submit
+    </button>
   </form>
 </app-mainframe>
-

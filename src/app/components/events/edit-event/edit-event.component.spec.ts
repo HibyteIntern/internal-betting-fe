@@ -8,9 +8,8 @@ describe('EditEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditEventComponent ]
-    })
-    .compileComponents();
+      declarations: [EditEventComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditEventComponent);
     component = fixture.componentInstance;

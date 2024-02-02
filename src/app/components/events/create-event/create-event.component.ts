@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { EventRequest } from "../../../entity/EventRequest";
-import { UserProfile } from "../../../entity/UserProfile";
-import { Status } from "../../../entity/Status";
-import { EventService } from "../../../service/event.service";
-import { EventTemplateService } from "../../../service/event-template.service";
-import { EventTemplate } from "../../../entity/event-template.model";
-import { BetTemplateType } from "../../../entity/bet-template-type";
-import { CompleteBetType } from "../../../entity/complete-bet-type.model";
+import { EventRequest } from '../../../entity/EventRequest';
+import { UserProfile } from '../../../entity/UserProfile';
+import { Status } from '../../../entity/Status';
+import { EventService } from '../../../service/event.service';
+import { EventTemplateService } from '../../../service/event-template.service';
+import { EventTemplate } from '../../../entity/event-template.model';
+import { BetTemplateType } from '../../../entity/bet-template-type';
+import { CompleteBetType } from '../../../entity/complete-bet-type.model';
 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
-  styleUrls: ['./create-event.component.scss']
+  styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent implements OnInit {
   formData: EventRequest = new EventRequest();
@@ -24,8 +24,10 @@ export class CreateEventComponent implements OnInit {
   userProfilesList: UserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
-  constructor(private eventTemplateService: EventTemplateService,
-              private eventService: EventService) {}
+  constructor(
+    private eventTemplateService: EventTemplateService,
+    private eventService: EventService,
+  ) {}
 
   ngOnInit() {
     this.eventTemplateService.getData().subscribe(
@@ -34,16 +36,16 @@ export class CreateEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching event templates:', error);
-      }
+      },
     );
 
     this.eventService.getUserProfiles().subscribe(
-      profiles => {
+      (profiles) => {
         this.userProfilesList = profiles;
       },
-      error => {
+      (error) => {
         console.error('Error fetching user profiles:', error);
-      }
+      },
     );
   }
 
@@ -52,26 +54,27 @@ export class CreateEventComponent implements OnInit {
   }
 
   private convertBetTemplatesToCompleteBetTypes() {
-    const selectedEventTemplate = this.eventTemplates.find(template => template.name === this.formData.selectedTemplate);
+    const selectedEventTemplate = this.eventTemplates.find(
+      (template) => template.name === this.formData.selectedTemplate,
+    );
 
     if (selectedEventTemplate) {
-      this.formData.completeBetTypeDtoList = selectedEventTemplate.betTemplates.map(betTemplate => {
-        const completeBetType: CompleteBetType = {
-          name: betTemplate.name,
-          type: this.convertBetTemplateType(betTemplate.type),
-          multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
-        };
-        return completeBetType;
-      });
+      this.formData.completeBetTypeDtoList =
+        selectedEventTemplate.betTemplates.map((betTemplate) => {
+          const completeBetType: CompleteBetType = {
+            name: betTemplate.name,
+            type: this.convertBetTemplateType(betTemplate.type),
+            multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
+          };
+          return completeBetType;
+        });
     }
   }
 
   submitForm() {
     this.convertBetTemplatesToCompleteBetTypes();
-    this.eventService.addEvent(this.formData).subscribe(
-      error => {
-        console.error('Error adding event:', error);
-      }
-    );
+    this.eventService.addEvent(this.formData).subscribe((error) => {
+      console.error('Error adding event:', error);
+    });
   }
 }

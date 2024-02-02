@@ -3,7 +3,11 @@
     <mat-form-field appearance="outline">
       <mat-label>Select an option:</mat-label>
       <mat-select [(ngModel)]="selectedOption">
-        <mat-option *ngFor="let option of betType?.multipleChoiceOptions" [value]="option">{{ option }}</mat-option>
+        <mat-option
+          *ngFor="let option of betType?.multipleChoiceOptions"
+          [value]="option"
+          >{{ option }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
   </div>
@@ -20,11 +24,17 @@
     <mat-form-field appearance="outline">
       <mat-label>Your answer:</mat-label>
       <input matInput [(ngModel)]="answer" />
-    </mat-form-field >
+    </mat-form-field>
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Bet amount:</mat-label>
-    <input matInput [(ngModel)]="betAmount"  />
+    <input matInput [(ngModel)]="betAmount" />
   </mat-form-field>
-  <button mat-raised-button style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  " color="primary">Place Bet</button>
+  <button
+    mat-raised-button
+    style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  "
+    color="primary"
+  >
+    Place Bet
+  </button>
 </form>

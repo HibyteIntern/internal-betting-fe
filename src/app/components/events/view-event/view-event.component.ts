@@ -12,7 +12,11 @@ export class ViewEventComponent implements OnInit {
   eventRequest!: EventRequest;
   eventId!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventService: EventService,
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -29,7 +33,7 @@ export class ViewEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching event data:', error);
-      }
+      },
     );
   }
 

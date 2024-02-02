@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient ,HttpParams} from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, finalize  } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
-import {UserProfile} from "../entity/UserProfile";
+import { UserProfile } from '../entity/UserProfile';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
   private apiUrl = 'http://localhost:8080/api/v1/events'; // Adjust the base URL as needed
@@ -41,7 +41,9 @@ export class EventService {
   }
 
   getUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>('http://localhost:8080/api/user-profiles');
+    return this.http.get<UserProfile[]>(
+      'http://localhost:8080/api/user-profiles',
+    );
   }
 
   getAllTags(): Observable<string[]> {

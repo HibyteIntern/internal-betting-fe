@@ -8,9 +8,8 @@ describe('AddBetToEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddBetToEventComponent ]
-    })
-    .compileComponents();
+      declarations: [AddBetToEventComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddBetToEventComponent);
     component = fixture.componentInstance;

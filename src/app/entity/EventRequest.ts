@@ -6,12 +6,12 @@ export class EventRequest {
   description: string;
   creator: string;
   completeBetTypeDtoList: CompleteBetType[];
-  tags:string[];
+  tags: string[];
   userGroups: string[];
   userProfiles: string[];
   startsAt: Date;
   endsAt: Date;
-  status:Status;
+  status: Status;
   selectedTemplate: string;
 
   constructor(data: any = {}) {
