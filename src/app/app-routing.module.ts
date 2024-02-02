@@ -13,7 +13,6 @@ import { EditEventComponent } from './components/events/edit-event/edit-event.co
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { IndexComponent } from './components/index/index.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { authGuard } from './guard/auth.guard';
