@@ -6,9 +6,8 @@ import { CompleteBetType } from "../../../entity/CompleteBetType";
 import { BetTemplateType } from "../../../entity/BetTemplateType";
 import { UserProfile } from "../../../entity/UserProfile";
 import { Status } from "../../../entity/Status";
-import {EventService} from "../../../service/event.service";
-import {EventTemplateService} from "../../../service/event-template.service";
-import {HttpClient} from "@angular/common/http";
+import { EventService } from "../../../service/event.service";
+import { EventTemplateService } from "../../../service/event-template.service";
 
 @Component({
   selector: 'app-create-event',
@@ -21,23 +20,19 @@ export class CreateEventComponent implements OnInit {
   userGroupsControl = new FormControl();
   userProfilesControl = new FormControl();
 
-  userGroupsList: string[] = ['Group1', 'Group2', 'Group3'];
-  userProfilesList: UserProfile[] = [
-    { userId: 1, keycloakId: 'key1', username: 'User1', profilePicture: 1, description: 'Description1', bets: [], coins: 50 },
-    { userId: 2, keycloakId: 'key2', username: 'User2', profilePicture: 2, description: 'Description2', bets: [], coins: 50 },
-  ];
+  userGroupsList: string[] = [];
+  userProfilesList: UserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
-  constructor(private eventTemplateService: EventTemplateService ,
-              private eventService :EventService ,
-              private http: HttpClient) {}
+  constructor(private eventTemplateService: EventTemplateService,
+              private eventService: EventService) {}
 
   ngOnInit() {
-    // Call the method from the service to fetch event templates on component initialization
     this.eventTemplateService.getData().subscribe((data: { entity: EventTemplate[]; }) => {
       this.eventTemplates = data.entity;
     });
-    this.http.get<UserProfile[]>('http://localhost:8080/api/user-profiles').subscribe(
+
+    this.eventService.getUserProfiles().subscribe(
       profiles => {
         this.userProfilesList = profiles;
       },
@@ -68,13 +63,7 @@ export class CreateEventComponent implements OnInit {
 
   submitForm() {
     this.convertBetTemplatesToCompleteBetTypes()
-    console.log('Form Data:', this.formData);
-    // Use the event service to add the event
-    // This assumes that the event service has a method like addEvent(formData: EventRequest)
     this.eventService.addEvent(this.formData).subscribe(
-      response => {
-        console.log('Event added successfully:', response);
-      },
       error => {
         console.error('Error adding event:', error);
       }

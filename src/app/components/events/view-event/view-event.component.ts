@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '../../../service/event.service';
 import { EventRequest } from '../../../entity/EventRequest';
-import { Status } from '../../../entity/Status';
 
 @Component({
   selector: 'app-view-event',
@@ -10,9 +9,10 @@ import { Status } from '../../../entity/Status';
   styleUrls: ['./view-event.component.scss'],
 })
 export class ViewEventComponent implements OnInit {
-  eventRequest!: EventRequest ;
-  eventId!:string;
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
+  eventRequest!: EventRequest;
+  eventId!: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -20,16 +20,11 @@ export class ViewEventComponent implements OnInit {
 
       this.fetchEventData();
     });
-
-    this.route.params.subscribe((params) => {
-      this.eventId = params['eventId'];
-
-      this.fetchEventData();
-    });
   }
+
   fetchEventData() {
-    this.http.get(`http://localhost:8080/api/v1/events/get/${this.eventId}`).subscribe(
-      (data: any) => {
+    this.eventService.getEventById(this.eventId).subscribe(
+      (data: EventRequest) => {
         this.eventRequest = new EventRequest(data);
       },
       (error) => {
@@ -37,6 +32,7 @@ export class ViewEventComponent implements OnInit {
       }
     );
   }
+
   navigateToEditEvent() {
     this.router.navigate(['/edit-event', this.eventId]);
   }
