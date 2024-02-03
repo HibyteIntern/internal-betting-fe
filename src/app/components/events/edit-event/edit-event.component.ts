@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventRequest } from '../../../entity/event-request.model';
 import { EventService } from '../../../service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Status } from "../../../entity/Status";
 
 @Component({
   selector: 'app-edit-event',
@@ -12,7 +13,7 @@ export class EditEventComponent implements OnInit {
   eventId!: string;
   formData: EventRequest = new EventRequest();
   eventTemplates: any[] = []; // Add this line
-  statusOptions: string[] = ['DRAFT', 'PUBLISHED', 'CANCELLED'];
+  statusOptions: string[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class EditEventComponent implements OnInit {
   submitForm() {
     this.eventService.updateEvent(this.eventId, this.formData).subscribe(
       () => {
-        this.router.navigate(['/view-event', this.eventId]);
+        this.router.navigate(['/events', this.eventId]);
       },
       (error) => {
         console.error('Error updating event:', error);

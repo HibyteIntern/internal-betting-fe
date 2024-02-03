@@ -7,6 +7,8 @@ import PrizeDrawEntryRequest from '../../../entity/prize-draw-entry-request.mode
 import { DrawType } from '../../../entity/DrawType';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import {UserProfile} from "../../../entity/UserProfile";
+import {UserProfileService} from "../../../service/user-profile.service";
 
 @Component({
   selector: 'app-prize-draw-page',
@@ -16,8 +18,10 @@ import { MatDialog } from '@angular/material/dialog';
 export class PrizeDrawPageComponent implements OnInit {
   prizeDraw: PrizeDraw | undefined;
   isLoading = true;
+  userProfile: UserProfile | null = null;
   constructor(
     private prizeDrawService: PrizeDrawService,
+    private userProfileService: UserProfileService,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
@@ -40,6 +44,9 @@ export class PrizeDrawPageComponent implements OnInit {
       this.isLoading = false;
       this.prizeDraw = data;
     });
+    this.userProfileService.userProfile$.subscribe((profile) => {
+      this.userProfile = profile;
+    });
   }
 
   addEntry(amount: number) {
@@ -50,6 +57,7 @@ export class PrizeDrawPageComponent implements OnInit {
       };
       this.prizeDrawService.addEntryToDraw(body).subscribe((data) => {
         this.prizeDraw!.entries.push(data);
+        this.userProfileService.updateCoins(-amount);
         this.recalculateLeader(this.prizeDraw!);
       });
     }
@@ -89,7 +97,9 @@ export class PrizeDrawPageComponent implements OnInit {
 
   showEntryInput(): boolean {
     if (this.prizeDraw?.type === DrawType.MOST_POINTS) return false;
-    //once the user service will be finished, we will check if the logged-in user has already entered the draw
-    return true;
+    if(this.userProfile != null && this.prizeDraw?.entries) {
+      return !this.prizeDraw.entries.some(entry => entry.user.userId === this.userProfile!.userId);
+    }
+    return false;
   }
 }

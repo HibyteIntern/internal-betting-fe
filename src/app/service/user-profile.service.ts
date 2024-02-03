@@ -116,4 +116,11 @@ export class UserProfileService {
       responseType: 'blob',
     });
   }
+
+  updateCoins(coins: number) {
+    let tempUserProfile = this.userProfileSubject.value;
+    if(tempUserProfile && tempUserProfile.coins) tempUserProfile.coins = tempUserProfile.coins + coins;
+    this.userProfileSubject.next(tempUserProfile);
+  }
+
 }

@@ -10,7 +10,6 @@
         required
       />
     </mat-form-field>
-    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
@@ -22,20 +21,6 @@
         required
       ></textarea>
     </mat-form-field>
-    <br />
-
-    <!--  creator should be gotten automatically to be implemented when userProfile is complete  -->
-    <mat-form-field appearance="outline">
-      <mat-label>Creator</mat-label>
-      <input
-        name="creator"
-        matInput
-        placeholder="{{ formData.creator || 'Ex. Creator' }}"
-        [(ngModel)]="formData.creator"
-        required
-      />
-    </mat-form-field>
-    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Event Template</mat-label>
@@ -51,7 +36,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Starts At</mat-label>
@@ -69,7 +53,6 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #startsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Ends At</mat-label>
@@ -87,7 +70,6 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #endsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br />
 
     <mat-form-field appearance="outline">
       <mat-label>Status</mat-label>
@@ -97,7 +79,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
     <button
       mat-raised-button

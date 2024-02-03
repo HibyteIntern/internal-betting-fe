@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {EventRequest} from '../../../entity/event-request.model';
-import {UserProfile} from '../../../entity/UserProfile';
-import {Status} from '../../../entity/Status';
-import {EventService} from '../../../service/event.service';
-import {EventTemplateService} from '../../../service/event-template.service';
-import {EventTemplate} from '../../../entity/event-template.model';
-import {BetTemplateType} from '../../../entity/bet-template-type';
-import {CompleteBetType} from '../../../entity/complete-bet-type.model';
-import {UserProfileService} from "../../../service/user-profile.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { EventRequest } from '../../../entity/event-request.model';
+import { UserProfile } from '../../../entity/UserProfile';
+import { Status } from '../../../entity/Status';
+import { EventService } from '../../../service/event.service';
+import { EventTemplateService } from '../../../service/event-template.service';
+import { EventTemplate } from '../../../entity/event-template.model';
+import { BetTemplateType } from '../../../entity/bet-template-type';
+import { CompleteBetType } from '../../../entity/complete-bet-type.model';
+import { UserProfileService } from "../../../service/user-profile.service";
 
 @Component({
   selector: 'app-create-event',
