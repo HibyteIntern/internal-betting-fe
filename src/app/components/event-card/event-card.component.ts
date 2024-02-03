@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EventRequest } from 'src/app/entity/EventRequest';
+import { EventRequest } from 'src/app/entity/event-request.model';
 
 @Component({
   selector: 'app-event-card',

@@ -1,10 +1,12 @@
 import { CompleteBetType } from './complete-bet-type.model';
 import { Status } from './Status';
+import {UserProfile} from "./UserProfile";
 
 export class EventRequest {
+  eventId?: number
   name: string;
   description: string;
-  creator: string;
+  creator?: UserProfile;
   completeBetTypeDtoList: CompleteBetType[];
   tags: string[];
   userGroups: string[];
@@ -17,7 +19,6 @@ export class EventRequest {
   constructor(data: any = {}) {
     this.name = data.name || '';
     this.description = data.description || '';
-    this.creator = data.creator || '';
     this.completeBetTypeDtoList = data.completeBetTypeDtoList || [];
     this.tags = data.tags || [];
     this.userGroups = data.userGroups || [];

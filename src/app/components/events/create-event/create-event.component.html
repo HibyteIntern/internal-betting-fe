@@ -1,6 +1,6 @@
 <app-mainframe [title]="'Create an event'">
   <form class="styled-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Name</mat-label>
       <input
         name="eventName"
@@ -10,8 +10,8 @@
         required
       />
     </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline">
+
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Description</mat-label>
       <textarea
         name="description"
@@ -21,20 +21,8 @@
         required
       ></textarea>
     </mat-form-field>
-    <br />
-    <!--  creator should be gotten automatically to be implemented when userProfile is complete  -->
-    <mat-form-field appearance="outline">
-      <mat-label>Creator</mat-label>
-      <input
-        name="creator"
-        matInput
-        placeholder="Ex. Creator"
-        [(ngModel)]="formData.creator"
-        required
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline">
+
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Template</mat-label>
       <mat-select
         [(ngModel)]="formData.selectedTemplate"
@@ -48,23 +36,21 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>User Groups</mat-label>
-      <mat-select [formControl]="userGroupsControl" multiple>
+      <mat-select [formControl]="userGroupsControl" [multiple]="true">
         <mat-option *ngFor="let group of userGroupsList" [value]="group">{{
           group
         }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>User Profiles</mat-label>
       <mat-select
         [(ngModel)]="formData.userProfiles"
-        multiple
+        [multiple]="true"
         name="userProfiles"
       >
         <mat-option
@@ -74,9 +60,8 @@
         >
       </mat-select>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Starts At</mat-label>
       <input
         matInput
@@ -92,9 +77,8 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #startsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Ends At</mat-label>
       <input
         matInput
@@ -110,9 +94,8 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #endsAtPicker></mat-datepicker>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Status</mat-label>
       <mat-select [(ngModel)]="formData.status" name="selectedStatus">
         <mat-option *ngFor="let status of statusOptions" [value]="status">
@@ -120,7 +103,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
     <button
       mat-raised-button

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../service/event.service';
-import { EventRequest } from '../../../entity/EventRequest';
+import { EventRequest } from '../../../entity/event-request.model';
 
 @Component({
   selector: 'app-view-event',
@@ -9,7 +9,7 @@ import { EventRequest } from '../../../entity/EventRequest';
   styleUrls: ['./view-event.component.scss'],
 })
 export class ViewEventComponent implements OnInit {
-  eventRequest!: EventRequest;
+  eventRequest?: EventRequest;
   eventId!: string;
 
   constructor(

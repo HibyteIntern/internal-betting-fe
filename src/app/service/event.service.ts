@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
-import { EventRequest } from '../entity/EventRequest';
-import { UserProfile } from '../entity/UserProfile';
+import { EventRequest } from '../entity/event-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +16,8 @@ export class EventService {
 
   constructor(private http: HttpClient) {}
 
-  addEvent(eventRequest: EventRequest): Observable<any> {
-    return this.http.post(this.addUrl, eventRequest);
+  addEvent(eventRequest: EventRequest): Observable<EventRequest> {
+    return this.http.post<EventRequest>(this.addUrl, eventRequest);
   }
 
   getEvents(): Observable<EventRequest[]> {
@@ -38,12 +37,6 @@ export class EventService {
   deleteEvent(eventId: string): Observable<any> {
     const deleteUrl = `${this.apiUrl}/delete/${eventId}`;
     return this.http.delete(deleteUrl);
-  }
-
-  getUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(
-      'http://localhost:8080/api/user-profiles',
-    );
   }
 
   getAllTags(): Observable<string[]> {

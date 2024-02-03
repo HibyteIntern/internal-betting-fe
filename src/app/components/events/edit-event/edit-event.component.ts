@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventRequest } from '../../../entity/EventRequest';
+import { EventRequest } from '../../../entity/event-request.model';
 import { EventService } from '../../../service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -37,7 +37,7 @@ export class EditEventComponent implements OnInit {
 
   submitForm() {
     this.eventService.updateEvent(this.eventId, this.formData).subscribe(
-      (response) => {
+      () => {
         this.router.navigate(['/view-event', this.eventId]);
       },
       (error) => {

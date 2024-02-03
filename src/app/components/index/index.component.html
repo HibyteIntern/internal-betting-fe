@@ -47,6 +47,10 @@
       *ngFor="let competition of selectedCompetitions"
       [competition]="competition"
     />
-    <app-event-card *ngFor="let event of selectedEvents" [event]="event" />
+    <app-event-card
+      (viewEmitter)="handleEventViewClick(event.eventId!)"
+      (editEmitter)="handleEventEditClick(event.eventId!)"
+      *ngFor="let event of selectedEvents" [event]="event"
+    />
   </div>
 </app-mainframe>

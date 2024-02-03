@@ -1,4 +1,4 @@
-import { EventRequest } from './EventRequest';
+import { EventRequest } from './event-request.model';
 import { Status } from './Status';
 import { UserProfile } from './UserProfile';
 

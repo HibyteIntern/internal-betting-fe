@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { EventRequest } from '../../../entity/EventRequest';
-import { UserProfile } from '../../../entity/UserProfile';
-import { Status } from '../../../entity/Status';
-import { EventService } from '../../../service/event.service';
-import { EventTemplateService } from '../../../service/event-template.service';
-import { EventTemplate } from '../../../entity/event-template.model';
-import { BetTemplateType } from '../../../entity/bet-template-type';
-import { CompleteBetType } from '../../../entity/complete-bet-type.model';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {EventRequest} from '../../../entity/event-request.model';
+import {UserProfile} from '../../../entity/UserProfile';
+import {Status} from '../../../entity/Status';
+import {EventService} from '../../../service/event.service';
+import {EventTemplateService} from '../../../service/event-template.service';
+import {EventTemplate} from '../../../entity/event-template.model';
+import {BetTemplateType} from '../../../entity/bet-template-type';
+import {CompleteBetType} from '../../../entity/complete-bet-type.model';
+import {UserProfileService} from "../../../service/user-profile.service";
 
 @Component({
   selector: 'app-create-event',
@@ -27,7 +28,9 @@ export class CreateEventComponent implements OnInit {
   constructor(
     private eventTemplateService: EventTemplateService,
     private eventService: EventService,
-  ) {}
+    private userProfilesService: UserProfileService,
+  ) {
+  }
 
   ngOnInit() {
     this.eventTemplateService.getData().subscribe(
@@ -39,7 +42,7 @@ export class CreateEventComponent implements OnInit {
       },
     );
 
-    this.eventService.getUserProfiles().subscribe(
+    this.userProfilesService.getAll().subscribe(
       (profiles) => {
         this.userProfilesList = profiles;
       },
@@ -73,7 +76,9 @@ export class CreateEventComponent implements OnInit {
 
   submitForm() {
     this.convertBetTemplatesToCompleteBetTypes();
-    this.eventService.addEvent(this.formData).subscribe((error) => {
+    this.eventService.addEvent(this.formData).subscribe(() => {
+      window.history.back();
+    }, (error) => {
       console.error('Error adding event:', error);
     });
   }
