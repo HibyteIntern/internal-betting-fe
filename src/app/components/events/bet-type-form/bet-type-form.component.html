@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <div formArrayName="betTypes">
+    <div *ngFor="let betType of betTypes.controls; let i=index" [formGroupName]="i">
+      <div>
+        <input type="text" formControlName="name" required>
+      </div>
+      <div>
+        <input type="text" formControlName="type" required>
+      </div>
+      <div>
+        <input type="text" formControlName="multipleChoiceOptions">
+      </div>
+      <div>
+        <input type="text" formControlName="odds">
+      </div>
+      <button type="button" (click)="removeBetType(i)">Remove Bet Type</button>
+    </div>
+  </div>
+  <button type="button" (click)="addBetType()">Add Bet Type</button>
+  <button type="submit">Submit</button>
+</form>

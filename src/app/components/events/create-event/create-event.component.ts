@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { EventRequest } from '../../../entity/event-request.model';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import { UserProfile } from '../../../entity/UserProfile';
 import { Status } from '../../../entity/Status';
 import { EventService } from '../../../service/event.service';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
 import { BetTemplateType } from '../../../entity/bet-template-type';
-import { CompleteBetType } from '../../../entity/complete-bet-type.model';
 import { UserProfileService } from "../../../service/user-profile.service";
 
 @Component({
@@ -16,22 +14,33 @@ import { UserProfileService } from "../../../service/user-profile.service";
   styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent implements OnInit {
-  formData: EventRequest = new EventRequest();
-  eventTemplates: EventTemplate[] = [];
-  userGroupsControl = new FormControl();
-  userProfilesControl = new FormControl();
+  eventForm: FormGroup
 
   minStartsAtDate = new Date();
 
+  eventTemplates: EventTemplate[] = [];
   userGroupsList: string[] = [];
   userProfilesList: UserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
   constructor(
+    private fb: FormBuilder,
     private eventTemplateService: EventTemplateService,
     private eventService: EventService,
     private userProfilesService: UserProfileService,
   ) {
+    this.eventForm = this.fb.group({
+      // Initialize form controls and groups for other parts of EventRequest
+      name: [''],
+      description: [''],
+      startsAt: [new Date()],
+      endsAt: [new Date()],
+      status: [Status.DRAFT],
+      selectedTemplate: [''],
+      completeBetTypeDtoList: this.fb.control([]),
+      userGroups: this.fb.control([]),
+      userProfiles: this.fb.control([]),
+    });
   }
 
   ngOnInit() {
@@ -58,27 +67,28 @@ export class CreateEventComponent implements OnInit {
     return type.toString();
   }
 
-  private convertBetTemplatesToCompleteBetTypes() {
-    const selectedEventTemplate = this.eventTemplates.find(
-      (template) => template.name === this.formData.selectedTemplate,
-    );
-
-    if (selectedEventTemplate) {
-      this.formData.completeBetTypeDtoList =
-        selectedEventTemplate.betTemplates.map((betTemplate) => {
-          const completeBetType: CompleteBetType = {
-            name: betTemplate.name,
-            type: this.convertBetTemplateType(betTemplate.type),
-            multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
-          };
-          return completeBetType;
-        });
-    }
-  }
+  // private convertBetTemplatesToCompleteBetTypes() {
+  //   const selectedEventTemplate = this.eventTemplates.find(
+  //     (template) => template.name === this.formData.selectedTemplate,
+  //   );
+  //
+  //   if (selectedEventTemplate) {
+  //     this.formData.completeBetTypeDtoList =
+  //       selectedEventTemplate.betTemplates.map((betTemplate) => {
+  //         const completeBetType: CompleteBetType = {
+  //           name: betTemplate.name,
+  //           type: this.convertBetTemplateType(betTemplate.type),
+  //           multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
+  //         };
+  //         return completeBetType;
+  //       });
+  //   }
+  // }
 
   submitForm() {
-    this.convertBetTemplatesToCompleteBetTypes();
-    this.eventService.addEvent(this.formData).subscribe(() => {
+    console.log('Form data:', this.eventForm.value);
+    // this.convertBetTemplatesToCompleteBetTypes();
+    this.eventService.addEvent(this.eventForm.value).subscribe(() => {
       window.history.back();
     }, (error) => {
       console.error('Error adding event:', error);
