@@ -21,6 +21,8 @@ export class CreateEventComponent implements OnInit {
   userGroupsControl = new FormControl();
   userProfilesControl = new FormControl();
 
+  minStartsAtDate = new Date();
+
   userGroupsList: string[] = [];
   userProfilesList: UserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];

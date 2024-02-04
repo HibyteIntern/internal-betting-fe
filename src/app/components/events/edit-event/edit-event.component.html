@@ -41,34 +41,36 @@
       <mat-label>Starts At</mat-label>
       <input
         matInput
-        [matDatepicker]="startsAtPicker"
+        [ngxMatDatetimePicker]="startsAtPicker"
         name="startsAt"
         placeholder="Select a date and time"
         [(ngModel)]="formData.startsAt"
         required
+        [min]="minStartsAtDate"
       />
       <mat-datepicker-toggle
         matSuffix
-        [for]="startsAtPicker"
+        [for]="$any(startsAtPicker)"
       ></mat-datepicker-toggle>
-      <mat-datepicker #startsAtPicker></mat-datepicker>
+      <ngx-mat-datetime-picker #startsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Ends At</mat-label>
       <input
         matInput
-        [matDatepicker]="endsAtPicker"
+        [ngxMatDatetimePicker]="endsAtPicker"
         name="endsAt"
         placeholder="Select a date and time"
         [(ngModel)]="formData.endsAt"
         required
+        [min]="formData.startsAt"
       />
       <mat-datepicker-toggle
         matSuffix
-        [for]="endsAtPicker"
+        [for]="$any(endsAtPicker)"
       ></mat-datepicker-toggle>
-      <mat-datepicker #endsAtPicker></mat-datepicker>
+      <ngx-mat-datetime-picker #endsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

@@ -15,6 +15,8 @@ export class EditEventComponent implements OnInit {
   eventTemplates: any[] = []; // Add this line
   statusOptions: string[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
+  minStartsAtDate = new Date();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
