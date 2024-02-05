@@ -99,7 +99,7 @@
     </mat-form-field>
 
     <div class="bets-container">
-      <div class="section-title">Bets</div>
+      <div class="section-title" style="margin-bottom: 2rem">Bets</div>
       <app-bet-type-form formControlName="completeBetTypeDtoList"></app-bet-type-form>
     </div>
 
@@ -123,5 +123,12 @@
     >
       Submit
     </button>
+
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div *ngIf="errorMessage" class="form-error-message" style="margin: 0 0 1rem 0">
+      {{errorMessage}}
+    </div>
   </form>
 </app-mainframe>

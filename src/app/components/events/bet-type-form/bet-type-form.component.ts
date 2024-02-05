@@ -1,8 +1,18 @@
 import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormArray,
+  FormBuilder,
+  FormGroup, NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators
+} from "@angular/forms";
 import {CompleteBetType} from "../../../entity/complete-bet-type.model";
 import {multipleChoiceOptionValidator} from "../../../shared/validator/multiple-choice-option.validator";
-import {multipleChoiceValidator} from "../../../shared/validator/multiple-choice.validator";
+import {multipleChoiceEventValidator} from "../../../shared/validator/multiple-choice-event.validator";
 
 @Component({
   selector: 'app-bet-type-form',
@@ -13,20 +23,37 @@ import {multipleChoiceValidator} from "../../../shared/validator/multiple-choice
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => BetTypeFormComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => BetTypeFormComponent),
+      multi: true
     }
   ]
 
 })
-export class BetTypeFormComponent implements ControlValueAccessor {
+export class BetTypeFormComponent implements ControlValueAccessor, Validator {
   form: FormGroup;
   onChange!: (betTypes: CompleteBetType[]) => void;
   onTouched!: () => void;
+  onValidationChange: any = () => {}
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       betTypes: this.fb.array([])
     });
   }
+
+  validate(control: AbstractControl<any, any>): ValidationErrors | null {
+    if (this.form?.invalid) {
+      return { invalid: true };
+      } else {
+        return null;
+      }
+    }
+    registerOnValidatorChange?(fn: () => void): void {
+      this.onValidationChange = fn;
+    }
 
   writeValue(completeBetTypeDtoList: CompleteBetType[]): void {
     if (completeBetTypeDtoList) {
@@ -84,7 +111,7 @@ export class BetTypeFormComponent implements ControlValueAccessor {
           ['', multipleChoiceOptionValidator()],
         ]),
       },
-      {validators: multipleChoiceValidator()}
+      { validators: multipleChoiceEventValidator() }
     );
   }
 

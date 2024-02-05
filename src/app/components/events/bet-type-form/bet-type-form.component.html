@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div formArrayName="betTypes">
     <div *ngFor="let betType of betTypes.controls; let i=index" [formGroupName]="i" class="bet-container">
-
+      <div class="bet-title">{{betType.get('name')?.value ? betType.get('name')?.value : 'New bet'}}</div>
       <div class="bet-name-container">
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Bet name</mat-label>
@@ -90,7 +90,7 @@
       >
         Delete bet
       </button>
-      <div class="bet-separator" *ngIf="betTypes.controls.length !== i + 1"></div>
+      <div class="bet-separator"></div>
     </div>
   </div>
   <button

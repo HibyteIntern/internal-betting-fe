@@ -11,6 +11,12 @@ mat-icon {
   }
 }
 
+.bet-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
 .bet-container {
   .bet-name-container {
     display: flex;
@@ -21,7 +27,6 @@ mat-icon {
       flex: 1;
     }
   }
-
   .outer-options-container {
     display: flex;
     flex-direction: row;
@@ -68,6 +73,7 @@ mat-icon {
 
 .add-bet-button {
   width: 10rem;
+  margin-top: .5rem;
   @media screen and (max-width: 900px) {
     width: 100%;
   }
@@ -98,8 +104,20 @@ mat-icon {
         display: none;
       }
     }
-    .option-container {
 
+    .outer-options-container {
+      .option-text-container {
+        width: 55%;
+      }
+      .option-odd-container {
+        width: 45%;
+        div {
+          display: flex;
+          mat-form-field {
+            width: calc(100% - 2rem);
+          }
+        }
+      }
     }
     .delete-bet-button {
       display: flex;

@@ -75,7 +75,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
-import {authInterceptor} from "./interceptor/auth.interceptor";
+import { authInterceptor } from "./interceptor/auth.interceptor";
 import { BetTypeFormComponent } from './components/events/bet-type-form/bet-type-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {

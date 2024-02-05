@@ -15,8 +15,10 @@ import { UserProfileService } from "../../../service/user-profile.service";
 })
 export class CreateEventComponent implements OnInit {
   eventForm: FormGroup
-
   minStartsAtDate = new Date();
+
+  isLoading = false;
+  errorMessage = '';
 
   eventTemplates: EventTemplate[] = [];
   userGroupsList: string[] = [];
@@ -30,7 +32,6 @@ export class CreateEventComponent implements OnInit {
     private userProfilesService: UserProfileService,
   ) {
     this.eventForm = this.fb.group({
-      // Initialize form controls and groups for other parts of EventRequest
       name: [''],
       description: [''],
       startsAt: [],
@@ -86,12 +87,14 @@ export class CreateEventComponent implements OnInit {
   // }
 
   submitForm() {
-    console.log('Form data:', this.eventForm.value);
+    this.isLoading = true;
     // this.convertBetTemplatesToCompleteBetTypes();
     this.eventService.addEvent(this.eventForm.value).subscribe(() => {
+      this.isLoading = false;
       window.history.back();
-    }, (error) => {
-      console.error('Error adding event:', error);
+    }, () => {
+      this.isLoading = false;
+      this.errorMessage = "Something went wrong. Please try again."
     });
   }
 }
