@@ -1,6 +1,8 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
-import { CompleteBetType } from "../../../entity/complete-bet-type.model";
+import {Component, forwardRef} from '@angular/core';
+import {ControlValueAccessor, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
+import {CompleteBetType} from "../../../entity/complete-bet-type.model";
+import {multipleChoiceOptionValidator} from "../../../shared/validator/multiple-choice-option.validator";
+import {multipleChoiceValidator} from "../../../shared/validator/multiple-choice.validator";
 
 @Component({
   selector: 'app-bet-type-form',
@@ -19,6 +21,7 @@ export class BetTypeFormComponent implements ControlValueAccessor {
   form: FormGroup;
   onChange!: (betTypes: CompleteBetType[]) => void;
   onTouched!: () => void;
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       betTypes: this.fb.array([])
@@ -55,19 +58,58 @@ export class BetTypeFormComponent implements ControlValueAccessor {
     return this.form.get('betTypes') as FormArray;
   }
 
+  getOptions(betIndex: number): FormArray {
+    return this.betTypes
+      .at(betIndex)
+      .get('multipleChoiceOptions') as FormArray;
+  }
+
+  getOdds(betIndex: number): FormArray {
+    return this.betTypes
+      .at(betIndex)
+      .get('odds') as FormArray;
+  }
+
   private createBetTypeFormGroup(): FormGroup {
-    return this.fb.group({
-      name: ['', Validators.required],
-      type: ['NUMERIC', Validators.required],
-      multipleChoiceOptions: [[]],
-      odds: [[]]
-    });
+    return this.fb.group(
+      {
+        name: ['', [Validators.required, Validators.maxLength(50)]],
+        type: ['', Validators.required],
+        multipleChoiceOptions: this.fb.array([
+          ['', multipleChoiceOptionValidator()],
+          ['', multipleChoiceOptionValidator()],
+        ]),
+        odds: this.fb.array([
+          ['', multipleChoiceOptionValidator()],
+          ['', multipleChoiceOptionValidator()],
+        ]),
+      },
+      {validators: multipleChoiceValidator()}
+    );
   }
 
   addBetType(): void {
     this.betTypes.push(this.createBetTypeFormGroup());
   }
+
   removeBetType(index: number): void {
     this.betTypes.removeAt(index);
+  }
+
+  addMultipleChoiceOptions(betIndex: number) {
+    this.getOptions(betIndex).push(
+      this.fb.control('', multipleChoiceOptionValidator()),
+    );
+    this.getOdds(betIndex).push(
+      this.fb.control('', multipleChoiceOptionValidator()),
+    );
+  }
+
+  removeMultipleChoiceOption(
+    betIndex: number,
+    optionIndex: number,
+  ): void {
+    this.getOptions(betIndex).removeAt(optionIndex);
+    this.getOdds(betIndex).removeAt(optionIndex);
   }
 }

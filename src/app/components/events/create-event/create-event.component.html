@@ -1,5 +1,5 @@
 <app-mainframe [title]="'Create an event'">
-  <form class="styled-form" (ngSubmit)="submitForm()" [formGroup]="eventForm">
+  <form class="app-form" (ngSubmit)="submitForm()" [formGroup]="eventForm">
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Template</mat-label>
       <mat-select panelClass="select-dropdown">
@@ -80,13 +80,13 @@
       ></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #startsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
-
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Ends At</mat-label>
       <input
         matInput
         [ngxMatDatetimePicker]="endsAtPicker"
         name="endsAt"
+        [min]="eventForm.get('startsAt')?.value"
         placeholder="Select a date and time"
         formControlName="endsAt"
         required
@@ -98,7 +98,11 @@
       <ngx-mat-datetime-picker #endsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
 
-    <div class="section-title">Bets</div>
+    <div class="bets-container">
+      <div class="section-title">Bets</div>
+      <app-bet-type-form formControlName="completeBetTypeDtoList"></app-bet-type-form>
+    </div>
+
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Status</mat-label>
       <mat-select
@@ -110,8 +114,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <app-bet-type-form formControlName="completeBetTypeDtoList"></app-bet-type-form>
 
     <button
       mat-raised-button

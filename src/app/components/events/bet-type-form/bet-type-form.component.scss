@@ -1,0 +1,119 @@
+mat-icon {
+  transform: scale(1.5);
+  position: relative;
+  bottom: 0.55rem;
+  margin-left: 0.5rem;
+  display: block;
+  color: white !important;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(80%);
+  }
+}
+
+.bet-container {
+  .bet-name-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+
+  .outer-options-container {
+    display: flex;
+    flex-direction: row;
+    .option-text-container {
+      display: flex;
+      flex-direction: column;
+      width: calc(50% - 1rem);
+      div {
+        width: 100%;
+      }
+    }
+    .option-odd-container {
+      display: flex;
+      flex-direction: column;
+      width: 35%;
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        mat-form-field {
+          flex-grow: 0.2;
+        }
+        mat-icon {
+          box-sizing: border-box;
+          transform: scale(1.5);
+          position: relative;
+          bottom: .55rem;
+          margin-left: 0.5rem;
+          display: block;
+          color: white !important;
+          &:hover {
+            cursor: pointer;
+            filter: brightness(80%);
+          }
+        }
+      }
+    }
+  }
+  .delete-bet-button {
+    display: none;
+    margin-bottom: 2rem;
+  }
+}
+
+.add-bet-button {
+  width: 10rem;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
+}
+
+.add-option-button {
+  margin-bottom: 0.75rem;
+
+}
+
+.bet-separator {
+  height: 2px;
+  width: 100%;
+  opacity: 0.5;
+  background-color: white;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .bet-container {
+    .bet-name-container {
+      flex-direction: column;
+      mat-form-field {
+        width: 100%;
+      }
+      mat-icon {
+        display: none;
+      }
+    }
+    .option-container {
+
+    }
+    .delete-bet-button {
+      display: flex;
+    }
+  }
+}
+
+input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

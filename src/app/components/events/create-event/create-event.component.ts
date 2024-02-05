@@ -33,8 +33,8 @@ export class CreateEventComponent implements OnInit {
       // Initialize form controls and groups for other parts of EventRequest
       name: [''],
       description: [''],
-      startsAt: [new Date()],
-      endsAt: [new Date()],
+      startsAt: [],
+      endsAt: [],
       status: [Status.DRAFT],
       selectedTemplate: [''],
       completeBetTypeDtoList: this.fb.control([]),
