@@ -16,4 +16,8 @@ export class LeftSidebarListComponent {
   navigateToCreateCompetition() {
     this.router.navigate(['/competitions/create']);
   }
+
+  navigateToCreateEvent(){
+    this.router.navigate(['/create-event'])
+  }
 }

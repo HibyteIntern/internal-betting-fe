@@ -3,14 +3,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
 import { UserProfile } from '../entity/UserProfile';
+import { Bet } from '../entity/Bet';  // Import the Bet interface
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8080/api/v1/events'; // Adjust the base URL as needed
+  private apiUrl = 'http://localhost:8080/api/v1/events';
   private addUrl = 'http://localhost:8080/api/v1/events/add';
-  private getEventsUrl = 'http://localhost:8080/api/v1/events'; // Adjust the URL as needed
+  private getEventsUrl = 'http://localhost:8080/api/v1/events';
 
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$: Observable<boolean> = this.loadingSubject.asObservable();
@@ -19,6 +20,12 @@ export class EventService {
 
   addEvent(eventRequest: EventRequest): Observable<any> {
     return this.http.post(this.addUrl, eventRequest);
+  }
+
+  // Add the new method to place a bet for an event
+  addBetToEvent(eventId: number, bet: Bet): Observable<any> {
+    const betUrl = `${this.apiUrl}/bet/${eventId}`;
+    return this.http.post(betUrl, bet);
   }
 
   getEvents(): Observable<EventRequest[]> {
