@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CompleteBetType } from '../../../entity/complete-bet-type.model';
-import { Bet } from "../../../entity/Bet";
-import { UserProfileService } from "../../../service/user-profile.service";
-import { UserProfile } from "../../../entity/UserProfile";
+import { Bet } from '../../../entity/Bet';
+import { UserProfileService } from '../../../service/user-profile.service';
+import { UserProfile } from '../../../entity/UserProfile';
 import { EventService } from '../../../service/event.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -21,7 +21,7 @@ export class AddBetToEventComponent implements OnInit {
   constructor(
     private userProfileService: UserProfileService,
     private eventService: EventService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -31,10 +31,10 @@ export class AddBetToEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user profile:', error);
-      }
+      },
     );
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.eventId = +params['eventId']; // '+' is used to convert the parameter to a number
     });
   }
@@ -47,7 +47,9 @@ export class AddBetToEventComponent implements OnInit {
 
     let odds: number | number[] = 0;
     if (this.betType?.type === 'MULTIPLE_CHOICE') {
-      const selectedChoiceIndex = this.betType.multipleChoiceOptions!.indexOf(this.bet.value);
+      const selectedChoiceIndex = this.betType.multipleChoiceOptions!.indexOf(
+        this.bet.value,
+      );
       odds = this.betType?.odds![selectedChoiceIndex];
     } else {
       odds = 0;
@@ -64,11 +66,17 @@ export class AddBetToEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error placing bet:', error);
-      }
+      },
     );
   }
 
   resetForm() {
-    this.bet = { user: null, amount: 0, value: '', betType: undefined, odds: 0 };
+    this.bet = {
+      user: null,
+      amount: 0,
+      value: '',
+      betType: undefined,
+      odds: 0,
+    };
   }
 }

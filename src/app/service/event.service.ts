@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
 import { UserProfile } from '../entity/UserProfile';
-import { Bet } from '../entity/Bet';  // Import the Bet interface
+import { Bet } from '../entity/Bet'; // Import the Bet interface
 
 @Injectable({
   providedIn: 'root',

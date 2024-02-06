@@ -1,5 +1,5 @@
 import { UserProfile } from './UserProfile';
-import {CompleteBetType} from "./complete-bet-type.model";
+import { CompleteBetType } from './complete-bet-type.model';
 
 export interface Bet {
   betId?: number;

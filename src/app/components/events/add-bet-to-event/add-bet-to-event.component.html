@@ -6,7 +6,8 @@
         <mat-option
           *ngFor="let option of betType?.multipleChoiceOptions"
           [value]="option"
-        >{{ option }}</mat-option>
+          >{{ option }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
   </div>
@@ -29,7 +30,12 @@
     <mat-label>Bet amount:</mat-label>
     <input matInput type="number" name="amount" [(ngModel)]="bet.amount" />
   </mat-form-field>
-  <button mat-raised-button color="primary"  style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  " type="submit">
+  <button
+    mat-raised-button
+    color="primary"
+    style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  "
+    type="submit"
+  >
     Place Bet
   </button>
 </form>
