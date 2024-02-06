@@ -2,7 +2,10 @@
   <form class="app-form" (ngSubmit)="submitForm()" [formGroup]="eventForm">
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Template</mat-label>
-      <mat-select panelClass="select-dropdown">
+      <mat-select panelClass="select-dropdown" formControlName="eventTemplateName">
+        <mat-option [value]="'Custom'">
+          Custom
+        </mat-option>
         <mat-option
           *ngFor="let template of eventTemplates"
           [value]="template.name"
@@ -99,7 +102,7 @@
     </mat-form-field>
 
     <div class="bets-container">
-      <div class="section-title" style="margin-bottom: 2rem">Bets</div>
+      <div class="section-title" style="margin-bottom: 2rem" id="bet-section">Bets</div>
       <app-bet-type-form formControlName="completeBetTypeDtoList"></app-bet-type-form>
     </div>
 

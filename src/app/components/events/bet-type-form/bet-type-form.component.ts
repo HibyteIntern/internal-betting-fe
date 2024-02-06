@@ -34,9 +34,9 @@ import {multipleChoiceEventValidator} from "../../../shared/validator/multiple-c
 })
 export class BetTypeFormComponent implements ControlValueAccessor, Validator {
   form: FormGroup;
-  onChange!: (betTypes: CompleteBetType[]) => void;
   onTouched!: () => void;
-  onValidationChange: any = () => {}
+  onValidationChange: any = () => {
+  }
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -46,18 +46,19 @@ export class BetTypeFormComponent implements ControlValueAccessor, Validator {
 
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
     if (this.form?.invalid) {
-      return { invalid: true };
-      } else {
-        return null;
-      }
+      return {invalid: true};
+    } else {
+      return null;
     }
-    registerOnValidatorChange?(fn: () => void): void {
-      this.onValidationChange = fn;
-    }
+  }
+
+  registerOnValidatorChange?(fn: () => void): void {
+    this.onValidationChange = fn;
+  }
 
   writeValue(completeBetTypeDtoList: CompleteBetType[]): void {
     if (completeBetTypeDtoList) {
-      const betTypeFormGroups = completeBetTypeDtoList.map(betType => this.createBetTypeFormGroup());
+      const betTypeFormGroups = completeBetTypeDtoList.map(betType => this.createBetTypeFormGroupFromBetType(betType));
       const betTypeFormArray = this.fb.array(betTypeFormGroups);
       this.form.setControl('betTypes', betTypeFormArray);
     }
@@ -111,7 +112,23 @@ export class BetTypeFormComponent implements ControlValueAccessor, Validator {
           ['', multipleChoiceOptionValidator()],
         ]),
       },
-      { validators: multipleChoiceEventValidator() }
+      {validators: multipleChoiceEventValidator()}
+    );
+  }
+
+  private createBetTypeFormGroupFromBetType(betType: CompleteBetType): FormGroup {
+    return this.fb.group(
+      {
+        name: [betType.name, [Validators.required, Validators.maxLength(50)]],
+        type: [betType.type, Validators.required],
+        multipleChoiceOptions: this.fb.array(
+          betType.multipleChoiceOptions ? betType.multipleChoiceOptions.map(option => this.fb.control(option, multipleChoiceOptionValidator())) : []
+        ),
+        odds: this.fb.array(
+          betType.multipleChoiceOptions ? betType.multipleChoiceOptions.map(() => this.fb.control('', multipleChoiceOptionValidator())) : []
+        ),
+      },
+      {validators: multipleChoiceEventValidator()}
     );
   }
 
