@@ -14,11 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AddBetToEventComponent implements OnInit {
   @Input() betType: CompleteBetType | undefined;
 
-  selectedOption = '';
-  selectedBooleanOption = 'true';
-  answer = '';
-  betAmount = 0;
-
+  bet: Bet = { user: null, amount: 0, value: '', betType: undefined, odds: 0 };
   userProfile: UserProfile | null = null;
   eventId: number | null = null;
 
@@ -49,14 +45,19 @@ export class AddBetToEventComponent implements OnInit {
       return;
     }
 
-    const bet: Bet = {
-      user: this.userProfile,
-      amount: this.betAmount,
-      odds: this.betType?.odds || 0,
-      value: this.selectedOption || this.selectedBooleanOption || this.answer,
-    };
+    let odds: number | number[] = 0;
+    if (this.betType?.type === 'MULTIPLE_CHOICE') {
+      const selectedChoiceIndex = this.betType.multipleChoiceOptions!.indexOf(this.bet.value);
+      odds = this.betType?.odds![selectedChoiceIndex];
+    } else {
+      odds = 0;
+    }
 
-    this.eventService.addBetToEvent(this.eventId, bet).subscribe(
+    this.bet.user = this.userProfile;
+    this.bet.betType = this.betType;
+    this.bet.odds = odds;
+
+    this.eventService.addBetToEvent(this.eventId, this.bet).subscribe(
       () => {
         console.log('Bet placed successfully.');
         this.resetForm();
@@ -68,9 +69,6 @@ export class AddBetToEventComponent implements OnInit {
   }
 
   resetForm() {
-    this.selectedOption = '';
-    this.selectedBooleanOption = 'true';
-    this.answer = '';
-    this.betAmount = 0;
+    this.bet = { user: null, amount: 0, value: '', betType: undefined, odds: 0 };
   }
 }

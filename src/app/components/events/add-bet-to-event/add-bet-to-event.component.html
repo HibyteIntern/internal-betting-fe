@@ -1,20 +1,19 @@
-<form class="styled-form" style="margin-bottom: 15px">
+<form class="styled-form" style="margin-bottom: 15px" (ngSubmit)="placeBet()">
   <div *ngIf="betType?.type === 'MULTIPLE_CHOICE'">
     <mat-form-field appearance="outline">
       <mat-label>Select an option:</mat-label>
-      <mat-select [(ngModel)]="selectedOption">
+      <mat-select name="value" [(ngModel)]="bet.value">
         <mat-option
           *ngFor="let option of betType?.multipleChoiceOptions"
           [value]="option"
-          >{{ option }}</mat-option
-        >
+        >{{ option }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div *ngIf="betType?.type === 'BOOLEAN'">
     <mat-form-field appearance="outline">
       <mat-label>Will it happen?</mat-label>
-      <mat-select [(ngModel)]="selectedBooleanOption">
+      <mat-select name="value" [(ngModel)]="bet.value">
         <mat-option value="true">Yes</mat-option>
         <mat-option value="false">No</mat-option>
       </mat-select>
@@ -23,19 +22,14 @@
   <div *ngIf="betType?.type === 'NUMERIC' || betType?.type === 'STRING'">
     <mat-form-field appearance="outline">
       <mat-label>Your answer:</mat-label>
-      <input matInput [(ngModel)]="answer" />
+      <input matInput name="value" [(ngModel)]="bet.value" />
     </mat-form-field>
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Bet amount:</mat-label>
-    <input matInput [(ngModel)]="betAmount" />
+    <input matInput type="number" name="amount" [(ngModel)]="bet.amount" />
   </mat-form-field>
-  <button
-    (click)="placeBet()"
-    mat-raised-button
-    style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  "
-    color="primary"
-  >
+  <button mat-raised-button color="primary"  style="margin-left : 10px; padding-top: 26px; padding-bottom: 26px;:  " type="submit">
     Place Bet
   </button>
 </form>
