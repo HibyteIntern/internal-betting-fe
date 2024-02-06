@@ -7,7 +7,7 @@
     <div style="text-transform: capitalize">
       <!-- {{competition.status.toLocaleLowerCase()}}<mat-icon class="icon">{{statusIcon}}</mat-icon> -->
     </div>
-    <div>
+    <div *ngIf="showButtons">
       <mat-icon
         (click)="this.viewEmitter.emit()"
         class="icon-hover"

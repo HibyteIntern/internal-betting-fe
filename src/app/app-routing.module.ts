@@ -16,7 +16,7 @@ import { IndexComponent } from './components/index/index.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { authGuard } from './guard/auth.guard';
-import {AccessDeniedPageComponent} from "./components/error-pages/access-denied-page/access-denied-page.component";
+import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,15 +26,43 @@ const routes: Routes = [
     component: UserProfileComponent,
     children: [{ path: 'edit', component: UserProfileEditComponent }],
   },
-  { path: 'event-templates', canActivate: [authGuard], component: EventTemplateBrowserComponent },
-  { path: 'event-templates/create', canActivate: [authGuard], component: EventTemplateAddComponent },
-  { path: 'event-templates/edit/:id', canActivate: [authGuard], component: EventTemplateAddComponent },
-  { path: 'competitions/create', canActivate: [authGuard], component: CreateCompetitionComponent },
-  { path: 'competitions/edit/:id', canActivate: [authGuard], component: CreateCompetitionComponent },
+  {
+    path: 'event-templates',
+    canActivate: [authGuard],
+    component: EventTemplateBrowserComponent,
+  },
+  {
+    path: 'event-templates/create',
+    canActivate: [authGuard],
+    component: EventTemplateAddComponent,
+  },
+  {
+    path: 'event-templates/edit/:id',
+    canActivate: [authGuard],
+    component: EventTemplateAddComponent,
+  },
+  {
+    path: 'competitions/create',
+    canActivate: [authGuard],
+    component: CreateCompetitionComponent,
+  },
+  {
+    path: 'competitions/edit/:id',
+    canActivate: [authGuard],
+    component: CreateCompetitionComponent,
+  },
   { path: 'competitions/:id', component: ViewCompetitionsComponent },
   { path: 'prizes', component: PrizeBrowserComponent },
-  { path: 'prizes/create', canActivate: [authGuard], component: PrizeDrawAddComponent },
-  { path: 'prizes/edit/:id', canActivate: [authGuard], component: PrizeDrawAddComponent },
+  {
+    path: 'prizes/create',
+    canActivate: [authGuard],
+    component: PrizeDrawAddComponent,
+  },
+  {
+    path: 'prizes/edit/:id',
+    canActivate: [authGuard],
+    component: PrizeDrawAddComponent,
+  },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
   { path: 'events/create', component: CreateEventComponent },
   { path: 'events/:eventId', component: ViewEventComponent },

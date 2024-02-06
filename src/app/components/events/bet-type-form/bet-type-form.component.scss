@@ -53,7 +53,7 @@ mat-icon {
           box-sizing: border-box;
           transform: scale(1.5);
           position: relative;
-          bottom: .55rem;
+          bottom: 0.55rem;
           margin-left: 0.5rem;
           display: block;
           color: white !important;
@@ -73,7 +73,7 @@ mat-icon {
 
 .add-bet-button {
   width: 10rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   @media screen and (max-width: 900px) {
     width: 100%;
   }
@@ -81,7 +81,6 @@ mat-icon {
 
 .add-option-button {
   margin-bottom: 0.75rem;
-
 }
 
 .bet-separator {

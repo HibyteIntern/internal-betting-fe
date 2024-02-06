@@ -2,10 +2,11 @@
   <form class="app-form" (ngSubmit)="submitForm()" [formGroup]="eventForm">
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Template</mat-label>
-      <mat-select panelClass="select-dropdown" formControlName="eventTemplateName">
-        <mat-option [value]="'Custom'">
-          Custom
-        </mat-option>
+      <mat-select
+        panelClass="select-dropdown"
+        formControlName="eventTemplateName"
+      >
+        <mat-option [value]="'Custom'"> Custom </mat-option>
         <mat-option
           *ngFor="let template of eventTemplates"
           [value]="template.name"
@@ -102,16 +103,17 @@
     </mat-form-field>
 
     <div class="bets-container">
-      <div class="section-title" style="margin-bottom: 2rem" id="bet-section">Bets</div>
-      <app-bet-type-form formControlName="completeBetTypeDtoList"></app-bet-type-form>
+      <div class="section-title" style="margin-bottom: 2rem" id="bet-section">
+        Bets
+      </div>
+      <app-bet-type-form
+        formControlName="completeBetTypeDtoList"
+      ></app-bet-type-form>
     </div>
 
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Status</mat-label>
-      <mat-select
-        panelClass="select-dropdown"
-        formControlName="status"
-      >
+      <mat-select panelClass="select-dropdown" formControlName="status">
         <mat-option *ngFor="let status of statusOptions" [value]="status">
           {{ status }}
         </mat-option>
@@ -123,6 +125,7 @@
       color="accent"
       type="submit"
       [disabled]="!eventForm.valid"
+      style="color: var(--text-color)"
     >
       Submit
     </button>
@@ -130,8 +133,12 @@
     <div *ngIf="isLoading" class="lds-dual-ring-container">
       <div class="lds-dual-ring"></div>
     </div>
-    <div *ngIf="errorMessage" class="form-error-message" style="margin: 0 0 1rem 0">
-      {{errorMessage}}
+    <div
+      *ngIf="errorMessage"
+      class="form-error-message"
+      style="margin: 0 0 1rem 0"
+    >
+      {{ errorMessage }}
     </div>
   </form>
 </app-mainframe>

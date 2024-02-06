@@ -6,7 +6,7 @@ import { EventService } from '../../../service/event.service';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
 import { BetTemplateType } from '../../../entity/bet-template-type';
-import { UserProfileService } from "../../../service/user-profile.service";
+import { UserProfileService } from '../../../service/user-profile.service';
 
 @Component({
   selector: 'app-create-event',
@@ -14,7 +14,7 @@ import { UserProfileService } from "../../../service/user-profile.service";
   styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent implements OnInit {
-  eventForm: FormGroup
+  eventForm: FormGroup;
   minStartsAtDate = new Date();
 
   isLoading = false;
@@ -84,7 +84,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   handleEventTemplateChange() {
-    if(this.eventForm.get('eventTemplateName')?.value === 'Custom') {
+    if (this.eventForm.get('eventTemplateName')?.value === 'Custom') {
       this.eventForm.patchValue({
         completeBetTypeDtoList: [],
       });
@@ -92,12 +92,15 @@ export class CreateEventComponent implements OnInit {
     }
 
     const selectedEventTemplate = this.eventTemplates.find(
-      (template) => template.name === this.eventForm.get('eventTemplateName')?.value,
+      (template) =>
+        template.name === this.eventForm.get('eventTemplateName')?.value,
     );
 
     if (selectedEventTemplate) {
       this.eventForm.patchValue({
-        completeBetTypeDtoList: this.mapEventTemplateToBetTypeList(selectedEventTemplate),
+        completeBetTypeDtoList: this.mapEventTemplateToBetTypeList(
+          selectedEventTemplate,
+        ),
       });
     }
     // Allow time for the DOM to update
@@ -112,12 +115,15 @@ export class CreateEventComponent implements OnInit {
   submitForm() {
     this.isLoading = true;
     this.errorMessage = '';
-    this.eventService.addEvent(this.eventForm.value).subscribe(() => {
-      this.isLoading = false;
-      window.history.back();
-    }, () => {
-      this.isLoading = false;
-      this.errorMessage = "Something went wrong. Please try again."
-    });
+    this.eventService.addEvent(this.eventForm.value).subscribe(
+      () => {
+        this.isLoading = false;
+        window.history.back();
+      },
+      () => {
+        this.isLoading = false;
+        this.errorMessage = 'Something went wrong. Please try again.';
+      },
+    );
   }
 }

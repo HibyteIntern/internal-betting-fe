@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, delay, firstValueFrom } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
-import { AvatarService } from "./avatar.service";
+import { AvatarService } from './avatar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -119,8 +119,8 @@ export class UserProfileService {
 
   updateCoins(coins: number) {
     let tempUserProfile = this.userProfileSubject.value;
-    if(tempUserProfile && tempUserProfile.coins) tempUserProfile.coins = tempUserProfile.coins + coins;
+    if (tempUserProfile && tempUserProfile.coins)
+      tempUserProfile.coins = tempUserProfile.coins + coins;
     this.userProfileSubject.next(tempUserProfile);
   }
-
 }

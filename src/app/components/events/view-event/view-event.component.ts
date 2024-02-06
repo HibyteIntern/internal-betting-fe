@@ -38,6 +38,6 @@ export class ViewEventComponent implements OnInit {
   }
 
   navigateToEditEvent() {
-    this.router.navigate(['/events', 'edit',  this.eventId]);
+    this.router.navigate(['/events', 'edit', this.eventId]);
   }
 }

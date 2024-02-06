@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
@@ -73,9 +77,9 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
-import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
+import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
-import { authInterceptor } from "./interceptor/auth.interceptor";
+import { authInterceptor } from './interceptor/auth.interceptor';
 import { BetTypeFormComponent } from './components/events/bet-type-form/bet-type-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -149,7 +153,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LoginAlertComponent,
     ClickOutsideDirective,
     AccessDeniedPageComponent,
-    BetTypeFormComponent
+    BetTypeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -192,8 +196,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
-    provideHttpClient(
-      withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
   bootstrap: [AppComponent],
 })

@@ -35,7 +35,9 @@
       </div>
     </div>
   </div>
-  <div *ngIf="selectedEvents.length === 0 && selectedCompetitions.length === 0">No results found</div>
+  <div *ngIf="selectedEvents.length === 0 && selectedCompetitions.length === 0">
+    No results found
+  </div>
   <div
     *ngIf="competitionService.loading$ || eventService.loading$"
     class="grid-container"
@@ -50,7 +52,9 @@
     <app-event-card
       (viewEmitter)="handleEventViewClick(event.eventId!)"
       (editEmitter)="handleEventEditClick(event.eventId!)"
-      *ngFor="let event of selectedEvents" [event]="event"
+      (deleteEmitter)="handleEventDeleteClick(event.eventId!)"
+      *ngFor="let event of selectedEvents"
+      [event]="event"
     />
   </div>
 </app-mainframe>

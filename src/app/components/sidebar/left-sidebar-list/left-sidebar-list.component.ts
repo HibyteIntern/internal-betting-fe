@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserProfileService } from "../../../service/user-profile.service";
-import { Role } from "../../../entity/Role";
-import { UserProfile } from "../../../entity/UserProfile";
+import { UserProfileService } from '../../../service/user-profile.service';
+import { Role } from '../../../entity/Role';
+import { UserProfile } from '../../../entity/UserProfile';
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -13,9 +13,9 @@ export class LeftSidebarListComponent {
   userProfile: UserProfile | null = null;
   constructor(
     protected router: Router,
-    protected userProfileService: UserProfileService
+    protected userProfileService: UserProfileService,
   ) {
-  this.userProfileService.userProfile$.subscribe((userProfile) => {
+    this.userProfileService.userProfile$.subscribe((userProfile) => {
       this.userProfile = userProfile;
     });
   }

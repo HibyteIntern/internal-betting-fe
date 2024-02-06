@@ -7,8 +7,8 @@ import PrizeDrawEntryRequest from '../../../entity/prize-draw-entry-request.mode
 import { DrawType } from '../../../entity/DrawType';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {UserProfile} from "../../../entity/UserProfile";
-import {UserProfileService} from "../../../service/user-profile.service";
+import { UserProfile } from '../../../entity/UserProfile';
+import { UserProfileService } from '../../../service/user-profile.service';
 
 @Component({
   selector: 'app-prize-draw-page',
@@ -97,8 +97,10 @@ export class PrizeDrawPageComponent implements OnInit {
 
   showEntryInput(): boolean {
     if (this.prizeDraw?.type === DrawType.MOST_POINTS) return false;
-    if(this.userProfile != null && this.prizeDraw?.entries) {
-      return !this.prizeDraw.entries.some(entry => entry.user.userId === this.userProfile!.userId);
+    if (this.userProfile != null && this.prizeDraw?.entries) {
+      return !this.prizeDraw.entries.some(
+        (entry) => entry.user.userId === this.userProfile!.userId,
+      );
     }
     return false;
   }

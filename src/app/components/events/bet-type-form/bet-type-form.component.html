@@ -1,7 +1,15 @@
 <form [formGroup]="form">
   <div formArrayName="betTypes">
-    <div *ngFor="let betType of betTypes.controls; let i=index" [formGroupName]="i" class="bet-container">
-      <div class="bet-title">{{betType.get('name')?.value ? betType.get('name')?.value : 'New bet'}}</div>
+    <div
+      *ngFor="let betType of betTypes.controls; let i = index"
+      [formGroupName]="i"
+      class="bet-container"
+    >
+      <div class="bet-title">
+        {{
+          betType.get("name")?.value ? betType.get("name")?.value : "New bet"
+        }}
+      </div>
       <div class="bet-name-container">
         <mat-form-field color="accent" appearance="outline">
           <mat-label>Bet name</mat-label>
@@ -30,30 +38,35 @@
 
       <div
         *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
-        style="
-              margin-bottom: 1rem;
-              font-weight: bold;
-              filter: brightness(0.7);
-            "
+        style="margin-bottom: 1rem; font-weight: bold; filter: brightness(0.7)"
       >
         Options
       </div>
 
-      <div *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'" class="outer-options-container">
-        <div class="option-text-container" formArrayName="multipleChoiceOptions" >
-          <div *ngFor="let option of getOptions(i).controls; let j = index" class="option-text-container">
+      <div
+        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
+        class="outer-options-container"
+      >
+        <div
+          class="option-text-container"
+          formArrayName="multipleChoiceOptions"
+        >
+          <div
+            *ngFor="let option of getOptions(i).controls; let j = index"
+            class="option-text-container"
+          >
             <mat-form-field color="accent" appearance="outline">
-                <mat-label>{{ "Option " + (j + 1) }}</mat-label>
-                <input
-                  matInput
-                  placeholder="Some option"
-                  value="d"
-                  [formControlName]="j"
-                />
-              </mat-form-field>
+              <mat-label>{{ "Option " + (j + 1) }}</mat-label>
+              <input
+                matInput
+                placeholder="Some option"
+                value="d"
+                [formControlName]="j"
+              />
+            </mat-form-field>
           </div>
         </div>
-        <div class="option-odd-container" formArrayName="odds" >
+        <div class="option-odd-container" formArrayName="odds">
           <div *ngFor="let odd of getOdds(i).controls; let j = index">
             <mat-form-field color="accent" appearance="outline">
               <mat-label>Odds</mat-label>
@@ -79,7 +92,8 @@
         style="margin-bottom: 0.75rem; margin-left: 0"
         class="add-option-button"
         (click)="addMultipleChoiceOptions(i)"
-      >add</mat-icon>
+        >add</mat-icon
+      >
 
       <button
         type="button"

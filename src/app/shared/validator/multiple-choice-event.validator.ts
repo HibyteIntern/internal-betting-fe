@@ -13,7 +13,7 @@ export function multipleChoiceEventValidator(): ValidatorFn {
     const options = formGroup.get('multipleChoiceOptions') as FormArray;
     const odds = formGroup.get('odds') as FormArray;
 
-    if (type === 'MULTIPLE_CHOICE' && (options.length < 2 || odds.length < 2) ) {
+    if (type === 'MULTIPLE_CHOICE' && (options.length < 2 || odds.length < 2)) {
       return { insufficientOptions: true };
     }
     return null;

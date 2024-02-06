@@ -1,6 +1,6 @@
-<app-mainframe [title]="'Edit an event'">
-  <form class="styled-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
-    <mat-form-field appearance="outline">
+<app-mainframe [title]="'Edit ' + formData.name">
+  <form class="app-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Name</mat-label>
       <input
         name="eventName"
@@ -11,7 +11,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Description</mat-label>
       <textarea
         name="description"
@@ -22,22 +22,7 @@
       ></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Event Template</mat-label>
-      <mat-select
-        [(ngModel)]="formData.selectedTemplate"
-        name="selectedTemplate"
-      >
-        <mat-option
-          *ngFor="let template of eventTemplates"
-          [value]="template.name"
-        >
-          {{ template.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Starts At</mat-label>
       <input
         matInput
@@ -55,7 +40,7 @@
       <ngx-mat-datetime-picker #startsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Ends At</mat-label>
       <input
         matInput
@@ -73,9 +58,13 @@
       <ngx-mat-datetime-picker #endsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="formData.status" name="selectedStatus">
+      <mat-select
+        [(ngModel)]="formData.status"
+        name="selectedStatus"
+        panelClass="select-dropdown"
+      >
         <mat-option *ngFor="let status of statusOptions" [value]="status">
           {{ status }}
         </mat-option>
@@ -87,8 +76,20 @@
       color="accent"
       type="submit"
       [disabled]="!eventForm.valid"
+      style="color: var(--text-color)"
     >
       Submit
     </button>
+
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div
+      *ngIf="errorMessage"
+      class="form-error-message"
+      style="margin: 0 0 1rem 0"
+    >
+      {{ errorMessage }}
+    </div>
   </form>
 </app-mainframe>

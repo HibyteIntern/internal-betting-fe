@@ -1,9 +1,9 @@
 import { CompleteBetType } from './complete-bet-type.model';
 import { Status } from './Status';
-import {UserProfile} from "./UserProfile";
+import { UserProfile } from './UserProfile';
 
 export class EventRequest {
-  eventId?: number
+  eventId?: number;
   name: string;
   description: string;
   creator?: UserProfile;

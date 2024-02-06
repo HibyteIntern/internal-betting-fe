@@ -23,7 +23,11 @@
     />
     <div class="info-container">Create competition</div>
   </div>
-  <div class="icon" [routerLink]="['event-templates']" *ngIf="userProfile?.roles?.includes(Role.ADMIN)">
+  <div
+    class="icon"
+    [routerLink]="['event-templates']"
+    *ngIf="userProfile?.roles?.includes(Role.ADMIN)"
+  >
     <img src="assets/icons/event-template-icon.svg" alt="credits" />
     <div class="info-container">Event templates</div>
   </div>

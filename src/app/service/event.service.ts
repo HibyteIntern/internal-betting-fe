@@ -29,12 +29,15 @@ export class EventService {
     return this.http.get<EventRequest>(getUrl);
   }
 
-  updateEvent(eventId: string, eventRequest: EventRequest): Observable<EventRequest> {
+  updateEvent(
+    eventId: string,
+    eventRequest: EventRequest,
+  ): Observable<EventRequest> {
     const updateUrl = `${this.apiUrl}/edit/${eventId}`;
     return this.http.put<EventRequest>(updateUrl, eventRequest);
   }
 
-  deleteEvent(eventId: string): Observable<any> {
+  deleteEvent(eventId: number): Observable<any> {
     const deleteUrl = `${this.apiUrl}/delete/${eventId}`;
     return this.http.delete(deleteUrl);
   }

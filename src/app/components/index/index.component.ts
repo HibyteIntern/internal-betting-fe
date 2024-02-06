@@ -179,4 +179,23 @@ export class IndexComponent implements OnInit {
   handleEventEditClick(eventId: number) {
     this.router.navigate(['/events/edit/', eventId]);
   }
+
+  handleEventDeleteClick(eventId: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete event',
+        content: 'Are you sure you want to delete this event?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.eventService.deleteEvent(eventId).subscribe(() => {
+          this.eventService.getEvents().subscribe((events) => {
+            this.events = events;
+            this.selectEvents();
+          });
+        });
+      }
+    });
+  }
 }
