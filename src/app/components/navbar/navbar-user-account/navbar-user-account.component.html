@@ -14,7 +14,6 @@
   <app-account-page-user-profile
     *ngIf="showAlertBox"
     [username]="userProfile?.username?.toString()"
-    [userId]="userProfile?.userId"
     [profilePicture]="userProfile?.profilePicture"
     (edit)="onUserProfileEdit()"
     (logout)="onLogout()"

@@ -1,7 +1,7 @@
 import { Bet } from './Bet';
 import { FullUserGroupModel } from './full-user-group.model';
 
-export interface UserProfile {
+export interface FullUserProfile {
   userId?: number;
   keycloakId?: string;
   username: string;
@@ -9,5 +9,5 @@ export interface UserProfile {
   description?: string;
   coins?: number;
   bets?: Bet[];
-  groups?: number[] | FullUserGroupModel[];
+  groups?: FullUserGroupModel[];
 }

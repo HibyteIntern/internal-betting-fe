@@ -6,17 +6,28 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
 import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
+import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
+import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
+import { IndexComponent } from './components/index/index.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
-import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
-import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
-import { IndexComponent } from './components/index/index.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+
+  {
+    path: 'user-profile',
+    canActivate: [AuthGuard],
+    component: UserProfileComponent,
+    children: [{ path: 'edit/:id', component: UserProfileEditComponent }],
+  },
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
 
   { path: 'user-groups', component: GroupsComponent },
   { path: 'user-groups/create', component: GroupCreateComponent },

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable, Subscription, filter } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { Subject, filter, takeUntil } from 'rxjs';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -11,13 +11,10 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./navbar-user-account.component.scss'],
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy {
-  userId: any;
-  currentPath?: string;
-  userProfile: UserProfile | null = null;
-  userProfile$?: Observable<UserProfile | null>;
+  private unsubscribe$ = new Subject<void>();
+  userProfile: FullUserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
-  private userProfileSubscription?: Subscription;
 
   constructor(
     private router: Router,
@@ -27,41 +24,52 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.unsubscribe$),
+      )
       .subscribe(() => {
-        this.userProfileSubscription =
-          this.userProfileService.userId$.subscribe((userId) => {
-            if (userId) {
-              this.userId = userId;
-              this.fetchUserProfile(this.userId);
-            }
-          });
+        this.fetchUserProfile();
       });
+
     this.isLoggedIn = await this.authService.isLoggedIn();
+    this.fetchUserProfile();
+
+    this.userProfileService.userProfile$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((profile) => {
+        this.userProfile = profile;
+        if (profile?.userId) {
+          this.fetchProfileImage();
+        }
+      });
   }
 
   ngOnDestroy(): void {
-    if (this.userProfileSubscription) {
-      this.userProfileSubscription.unsubscribe();
-    }
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
-  fetchUserProfile(userId: number): void {
-    this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
-
-    this.userProfile$.subscribe((user) => {
-      this.userProfile = user;
-      if (this.userProfile?.userId) {
-        this.fetchProfileImage(this.userProfile?.userId);
-      }
-    });
+  fetchUserProfile(): void {
+    this.userProfileService.getUserProfile();
   }
 
-  fetchProfileImage(userId: number) {
-    this.userProfileService.getPhoto(userId).subscribe((blob) => {
-      this.displayProfileImage(blob);
-    });
+  fetchProfileImage() {
+    this.userProfileService
+      .getPhoto()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (blob) => {
+          if (blob.size > 0) {
+            this.displayProfileImage(blob);
+          } else {
+            console.error('Fetched blob is empty.');
+          }
+        },
+        (error) => {
+          console.error('Error fetching profile image:', error);
+        },
+      );
   }
 
   displayProfileImage(blob: Blob) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -11,23 +11,16 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 export class UserProfileEditComponent implements OnInit {
   title = 'User Profile';
   userId?: any;
-  userProfile$?: Observable<UserProfile | null>;
+  userProfile$?: Observable<FullUserProfile | null>;
 
-  constructor(
-    private userProfileService: UserProfileService
-  ) {}
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    this.userProfileService.userId$.subscribe((userId) => {
-      if (userId) {
-        this.userId = userId;
-        this.fetchUserProfile(this.userId);
-      }
-    });
+    this.fetchUserProfile();
   }
 
-  fetchUserProfile(userId: number): void {
+  fetchUserProfile(): void {
     this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
+    this.userProfileService.getUserProfile();
   }
 }

@@ -89,10 +89,9 @@ input {
   color: var(--text-color) !important;
 }
 
-h1 {
-  font-size: var(--text-lg);
-  font-family: var(--font-raleway);
-  font-weight: bold;
+//Background color for the Angular material select dropdown
+.select-dropdown.mat-mdc-select-panel {
+  background: var(--background-color);
 }
 
 mat-calendar {

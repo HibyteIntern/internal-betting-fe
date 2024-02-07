@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -8,28 +8,17 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './bets-list.component.html',
   styleUrls: ['./bets-list.component.scss'],
 })
-export class BetsListComponent implements OnInit, OnDestroy {
-  userProfile$?: Observable<UserProfile | null>;
-  private userProfileSubscription?: Subscription;
+export class BetsListComponent implements OnInit  {
+  userProfile$?: Observable<FullUserProfile | null>;
+
 
   constructor(private userProfileService: UserProfileService) {}
-
   ngOnInit(): void {
-    this.userProfileSubscription = this.userProfileService.userId$.subscribe(
-      (userId) => {
-        if (userId) {
-          this.fetchUserProfile(userId);
-        }
-      },
-    );
+    this.fetchUserProfile();
   }
 
-  fetchUserProfile(userId: number): void {
+  fetchUserProfile(): void {
     this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getById(userId);
-  }
-
-  ngOnDestroy(): void {
-    this.userProfileSubscription?.unsubscribe();
+    this.userProfileService.getUserProfile();
   }
 }

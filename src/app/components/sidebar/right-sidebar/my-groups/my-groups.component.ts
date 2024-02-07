@@ -1,43 +1,31 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, switchMap } from 'rxjs/operators';
-import { UserProfile } from '../../../../entity/UserProfile';
+import { FullUserProfile } from '../../../../entity/full-user-profile';
 import { UserProfileService } from '../../../../service/user-profile.service';
-import { FullUserGroupModel } from '../../../../entity/full-user-group.model';
+import {FullUserGroupModel} from "../../../../entity/full-user-group.model";
 
 @Component({
   selector: 'app-my-groups',
   templateUrl: './my-groups.component.html',
   styleUrls: ['./my-groups.component.scss'],
 })
-export class MyGroupsComponent implements OnInit, OnDestroy {
-  userProfile$?: Observable<UserProfile | null>;
-  groupsEntity: FullUserGroupModel[] = [];
-
-  private destroy$ = new Subject<void>();
+export class MyGroupsComponent implements OnInit {
+  userProfile$?: Observable<FullUserProfile | null>;
+  myGroups: FullUserGroupModel[] = [];
 
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    this.userProfile$ = this.userProfileService.userId$.pipe(
-      takeUntil(this.destroy$),
-      switchMap((userId) => {
-        if (userId) {
-          return this.userProfileService.userProfile$;
-        }
-        return [];
-      }),
+    this.fetchUserProfile();
+    console.log(this.userProfile$?.subscribe((data) => {
+        console.log(data);
+        this.myGroups = data?.groups || [];
+      })
     );
-
-    this.userProfile$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
-      if (user?.groups) {
-        this.groupsEntity = user.groups as FullUserGroupModel[];
-      }
-    });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  fetchUserProfile(): void {
+    this.userProfile$ = this.userProfileService.userProfile$;
+    this.userProfileService.getUserProfile();
   }
 }

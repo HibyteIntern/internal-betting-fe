@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { FullUserGroupModel } from '../../../entity/full-user-group.model';
 import { UserProfileService } from '../../../service/user-profile.service';
-import { UserProfile } from '../../../entity/UserProfile';
+import { FullUserProfile } from '../../../entity/full-user-profile';
 import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
 
@@ -30,8 +30,8 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
-  allUserProfiles: UserProfile[] = [];
-  selectedUserProfiles: UserProfile[] = [];
+  allUserProfiles: FullUserProfile[] = [];
+  selectedUserProfiles: FullUserProfile[] = [];
   userGroupForm: FormGroup;
   isEditMode = false;
   uploadedPhotoId?: number;

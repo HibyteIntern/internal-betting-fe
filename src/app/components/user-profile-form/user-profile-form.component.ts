@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
+import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -11,16 +12,18 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./user-profile-form.component.scss'],
 })
 export class UserProfileFormComponent implements OnChanges {
-  @Input() userProfile?: UserProfile | null;
+  @Input() userProfile?: FullUserProfile | null;
 
   userProfileForm: FormGroup;
   uploadedPhotoId?: number;
-  originalUserProfile?: UserProfile;
+  originalUserProfile?: FullUserProfile;
+  file: File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private router: Router,
+    private avatarService: AvatarService,
+    private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -28,19 +31,19 @@ export class UserProfileFormComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
-      console.log(this.originalUserProfile);
+
       this.userProfileForm.patchValue(this.userProfile);
 
       if (
         this.userProfile &&
         this.userProfile.userId &&
         this.userProfile.profilePicture
-      ) {
-        this.userProfileService
-          .getPhoto(this.userProfile?.userId)
+
+      ) {  this.userProfileService
+          .getPhoto()
           .subscribe((blob) => {
             this.displayProfileImage(blob);
           });
@@ -64,7 +67,7 @@ export class UserProfileFormComponent implements OnChanges {
     const element = event.target as HTMLInputElement;
     const fileList: FileList | null = element.files;
     if (fileList && fileList.length > 0) {
-      const file = fileList[0];
+      this.file = fileList[0];
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -74,23 +77,25 @@ export class UserProfileFormComponent implements OnChanges {
         }
       };
 
-      reader.readAsDataURL(file);
-
-      if (typeof this.userProfile?.userId === 'number') {
-        this.userProfileService
-          .addPhoto(this.userProfile.userId, file)
-          .subscribe((photoId) => {
-            this.uploadedPhotoId = photoId;
-          });
-      } else {
-        console.error('User ID is undefined');
-      }
+      reader.readAsDataURL(this.file);
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
+    if (this.file) {
+      try {
+        const photoId = await this.userProfileService
+          .addPhoto(this.file)
+          .toPromise();
+        this.uploadedPhotoId = photoId;
+      } catch (error) {
+        console.error('Error uploading photo:', error);
+        return;
+      }
+    }
+
     const formValue = this.userProfileForm.value;
-    const updatedUserProfile: UserProfile = {
+    const updatedUserProfile: FullUserProfile = {
       userId: this.userProfile?.userId,
       keycloakId: this.userProfile?.keycloakId,
       username:
@@ -98,7 +103,7 @@ export class UserProfileFormComponent implements OnChanges {
           ? formValue.username
           : '',
       profilePicture:
-        this.uploadedPhotoId !== undefined
+        this.uploadedPhotoId !== undefined && this.uploadedPhotoId !== null
           ? this.uploadedPhotoId
           : this.userProfile?.profilePicture,
       description:
@@ -122,7 +127,8 @@ export class UserProfileFormComponent implements OnChanges {
       .update(updatedUserProfile)
       .pipe(
         finalize(() => {
-          this.router.navigate(['home']);
+          location.reload();
+          this.location.back();
         }),
       )
       .subscribe((user) => {
@@ -131,6 +137,20 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   onCancel() {
-    this.router.navigate(['home']);
+    this.location.back();
+  }
+
+  async onAddAvatar() {
+    const userId = String(this.userProfile?.userId);
+    const avatarSvg = this.avatarService.generateAvatar(userId);
+    const avatarFile = await this.avatarService.convertSvgToImageFile(
+      avatarSvg,
+      userId,
+    );
+    if (this.userProfile?.userId) {
+      await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
+    }
+
+    location.reload();
   }
 }
