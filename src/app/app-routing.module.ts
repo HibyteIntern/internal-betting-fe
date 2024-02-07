@@ -6,6 +6,9 @@ import { EventTemplateBrowserComponent } from './components/event-templates/even
 import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
 import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
+import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { ViewEventComponent } from './components/events/view-event/view-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { IndexComponent } from './components/index/index.component';
@@ -19,7 +22,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'create-event', component: CreateEventComponent },
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+  { path: 'view-event/:eventId', component: ViewEventComponent },
+  { path: 'edit-event/:eventId', component: EditEventComponent },
 
   {
     path: 'user-profile',
