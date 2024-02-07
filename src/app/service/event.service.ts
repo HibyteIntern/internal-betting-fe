@@ -3,15 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
 import { UserProfile } from '../entity/UserProfile';
-import { Bet } from '../entity/Bet'; // Import the Bet interface
+import { Bet } from '../entity/Bet';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
   private apiUrl = 'http://localhost:8080/api/v1/events';
-  private addUrl = 'http://localhost:8080/api/v1/events/add';
-  private getEventsUrl = 'http://localhost:8080/api/v1/events';
 
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$: Observable<boolean> = this.loadingSubject.asObservable();
@@ -19,13 +17,11 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   addEvent(eventRequest: EventRequest): Observable<any> {
-    return this.http.post(this.addUrl, eventRequest);
+    return this.http.post('http://localhost:8080/api/v1/events/add', eventRequest);
   }
 
-  // Add the new method to place a bet for an event
   addBetToEvent(eventId: number, bet: Bet): Observable<any> {
-    const betUrl = `${this.apiUrl}/bet/${eventId}`;
-    return this.http.post(betUrl, bet);
+    return this.http.post(`${this.apiUrl}/bet/${eventId}`, bet);
   }
 
   getEvents(): Observable<EventRequest[]> {
@@ -33,35 +29,30 @@ export class EventService {
   }
 
   getEventById(eventId: string): Observable<EventRequest> {
-    const getUrl = `${this.apiUrl}/get/${eventId}`;
-    return this.http.get<EventRequest>(getUrl);
+    return this.http.get<EventRequest>(`${this.apiUrl}/get/${eventId}`);
   }
 
   updateEvent(eventId: string, eventRequest: EventRequest): Observable<any> {
-    const updateUrl = `${this.apiUrl}/edit/${eventId}`;
-    return this.http.put(updateUrl, eventRequest);
+    return this.http.put(`${this.apiUrl}/edit/${eventId}`, eventRequest);
   }
 
   deleteEvent(eventId: string): Observable<any> {
-    const deleteUrl = `${this.apiUrl}/delete/${eventId}`;
-    return this.http.delete(deleteUrl);
+    return this.http.delete(`${this.apiUrl}/delete/${eventId}`);
   }
 
   getUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(
-      'http://localhost:8080/api/user-profiles',
-    );
+    return this.http.get<UserProfile[]>('http://localhost:8080/api/v1/user-profile');
   }
 
   getAllTags(): Observable<string[]> {
-    return this.http.get<string[]>(this.getEventsUrl + '/get/tags');
+    return this.http.get<string[]>(`${this.apiUrl}/get/tags`);
   }
 
   getEventsSearch(query: string): Observable<EventRequest[]> {
     this.loadingSubject.next(true);
 
     return this.http
-      .get<EventRequest[]>(`${this.getEventsUrl}/get/name`, {
+      .get<EventRequest[]>(`${this.apiUrl}/get/name`, {
         params: new HttpParams().set('name', query),
       })
       .pipe(

@@ -35,7 +35,7 @@ export class AddBetToEventComponent implements OnInit {
     );
 
     this.route.params.subscribe((params) => {
-      this.eventId = +params['eventId']; // '+' is used to convert the parameter to a number
+      this.eventId = +params['eventId'];
     });
   }
 
@@ -61,7 +61,6 @@ export class AddBetToEventComponent implements OnInit {
 
     this.eventService.addBetToEvent(this.eventId, this.bet).subscribe(
       () => {
-        console.log('Bet placed successfully.');
         this.resetForm();
       },
       (error) => {
