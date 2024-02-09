@@ -27,6 +27,8 @@ import { UserProfileFormComponent } from './components/user-profile-form/user-pr
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
+import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { MatLegacyChipsModule } from '@angular/material/legacy-chips';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
@@ -37,14 +39,18 @@ import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
-import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewEventComponent } from './components/events/view-event/view-event.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -95,6 +101,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateCardComponent,
     EventTemplateListComponent,
     MainframeComponent,
+    CreateEventComponent,
     UserProfileComponent,
     UserProfileEditComponent,
     UserProfileFormComponent,
@@ -107,11 +114,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CompetitionCardComponent,
     TagComponent,
     StopMousePropagationDirective,
+    ViewEventComponent,
     SearchBarComponent,
     LeftSidebarListComponent,
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    AddBetToEventComponent,
+    EditEventComponent,
     CreateCompetitionComponent,
     EventCardComponent,
     IndexComponent,
@@ -144,13 +154,17 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    MatLegacyChipsModule,
     FormsModule,
     MatExpansionModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule,
+    MatIconModule,
+    MatChipsModule,
     MatAutocompleteModule,
+    MatListModule,
+    MatSelectModule,
     MatCardModule,
     MatChipsModule,
     MatRadioModule,
