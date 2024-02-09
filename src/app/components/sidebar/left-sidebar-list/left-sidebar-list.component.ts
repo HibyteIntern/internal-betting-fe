@@ -32,5 +32,11 @@ export class LeftSidebarListComponent {
     this.router.navigate(['/events/create']);
   }
 
+  isActiveRoute(route: string): boolean {
+    if(route === '/' && this.router.url === '/') return true;
+    else if(this.router.url !== '/' && route !== '/') return this.router.url.includes(route);
+    return false;
+  }
+
   protected readonly Role = Role;
 }

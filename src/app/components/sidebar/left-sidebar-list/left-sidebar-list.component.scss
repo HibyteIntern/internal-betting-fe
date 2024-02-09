@@ -55,3 +55,10 @@
     transform: scaleX(0);
   }
 }
+
+.active-icon {
+  img {
+    filter: brightness(0.3);
+    transform: scale(1.2);
+  }
+}

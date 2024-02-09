@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from './service/theme.service';
-import { KeycloakService } from 'keycloak-angular';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
