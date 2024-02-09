@@ -74,7 +74,6 @@ export class UserProfileService {
 
   getAll(): Observable<UserProfile[]> {
     return this.http.get<UserProfile[]>(this.userProfileUrl);
-    return this.http.get<UserProfile[]>(this.userProfileUrl);
   }
 
   getUserProfile() {
