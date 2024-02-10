@@ -82,10 +82,9 @@ export class UserProfileFormComponent implements OnChanges {
   async onSubmit() {
     if (this.file) {
       try {
-        const photoId = await this.userProfileService
+        this.uploadedPhotoId = await this.userProfileService
           .addPhoto(this.file)
           .toPromise();
-        this.uploadedPhotoId = photoId;
       } catch (error) {
         console.error('Error uploading photo:', error);
         return;

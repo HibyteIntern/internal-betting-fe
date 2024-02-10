@@ -118,7 +118,7 @@ export class UserProfileService {
   }
 
   updateCoins(coins: number) {
-    let tempUserProfile = this.userProfileSubject.value;
+    const tempUserProfile = this.userProfileSubject.value;
     if (tempUserProfile && tempUserProfile.coins)
       tempUserProfile.coins = tempUserProfile.coins + coins;
     this.userProfileSubject.next(tempUserProfile);

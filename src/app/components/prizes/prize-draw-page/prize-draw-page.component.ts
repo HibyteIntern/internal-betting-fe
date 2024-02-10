@@ -56,9 +56,10 @@ export class PrizeDrawPageComponent implements OnInit {
         amount: amount,
       };
       this.prizeDrawService.addEntryToDraw(body).subscribe((data) => {
-        this.prizeDraw!.entries.push(data);
+        if (!this.prizeDraw) return;
+        this.prizeDraw.entries.push(data);
         this.userProfileService.updateCoins(-amount);
-        this.recalculateLeader(this.prizeDraw!);
+        this.recalculateLeader(this.prizeDraw);
       });
     }
   }

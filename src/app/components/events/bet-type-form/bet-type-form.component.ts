@@ -35,7 +35,7 @@ import { multipleChoiceEventValidator } from '../../../shared/validator/multiple
 export class BetTypeFormComponent implements ControlValueAccessor, Validator {
   form: FormGroup;
   onTouched!: () => void;
-  onValidationChange: any = () => {};
+  onValidationChange!: () => void;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
