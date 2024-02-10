@@ -42,21 +42,15 @@ import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { ViewEventComponent } from './components/events/view-event/view-event.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatListModule } from '@angular/material/list';
-import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
-import { EditEventComponent } from './components/events/edit-event/edit-event.component';
-import { IndexComponent } from './components/index/index.component';
-import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -77,6 +71,12 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import { MatListModule } from '@angular/material/list';
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
+import { IndexComponent } from './components/index/index.component';
+import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
 import { authInterceptor } from './interceptor/auth.interceptor';
@@ -132,6 +132,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CreateCompetitionComponent,
     EventCardComponent,
     IndexComponent,
+    BetsListComponent,
+    LoginAlertComponent,
     PrizeBrowserComponent,
     PrizeCardComponent,
     PrizeListComponent,
@@ -188,6 +190,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     {
