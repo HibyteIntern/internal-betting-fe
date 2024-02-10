@@ -33,8 +33,9 @@ export class LeftSidebarListComponent {
   }
 
   isActiveRoute(route: string): boolean {
-    if(route === '/' && this.router.url === '/') return true;
-    else if(this.router.url !== '/' && route !== '/') return this.router.url.includes(route);
+    if (route === '/' && this.router.url === '/') return true;
+    else if (this.router.url !== '/' && route !== '/')
+      return this.router.url.includes(route);
     return false;
   }
 
