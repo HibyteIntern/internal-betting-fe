@@ -1,0 +1,17 @@
+<div class="outer-container">
+  <img
+    ngSrc="assets/icons/calendar-icon.svg"
+    alt="credits"
+    height="22"
+    width="18"
+  />
+  <div *ngIf="getTimeRemainingString() === 'Expired'">
+    {{ getTimeRemainingString() }}
+  </div>
+  <div *ngIf="getTimeRemainingString() !== 'Expired'">
+    Hurry up! This draw ends in:
+    <span style="color: var(--accent-color-two)">{{
+      getTimeRemainingString()
+    }}</span>
+  </div>
+</div>
