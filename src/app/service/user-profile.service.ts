@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, delay, firstValueFrom, map } from 'rxjs';
 import { UserProfile } from '../entity/UserProfile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -102,6 +102,12 @@ export class UserProfileService {
     return this.http.delete<any>(`${this.userProfileUrl}`);
   }
 
+  getUserProfileByName(name: string): Observable<UserProfile | undefined> {
+    return this.getAll().pipe(
+      map((profiles) => profiles.find((p) => p.username === name))
+    );
+  }
+
   addPhoto(photo: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
@@ -115,6 +121,12 @@ export class UserProfileService {
 
   getPhoto(): Observable<Blob> {
     return this.http.get(`${this.userProfileUrl}/getPhoto`, {
+      responseType: 'blob',
+    });
+  }
+
+  getPhotoById(userId: number): Observable<Blob> {
+    return this.http.get(`${this.userProfileUrl}/getPhoto/${userId}`, {
       responseType: 'blob',
     });
   }
