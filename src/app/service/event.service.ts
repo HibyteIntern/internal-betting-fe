@@ -20,8 +20,8 @@ export class EventService {
     return this.http.post('http://localhost:8080/api/v1/events/add', eventRequest);
   }
 
-  addBetToEvent(eventId: number, bet: Bet): Observable<any> {
-    return this.http.post(`${this.apiUrl}/bet/${eventId}`, bet);
+  addBetToEvent( bet: Bet): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/v1/bets`, bet);
   }
 
   getEvents(): Observable<EventRequest[]> {

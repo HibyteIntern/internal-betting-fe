@@ -55,11 +55,11 @@ export class AddBetToEventComponent implements OnInit {
       odds = 0;
     }
 
-    this.bet.user = this.userProfile;
-    this.bet.betType = this.betType;
+    this.bet.user = this.userProfile?.userId;
+    this.bet.betType = this.betType?.id;
     this.bet.odds = odds;
 
-    this.eventService.addBetToEvent(this.eventId, this.bet).subscribe(
+    this.eventService.addBetToEvent(this.bet).subscribe(
       () => {
         this.resetForm();
       },
