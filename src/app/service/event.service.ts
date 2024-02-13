@@ -17,10 +17,13 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   addEvent(eventRequest: EventRequest): Observable<any> {
-    return this.http.post('http://localhost:8080/api/v1/events/add', eventRequest);
+    return this.http.post(
+      'http://localhost:8080/api/v1/events/add',
+      eventRequest,
+    );
   }
 
-  addBetToEvent( bet: Bet): Observable<any> {
+  addBetToEvent(bet: Bet): Observable<any> {
     return this.http.post(`http://localhost:8080/api/v1/bets`, bet);
   }
 
@@ -41,7 +44,9 @@ export class EventService {
   }
 
   getUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>('http://localhost:8080/api/v1/user-profile');
+    return this.http.get<UserProfile[]>(
+      'http://localhost:8080/api/v1/user-profile',
+    );
   }
 
   getAllTags(): Observable<string[]> {
