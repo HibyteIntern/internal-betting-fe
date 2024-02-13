@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { FullUserGroupModel } from '../../../entity/full-user-group.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../service/group.service';
+import {UserGroupModel} from "../../../entity/user-group.model";
 
 @Component({
   selector: 'app-group-edit',
@@ -10,8 +10,8 @@ import { GroupService } from '../../../service/group.service';
   styleUrls: ['./group-edit.component.scss'],
 })
 export class GroupEditComponent implements OnInit {
-  protected group$: Observable<FullUserGroupModel | undefined> =
-    new BehaviorSubject<FullUserGroupModel | undefined>(undefined);
+  protected group$: Observable<UserGroupModel | undefined> =
+    new BehaviorSubject<UserGroupModel | undefined>(undefined);
 
   constructor(
     private router: Router,
@@ -22,12 +22,12 @@ export class GroupEditComponent implements OnInit {
     const stringId = this.route.snapshot.paramMap.get('id');
     if (stringId) {
       const id = Number.parseInt(stringId);
-      this.groupService.getOneFull(id).subscribe((group) => {
+      this.groupService.getOne(id).subscribe((group) => {
         this.group$ = of(group);
       });
     }
   }
-  protected handleFormEdit(group: FullUserGroupModel) {
+  protected handleFormEdit(group: UserGroupModel) {
     this.groupService.update(group).subscribe(() => {
       this.router.navigate(['/user-groups']);
     });

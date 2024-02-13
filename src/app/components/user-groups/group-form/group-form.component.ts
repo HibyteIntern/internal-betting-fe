@@ -13,11 +13,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FullUserGroupModel } from '../../../entity/full-user-group.model';
 import { UserProfileService } from '../../../service/user-profile.service';
-import { FullUserProfile } from '../../../entity/full-user-profile';
 import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
+import {UserGroupModel} from "../../../entity/user-group.model";
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-group-form',
@@ -25,13 +25,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./group-form.component.scss'],
 })
 export class GroupFormComponent implements OnChanges, OnInit {
-  @Input() initialGroup: FullUserGroupModel | null | undefined;
-  @Output() formSubmit = new EventEmitter<FullUserGroupModel>();
+  @Input() initialGroup: UserGroupModel | null | undefined;
+  @Output() formSubmit = new EventEmitter<UserGroupModel>();
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
   allUserProfiles: FullUserProfile[] = [];
-  selectedUserProfiles: FullUserProfile[] = [];
+  selectedUserIds: (number | undefined)[] = [];
   userGroupForm: FormGroup;
   isEditMode = false;
   uploadedPhotoId?: number;
@@ -50,40 +50,44 @@ export class GroupFormComponent implements OnChanges, OnInit {
         [Validators.required, this.validateSelectedUsers.bind(this)],
       ],
     });
+    this.fetchUserProfiles()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
-      if (this.initialGroup) {
-        this.userGroupForm.patchValue({
-          groupName: this.initialGroup.groupName || '',
-          description: this.initialGroup.description || '',
-          users: this.initialGroup.users || [],
+      this.updateFormWithInitialGroup();
+    }
+  }
+
+  private updateFormWithInitialGroup(): void {
+    if (this.initialGroup) {
+      this.userGroupForm.patchValue({
+        groupName: this.initialGroup.groupName || '',
+        description: this.initialGroup.description || '',
+        users: this.initialGroup.users || [],
+      });
+
+      this.selectedUsers = this.initialGroup.users.map((userId) => {
+        const user = this.allUserProfiles.find(profile => profile.userId === userId);
+        return user?.username || '';
+      });
+
+      this.selectedUserIds = this.initialGroup.users;
+
+      if (this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
+        this.groupService.getPhoto(this.initialGroup.userGroupId).subscribe(blob => {
+          this.displayProfileImage(blob);
         });
-        this.selectedUsers = this.initialGroup.users.map(
-          (user) => user.username,
-        );
-        this.selectedUserProfiles = this.initialGroup.users;
-        if (
-          this.initialGroup &&
-          this.initialGroup.userGroupId &&
-          this.initialGroup.profilePicture
-        ) {
-          this.groupService
-            .getPhoto(this.initialGroup?.userGroupId)
-            .subscribe((blob) => {
-              this.displayProfileImage(blob);
-            });
-        } else {
-          console.error('User profile or profile picture is undefined.');
-        }
+      } else {
+        console.error('User profile or profile picture is undefined.');
       }
     }
   }
 
+
   onSubmit() {
     const formValue = this.userGroupForm.value;
-    const updatedGroup: FullUserGroupModel = {
+    const updatedGroup: UserGroupModel = {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
@@ -98,22 +102,31 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.isEditMode = this.router.url.includes('edit');
+    this.fetchUserProfiles()
+  }
+
+  fetchUserProfiles(): void {
     this.userService.getAll().subscribe((data) => {
       this.allUserProfiles = data;
-      data.forEach((user) => {
-        if (user.username && !this.selectedUsers.includes(user.username)) {
-          this.userOptions = [...this.userOptions, user.username];
-        }
-      });
+      this.initializeUserOptions();
+      if (this.initialGroup) {
+        this.updateFormWithInitialGroup();
+      }
     });
   }
 
+  initializeUserOptions(): void {
+    this.userOptions = this.allUserProfiles
+      .filter(user => user.username && !this.selectedUsers.includes(user.username))
+      .map(user => user.username);
+  }
+
   handleUserSelect(users: string[]) {
-    this.selectedUserProfiles = this.allUserProfiles.filter((user) =>
-      users.includes(user.username),
-    );
+    this.selectedUserIds = this.allUserProfiles
+      .filter((user) => users.includes(user.username))
+      .map((user) => user.userId);
     this.userGroupForm.patchValue({
-      users: this.selectedUserProfiles,
+      users: this.selectedUserIds,
     });
   }
 

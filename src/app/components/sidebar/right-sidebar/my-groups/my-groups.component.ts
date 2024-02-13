@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FullUserProfile } from '../../../../entity/full-user-profile';
 import { UserProfileService } from '../../../../service/user-profile.service';
 import {FullUserGroupModel} from "../../../../entity/full-user-group.model";
@@ -18,7 +18,7 @@ export class MyGroupsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchUserProfile();
     console.log(this.userProfile$?.subscribe((data) => {
-        console.log(data);
+        // console.log(data);
         this.myGroups = data?.groups || [];
       })
     );

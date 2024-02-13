@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import {firstValueFrom, Observable} from 'rxjs';
 import { FullUserGroupModel } from '../entity/full-user-group.model';
 import { UserGroupModel } from '../entity/user-group.model';
 import { AvatarService } from './avatar.service';
@@ -22,20 +22,15 @@ export class GroupService {
     return this.httpClient.get<FullUserGroupModel[]>(this.groupUrl);
   }
 
-  getOneFull(id: number): Observable<FullUserGroupModel> {
-    const url = `${this.groupUrl}/${id}`;
-    return this.httpClient.get<FullUserGroupModel>(url);
-  }
-
   getOne(id: number): Observable<UserGroupModel> {
     const url = `${this.groupUrl}/${id}`;
     return this.httpClient.get<UserGroupModel>(url);
   }
 
-  create(group: FullUserGroupModel): Observable<FullUserGroupModel> {
-    return this.httpClient.post<FullUserGroupModel>(this.groupUrl, group).pipe(
-      switchMap(async (newGroup: FullUserGroupModel) => {
-        if (newGroup.profilePicture == null && newGroup.userGroupId) {
+  create(group: UserGroupModel): Observable<UserGroupModel> {
+    return this.httpClient.post<UserGroupModel>(this.groupUrl, group).pipe(
+      switchMap(async (newGroup: UserGroupModel) => {
+        if (newGroup.profilePicture == 0 && newGroup.userGroupId) {
           const avatarSvg = this.avatarService.generateAvatar(
             newGroup.groupName,
           );
@@ -54,9 +49,9 @@ export class GroupService {
     );
   }
 
-  update(group: FullUserGroupModel): Observable<FullUserGroupModel> {
+  update(group: UserGroupModel): Observable<UserGroupModel> {
     const url = `${this.groupUrl}/${group.userGroupId}`;
-    return this.httpClient.put<FullUserGroupModel>(url, group);
+    return this.httpClient.put<UserGroupModel>(url, group);
   }
 
   delete(id: number): Observable<never> {
@@ -88,7 +83,7 @@ export class GroupService {
   private async uploadAvatarAndUpdateGroup(
     userId: number,
     avatarFile: File,
-    userGroup: FullUserGroupModel,
+    userGroup: UserGroupModel,
   ) {
     userGroup.profilePicture = await firstValueFrom(
       this.addPhoto(userId, avatarFile),

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, delay, firstValueFrom } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
+import {UserProfile} from "../entity/user-profile";
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +76,11 @@ export class UserProfileService {
   getAll(): Observable<FullUserProfile[]> {
     return this.http.get<FullUserProfile[]>(this.userProfileUrl);
     return this.http.get<FullUserProfile[]>(this.userProfileUrl);
+  }
+
+  getOne(userId: number): Observable<UserProfile> {
+    const url = `${this.userProfileUrl}/{userId}`;
+    return this.http.get<UserProfile>(this.userProfileUrl);
   }
 
   getUserProfile() {
