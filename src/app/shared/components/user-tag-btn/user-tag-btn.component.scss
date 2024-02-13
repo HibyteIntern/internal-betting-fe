@@ -30,30 +30,31 @@
     right: 50%;
     transform: translateX(50%) translateY(calc(-50% + 2px));
   }
+}
 
-  .tooltip-content {
-    position: absolute;
-    opacity: 0;
-    bottom: calc(100% + 20px);
-    left: 50%;
-    transform: translate(-50%, -10px); 
-    background-color: var(--sidebar-color);
-    color: #fff;
-    text-align: center;
-    padding: 8px;
-    border-radius: 6px;
-    z-index: 10;
-    white-space: nowrap;
-    pointer-events: none;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    min-width: 150px; 
-  }
+.tooltip-content {
+  max-width: 3000px; 
+  overflow: visible; 
+  position: absolute;
+  opacity: 0;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translate(-50%, -10px);
+  background-color: var(--sidebar-color);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px; 
+  z-index: 10;
+  white-space: normal;
+  pointer-events: none;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
 }
 
 .profile-image-upload {
   margin-bottom: 1%; 
-  text-align: center; 
 }
 
 .profile-circle {
