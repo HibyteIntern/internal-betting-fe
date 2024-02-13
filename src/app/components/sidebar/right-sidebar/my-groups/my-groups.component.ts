@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { FullUserProfile } from '../../../../entity/full-user-profile';
 import { UserProfileService } from '../../../../service/user-profile.service';
-import {FullUserGroupModel} from "../../../../entity/full-user-group.model";
+import {GroupService} from "../../../../service/group.service";
+import {UserGroupModel} from "../../../../entity/user-group.model";
 
 @Component({
   selector: 'app-my-groups',
@@ -10,22 +9,19 @@ import {FullUserGroupModel} from "../../../../entity/full-user-group.model";
   styleUrls: ['./my-groups.component.scss'],
 })
 export class MyGroupsComponent implements OnInit {
-  userProfile$?: Observable<FullUserProfile | null>;
-  myGroups: FullUserGroupModel[] = [];
+  myGroups: UserGroupModel[] | undefined = [];
 
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(private userProfileService: UserProfileService,
+              private groupService: GroupService) {}
 
-  ngOnInit(): void {
-    this.fetchUserProfile();
-    console.log(this.userProfile$?.subscribe((data) => {
-        // console.log(data);
-        this.myGroups = data?.groups || [];
-      })
-    );
+  ngOnInit() {
+    this.userProfileService.getMeSimple().subscribe((userProfile) => {
+        userProfile.groups?.forEach( (groupId) => {
+          this.groupService.getOne(groupId).subscribe((group) => {
+            this.myGroups?.push(group);
+          });
+        })
+    });
   }
 
-  fetchUserProfile(): void {
-    this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getUserProfile();
-  }
 }

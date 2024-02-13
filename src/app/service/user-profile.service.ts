@@ -13,8 +13,7 @@ export class UserProfileService {
   private userProfileSubject: BehaviorSubject<FullUserProfile | null> =
     new BehaviorSubject<FullUserProfile | null>(null);
   public userProfile$: Observable<FullUserProfile | null> = this.userProfileSubject
-    .asObservable()
-    .pipe(delay(100));
+    .asObservable();
 
   userProfile: FullUserProfile | null = null;
   userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
@@ -75,7 +74,6 @@ export class UserProfileService {
 
   getAll(): Observable<FullUserProfile[]> {
     return this.http.get<FullUserProfile[]>(this.userProfileUrl);
-    return this.http.get<FullUserProfile[]>(this.userProfileUrl);
   }
 
   getOne(userId: number): Observable<UserProfile> {
@@ -93,6 +91,10 @@ export class UserProfileService {
 
   getMe(): Observable<FullUserProfile> {
     return this.http.get<FullUserProfile>(`${this.userProfileUrl}/getMe`);
+  }
+
+  getMeSimple(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
   }
 
   create(userProfile: FullUserProfile): Observable<FullUserProfile> {
