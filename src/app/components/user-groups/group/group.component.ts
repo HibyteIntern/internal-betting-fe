@@ -41,8 +41,7 @@ export class GroupComponent implements AfterViewInit {
     if (this.profileCircle) {
       const circle = this.profileCircle.nativeElement as HTMLElement;
       circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
+      circle.classList.add('profile-image');
     }
   }
 }

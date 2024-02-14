@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
@@ -31,7 +31,7 @@ export class UserProfileFormComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
 
@@ -45,21 +45,11 @@ export class UserProfileFormComponent implements OnChanges {
       ) {  this.userProfileService
           .getPhoto()
           .subscribe((blob) => {
-            this.displayProfileImage(blob);
+            this.userProfileService.displayProfileImage(blob, '.profile-circle');
           });
       } else {
         console.error('User profile or profile picture is undefined.');
       }
-    }
-  }
-
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
     }
   }
 

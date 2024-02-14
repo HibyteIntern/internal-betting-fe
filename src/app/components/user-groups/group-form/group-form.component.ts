@@ -53,6 +53,20 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.fetchUserProfiles()
   }
 
+  ngOnInit(): void {
+    this.isEditMode = this.router.url.includes('edit');
+    this.fetchUserProfiles()
+  }
+
+  fetchUserProfiles(): void {
+    this.userService.getAll().subscribe((data) => {
+      this.allUserProfiles = data;
+      this.initializeUserOptions();
+      if (this.initialGroup) {
+        this.updateFormWithInitialGroup();
+      }
+    });
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialGroup']) {
       this.updateFormWithInitialGroup();
@@ -76,7 +90,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
       if (this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
         this.groupService.getPhoto(this.initialGroup.userGroupId).subscribe(blob => {
-          this.displayProfileImage(blob);
+          this.userService.displayProfileImage(blob, '.profile-circle');
         });
       } else {
         console.error('User profile or profile picture is undefined.');
@@ -100,20 +114,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.formSubmit.emit(updatedGroup);
   }
 
-  ngOnInit(): void {
-    this.isEditMode = this.router.url.includes('edit');
-    this.fetchUserProfiles()
-  }
 
-  fetchUserProfiles(): void {
-    this.userService.getAll().subscribe((data) => {
-      this.allUserProfiles = data;
-      this.initializeUserOptions();
-      if (this.initialGroup) {
-        this.updateFormWithInitialGroup();
-      }
-    });
-  }
 
   initializeUserOptions(): void {
     this.userOptions = this.allUserProfiles
@@ -162,13 +163,4 @@ export class GroupFormComponent implements OnChanges, OnInit {
     }
   }
 
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
-    }
-  }
 }

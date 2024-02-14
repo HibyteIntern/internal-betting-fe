@@ -30,7 +30,7 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
       this.photoSubscription = this.userProfileService
         .getPhoto()
         .subscribe((blob) => {
-          this.displayProfileImage(blob);
+          this.userProfileService.displayProfileImage(blob, '.profile-circle');
         });
     }
   }
@@ -38,16 +38,6 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.photoSubscription) {
       this.photoSubscription.unsubscribe();
-    }
-  }
-
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
     }
   }
 

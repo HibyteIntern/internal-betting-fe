@@ -1,2 +1,4 @@
-<app-group-list [groups]="groups"></app-group-list>
+<app-group-list *ngIf="groups$ | async as groups"
+                [groups]="groups"
+></app-group-list>
 <router-outlet></router-outlet>

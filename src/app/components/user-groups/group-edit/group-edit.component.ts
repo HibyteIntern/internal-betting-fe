@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../service/group.service';
 import {UserGroupModel} from "../../../entity/user-group.model";
@@ -22,9 +22,7 @@ export class GroupEditComponent implements OnInit {
     const stringId = this.route.snapshot.paramMap.get('id');
     if (stringId) {
       const id = Number.parseInt(stringId);
-      this.groupService.getOne(id).subscribe((group) => {
-        this.group$ = of(group);
-      });
+      this.group$ = this.groupService.getOne(id);
     }
   }
   protected handleFormEdit(group: UserGroupModel) {

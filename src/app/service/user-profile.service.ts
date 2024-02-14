@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
 import {UserProfile} from "../entity/user-profile";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class UserProfileService {
     .asObservable();
 
   userProfile: FullUserProfile | null = null;
-  userProfileUrl = 'http://localhost:8080/api/v1/user-profile';
+  userProfileUrl = `${environment.baseUrl}/v1/user-profile`;
 
   constructor(
     private http: HttpClient,
@@ -76,11 +77,6 @@ export class UserProfileService {
     return this.http.get<FullUserProfile[]>(this.userProfileUrl);
   }
 
-  getOne(userId: number): Observable<UserProfile> {
-    const url = `${this.userProfileUrl}/{userId}`;
-    return this.http.get<UserProfile>(this.userProfileUrl);
-  }
-
   getUserProfile() {
     this.http
       .get<FullUserProfile>(`${this.userProfileUrl}/getMe`)
@@ -124,5 +120,14 @@ export class UserProfileService {
     return this.http.get(`${this.userProfileUrl}/getPhoto`, {
       responseType: 'blob',
     });
+  }
+
+  displayProfileImage(blob: Blob, selector: string) {
+    const url = URL.createObjectURL(blob);
+    const circle = document.querySelector(selector) as HTMLElement;
+    if (circle) {
+      circle.style.backgroundImage = `url(${url})`;
+      circle.classList.add('profile-image');
+    }
   }
 }
