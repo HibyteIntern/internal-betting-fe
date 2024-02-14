@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
 import { EventRequest } from '../entity/EventRequest';
-import {UserProfile} from "../entity/user-profile";
+import { UserProfile } from '../entity/user-profile';
 
 @Injectable({
   providedIn: 'root',

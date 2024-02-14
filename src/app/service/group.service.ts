@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {firstValueFrom, Observable} from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { FullUserGroupModel } from '../entity/full-user-group.model';
 import { UserGroupModel } from '../entity/user-group.model';
 import { AvatarService } from './avatar.service';

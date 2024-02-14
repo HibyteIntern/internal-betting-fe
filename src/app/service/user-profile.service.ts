@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
-import {UserProfile} from "../entity/user-profile";
-import {environment} from "../../environments/environment";
+import { UserProfile } from '../entity/user-profile';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,8 @@ import {environment} from "../../environments/environment";
 export class UserProfileService {
   private userProfileSubject: BehaviorSubject<FullUserProfile | null> =
     new BehaviorSubject<FullUserProfile | null>(null);
-  public userProfile$: Observable<FullUserProfile | null> = this.userProfileSubject
-    .asObservable();
+  public userProfile$: Observable<FullUserProfile | null> =
+    this.userProfileSubject.asObservable();
 
   userProfile: FullUserProfile | null = null;
   userProfileUrl = `${environment.baseUrl}/v1/user-profile`;
@@ -61,7 +61,9 @@ export class UserProfileService {
     });
   }
 
-  async updateUserProfile(userProfile: FullUserProfile): Promise<FullUserProfile> {
+  async updateUserProfile(
+    userProfile: FullUserProfile,
+  ): Promise<FullUserProfile> {
     const updatedProfile = await this.update(userProfile).toPromise();
     if (!updatedProfile) {
       throw new Error('Failed to update user profile.');
@@ -98,7 +100,10 @@ export class UserProfileService {
   }
 
   update(userProfile: FullUserProfile): Observable<FullUserProfile> {
-    return this.http.put<FullUserProfile>(`${this.userProfileUrl}`, userProfile);
+    return this.http.put<FullUserProfile>(
+      `${this.userProfileUrl}`,
+      userProfile,
+    );
   }
 
   delete(): Observable<any> {

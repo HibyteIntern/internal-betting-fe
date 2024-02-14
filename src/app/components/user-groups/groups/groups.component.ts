@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupService } from '../../../service/group.service';
 import { FullUserGroupModel } from '../../../entity/full-user-group.model';
-import {Observable} from "rxjs";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-groups',

@@ -16,8 +16,8 @@ import {
 import { UserProfileService } from '../../../service/user-profile.service';
 import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
-import {UserGroupModel} from "../../../entity/user-group.model";
-import {FullUserProfile} from "../../../entity/full-user-profile";
+import { UserGroupModel } from '../../../entity/user-group.model';
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-group-form',
@@ -50,12 +50,12 @@ export class GroupFormComponent implements OnChanges, OnInit {
         [Validators.required, this.validateSelectedUsers.bind(this)],
       ],
     });
-    this.fetchUserProfiles()
+    this.fetchUserProfiles();
   }
 
   ngOnInit(): void {
     this.isEditMode = this.router.url.includes('edit');
-    this.fetchUserProfiles()
+    this.fetchUserProfiles();
   }
 
   fetchUserProfiles(): void {
@@ -82,22 +82,25 @@ export class GroupFormComponent implements OnChanges, OnInit {
       });
 
       this.selectedUsers = this.initialGroup.users.map((userId) => {
-        const user = this.allUserProfiles.find(profile => profile.userId === userId);
+        const user = this.allUserProfiles.find(
+          (profile) => profile.userId === userId,
+        );
         return user?.username || '';
       });
 
       this.selectedUserIds = this.initialGroup.users;
 
       if (this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
-        this.groupService.getPhoto(this.initialGroup.userGroupId).subscribe(blob => {
-          this.userService.displayProfileImage(blob, '.profile-circle');
-        });
+        this.groupService
+          .getPhoto(this.initialGroup.userGroupId)
+          .subscribe((blob) => {
+            this.userService.displayProfileImage(blob, '.profile-circle');
+          });
       } else {
         console.error('User profile or profile picture is undefined.');
       }
     }
   }
-
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
@@ -114,12 +117,12 @@ export class GroupFormComponent implements OnChanges, OnInit {
     this.formSubmit.emit(updatedGroup);
   }
 
-
-
   initializeUserOptions(): void {
     this.userOptions = this.allUserProfiles
-      .filter(user => user.username && !this.selectedUsers.includes(user.username))
-      .map(user => user.username);
+      .filter(
+        (user) => user.username && !this.selectedUsers.includes(user.username),
+      )
+      .map((user) => user.username);
   }
 
   handleUserSelect(users: string[]) {
@@ -162,5 +165,4 @@ export class GroupFormComponent implements OnChanges, OnInit {
       }
     }
   }
-
 }

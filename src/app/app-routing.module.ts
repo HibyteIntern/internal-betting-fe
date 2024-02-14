@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: 'view-event/:eventId', component: ViewEventComponent },
   { path: 'edit-event/:eventId', component: EditEventComponent },
 
-
   { path: 'user-groups', component: GroupsComponent },
   { path: 'user-groups/create', component: GroupCreateComponent },
   { path: 'user-groups/edit/:id', component: GroupEditComponent },

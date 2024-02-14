@@ -41,12 +41,10 @@ export class UserProfileFormComponent implements OnChanges {
         this.userProfile &&
         this.userProfile.userId &&
         this.userProfile.profilePicture
-
-      ) {  this.userProfileService
-          .getPhoto()
-          .subscribe((blob) => {
-            this.userProfileService.displayProfileImage(blob, '.profile-circle');
-          });
+      ) {
+        this.userProfileService.getPhoto().subscribe((blob) => {
+          this.userProfileService.displayProfileImage(blob, '.profile-circle');
+        });
       } else {
         console.error('User profile or profile picture is undefined.');
       }

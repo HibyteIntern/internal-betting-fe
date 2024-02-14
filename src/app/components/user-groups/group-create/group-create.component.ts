@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
-import {UserGroupModel} from "../../../entity/user-group.model";
+import { UserGroupModel } from '../../../entity/user-group.model';
 
 @Component({
   selector: 'app-group-create',

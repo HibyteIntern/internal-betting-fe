@@ -7,7 +7,7 @@ import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
 import { BetTemplateType } from '../../../entity/bet-template-type';
 import { CompleteBetType } from '../../../entity/complete-bet-type.model';
-import {UserProfile} from "../../../entity/user-profile";
+import { UserProfile } from '../../../entity/user-profile';
 
 @Component({
   selector: 'app-create-event',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../service/group.service';
-import {UserGroupModel} from "../../../entity/user-group.model";
+import { UserGroupModel } from '../../../entity/user-group.model';
 
 @Component({
   selector: 'app-group-edit',

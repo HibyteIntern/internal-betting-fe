@@ -40,5 +40,4 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
       this.photoSubscription.unsubscribe();
     }
   }
-
 }

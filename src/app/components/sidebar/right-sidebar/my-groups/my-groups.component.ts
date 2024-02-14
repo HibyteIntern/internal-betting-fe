@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from '../../../../service/user-profile.service';
-import {GroupService} from "../../../../service/group.service";
-import {UserGroupModel} from "../../../../entity/user-group.model";
+import { GroupService } from '../../../../service/group.service';
+import { UserGroupModel } from '../../../../entity/user-group.model';
 
 @Component({
   selector: 'app-my-groups',
@@ -11,17 +11,18 @@ import {UserGroupModel} from "../../../../entity/user-group.model";
 export class MyGroupsComponent implements OnInit {
   myGroups: UserGroupModel[] | undefined = [];
 
-  constructor(private userProfileService: UserProfileService,
-              private groupService: GroupService) {}
+  constructor(
+    private userProfileService: UserProfileService,
+    private groupService: GroupService,
+  ) {}
 
   ngOnInit() {
     this.userProfileService.getMeSimple().subscribe((userProfile) => {
-        userProfile.groups?.forEach( (groupId) => {
-          this.groupService.getOne(groupId).subscribe((group) => {
-            this.myGroups?.push(group);
-          });
-        })
+      userProfile.groups?.forEach((groupId) => {
+        this.groupService.getOne(groupId).subscribe((group) => {
+          this.myGroups?.push(group);
+        });
+      });
     });
   }
-
 }

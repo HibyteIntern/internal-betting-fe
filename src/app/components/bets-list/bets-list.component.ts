@@ -8,9 +8,8 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './bets-list.component.html',
   styleUrls: ['./bets-list.component.scss'],
 })
-export class BetsListComponent implements OnInit  {
+export class BetsListComponent implements OnInit {
   userProfile$?: Observable<FullUserProfile | null>;
-
 
   constructor(private userProfileService: UserProfileService) {}
   ngOnInit(): void {

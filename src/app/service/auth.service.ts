@@ -5,9 +5,7 @@ import { KeycloakService } from 'keycloak-angular';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private keycloakService: KeycloakService
-  ) {}
+  constructor(private keycloakService: KeycloakService) {}
 
   isLoggedIn(): Promise<boolean> {
     return this.keycloakService.isLoggedIn();

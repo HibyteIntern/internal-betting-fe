@@ -37,11 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.userProfile = await this.authService.loadUserProfile();
       const token = await this.authService.getToken();
 
-
-      await this.userProfileService.checkUserProfile(
-
-        this.userProfile,
-      );
+      await this.userProfileService.checkUserProfile(this.userProfile);
 
       this.finishLogin = true;
     }
