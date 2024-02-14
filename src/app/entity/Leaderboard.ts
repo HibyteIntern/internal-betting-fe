@@ -1,8 +1,7 @@
-import { UserProfile } from "./UserProfile";
+import { LeaderboardEntry } from "./leaderboard-entry";
 
-export class Leaderboard {
-    startDate?: Date;
-    endDate?: Date;
-    usersInLeaderboard?: string[];
-    leaderboardSorted?: UserProfile[];
-  }
+export interface Leaderboard {
+  id: number;
+  name: string;
+  entries: LeaderboardEntry[];
+}

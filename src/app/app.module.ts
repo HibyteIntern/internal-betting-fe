@@ -68,8 +68,8 @@ import {
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
-import { LeaderboardFormComponent } from './components/leaderboard-form/leaderboard-form.component';
 import { MatTableModule } from '@angular/material/table';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -137,7 +137,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     BetsListComponent,
     LoginAlertComponent,
     ClickOutsideDirective,
-    LeaderboardFormComponent,
+    LeaderboardsComponent,
 
   ],
   imports: [

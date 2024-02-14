@@ -1,0 +1,43 @@
+<app-mainframe [title]="title">
+    <mat-form-field>
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="selected"  (selectionChange)="onSortChange($event.value)">
+        <mat-option value="none">None</mat-option>
+        <mat-option value="numberOfBets">Number Of Bets</mat-option>
+        <mat-option value="mostWins">Most Wins</mat-option>
+        <mat-option value="fewestLosses">Fewest Losses</mat-option>
+        <mat-option value="highestEarner">Highest Earner</mat-option>
+        <mat-option value="highestEarner">Highest Earner</mat-option>
+        <mat-option value="largestSingleBet">Largest Single Bet</mat-option>
+        <mat-option value="largestSingleWin">Largest Single Win</mat-option>
+        <mat-option value="largestSingleLoss">Largest Single Loss</mat-option>
+        <mat-option value="largestSingleLoss">Largest Single Loss</mat-option>
+        <mat-option value="win/lossRatio">Win/Loss Ratio</mat-option>
+        <mat-option value="highestAverageBet">Highest Average Bet</mat-option>
+        <mat-option value="highestAverageWin">Highest Average Win</mat-option>
+        <mat-option value="longestWinningStreakStrategy">Longest Winning Streak Strategy</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="showTable">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="coins">
+        <th mat-header-cell *matHeaderCellDef> Coins </th>
+        <td mat-cell *matCellDef="let element"> {{element.coins}} </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+  </app-mainframe>
+  
