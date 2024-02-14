@@ -27,7 +27,8 @@
         [profilePicture]="userProfiles[option].profilePicture ?? 0"
         [description]="userProfiles[option].description ?? ''"
         [userId]="userProfiles[option].userId ?? 0"
-        (clickEvent)="removeItem($event)">
+        (clickEvent)="removeItem($event)"
+      >
         {{ option }}
       </app-user-tag-btn>
     </ng-container>
@@ -35,10 +36,10 @@
       <app-user-tag-btn
         [id]="i"
         [name]="option"
-        (clickEvent)="removeItem($event)">
+        (clickEvent)="removeItem($event)"
+      >
         {{ option }}
       </app-user-tag-btn>
     </ng-template>
   </ng-container>
-
 </div>

@@ -104,7 +104,7 @@ export class UserProfileService {
 
   getUserProfileByName(name: string): Observable<UserProfile | undefined> {
     return this.getAll().pipe(
-      map((profiles) => profiles.find((p) => p.username === name))
+      map((profiles) => profiles.find((p) => p.username === name)),
     );
   }
 
