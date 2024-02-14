@@ -44,11 +44,6 @@ p {
   text-indent: 1rem;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 0.6rem;
-}
-
 h1 {
   font-size: var(--text-lg);
   font-family: var(--font-raleway);
@@ -82,6 +77,15 @@ label {
 .mat-mdc-text-field-wrapper {
   background-color: var(--sidebar-color) !important;
 }
+
+.mat-calendar {
+  background-color: var(--background-color) !important;
+}
+
+.time-container {
+  background-color: var(--background-color) !important;
+}
+
 mat-label {
   color: var(--text-color) !important;
 }
@@ -91,10 +95,6 @@ input {
 
 //Background color for the Angular material select dropdown
 .select-dropdown.mat-mdc-select-panel {
-  background: var(--background-color);
-}
-
-mat-calendar {
   background: var(--background-color);
 }
 
@@ -136,8 +136,16 @@ body {
   height: 100%;
 }
 
+mat-form-field {
+  font-size: 1rem !important;
+  input {
+    font-size: clamp(14px, 1rem, 24px) !important;
+  }
+}
+
 .app-form {
   width: clamp(550px, 40%, 1200px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-width: 100%;

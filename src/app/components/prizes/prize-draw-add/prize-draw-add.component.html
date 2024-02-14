@@ -1,0 +1,76 @@
+<app-mainframe
+  [title]="
+    isEditPage && editedPrizeDraw
+      ? '' + editedPrizeDraw?.title
+      : 'Create new prize draw'
+  "
+>
+  <app-prize-category-list
+    *ngIf="!isEditPage"
+    (categorySelected)="handleCategoryChange($event)"
+  ></app-prize-category-list>
+  <div style="margin-top: 1rem; font-weight: bold; font-size: var(--text-sm)">
+    Draw information
+  </div>
+  <form class="app-form" (ngSubmit)="submit()" [formGroup]="prizeDrawFormGroup">
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Prize draw title</mat-label>
+      <input
+        formControlName="title"
+        matInput
+        placeholder="Extra vacation days"
+        value=""
+      />
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        formControlName="description"
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="8"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        [ngxMatDatetimePicker]="picker"
+        placeholder="Choose a date"
+        [min]="minEndsAtDate"
+        formControlName="endDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="$any(picker)"
+      ></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+    </mat-form-field>
+    <mat-form-field
+      color="accent"
+      appearance="outline"
+      style="margin-top: 1rem"
+    >
+      <mat-label>Prize description</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        formControlName="prizeDescription"
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+      ></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" style="color: var(--text-color)">
+      {{ isEditPage ? "Update" : "Submit" }}
+    </button>
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div class="form-error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </form>
+</app-mainframe>
