@@ -1,0 +1,39 @@
+<div class="outer-container" (click)="handleNavigateToPrizeDrawPage()">
+  <div class="left-container">
+    <div class="title">{{ prizeDraw?.title }}</div>
+    <div class="current-leader">
+      Current leader: <span>{{ getCurrentLeaderUsername() }}</span
+      >, with {{ getCurrentLeaderPoints() }}
+      <img
+        ngSrc="assets/icons/chips-icon.svg"
+        alt="credits"
+        height="26"
+        width="40"
+      />
+    </div>
+    <div class="prize">{{ "Prize: " + prizeDraw?.prizeDescription }}</div>
+    <div class="description">{{ prizeDraw?.description }}</div>
+  </div>
+  <div class="right-container">
+    <div>
+      <img
+        ngSrc="assets/icons/calendar-icon.svg"
+        alt="credits"
+        height="22"
+        width="18"
+      />
+      {{ getTimeRemaining(prizeDraw?.endsAt) }}
+    </div>
+    <img
+      class="type-image"
+      [ngSrc]="
+        prizeDraw?.type === DrawType.ROULETTE
+          ? 'assets/icons/roulette-icon.svg'
+          : 'assets/icons/top-score-icon.svg'
+      "
+      alt="credits"
+      height="150"
+      width="150"
+    />
+  </div>
+</div>

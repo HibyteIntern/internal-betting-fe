@@ -1,0 +1,39 @@
+<app-mainframe [title]="eventRequest.name">
+  <div style="margin-bottom: 25px">
+    <img
+      ngSrc="assets/icons/calendar-icon.svg"
+      alt="calendar"
+      height="18"
+      width="32"
+      style="vertical-align: middle"
+    />
+    Starts on: {{ eventRequest.startsAt | date }}
+  </div>
+  <mat-chip-listbox>
+    <app-tag *ngFor="let tag of eventRequest.tags">
+      {{ tag }}
+    </app-tag>
+  </mat-chip-listbox>
+  <div style="margin-top: 30px; margin-bottom: 30px">
+    {{ eventRequest.description }}
+  </div>
+
+  <mat-list>
+    <mat-list-item
+      *ngFor="let bet of eventRequest.completeBetTypeDtoList; let last = last"
+    >
+      <span matListItemTitle style="font-size: 20px">{{ bet.name }}</span>
+      <span matListItemLine style="font-size: 15px" *ngIf="bet.odds"
+        >Odds: {{ bet.odds.join(", ") }}</span
+      >
+      <span matListItemLine>Type: {{ bet.type }}</span>
+      <app-add-bet-to-event [betType]="bet"></app-add-bet-to-event>
+      <div *ngIf="!last" style="margin-bottom: 10px"></div>
+    </mat-list-item>
+  </mat-list>
+  <br />
+  <!--  this button should only appear for creator and admin to be implemented when userProfile is complete-->
+  <button mat-raised-button color="primary" (click)="navigateToEditEvent()">
+    Edit Event
+  </button>
+</app-mainframe>

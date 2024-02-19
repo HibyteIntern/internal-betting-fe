@@ -1,0 +1,17 @@
+<div class="outer-container" *ngIf="currentLeader">
+  {{ currentLeader ? "The current leader is:" : "There is no current leader"
+  }}<span style="color: var(--accent-color-two)">{{
+    currentLeader ? currentLeader.user.username : ""
+  }}</span
+  >{{ ", with " + currentLeader.amount }}
+  <img
+    ngSrc="assets/icons/chips-icon.svg"
+    alt="credits"
+    height="26"
+    width="40"
+  />
+</div>
+
+<div class="outer-container" *ngIf="!currentLeader">
+  There is no current leader
+</div>

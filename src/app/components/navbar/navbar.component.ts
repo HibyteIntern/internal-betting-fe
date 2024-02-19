@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,10 @@ import { ThemeService } from '../../service/theme.service';
 })
 export class NavbarComponent {
   themeService: ThemeService;
-  constructor(themeService: ThemeService) {
+  router: Router;
+  constructor(themeService: ThemeService, router: Router) {
     this.themeService = themeService;
+    this.router = router;
   }
 
   goBack() {

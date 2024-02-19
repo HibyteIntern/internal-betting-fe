@@ -1,0 +1,30 @@
+<div class="outer-container">
+  <mat-radio-group
+    [(ngModel)]="selectedCategory"
+    (change)="categorySelected.emit(selectedCategory)"
+  >
+    <div
+      *ngFor="let category of categories; let isLast = last"
+      [ngClass]="['category-container', !isLast ? 'entry' : 'last-entry']"
+      (click)="selectCategory(radioButton)"
+    >
+      <div class="top-container">
+        <mat-radio-button
+          #radioButton
+          class="radio-button"
+          [value]="category.value"
+        ></mat-radio-button>
+        <div>{{ category.categoryName }}</div>
+      </div>
+      <div class="bottom-container">
+        <div>{{ category.description }}</div>
+        <img
+          [ngSrc]="'assets/icons/' + category.imageName"
+          alt="credits"
+          height="80"
+          width="80"
+        />
+      </div>
+    </div>
+  </mat-radio-group>
+</div>
