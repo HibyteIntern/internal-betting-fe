@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
@@ -140,12 +140,17 @@ export class UserProfileService {
     });
   }
 
-  isUsernameTaken(newUsername: string, currentUsername?: string): Observable<boolean> {
+  isUsernameTaken(
+    newUsername: string,
+    currentUsername?: string,
+  ): Observable<boolean> {
     const params = new HttpParams()
       .set('username', newUsername)
       .set('currentUsername', currentUsername || '');
 
-    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, { params });
+    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
+      params,
+    });
   }
 
   displayProfileImageForSelector(blob: Blob, selector: string) {

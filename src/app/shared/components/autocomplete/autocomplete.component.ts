@@ -10,9 +10,16 @@ import {
 import { FormControl } from '@angular/forms';
 
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import { Observable, Subscription, map, startWith, BehaviorSubject, merge } from 'rxjs';
-import {UserProfile} from "../../../entity/user-profile";
-import {FullUserProfile} from "../../../entity/full-user-profile";
+import {
+  Observable,
+  Subscription,
+  map,
+  startWith,
+  BehaviorSubject,
+  merge,
+} from 'rxjs';
+import { UserProfile } from '../../../entity/user-profile';
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-autocomplete',
@@ -39,7 +46,6 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   >();
   userProfile: UserProfile | undefined;
   userProfiles: { [key: string]: FullUserProfile } = {};
-
 
   constructor(private userProfileService: UserProfileService) {}
 
@@ -99,15 +105,13 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     const optionToRemove = this.chips[optionIndex];
     this.options.push(optionToRemove);
     delete this.userProfiles[optionToRemove];
-    this.chips = this.chips.filter(
-      (_, index) => index !== optionIndex,
-    );
+    this.chips = this.chips.filter((_, index) => index !== optionIndex);
     this.selectedOptionsEmmiter.emit(this.chips);
   }
 
-   ngOnChanges(changes: SimpleChanges): void {
-      if (changes['options']) {
-        this.filteredOptionsSubject.next(this.options);
-      }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options']) {
+      this.filteredOptionsSubject.next(this.options);
     }
+  }
 }
