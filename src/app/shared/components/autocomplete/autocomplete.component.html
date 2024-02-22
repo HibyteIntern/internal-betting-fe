@@ -22,7 +22,7 @@
   <app-user-tag-btn
     [id]="i"
     (clickEvent)="removeItem($event)"
-    *ngFor="let option of selectedOptions; let i = index"
+    *ngFor="let option of chips; let i = index"
   >
     {{ option }}
   </app-user-tag-btn>

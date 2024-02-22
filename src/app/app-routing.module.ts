@@ -70,6 +70,9 @@ const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'denied', component: AccessDeniedPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
+  { path: 'user-groups', component: GroupsComponent },
+  { path: 'user-groups/create', component: GroupCreateComponent },
+  { path: 'user-groups/edit/:id', component: GroupEditComponent },
 ];
 
 @NgModule({

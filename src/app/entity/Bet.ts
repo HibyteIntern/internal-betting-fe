@@ -1,8 +1,8 @@
-import { UserProfile } from './UserProfile';
+import { FullUserProfile } from './full-user-profile';
 
 export interface Bet {
   betId?: number;
-  user?: UserProfile;
+  user?: FullUserProfile;
   amount: number;
   odds: number;
   value: string;

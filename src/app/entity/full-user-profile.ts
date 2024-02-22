@@ -1,13 +1,13 @@
 import { Bet } from './Bet';
-import { Role } from './Role';
+import { FullUserGroupModel } from './full-user-group.model';
 
-export interface UserProfile {
+export interface FullUserProfile {
   userId?: number;
   keycloakId?: string;
-  username?: string;
+  username: string;
   profilePicture?: number;
   description?: string;
   coins?: number;
   bets?: Bet[];
-  roles?: Role[];
+  groups?: FullUserGroupModel[];
 }

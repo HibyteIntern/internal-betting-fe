@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
@@ -12,11 +12,11 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./user-profile-form.component.scss'],
 })
 export class UserProfileFormComponent implements OnChanges {
-  @Input() userProfile?: UserProfile | null;
+  @Input() userProfile?: FullUserProfile | null;
 
   userProfileForm: FormGroup;
   uploadedPhotoId?: number;
-  originalUserProfile?: UserProfile;
+  originalUserProfile?: FullUserProfile;
   file: File | null = null;
   isLoading = false;
 
@@ -32,9 +32,10 @@ export class UserProfileFormComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
+
       this.userProfileForm.patchValue(this.userProfile);
 
       if (
@@ -43,21 +44,14 @@ export class UserProfileFormComponent implements OnChanges {
         this.userProfile.profilePicture
       ) {
         this.userProfileService.getPhoto().subscribe((blob) => {
-          this.displayProfileImage(blob);
+          this.userProfileService.displayProfileImageForSelector(
+            blob,
+            '.profile-circle',
+          );
         });
       } else {
         console.error('User profile or profile picture is undefined.');
       }
-    }
-  }
-
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
     }
   }
 
@@ -92,7 +86,7 @@ export class UserProfileFormComponent implements OnChanges {
     }
 
     const formValue = this.userProfileForm.value;
-    const updatedUserProfile: UserProfile = {
+    const updatedUserProfile: FullUserProfile = {
       userId: this.userProfile?.userId,
       keycloakId: this.userProfile?.keycloakId,
       username:
