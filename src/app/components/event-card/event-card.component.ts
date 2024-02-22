@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventRequest } from 'src/app/entity/event-request.model';
 import { UserProfileService } from '../../service/user-profile.service';
-import { UserProfile } from '../../entity/UserProfile';
+import {FullUserProfile} from "../../entity/full-user-profile";
 
 @Component({
   selector: 'app-event-card',
@@ -19,7 +19,7 @@ export class EventCardComponent {
   @Output() editEmitter = new EventEmitter<void>();
 
   showButtons = false;
-  loggedInUser: UserProfile | null = null;
+  loggedInUser: FullUserProfile | null = null;
   constructor(private userProfileService: UserProfileService) {
     this.userProfileService.userProfile$.subscribe((user) => {
       this.loggedInUser = user;

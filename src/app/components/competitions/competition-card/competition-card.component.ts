@@ -3,7 +3,7 @@ import { Competition } from 'src/app/entity/competitions.model';
 import { Status } from 'src/app/entity/Status';
 import { StatusIcons } from 'src/app/entity/Status';
 import { UserProfileService } from '../../../service/user-profile.service';
-import { UserProfile } from '../../../entity/UserProfile';
+import { FullUserProfile } from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-competition-card',
@@ -34,7 +34,7 @@ export class CompetitionCardComponent implements OnInit {
 
   statusIcon = StatusIcons[this.competition.status];
   showButtons = true;
-  loggedInUser: UserProfile | null = null;
+  loggedInUser: FullUserProfile | null = null;
 
   constructor(private userProfileService: UserProfileService) {
     this.userProfileService.userProfile$.subscribe((user) => {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfileService } from '../../../service/user-profile.service';
 import { Role } from '../../../entity/Role';
-import { UserProfile } from '../../../entity/UserProfile';
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -10,7 +10,7 @@ import { UserProfile } from '../../../entity/UserProfile';
   styleUrls: ['./left-sidebar-list.component.scss'],
 })
 export class LeftSidebarListComponent {
-  userProfile: UserProfile | null = null;
+  userProfile: FullUserProfile | null = null;
   constructor(
     protected router: Router,
     protected userProfileService: UserProfileService,

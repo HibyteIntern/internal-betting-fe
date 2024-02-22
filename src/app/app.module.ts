@@ -72,8 +72,6 @@ import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { NotFoundPageComponent } from './components/error-pages/not-found-page/not-found-page.component';
-import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import {
   NgxMatDatetimePickerModule,

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserProfile } from '../../../entity/UserProfile';
 import { Status } from '../../../entity/Status';
 import { EventService } from '../../../service/event.service';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
 import { BetTemplateType } from '../../../entity/bet-template-type';
 import { UserProfileService } from '../../../service/user-profile.service';
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-create-event',
@@ -22,7 +22,7 @@ export class CreateEventComponent implements OnInit {
 
   eventTemplates: EventTemplate[] = [];
   userGroupsList: string[] = [];
-  userProfilesList: UserProfile[] = [];
+  userProfilesList: FullUserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
   constructor(

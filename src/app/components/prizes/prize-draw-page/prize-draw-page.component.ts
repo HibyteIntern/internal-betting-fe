@@ -7,8 +7,8 @@ import PrizeDrawEntryRequest from '../../../entity/prize-draw-entry-request.mode
 import { DrawType } from '../../../entity/DrawType';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserProfile } from '../../../entity/UserProfile';
 import { UserProfileService } from '../../../service/user-profile.service';
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-prize-draw-page',
@@ -18,7 +18,7 @@ import { UserProfileService } from '../../../service/user-profile.service';
 export class PrizeDrawPageComponent implements OnInit {
   prizeDraw: PrizeDraw | undefined;
   isLoading = true;
-  userProfile: UserProfile | null = null;
+  userProfile: FullUserProfile | null = null;
   constructor(
     private prizeDrawService: PrizeDrawService,
     private userProfileService: UserProfileService,

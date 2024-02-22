@@ -17,6 +17,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { authGuard } from './guard/auth.guard';
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
+import {GroupsComponent} from "./components/user-groups/groups/groups.component";
+import {GroupCreateComponent} from "./components/user-groups/group-create/group-create.component";
+import {GroupEditComponent} from "./components/user-groups/group-edit/group-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
