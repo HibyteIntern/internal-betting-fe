@@ -22,19 +22,19 @@
       [label]="'Add Users'"
       [options]="userOptions"
       [autocompleteType]="'user'"
-      [selectedOptions]="selectedUsers"
+      [chips]="selectedUsers"
       (selectedOptionsEmmiter)="handleUserSelect($event)"
     />
     <app-autocomplete
       [label]="'Add User Groups'"
       [options]="userGroupOptions"
-      [selectedOptions]="selectedUserGroups"
+      [chips]="selectedUserGroups"
       (selectedOptionsEmmiter)="handleUserGroupSelect($event)"
     />
     <app-autocomplete
       [label]="'Add Events'"
       [options]="eventOptions"
-      [selectedOptions]="selectedEvents"
+      [chips]="selectedEvents"
       (selectedOptionsEmmiter)="handleEventSelect($event)"
     />
     <mat-form-field color="accent" appearance="outline">

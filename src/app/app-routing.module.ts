@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { EventTemplateAddComponent } from './components/event-templates/event-template-add/event-template-add.component';
 import { EventTemplateBrowserComponent } from './components/event-templates/event-template-browser/event-template-browser.component';
+import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
+import { GroupsComponent } from './components/user-groups/groups/groups.component';
+import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeDrawAddComponent } from './components/prizes/prize-draw-add/prize-draw-add.component';
 import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/prize-draw-page.component';
@@ -26,6 +29,10 @@ const routes: Routes = [
   { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
   { path: 'view-event/:eventId', component: ViewEventComponent },
   { path: 'edit-event/:eventId', component: EditEventComponent },
+
+  { path: 'user-groups', component: GroupsComponent },
+  { path: 'user-groups/create', component: GroupCreateComponent },
+  { path: 'user-groups/edit/:id', component: GroupEditComponent },
 
   {
     path: 'user-profile',

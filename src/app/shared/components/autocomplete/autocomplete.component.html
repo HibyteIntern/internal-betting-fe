@@ -19,7 +19,7 @@
     </mat-autocomplete>
   </mat-form-field>
   <button type="button" (click)="addItem()">Add</button>
-  <ng-container *ngFor="let option of selectedOptions; let i = index">
+  <ng-container *ngFor="let option of chips; let i = index">
     <ng-container *ngIf="userProfiles[option]; else noProfile">
       <app-user-tag-btn
         [id]="i"

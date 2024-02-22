@@ -1,15 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, Subscription, map, startWith } from 'rxjs';
 import { UserProfile } from 'src/app/entity/UserProfile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
+import { Observable, Subscription, map, startWith, BehaviorSubject, merge } from 'rxjs';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() label = '';
   @Input() autocompleteType?: 'user' | 'userGroup';
 
@@ -17,7 +25,13 @@ export class AutocompleteComponent implements OnInit {
   @Input() options: string[] = [];
   filteredOptions: Observable<string[]> = new Observable<string[]>();
 
-  @Input() selectedOptions: string[] = [];
+  filteredOptionsSubject: BehaviorSubject<string[]> = new BehaviorSubject<
+    string[]
+  >([]);
+  filteredOptions2: Observable<string[]> =
+    this.filteredOptionsSubject.asObservable();
+
+  @Input() chips: string[] = [];
   @Output() selectedOptionsEmmiter: EventEmitter<string[]> = new EventEmitter<
     string[]
   >();
@@ -27,9 +41,12 @@ export class AutocompleteComponent implements OnInit {
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || '')),
+    this.filteredOptions = merge(
+      this.myControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => this._filter(value || '')),
+      ),
+      this.filteredOptions2,
     );
   }
 
@@ -65,23 +82,29 @@ export class AutocompleteComponent implements OnInit {
         }
       }
 
-      this.selectedOptions.push(this.myControl.value);
+      this.chips.push(this.myControl.value);
       this.options = this.options.filter(
         (option) => option !== this.myControl.value,
       );
       this.myControl.setValue('');
 
-      this.selectedOptionsEmmiter.emit(this.selectedOptions);
+      this.selectedOptionsEmmiter.emit(this.chips);
     }
   }
 
   removeItem(optionIndex: number) {
-    const optionToRemove = this.selectedOptions[optionIndex];
+    const optionToRemove = this.chips[optionIndex];
     this.options.push(optionToRemove);
     delete this.userProfiles[optionToRemove];
-    this.selectedOptions = this.selectedOptions.filter(
+    this.chips = this.chips.filter(
       (_, index) => index !== optionIndex,
     );
-    this.selectedOptionsEmmiter.emit(this.selectedOptions);
+    this.selectedOptionsEmmiter.emit(this.chips);
   }
+
+   ngOnChanges(changes: SimpleChanges): void {
+      if (changes['options']) {
+        this.filteredOptionsSubject.next(this.options);
+      }
+    }
 }

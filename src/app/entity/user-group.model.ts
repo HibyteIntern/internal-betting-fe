@@ -1,7 +1,7 @@
 export interface UserGroupModel {
-  userGroupId?: number;
+  userGroupId: number | null;
   groupName: string;
   profilePicture?: number;
   description: string;
-  //userProfiles[]
+  users: number[];
 }

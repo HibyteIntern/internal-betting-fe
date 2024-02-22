@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 export class UserProfileEditComponent implements OnInit {
   title = 'User Profile';
   userId?: any;
-  userProfile$?: Observable<UserProfile | null>;
+  userProfile$?: Observable<FullUserProfile | null>;
 
   constructor(private userProfileService: UserProfileService) {}
 

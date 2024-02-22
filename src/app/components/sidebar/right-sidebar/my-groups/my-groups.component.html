@@ -1,0 +1,8 @@
+<div>
+  <p class="title">My Groups</p>
+  <div *ngFor="let group of myGroups; let last = last">
+    <p class="name">{{ group.groupName }}</p>
+    <p class="description">{{ group.description }}</p>
+    <div *ngIf="!last" class="divider"></div>
+  </div>
+</div>
