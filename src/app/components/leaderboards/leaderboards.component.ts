@@ -4,10 +4,10 @@ import { LeaderboardRequest } from 'src/app/entity/leaderboard-request';
 import { LeaderboardService } from 'src/app/service/leaderboard.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
-interface UserProfileDisplayData {
+interface DisplayData {
   index: number;
-  username: string | undefined; // Assuming username can be undefined
-  coins: number | undefined;    // Assuming coins can be undefined
+  username: string | undefined; 
+  metricValue: number | undefined;
 }
 
 @Component({
@@ -21,7 +21,8 @@ export class LeaderboardsComponent {
   displayedColumns: string[] = ['index', 'username', 'coins'];
   showTable = false;
   userIds: number[] = []; 
-  dataSource: UserProfileDisplayData[] = [];
+  dataSource: DisplayData[] = [];
+  filteredDataSource: DisplayData[] = []; 
 
   leaderboardRequest: LeaderboardRequest = {
     leaderboardId: 1,
@@ -36,6 +37,17 @@ export class LeaderboardsComponent {
 
   constructor(private leaderboardService: LeaderboardService,
     private userProfileService: UserProfileService) {}
+
+  applyFilter(event: Event): void {
+      const filterValue = (event.target as HTMLInputElement).value;
+      const formattedFilterValue = filterValue.trim().toLowerCase();
+      if (!formattedFilterValue) {
+        this.filteredDataSource = [...this.dataSource]; 
+      } else {
+        this.filteredDataSource = this.dataSource.filter(item => item.username?.toLowerCase().includes(formattedFilterValue));
+      }
+    }
+    
 
   getLeaderboard(): void {
     this.leaderboardService.getLeaderboard(this.leaderboardRequest).subscribe({
@@ -53,16 +65,33 @@ export class LeaderboardsComponent {
 
   fetchUserProfiles(userIds: number[]): void {
     const userProfilesRequests = userIds.map(userId => this.userProfileService.getById(userId).toPromise());
+    console.log(userProfilesRequests);
     Promise.all(userProfilesRequests).then(userProfiles => {
-      this.dataSource = userProfiles.map((profile, index) => ({
-        index: index + 1,
-        username: profile?.username,
-        coins: profile?.coins 
-      }));
+      const mappedProfiles = userProfiles.map((profile, index) => {
+        const leaderboardEntry = this.leaderboard?.entries.find(entry => entry.userId === profile?.userId);
+        const metricValue = leaderboardEntry ? leaderboardEntry.metrics[this.selected] : 0; 
+        let positionClass = '';
+        if (index === 0) {
+          positionClass = 'first-place';
+        }
+        if (metricValue) {
+          return {
+            index: index + 1,
+            username: profile?.username,
+            metricValue: metricValue,
+            class: positionClass 
+          };
+        } else {
+          return undefined;
+        }
+      });
+      this.dataSource = mappedProfiles.filter(profile => profile !== undefined) as DisplayData[];
+      this.filteredDataSource = [...this.dataSource];
     }).catch(error => {
       console.error('Error fetching user profiles:', error);
     });
-  }
+    
+  } 
 
   onSortChange(newSort: string): void {
     if(this.selected != 'none'){
@@ -74,5 +103,6 @@ export class LeaderboardsComponent {
       this.showTable=false;
     }
   }
+
 
 }
