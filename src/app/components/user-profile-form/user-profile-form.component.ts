@@ -63,9 +63,12 @@ export class UserProfileFormComponent implements OnChanges {
 
   private usernameTakenValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.value) {
+        return of(null);
+      }
       return this.userProfileService.isUsernameTaken(control.value).pipe(
-        map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
-        catchError(() => of(null)),
+        map(isTaken => isTaken ? { usernameTaken: true } : null),
+        catchError(() => of(null))
       );
     };
   }

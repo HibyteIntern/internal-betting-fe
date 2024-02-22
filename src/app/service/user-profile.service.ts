@@ -141,10 +141,9 @@ export class UserProfileService {
   }
 
   isUsernameTaken(username: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
-      params: { username: username },
-    });
+    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken?username=${encodeURIComponent(username)}`);
   }
+
   displayProfileImageForSelector(blob: Blob, selector: string) {
     const circle = document.querySelector(selector) as HTMLElement;
     this.displayProfileImage(blob, circle);
