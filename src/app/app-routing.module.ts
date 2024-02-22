@@ -72,10 +72,10 @@ const routes: Routes = [
   { path: 'events/edit/:eventId', component: EditEventComponent },
   { path: '', component: IndexComponent },
   { path: 'denied', component: AccessDeniedPageComponent },
-  { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
   { path: 'user-groups', component: GroupsComponent },
   { path: 'user-groups/create', component: GroupCreateComponent },
   { path: 'user-groups/edit/:id', component: GroupEditComponent },
+  { path: '**', pathMatch: 'full', component: NotFoundPageComponent }
 ];
 
 @NgModule({

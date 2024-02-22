@@ -35,6 +35,8 @@ export class GroupFormComponent implements OnChanges, OnInit {
   userGroupForm: FormGroup;
   isEditMode = false;
   uploadedPhotoId?: number;
+  file: File | null = null;
+  updatedFile: File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -107,6 +109,17 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
+    try {
+      if (typeof this.initialGroup?.userGroupId === 'number' && this.updatedFile) {
+        this.groupService
+          .addPhoto(this.initialGroup.userGroupId, this.updatedFile)
+          .subscribe((photoId) => {
+            this.uploadedPhotoId = photoId;
+          });
+      }
+    }catch {
+      console.error('User Group ID is undefined');
+    }
     const updatedGroup: UserGroupModel = {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
@@ -144,28 +157,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
     return users && users.length >= 2 ? null : { noUsersSelected: true };
   }
 
-  onFileSelect(event: Event): void {
-    const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
-    if (fileList && fileList.length > 0) {
-      const file = fileList[0];
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const circle = document.querySelector('.profile-circle') as HTMLElement;
-        if (circle && e.target && e.target.result) {
-          circle.style.backgroundImage = `url(${e.target.result})`;
-        }
-      };
-      reader.readAsDataURL(file);
-      if (typeof this.initialGroup?.userGroupId === 'number') {
-        this.groupService
-          .addPhoto(this.initialGroup.userGroupId, file)
-          .subscribe((photoId) => {
-            this.uploadedPhotoId = photoId;
-          });
-      } else {
-        console.error('User ID is undefined');
-      }
-    }
+  handleFileChange(file: File) {
+    this.updatedFile = file;
   }
 }

@@ -35,7 +35,6 @@ export class UserProfileFormComponent implements OnChanges {
   ngOnChanges(): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
-
       this.userProfileForm.patchValue(this.userProfile);
 
       if (
