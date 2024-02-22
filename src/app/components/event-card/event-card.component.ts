@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventRequest } from 'src/app/entity/event-request.model';
 import { UserProfileService } from '../../service/user-profile.service';
-import {FullUserProfile} from "../../entity/full-user-profile";
+import { FullUserProfile } from '../../entity/full-user-profile';
 
 @Component({
   selector: 'app-event-card',

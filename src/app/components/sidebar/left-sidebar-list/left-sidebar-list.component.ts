@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfileService } from '../../../service/user-profile.service';
 import { Role } from '../../../entity/Role';
-import {FullUserProfile} from "../../../entity/full-user-profile";
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-left-sidebar-list',

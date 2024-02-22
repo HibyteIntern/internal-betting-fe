@@ -8,7 +8,7 @@ import { DrawType } from '../../../entity/DrawType';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserProfileService } from '../../../service/user-profile.service';
-import {FullUserProfile} from "../../../entity/full-user-profile";
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-prize-draw-page',

@@ -3,7 +3,7 @@ import { Competition } from 'src/app/entity/competitions.model';
 import { Status } from 'src/app/entity/Status';
 import { StatusIcons } from 'src/app/entity/Status';
 import { UserProfileService } from '../../../service/user-profile.service';
-import { FullUserProfile } from "../../../entity/full-user-profile";
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-competition-card',

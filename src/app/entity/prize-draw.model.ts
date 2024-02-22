@@ -1,7 +1,7 @@
 import { Status } from './Status';
 import { DrawType } from './DrawType';
 import { PrizeDrawEntry } from './prize-draw-entry.model';
-import {UserProfile} from "./user-profile";
+import { UserProfile } from './user-profile';
 
 export interface PrizeDraw {
   id: number;

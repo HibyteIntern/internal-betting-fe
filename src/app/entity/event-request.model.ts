@@ -1,6 +1,6 @@
 import { CompleteBetType } from './complete-bet-type.model';
 import { Status } from './Status';
-import {UserProfile} from "./user-profile";
+import { UserProfile } from './user-profile';
 
 export class EventRequest {
   eventId?: number;
