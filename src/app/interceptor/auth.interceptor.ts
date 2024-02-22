@@ -11,10 +11,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((err) => {
-      console.log(req);
       if (
         err.status === 401 &&
-        req.url !== environment.baseUrl + '/v1/user-profile/getMe'
+        req.url !== environment.baseUrl + '/v1/user-profile/getMe' &&
+        req.url !== environment.baseUrl + '/v1/user-profile/getMeSimple'
       ) {
         authService.logout();
       } else if (err.status === 403) {
