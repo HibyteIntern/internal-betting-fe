@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FullUserGroupModel } from '../../../entity/full-user-group.model';
 import { GroupService } from '../../../service/group.service';
+import {UserProfileService} from "../../../service/user-profile.service";
 
 @Component({
   selector: 'app-group',
@@ -22,7 +23,7 @@ export class GroupComponent implements AfterViewInit {
 
   @ViewChild('profileCircle') profileCircle?: ElementRef;
 
-  constructor(private groupService: GroupService) {}
+  constructor(private groupService: GroupService, private userService: UserProfileService ) {}
 
   ngAfterViewInit(): void {
     if (
@@ -31,17 +32,8 @@ export class GroupComponent implements AfterViewInit {
       this.profileCircle
     ) {
       this.groupService.getPhoto(this.group.userGroupId).subscribe((blob) => {
-        this.displayGroupImage(blob);
+        this.userService.displayProfileImage(blob, this.profileCircle?.nativeElement as HTMLElement);
       });
-    }
-  }
-
-  private displayGroupImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    if (this.profileCircle) {
-      const circle = this.profileCircle.nativeElement as HTMLElement;
-      circle.style.backgroundImage = `url(${url})`;
-      circle.classList.add('profile-image');
     }
   }
 }

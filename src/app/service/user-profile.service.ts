@@ -126,10 +126,13 @@ export class UserProfileService {
       responseType: 'blob',
     });
   }
+  displayProfileImageForSelector(blob: Blob, selector: string) {
+  const circle = document.querySelector(selector) as HTMLElement;
+  this.displayProfileImage(blob, circle);
+  }
 
-  displayProfileImage(blob: Blob, selector: string) {
+  displayProfileImage(blob: Blob, circle: HTMLElement) {
     const url = URL.createObjectURL(blob);
-    const circle = document.querySelector(selector) as HTMLElement;
     if (circle) {
       circle.style.backgroundImage = `url(${url})`;
       circle.classList.add('profile-image');

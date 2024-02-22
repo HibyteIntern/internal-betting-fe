@@ -61,7 +61,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
       .subscribe(
         (blob) => {
           if (blob.size > 0) {
-            this.userProfileService.displayProfileImage(blob, '#account-image');
+            this.userProfileService.displayProfileImageForSelector(blob, '#account-image');
           } else {
             console.error('Fetched blob is empty.');
           }

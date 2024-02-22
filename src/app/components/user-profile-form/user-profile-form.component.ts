@@ -43,7 +43,7 @@ export class UserProfileFormComponent implements OnChanges {
         this.userProfile.profilePicture
       ) {
         this.userProfileService.getPhoto().subscribe((blob) => {
-          this.userProfileService.displayProfileImage(blob, '.profile-circle');
+          this.userProfileService.displayProfileImageForSelector(blob, '.profile-circle');
         });
       } else {
         console.error('User profile or profile picture is undefined.');

@@ -30,7 +30,7 @@ export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
       this.photoSubscription = this.userProfileService
         .getPhoto()
         .subscribe((blob) => {
-          this.userProfileService.displayProfileImage(blob, '.profile-circle');
+          this.userProfileService.displayProfileImageForSelector(blob, '.profile-circle');
         });
     }
   }
