@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { KeycloakProfile } from 'keycloak-js';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   public userKeycloakId = '';
   public username = '';
   public response: string | null = null;
-  public appUserProfile: UserProfile | null = null;
+  public appUserProfile: FullUserProfile | null = null;
   private subscription?: Subscription;
 
-  userProfileObs$?: Observable<UserProfile | null>;
+  userProfileObs$?: Observable<FullUserProfile | null>;
   finishLogin = false;
   userId?: number;
 

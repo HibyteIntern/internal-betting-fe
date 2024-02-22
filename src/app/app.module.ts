@@ -21,6 +21,10 @@ import { EventTemplateCardComponent } from './components/event-templates/event-t
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { GroupListComponent } from './components/user-groups/group-list/group-list.component';
+import { GroupComponent } from './components/user-groups/group/group.component';
+import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
+import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
@@ -38,6 +42,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
+import { GroupFormComponent } from './components/user-groups/group-form/group-form.component';
+import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -68,6 +74,7 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { IndexComponent } from './components/index/index.component';
 import { BetsListComponent } from './components/bets-list/bets-list.component';
 import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
@@ -101,6 +108,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateCardComponent,
     EventTemplateListComponent,
     MainframeComponent,
+    GroupListComponent,
+    GroupComponent,
+    GroupCreateComponent,
+    GroupsComponent,
     CreateEventComponent,
     UserProfileComponent,
     UserProfileEditComponent,
@@ -113,6 +124,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ViewCompetitionsComponent,
     CompetitionCardComponent,
     TagComponent,
+    GroupFormComponent,
+    GroupEditComponent,
     StopMousePropagationDirective,
     ViewEventComponent,
     SearchBarComponent,
@@ -127,6 +140,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     IndexComponent,
     BetsListComponent,
     LoginAlertComponent,
+    LoginAlertComponent,
+    MyGroupsComponent,
     PrizeBrowserComponent,
     PrizeCardComponent,
     PrizeListComponent,
