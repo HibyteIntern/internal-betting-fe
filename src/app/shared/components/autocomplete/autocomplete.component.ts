@@ -8,9 +8,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { UserProfile } from 'src/app/entity/UserProfile';
+
 import { UserProfileService } from 'src/app/service/user-profile.service';
 import { Observable, Subscription, map, startWith, BehaviorSubject, merge } from 'rxjs';
+import {UserProfile} from "../../../entity/user-profile";
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-autocomplete',
@@ -36,7 +38,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     string[]
   >();
   userProfile: UserProfile | undefined;
-  userProfiles: { [key: string]: UserProfile } = {};
+  userProfiles: { [key: string]: FullUserProfile } = {};
+
 
   constructor(private userProfileService: UserProfileService) {}
 
