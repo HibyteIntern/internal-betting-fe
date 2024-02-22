@@ -127,8 +127,8 @@ export class UserProfileService {
     });
   }
   displayProfileImageForSelector(blob: Blob, selector: string) {
-  const circle = document.querySelector(selector) as HTMLElement;
-  this.displayProfileImage(blob, circle);
+    const circle = document.querySelector(selector) as HTMLElement;
+    this.displayProfileImage(blob, circle);
   }
 
   displayProfileImage(blob: Blob, circle: HTMLElement) {

@@ -94,7 +94,10 @@ export class GroupFormComponent implements OnChanges, OnInit {
         this.groupService
           .getPhoto(this.initialGroup.userGroupId)
           .subscribe((blob) => {
-            this.userService.displayProfileImageForSelector(blob, '.profile-circle');
+            this.userService.displayProfileImageForSelector(
+              blob,
+              '.profile-circle',
+            );
           });
       } else {
         console.error('User profile or profile picture is undefined.');
