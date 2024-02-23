@@ -7,6 +7,8 @@ import { EventTemplate } from '../../../entity/event-template.model';
 import { BetTemplateType } from '../../../entity/bet-template-type';
 import { UserProfileService } from '../../../service/user-profile.service';
 import { FullUserProfile } from '../../../entity/full-user-profile';
+import { GroupService } from "../../../service/group.service";
+import { FullUserGroupModel } from "../../../entity/full-user-group.model";
 
 @Component({
   selector: 'app-create-event',
@@ -21,7 +23,7 @@ export class CreateEventComponent implements OnInit {
   errorMessage = '';
 
   eventTemplates: EventTemplate[] = [];
-  userGroupsList: string[] = [];
+  userGroupsList: FullUserGroupModel[] = [];
   userProfilesList: FullUserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
@@ -30,6 +32,7 @@ export class CreateEventComponent implements OnInit {
     private eventTemplateService: EventTemplateService,
     private eventService: EventService,
     private userProfilesService: UserProfileService,
+    private groupService: GroupService,
   ) {
     this.eventForm = this.fb.group({
       eventTemplateName: [''],
@@ -61,6 +64,15 @@ export class CreateEventComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user profiles:', error);
+      },
+    );
+
+    this.groupService.getAll().subscribe(
+      (groups) => {
+        this.userGroupsList = groups;
+      },
+      (error) => {
+        console.error('Error fetching user groups:', error);
       },
     );
 
