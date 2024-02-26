@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import {Bet} from "../../entity/Bet";
-import {BetService} from "../../service/bet.service";
+import { Bet } from '../../entity/Bet';
+import { BetService } from '../../service/bet.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -22,8 +22,7 @@ export class BetsListComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching bets:', error);
-      }
+      },
     );
   }
-
 }

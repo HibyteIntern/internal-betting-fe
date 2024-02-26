@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Bet} from "../entity/Bet";
-import {HttpClient} from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { Bet } from '../entity/Bet';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BetService {
-
   private betUrl = 'http://localhost:8080/api/v1/bets';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Set<Bet>> {
     return this.http.get<Set<Bet>>(`${this.betUrl}`);
@@ -36,4 +35,3 @@ export class BetService {
     return this.http.delete(`${this.betUrl}/${betId}`);
   }
 }
-
