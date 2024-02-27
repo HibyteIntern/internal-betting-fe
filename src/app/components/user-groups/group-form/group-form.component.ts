@@ -27,15 +27,16 @@ import { FullUserProfile } from '../../../entity/full-user-profile';
 export class GroupFormComponent implements OnChanges, OnInit {
   @Input() initialGroup: UserGroupModel | null | undefined;
   @Output() formSubmit = new EventEmitter<UserGroupModel>();
+  file: File | null = null;
+  initialId?: number | null;
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
-  allUserProfiles: FullUserProfile[] = [];
+  allUserProfiles: FullUserProfile[]= [];
   selectedUserIds: (number | undefined)[] = [];
   userGroupForm: FormGroup;
   isEditMode = false;
   uploadedPhotoId?: number;
-  file: File | null = null;
   updatedFile: File | null = null;
 
   constructor(
@@ -92,18 +93,8 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
       this.selectedUserIds = this.initialGroup.users;
 
-      if (this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
-        this.groupService
-          .getPhoto(this.initialGroup.userGroupId)
-          .subscribe((blob) => {
-            this.userService.displayProfileImageForSelector(
-              blob,
-              '.profile-circle',
-            );
-          });
-      } else {
-        console.error('User profile or profile picture is undefined.');
-      }
+      this.initialId = this.initialGroup.userGroupId;
+
     }
   }
 

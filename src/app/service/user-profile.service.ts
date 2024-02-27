@@ -145,4 +145,5 @@ export class UserProfileService {
       circle.classList.add('profile-image');
     }
   }
+  // TODO: remove display methods from service and use <app-profile-image> component for users
 }

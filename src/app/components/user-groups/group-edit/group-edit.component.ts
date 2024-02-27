@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../service/group.service';
@@ -12,6 +12,8 @@ import { UserGroupModel } from '../../../entity/user-group.model';
 export class GroupEditComponent implements OnInit {
   protected group$: Observable<UserGroupModel | undefined> =
     new BehaviorSubject<UserGroupModel | undefined>(undefined);
+  @Output() id: number | undefined;
+  file: File | null = null;
 
   constructor(
     private router: Router,
@@ -21,8 +23,8 @@ export class GroupEditComponent implements OnInit {
   ngOnInit(): void {
     const stringId = this.route.snapshot.paramMap.get('id');
     if (stringId) {
-      const id = Number.parseInt(stringId);
-      this.group$ = this.groupService.getOne(id);
+      this.id = Number.parseInt(stringId);
+      this.group$ = this.groupService.getOne(this.id);
     }
   }
   protected handleFormEdit(group: UserGroupModel) {

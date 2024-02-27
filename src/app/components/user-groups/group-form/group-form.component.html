@@ -1,7 +1,9 @@
 <form [formGroup]="userGroupForm" (ngSubmit)="onSubmit()" class="styled-form">
-  <div *ngIf="isEditMode" class="profile-image-upload">
+  <div *ngIf="isEditMode && initialId !== undefined" class="profile-image-upload">
     <app-profile-image [file] = "file"
-      (imageChanged)="handleFileChange($event)"
+                       (imageChanged)="handleFileChange($event)"
+                       [viewOrEdit]="'edit'"
+                       [groupOrUser]="initialId"
     ></app-profile-image>
   </div>
   <br>

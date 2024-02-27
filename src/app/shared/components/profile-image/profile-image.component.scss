@@ -3,9 +3,21 @@
   text-align: left;
 }
 
-.profile-circle {
+.profile-circle-edit {
   width: 175px;
   height: 175px;
+  background-color: var(--sidebar-color);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+
+.profile-circle-view {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 1rem;
   background-color: var(--sidebar-color);
   border-radius: 50%;
   display: inline-block;
