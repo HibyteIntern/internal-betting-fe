@@ -122,6 +122,12 @@ export class UserProfileService {
     });
   }
 
+  getPhotoById(userId: number): Observable<Blob> {
+    return this.http.get(`${this.userProfileUrl}/getPhoto/${userId}`, {
+      responseType: 'blob',
+    });
+  }
+
   isUsernameTaken(username: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
       params: { username: username },
