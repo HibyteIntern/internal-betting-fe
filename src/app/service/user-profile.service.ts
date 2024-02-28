@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import {BehaviorSubject, Observable, firstValueFrom, map} from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
 import { UserProfile } from '../entity/user-profile';
 import { environment } from '../../environments/environment';
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class UserProfileService {
   constructor(
     private http: HttpClient,
     private avatarService: AvatarService,
+    private authService: AuthService
   ) {}
 
   async checkUserProfile(

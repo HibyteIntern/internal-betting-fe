@@ -1,16 +1,11 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
   <div class="profile-image-upload">
     <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
-    <input
-      type="file"
-      id="profileImage"
-      (change)="onFileSelect($event)"
-      hidden
-      accept="image/*"
-    />
-    <label for="profileImage">
-      <div class="profile-circle"></div>
-    </label>
+    <app-profile-image [file] = "file"
+                       (imageChanged)="handleFileChange($event)"
+                       [viewOrEdit]="'edit'"
+                       [groupOrUser]="'user'"
+    ></app-profile-image>
   </div>
 
   <button

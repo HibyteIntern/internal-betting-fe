@@ -2,7 +2,8 @@
   <div class="info">
     <div class="name-and-pic">
       <app-profile-image
-        [groupOrUser]="group?.userGroupId"
+        [id]="group?.userGroupId"
+        [groupOrUser]="'group'"
         [viewOrEdit]="'view'">
       </app-profile-image>
       <h2>{{ group?.groupName }}</h2>

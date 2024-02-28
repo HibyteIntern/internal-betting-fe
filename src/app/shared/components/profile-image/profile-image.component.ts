@@ -11,8 +11,9 @@ export class ProfileImageComponent implements OnInit{
 
   @Input() file: File | null = null;
   @Output() imageChanged: EventEmitter<File> = new EventEmitter<File>();
-  @Input() groupOrUser?: number | null;
+  @Input() groupOrUser?: string;
   @Input() viewOrEdit?: string;
+  @Input() id?: number | null;
 
   @ViewChild('profileCircle') profileCircle?: ElementRef;
 
@@ -50,8 +51,16 @@ export class ProfileImageComponent implements OnInit{
   }
 
   displayImage(){
-    if(this.groupOrUser){
-      this.groupService.getPhoto(this.groupOrUser).subscribe((blob) => {
+    if(this.id && this.groupOrUser === 'group'){
+      this.groupService.getPhoto(this.id).subscribe((blob) => {
+        this.displayProfileImage(
+          blob,
+          this.profileCircle?.nativeElement as HTMLElement,
+        );
+      });
+    }
+    else if (this.groupOrUser === 'user'){
+      this.userService.getPhoto().subscribe((blob) => {
         this.displayProfileImage(
           blob,
           this.profileCircle?.nativeElement as HTMLElement,

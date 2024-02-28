@@ -19,6 +19,7 @@ export class UserProfileFormComponent implements OnChanges {
   originalUserProfile?: FullUserProfile;
   file: File | null = null;
   isLoading = false;
+  updatedFile: File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,47 +37,14 @@ export class UserProfileFormComponent implements OnChanges {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
       this.userProfileForm.patchValue(this.userProfile);
-
-      if (
-        this.userProfile &&
-        this.userProfile.userId &&
-        this.userProfile.profilePicture
-      ) {
-        this.userProfileService.getPhoto().subscribe((blob) => {
-          this.userProfileService.displayProfileImageForSelector(
-            blob,
-            '.profile-circle',
-          );
-        });
-      } else {
-        console.error('User profile or profile picture is undefined.');
-      }
-    }
-  }
-
-  onFileSelect(event: Event): void {
-    const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
-    if (fileList && fileList.length > 0) {
-      this.file = fileList[0];
-      const reader = new FileReader();
-
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const circle = document.querySelector('.profile-circle') as HTMLElement;
-        if (circle && e.target && e.target.result) {
-          circle.style.backgroundImage = `url(${e.target.result})`;
-        }
-      };
-
-      reader.readAsDataURL(this.file);
     }
   }
 
   async onSubmit() {
-    if (this.file) {
+    if (this.updatedFile) {
       try {
         this.uploadedPhotoId = await this.userProfileService
-          .addPhoto(this.file)
+          .addPhoto(this.updatedFile)
           .toPromise();
       } catch (error) {
         console.error('Error uploading photo:', error);
@@ -145,5 +113,9 @@ export class UserProfileFormComponent implements OnChanges {
     }
     this.isLoading = false;
     location.reload();
+  }
+
+  handleFileChange(file: File) {
+    this.updatedFile = file;
   }
 }
