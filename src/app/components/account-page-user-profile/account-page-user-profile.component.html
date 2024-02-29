@@ -1,6 +1,9 @@
 <div class="alert-box" appClickOutside (clickOutside)="cancel.emit()">
   <div class="profile-image-upload">
-    <div class="profile-circle"></div>
+    <app-profile-image
+    [groupOrUser]="'user'"
+    [viewOrEdit]="'view'"
+    [bigPhoto]="true"></app-profile-image>
   </div>
   <div class="username">{{ username }}</div>
   <div class="description">{{ description }}</div>

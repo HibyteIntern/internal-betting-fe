@@ -1,10 +1,13 @@
-<input
-  type="file"
-  id="profileImage"
-  (change)="onFileSelect($event)"
-  hidden
-  accept="image/*"
-/>
-<label for="profileImage">
-  <div #profileCircle class="{{  getImageType() }}"></div>
+<input *ngIf="viewOrEdit === 'edit'"
+       type="file"
+       id="profileImage"
+       (change)="onFileSelect($event)"
+       hidden
+       accept="image/*" />
+<label for="profileImage" *ngIf="viewOrEdit === 'edit'">
+  <div #profileCircle class="{{ getImageType() }}"></div>
 </label>
+<div *ngIf="viewOrEdit === 'view'">
+  <div #profileCircle class="{{ getImageType() }}"></div>
+</div>
+

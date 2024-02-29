@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, firstValueFrom, map} from 'rxjs';
+import {BehaviorSubject, Observable, firstValueFrom} from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -22,8 +22,7 @@ export class UserProfileService {
 
   constructor(
     private http: HttpClient,
-    private avatarService: AvatarService,
-    private authService: AuthService
+    private avatarService: AvatarService
   ) {}
 
   async checkUserProfile(
@@ -135,17 +134,4 @@ export class UserProfileService {
       tempUserProfile.coins = tempUserProfile.coins + coins;
     this.userProfileSubject.next(tempUserProfile);
   }
-  displayProfileImageForSelector(blob: Blob, selector: string) {
-    const circle = document.querySelector(selector) as HTMLElement;
-    this.displayProfileImage(blob, circle);
-  }
-
-  displayProfileImage(blob: Blob, circle: HTMLElement) {
-    const url = URL.createObjectURL(blob);
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.classList.add('profile-image');
-    }
-  }
-  // TODO: remove display methods from service and use <app-profile-image> component for users
 }
