@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, ViewChild} from '@angular/core';
 import { Leaderboard } from 'src/app/entity/Leaderboard';
 import { LeaderboardRequest } from 'src/app/entity/leaderboard-request';
 import { LeaderboardService } from 'src/app/service/leaderboard.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {ConfettiService} from "../../service/conffeti.service";
+import {first} from "rxjs";
 
 interface DisplayData {
   index: number;
@@ -17,7 +19,7 @@ interface DisplayData {
   templateUrl: './leaderboards.component.html',
   styleUrls: ['./leaderboards.component.scss']
 })
-export class LeaderboardsComponent {
+export class LeaderboardsComponent{
   title = 'Leaderboards';
   selected = '';
   displayedColumns: string[] = ['index', 'username', 'coins'];
@@ -40,10 +42,23 @@ export class LeaderboardsComponent {
   };
 
   leaderboard: Leaderboard | undefined;
+  @ViewChild('firstPlacePodium') firstPlacePodium?: ElementRef<HTMLElement>;
 
   constructor(private leaderboardService: LeaderboardService,
               private userProfileService: UserProfileService,
-              private sanitizer: DomSanitizer ) {
+              private sanitizer: DomSanitizer,
+              private confettiService: ConfettiService,
+              private ngZone: NgZone,
+              private cdr: ChangeDetectorRef,) {
+  }
+
+  private triggerConfetti() {
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      if (this.firstPlacePodium && this.firstPlacePodium.nativeElement) {
+        this.confettiService.runConfettiFromElement(this.firstPlacePodium.nativeElement);
+      }
+    }, 800);
   }
 
   updatePodiumUsernames() {
@@ -72,6 +87,9 @@ export class LeaderboardsComponent {
         this.userIds = data.entries.map(entry => entry.userId);
         this.fetchUserProfiles(this.userIds);
         this.showTable = true;
+        this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+          this.triggerConfetti();
+        });
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -89,6 +107,12 @@ export class LeaderboardsComponent {
         let positionClass = '';
         if (index === 0) {
           positionClass = 'first-place';
+        }
+        if(index === 1){
+          positionClass = 'second-place';
+        }
+        if(index === 2){
+          positionClass = 'third-place';
         }
         if (metricValue) {
           return {
@@ -120,25 +144,14 @@ export class LeaderboardsComponent {
 
   }
 
-  // displayProfileImage(blob: Blob) {
-  //   console.log(blob);
-  //   const url = URL.createObjectURL(blob);
-  //   const circle = document.querySelector('.profile-circle') as HTMLElement;
-  //   if (circle) {
-  //     circle.style.backgroundImage = `url(${url})`;
-  //     circle.style.backgroundSize = 'cover';
-  //     circle.style.backgroundPosition = 'center';
-  //   }
-  // }
-
   onSortChange(newSort: string): void {
-    if(this.selected != 'none'){
-      this.selected = newSort;
-      this.leaderboardRequest.sortedBy = this.selected;
+    this.selected = newSort;
+    this.leaderboardRequest.sortedBy = this.selected;
+    if (this.selected !== 'none') {
       this.getLeaderboard();
-    }
-    else{
-      this.showTable=false;
+      this.showTable = true;
+    } else {
+      this.showTable = false;
     }
   }
 

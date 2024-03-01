@@ -70,6 +70,8 @@ import {
 import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
 import { MatTableModule } from '@angular/material/table';
 import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+import { ConfettiTriggerDirective } from './directives/confetti-trigger.directive';
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -138,7 +140,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LoginAlertComponent,
     ClickOutsideDirective,
     LeaderboardsComponent,
-
+    ConfettiTriggerDirective,
   ],
   imports: [
     BrowserModule,

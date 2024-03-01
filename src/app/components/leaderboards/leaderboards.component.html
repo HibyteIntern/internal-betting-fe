@@ -26,15 +26,16 @@
       <p class="podium__name">{{ secondPlaceUsername }}</p>
       <div class="podium__rank second">2</div>
     </div>
-
-    <div class="podium__item" *ngIf="firstPlaceUsername">
-      <div class="profile-image-upload" *ngIf="dataSource[0]?.photoUrl">
-        <img [src]="dataSource[0]?.photoUrl" class="profile-circle" />
+    <div class="podium__item" *ngIf="firstPlaceUsername" #firstPlacePodium>
+      <div class="profile-image-upload" *ngIf="dataSource[0]?.photoUrl" appConfettiTrigger>
+        <img [src]="dataSource[0]?.photoUrl" class="profile-circle"
+             style="cursor: pointer; transition: filter 0.3s;"
+             onmouseover="this.style.filter='brightness(50%)'"
+        onmouseout="this.style.filter='brightness(100%)'" />
       </div>
       <p class="podium__name">{{ firstPlaceUsername }}</p>
       <div class="podium__rank first">1</div>
     </div>
-
     <div class="podium__item" *ngIf="thirdPlaceUsername">
       <div class="profile-image-upload" *ngIf="dataSource[2]?.photoUrl">
         <img [src]="dataSource[2]?.photoUrl" class="profile-circle" />
@@ -43,7 +44,6 @@
       <div class="podium__rank third">3</div>
     </div>
   </div>
-
   <br>
   <br>
   <mat-form-field appearance="fill" *ngIf="showTable">
@@ -56,12 +56,10 @@
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let element"> {{element.index}} </td>
         </ng-container>
-
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef> Username </th>
           <td mat-cell *matCellDef="let element"> {{element.username}} </td>
         </ng-container>
-
         <ng-container matColumnDef="coins">
           <th mat-header-cell *matHeaderCellDef> {{this.selected}} </th>
           <td mat-cell *matCellDef="let element">
