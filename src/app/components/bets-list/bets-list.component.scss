@@ -23,5 +23,13 @@
 .bet-item {
   display: flex;
   align-items: center;
-  gap: 0.5px;
+  gap: 5px;
+}
+
+.bet-item img {
+  margin-right: -15px;
+}
+
+.bet-item + p {
+  margin-top: 5px;
 }

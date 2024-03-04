@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -115,6 +115,12 @@ export class UserProfileService {
     return this.http.delete<any>(`${this.userProfileUrl}`);
   }
 
+  getUserProfileByName(name: string): Observable<FullUserProfile | undefined> {
+    return this.getAll().pipe(
+      map((profiles) => profiles.find((p) => p.username === name)),
+    );
+  }
+
   addPhoto(photo: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
@@ -138,11 +144,19 @@ export class UserProfileService {
     });
   }
 
-  isUsernameTaken(username: string): Observable<boolean> {
+  isUsernameTaken(
+    newUsername: string,
+    currentUsername?: string,
+  ): Observable<boolean> {
+    const params = new HttpParams()
+      .set('username', newUsername)
+      .set('currentUsername', currentUsername || '');
+
     return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
-      params: { username: username },
+      params,
     });
   }
+
   displayProfileImageForSelector(blob: Blob, selector: string) {
     const circle = document.querySelector(selector) as HTMLElement;
     this.displayProfileImage(blob, circle);

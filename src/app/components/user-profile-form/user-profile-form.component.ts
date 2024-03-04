@@ -9,9 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable, catchError, finalize, map, of } from 'rxjs';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import { FullUserProfile } from '../../entity/full-user-profile';
 
 @Component({
   selector: 'app-user-profile-form',
@@ -64,10 +64,16 @@ export class UserProfileFormComponent implements OnChanges {
 
   private usernameTakenValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return this.userProfileService.isUsernameTaken(control.value).pipe(
-        map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
-        catchError(() => of(null)),
-      );
+      const currentUsername = this.originalUserProfile?.username;
+      if (!control.value || control.value === currentUsername) {
+        return of(null);
+      }
+      return this.userProfileService
+        .isUsernameTaken(control.value, currentUsername)
+        .pipe(
+          map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
+          catchError(() => of(null)),
+        );
     };
   }
 
