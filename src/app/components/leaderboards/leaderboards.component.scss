@@ -40,6 +40,10 @@
   overflow: hidden;
 }
 
+.custom-dropdown-panel{
+  background-color: var( --sidebar-color);
+}
+
 .first-place td {
   background-color: var(--first-place-color) !important;
 }
@@ -141,4 +145,3 @@ body {
 input[type="file"] {
   display: none;
 }
-
