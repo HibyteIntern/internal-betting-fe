@@ -1,4 +1,4 @@
-import { CompleteBetType } from './complete-bet-type.model';
+import { BetType } from './bet-type.model';
 import { Status } from './Status';
 import { UserProfile } from './user-profile';
 
@@ -7,7 +7,7 @@ export class EventRequest {
   name: string;
   description: string;
   creator?: UserProfile;
-  completeBetTypeDtoList: CompleteBetType[];
+  betTypeList: BetType[];
   tags: string[];
   userGroups: string[];
   userProfiles: string[];
@@ -19,7 +19,7 @@ export class EventRequest {
   constructor(data: any = {}) {
     this.name = data.name || '';
     this.description = data.description || '';
-    this.completeBetTypeDtoList = data.completeBetTypeDtoList || [];
+    this.betTypeList = data.completeBetTypeDtoList || [];
     this.tags = data.tags || [];
     this.userGroups = data.userGroups || [];
     this.userProfiles = data.userProfiles || [];

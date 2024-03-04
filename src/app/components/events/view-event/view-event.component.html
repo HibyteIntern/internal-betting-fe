@@ -20,13 +20,12 @@
 
   <mat-list>
     <mat-list-item
-      *ngFor="let bet of eventRequest?.completeBetTypeDtoList; let last = last"
+      *ngFor="let bet of eventRequest?.betTypeList; let last = last"
     >
       <span matListItemTitle style="font-size: 20px">{{ bet.name }}</span>
       <span matListItemLine style="font-size: 15px" *ngIf="bet.odds"
         >Odds: {{ bet.odds.join(", ") }}</span
       >
-      <span matListItemLine>Type: {{ bet.type }}</span>
       <app-add-bet-to-event [betType]="bet"></app-add-bet-to-event>
       <div *ngIf="!last" style="margin-bottom: 10px"></div>
     </mat-list-item>

@@ -4,7 +4,6 @@ import { Status } from '../../../entity/Status';
 import { EventService } from '../../../service/event.service';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
-import { BetTemplateType } from '../../../entity/bet-template-type';
 import { UserProfileService } from '../../../service/user-profile.service';
 import { FullUserProfile } from '../../../entity/full-user-profile';
 import { GroupService } from '../../../service/group.service';
@@ -81,16 +80,11 @@ export class CreateEventComponent implements OnInit {
     });
   }
 
-  private convertBetTemplateType(type: BetTemplateType): string {
-    return type.toString();
-  }
-
   private mapEventTemplateToBetTypeList(eventTemplate: EventTemplate) {
     return eventTemplate.betTemplates.map((betTemplate) => {
       return {
         name: betTemplate.name,
-        type: this.convertBetTemplateType(betTemplate.type),
-        multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
+        options: betTemplate.options || [],
       };
     });
   }
