@@ -21,11 +21,17 @@ import { EventTemplateCardComponent } from './components/event-templates/event-t
 import { EventTemplateListComponent } from './components/event-templates/event-template-browser/event-template-list/event-template-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MainframeComponent } from './shared/components/mainframe/mainframe.component';
+import { GroupListComponent } from './components/user-groups/group-list/group-list.component';
+import { GroupComponent } from './components/user-groups/group/group.component';
+import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
+import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
+import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { MatLegacyChipsModule } from '@angular/material/legacy-chips';
 import { UserTagBtnComponent } from './shared/components/user-tag-btn/user-tag-btn.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CompetitionCardComponent } from './components/competitions/competition-card/competition-card.component';
@@ -35,18 +41,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
+import { GroupFormComponent } from './components/user-groups/group-form/group-form.component';
+import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
-import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewEventComponent } from './components/events/view-event/view-event.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { IndexComponent } from './components/index/index.component';
 import { BetsListComponent } from './components/bets-list/bets-list.component';
 import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { MatListModule } from '@angular/material/list';
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -61,16 +72,19 @@ import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/
 import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { IndexComponent } from './components/index/index.component';
+import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
+import { MatTableModule } from '@angular/material/table';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+import { ConfettiTriggerDirective } from './directives/confetti-trigger.directive';
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
-import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
-import { MatTableModule } from '@angular/material/table';
-import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
-import { ConfettiTriggerDirective } from './directives/confetti-trigger.directive';
+
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -100,6 +114,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     EventTemplateCardComponent,
     EventTemplateListComponent,
     MainframeComponent,
+    GroupListComponent,
+    GroupComponent,
+    GroupCreateComponent,
+    GroupsComponent,
+    CreateEventComponent,
     UserProfileComponent,
     UserProfileEditComponent,
     UserProfileFormComponent,
@@ -110,15 +129,24 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ViewCompetitionsComponent,
     CompetitionCardComponent,
     TagComponent,
+    GroupFormComponent,
+    GroupEditComponent,
     StopMousePropagationDirective,
+    ViewEventComponent,
     SearchBarComponent,
     LeftSidebarListComponent,
     HideScrollbarDirective,
     RightSidebarComponent,
     AutocompleteComponent,
+    AddBetToEventComponent,
+    EditEventComponent,
     CreateCompetitionComponent,
     EventCardComponent,
     IndexComponent,
+    BetsListComponent,
+    LoginAlertComponent,
+    LoginAlertComponent,
+    MyGroupsComponent,
     PrizeBrowserComponent,
     PrizeCardComponent,
     PrizeListComponent,
@@ -155,13 +183,17 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    MatLegacyChipsModule,
     FormsModule,
     MatExpansionModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule,
+    MatIconModule,
+    MatChipsModule,
     MatAutocompleteModule,
+    MatListModule,
+    MatSelectModule,
     MatCardModule,
     MatChipsModule,
     MatRadioModule,

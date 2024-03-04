@@ -1,0 +1,16 @@
+<app-mainframe [title]="'User Groups'">
+  <div class="wrapper">
+    <div>
+      <button mat-raised-button color="primary" (click)="createGroup()">
+        Add User Group
+      </button>
+    </div>
+    <app-group
+      *ngFor="let group of groups"
+      [group]="group"
+      (delete)="handleDelete($event)"
+      (edit)="handleEdit($event)"
+    >
+    </app-group>
+  </div>
+</app-mainframe>

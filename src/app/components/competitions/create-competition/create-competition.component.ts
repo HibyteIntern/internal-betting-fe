@@ -12,7 +12,7 @@ import { GroupService } from 'src/app/service/group.service';
   templateUrl: './create-competition.component.html',
   styleUrls: ['./create-competition.component.scss'],
 })
-export class CreateCompetitionComponent implements OnInit {
+export class  CreateCompetitionComponent implements OnInit {
   competitionForm: FormGroup;
 
   searchValue = '';

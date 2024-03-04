@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -25,7 +25,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  userProfile: UserProfile | null = null;
+  userProfile: FullUserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
   constructor(
@@ -73,7 +73,10 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
       .subscribe(
         (blob) => {
           if (blob.size > 0) {
-            this.displayProfileImage(blob);
+            this.userProfileService.displayProfileImageForSelector(
+              blob,
+              '#account-image',
+            );
           } else {
             console.error('Fetched blob is empty.');
           }
@@ -82,16 +85,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
           console.error('Error fetching profile image:', error);
         },
       );
-  }
-
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('#account-image') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
-    }
   }
 
   onLogin() {

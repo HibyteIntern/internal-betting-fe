@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserProfile } from 'src/app/entity/UserProfile';
+import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -9,10 +9,9 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./bets-list.component.scss'],
 })
 export class BetsListComponent implements OnInit {
-  userProfile$?: Observable<UserProfile | null>;
+  userProfile$?: Observable<FullUserProfile | null>;
 
   constructor(private userProfileService: UserProfileService) {}
-
   ngOnInit(): void {
     this.fetchUserProfile();
   }
