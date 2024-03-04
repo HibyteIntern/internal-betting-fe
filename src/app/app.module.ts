@@ -78,12 +78,13 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
 import { MatTableModule } from '@angular/material/table';
 import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
-import { ConfettiTriggerDirective } from './directives/confetti-trigger.directive';
+
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import {ConfettiTriggerDirective} from "./shared/directive/confetti-trigger.directive";
 
 
 
