@@ -1,6 +1,5 @@
 export interface LeaderboardRequest {
-    leaderboardId?: number; 
-    metrics: string[];
-    sortedBy: string;
-    }
-  
+  leaderboardId?: number;
+  metrics: string[];
+  sortedBy: string;
+}

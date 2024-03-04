@@ -1,9 +1,8 @@
 import { Directive, HostListener } from '@angular/core';
-import {ConfettiService} from "../../service/conffeti.service";
-
+import { ConfettiService } from '../../service/conffeti.service';
 
 @Directive({
-  selector: '[appConfettiTrigger]'
+  selector: '[appConfettiTrigger]',
 })
 export class ConfettiTriggerDirective {
   constructor(private confettiService: ConfettiService) {}
@@ -13,5 +12,3 @@ export class ConfettiTriggerDirective {
     this.confettiService.runConfettiFromElement(target);
   }
 }
-
-

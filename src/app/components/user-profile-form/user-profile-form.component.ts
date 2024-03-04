@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -11,7 +11,7 @@ import {
 import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import {FullUserProfile} from "../../entity/full-user-profile";
+import { FullUserProfile } from '../../entity/full-user-profile';
 
 @Component({
   selector: 'app-user-profile-form',

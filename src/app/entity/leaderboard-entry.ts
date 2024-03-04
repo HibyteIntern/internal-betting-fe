@@ -1,4 +1,4 @@
 export interface LeaderboardEntry {
-    userId: number;
-    metrics: { [key: string]: number }; 
+  userId: number;
+  metrics: { [key: string]: number };
 }

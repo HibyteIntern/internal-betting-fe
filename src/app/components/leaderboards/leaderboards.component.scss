@@ -4,14 +4,13 @@
   padding-right: 40%;
 }
 
-.mat-elevation-z8 th{
+.mat-elevation-z8 th {
   text-align: center;
   background-color: var(--lighter-background-color);
 }
 .mat-elevation-z8 td {
   text-align: center;
   background-color: var(--sidebar-color);
-
 }
 
 .mat-elevation-z8 {
@@ -40,8 +39,8 @@
   overflow: hidden;
 }
 
-.custom-dropdown-panel{
-  background-color: var( --sidebar-color);
+.custom-dropdown-panel {
+  background-color: var(--sidebar-color);
 }
 
 .first-place td {
@@ -69,7 +68,6 @@ body {
   width: 200px;
   display: flex;
   flex-direction: column;
-
 }
 
 .podium__rank {
@@ -82,7 +80,7 @@ body {
 
 .podium__name {
   text-align: center;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   font-size: 1.2em;
   white-space: nowrap;
   overflow: hidden;

@@ -75,7 +75,7 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { IndexComponent } from './components/index/index.component';
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-import {ClickOutsideDirective} from "./shared/directive/click-outside.directive";
+import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
 import { MatTableModule } from '@angular/material/table';
 import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
 
@@ -84,9 +84,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
-import {ConfettiTriggerDirective} from "./shared/directive/confetti-trigger.directive";
-
-
+import { ConfettiTriggerDirective } from './shared/directive/confetti-trigger.directive';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -204,7 +202,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [
     {

@@ -1,4 +1,4 @@
-import { LeaderboardEntry } from "./leaderboard-entry";
+import { LeaderboardEntry } from './leaderboard-entry';
 
 export interface Leaderboard {
   id: number;

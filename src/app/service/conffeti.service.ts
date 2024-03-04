@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import confetti from 'canvas-confetti';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfettiService {
   runConfettiFromElement(element: HTMLElement): void {
@@ -15,8 +15,8 @@ export class ConfettiService {
       spread: 70,
       origin: {
         x: confettiX / window.innerWidth,
-        y: confettiY / window.innerHeight
-      }
+        y: confettiY / window.innerHeight,
+      },
     });
   }
 }
