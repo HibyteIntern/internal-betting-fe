@@ -21,6 +21,7 @@
     <app-autocomplete
       [label]="'Add Users'"
       [options]="userOptions"
+      [autocompleteType]="'user'"
       [chips]="selectedUsers"
       (selectedOptionsEmmiter)="handleUserSelect($event)"
     />
