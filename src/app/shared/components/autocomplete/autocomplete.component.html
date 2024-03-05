@@ -19,11 +19,27 @@
     </mat-autocomplete>
   </mat-form-field>
   <button type="button" (click)="addItem()">Add</button>
-  <app-user-tag-btn
-    [id]="i"
-    (clickEvent)="removeItem($event)"
-    *ngFor="let option of chips; let i = index"
-  >
-    {{ option }}
-  </app-user-tag-btn>
+  <ng-container *ngFor="let option of chips; let i = index">
+    <ng-container *ngIf="userProfiles[option]; else noProfile">
+      <app-user-tag-btn
+        [id]="i"
+        [name]="option"
+        [profilePicture]="userProfiles[option].profilePicture ?? 0"
+        [description]="userProfiles[option].description ?? ''"
+        [userId]="userProfiles[option].userId ?? 0"
+        (clickEvent)="removeItem($event)"
+      >
+        {{ option }}
+      </app-user-tag-btn>
+    </ng-container>
+    <ng-template #noProfile>
+      <app-user-tag-btn
+        [id]="i"
+        [name]="option"
+        (clickEvent)="removeItem($event)"
+      >
+        {{ option }}
+      </app-user-tag-btn>
+    </ng-template>
+  </ng-container>
 </div>

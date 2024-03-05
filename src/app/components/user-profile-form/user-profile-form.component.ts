@@ -1,7 +1,14 @@
 import { Location } from '@angular/common';
 import {Component, Input, OnChanges} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -29,7 +36,7 @@ export class UserProfileFormComponent implements OnChanges {
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required], [this.usernameTakenValidator()]],
       description: '',
     });
   }
@@ -39,6 +46,21 @@ export class UserProfileFormComponent implements OnChanges {
       this.originalUserProfile = { ...this.userProfile };
       this.userProfileForm.patchValue(this.userProfile);
     }
+  }
+
+  private usernameTakenValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const currentUsername = this.originalUserProfile?.username;
+      if (!control.value || control.value === currentUsername) {
+        return of(null);
+      }
+      return this.userProfileService
+        .isUsernameTaken(control.value, currentUsername)
+        .pipe(
+          map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
+          catchError(() => of(null)),
+        );
+    };
   }
 
   async onSubmit() {
@@ -112,7 +134,6 @@ export class UserProfileFormComponent implements OnChanges {
     this.updatedFile = avatarFile;
     this.handleFileChange(this.updatedFile);
     this.avatarImage = avatarFile;
-    console.log('file', this.updatedFile);
   }
 
   handleFileChange(file: File) {

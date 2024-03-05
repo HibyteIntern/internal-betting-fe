@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { UserProfileService } from 'src/app/service/user-profile.service';
+import { Bet } from '../../entity/Bet';
+import { BetService } from '../../service/bet.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -9,15 +9,20 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   styleUrls: ['./bets-list.component.scss'],
 })
 export class BetsListComponent implements OnInit {
-  userProfile$?: Observable<FullUserProfile | null>;
-
-  constructor(private userProfileService: UserProfileService) {}
+  bets: Bet[] = [];
+  constructor(private betService: BetService) {}
   ngOnInit(): void {
-    this.fetchUserProfile();
+    this.loadUserBets();
   }
-
-  fetchUserProfile(): void {
-    this.userProfile$ = this.userProfileService.userProfile$;
-    this.userProfileService.getUserProfile();
+  loadUserBets(): void {
+    this.betService.getBets().subscribe(
+      (bets) => {
+        this.bets = bets;
+        console.log(bets);
+      },
+      (error) => {
+        console.error('Error fetching bets:', error);
+      },
+    );
   }
 }

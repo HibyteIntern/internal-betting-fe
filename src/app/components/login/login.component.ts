@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   userProfileObs$?: Observable<FullUserProfile | null>;
   finishLogin = false;
-  userId?: number;
 
   constructor(
     private authService: AuthService,
@@ -48,7 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subscription = this.userProfileService.getMe().subscribe(() => {
         this.router.navigate(['/']);
       });
-      localStorage.getItem('acc');
     }
   }
 
