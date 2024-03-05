@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CompleteBet } from '../../entity/complete-bet.model';
 import { BetService } from '../../service/bet.service';
+import { CompleteBet } from "../../entity/complete-bet.model";
 
 @Component({
   selector: 'app-bets-list',
