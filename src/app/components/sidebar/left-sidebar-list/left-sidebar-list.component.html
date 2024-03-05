@@ -48,8 +48,9 @@
   </div>
   <div
     class="icon"
+    [routerLink]="['user-groups']"
     *ngIf="userProfile?.roles?.includes(Role.ADMIN)"
-    [ngClass]="{ 'active-icon': isActiveRoute('/groups') }"
+    [ngClass]="{ 'active-icon': isActiveRoute('/user-groups') }"
   >
     <img src="assets/icons/user-group-icon.svg" alt="credits" />
     <div class="info-container">User groups</div>

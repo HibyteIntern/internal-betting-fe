@@ -1,6 +1,6 @@
 <mat-card class="mat-card" (click)="this.viewEmitter.emit()">
   <mat-card-header class="mat-card-header">
-    <mat-card-title class="mat-card-title">{{ event.name }}</mat-card-title>
+    <mat-card-title class="mat-card-title">{{ event?.name }}</mat-card-title>
     <div *ngIf="showButtons">
       <mat-icon
         (click)="this.viewEmitter.emit()"
@@ -25,10 +25,10 @@
 
   <div class="tags-container">
     <app-tag>Event</app-tag>
-    <app-tag *ngFor="let tag of event.tags">{{ tag }}</app-tag>
+    <app-tag *ngFor="let tag of event?.tags">{{ tag }}</app-tag>
   </div>
 
   <mat-card-content class="mat-card-content">
-    <p>{{ event.description }}</p>
+    <p>{{ event?.description }}</p>
   </mat-card-content>
 </mat-card>

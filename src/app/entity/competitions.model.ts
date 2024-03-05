@@ -1,4 +1,4 @@
-import { EventRequest } from './event-request.model';
+import { Event } from './event.model';
 import { Status } from './Status';
 import { FullUserProfile } from './full-user-profile';
 
@@ -10,7 +10,7 @@ export interface Competition {
   users: FullUserProfile[];
   userGroups: string[];
   userProfiles: string[];
-  events: EventRequest[];
+  events: Event[];
   created: Date;
   lastModified: Date;
   status: Status;
