@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EventRequest } from 'src/app/entity/event-request.model';
+import { Event } from 'src/app/entity/event.model';
 import { UserProfileService } from '../../service/user-profile.service';
 import { FullUserProfile } from '../../entity/full-user-profile';
 
@@ -12,7 +12,7 @@ import { FullUserProfile } from '../../entity/full-user-profile';
   ],
 })
 export class EventCardComponent implements OnInit {
-  @Input() event: EventRequest | null = null;
+  @Input() event: Event | null = null;
 
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() viewEmitter = new EventEmitter<void>();

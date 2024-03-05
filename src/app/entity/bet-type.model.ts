@@ -3,4 +3,5 @@ export interface BetType {
   name: string;
   options?: string[];
   odds?: number[];
+  outcome?: string;
 }

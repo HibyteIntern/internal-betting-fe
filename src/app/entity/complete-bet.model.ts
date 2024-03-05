@@ -1,11 +1,11 @@
 import { FullUserProfile } from './full-user-profile';
 
-export interface Bet {
+export interface CompleteBet {
   betId?: number;
   user?: FullUserProfile;
-  betType: number;
+  betTypeId: number;
   amount: number;
   odds: number;
-  event: number;
+  eventId: number;
   value: string;
 }

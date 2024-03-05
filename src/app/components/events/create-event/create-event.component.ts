@@ -41,7 +41,7 @@ export class CreateEventComponent implements OnInit {
       endsAt: [],
       status: [Status.DRAFT],
       selectedTemplate: [''],
-      completeBetTypeDtoList: this.fb.control([]),
+      betTypeDtoList: this.fb.control([]),
       userGroups: this.fb.control([]),
       userProfiles: this.fb.control([]),
     });
@@ -92,7 +92,7 @@ export class CreateEventComponent implements OnInit {
   handleEventTemplateChange() {
     if (this.eventForm.get('eventTemplateName')?.value === 'Custom') {
       this.eventForm.patchValue({
-        completeBetTypeDtoList: [],
+        betTypeDtoList: [],
       });
       return;
     }
@@ -104,7 +104,7 @@ export class CreateEventComponent implements OnInit {
 
     if (selectedEventTemplate) {
       this.eventForm.patchValue({
-        completeBetTypeDtoList: this.mapEventTemplateToBetTypeList(
+        betTypeDtoList: this.mapEventTemplateToBetTypeList(
           selectedEventTemplate,
         ),
       });

@@ -20,7 +20,7 @@
 
   <mat-list>
     <mat-list-item
-      *ngFor="let bet of eventRequest?.betTypeList; let last = last"
+      *ngFor="let bet of eventRequest?.betTypeDtoList; let last = last"
     >
       <span matListItemTitle style="font-size: 20px">{{ bet.name }}</span>
       <span matListItemLine style="font-size: 15px" *ngIf="bet.odds"

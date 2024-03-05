@@ -54,9 +54,9 @@ export class BetTypeFormComponent implements ControlValueAccessor, Validator {
     this.onValidationChange = fn;
   }
 
-  writeValue(completeBetTypeDtoList: BetType[]): void {
-    if (completeBetTypeDtoList) {
-      const betTypeFormGroups = completeBetTypeDtoList.map((betType) =>
+  writeValue(betTypeDtoList: BetType[]): void {
+    if (betTypeDtoList) {
+      const betTypeFormGroups = betTypeDtoList.map((betType) =>
         this.createBetTypeFormGroupFromBetType(betType),
       );
       const betTypeFormArray = this.fb.array(betTypeFormGroups);

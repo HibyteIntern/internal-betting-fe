@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfileService } from 'src/app/service/user-profile.service';
-import { Bet } from '../../entity/Bet';
+import { CompleteBet } from '../../entity/complete-bet.model';
 import { BetService } from '../../service/bet.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { BetService } from '../../service/bet.service';
   styleUrls: ['./bets-list.component.scss'],
 })
 export class BetsListComponent implements OnInit {
-  bets: Bet[] = [];
+  bets: CompleteBet[] = [];
   constructor(private betService: BetService) {}
   ngOnInit(): void {
     this.loadUserBets();
