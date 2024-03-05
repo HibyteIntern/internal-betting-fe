@@ -92,9 +92,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
       });
 
       this.selectedUserIds = this.initialGroup.users;
-
       this.initialId = this.initialGroup.userGroupId;
-
     }
   }
 

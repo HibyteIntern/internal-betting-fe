@@ -5,7 +5,9 @@
        hidden
        accept="image/*" />
 <label for="profileImage" *ngIf="viewOrEdit === 'edit'">
-  <div #profileCircle class="{{ getImageType() }}"></div>
+  <div #profileCircle class="{{ getImageType() }}">
+    <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+  </div>
 </label>
 <div *ngIf="viewOrEdit === 'view'">
   <div #profileCircle class="{{ getImageType() }}"></div>

@@ -6,7 +6,6 @@ import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
 import { UserProfile } from '../entity/user-profile';
 import { environment } from '../../environments/environment';
-import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,8 @@ export class UserProfileService {
   constructor(
     private http: HttpClient,
     private avatarService: AvatarService
-  ) {}
+  ) {
+  }
 
   async checkUserProfile(
     userProfileKeycloak: KeycloakProfile,
@@ -93,7 +93,7 @@ export class UserProfileService {
   }
 
   getMeSimple(): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
+      return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
   }
 
   create(userProfile: FullUserProfile): Observable<FullUserProfile> {
@@ -123,9 +123,9 @@ export class UserProfileService {
   }
 
   getPhoto(): Observable<Blob> {
-    return this.http.get(`${this.userProfileUrl}/getPhoto`, {
-      responseType: 'blob',
-    });
+      return this.http.get(`${this.userProfileUrl}/getPhoto`, {
+        responseType: 'blob',
+      });
   }
 
   updateCoins(coins: number) {

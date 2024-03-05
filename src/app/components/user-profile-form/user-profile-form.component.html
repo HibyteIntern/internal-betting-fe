@@ -1,6 +1,5 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
   <div class="profile-image-upload">
-    <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
     <app-profile-image [file] = "file"
                        (imageChanged)="handleFileChange($event)"
                        [viewOrEdit]="'edit'"
