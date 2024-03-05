@@ -53,20 +53,19 @@ export class ProfileImageComponent implements OnInit{
     reader.readAsDataURL(file);
   }
 
-  displayImage(){
-    if(this.id && this.groupOrUser === 'group'){
-      this.groupService.getPhoto(this.id).subscribe((blob) => {
-        this.displayProfileImage(
-          blob,
-          this.profileCircle?.nativeElement as HTMLElement,
-        );
-      });
+  displayImage() {
+    let photoService;
+    if (this.groupOrUser === 'group' && this.id) {
+      photoService = this.groupService.getPhoto(this.id);
+    } else if (this.groupOrUser === 'user') {
+      photoService = this.userService.getPhoto();
     }
-    else if (this.groupOrUser === 'user'){
-      this.userService.getPhoto().subscribe((blob) => {
+
+    if (photoService) {
+      photoService.subscribe((blob) => {
         this.displayProfileImage(
           blob,
-          this.profileCircle?.nativeElement as HTMLElement,
+          this.profileCircle?.nativeElement as HTMLElement
         );
       });
     }

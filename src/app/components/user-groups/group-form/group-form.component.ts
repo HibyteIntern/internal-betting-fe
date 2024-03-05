@@ -98,28 +98,35 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
+
     try {
       if (typeof this.initialGroup?.userGroupId === 'number' && this.updatedFile) {
         this.groupService
           .addPhoto(this.initialGroup.userGroupId, this.updatedFile)
           .subscribe((photoId) => {
             this.uploadedPhotoId = photoId;
+            const updatedGroup = this.createUpdatedGroup(formValue);
+            this.formSubmit.emit(updatedGroup);
           });
+      } else {
+        const updatedGroup = this.createUpdatedGroup(formValue);
+        this.formSubmit.emit(updatedGroup);
       }
-    }catch {
-      console.error('User Group ID is undefined');
+    } catch (error) {
+      console.error('Error submitting form:', error);
     }
-    const updatedGroup: UserGroupModel = {
+  }
+
+  private createUpdatedGroup(formValue: any): UserGroupModel {
+    return {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
       users: formValue.users ?? [],
-      profilePicture:
-        this.uploadedPhotoId !== undefined
-          ? this.uploadedPhotoId
-          : this.initialGroup?.profilePicture,
+      profilePicture: this.uploadedPhotoId !== undefined
+        ? this.uploadedPhotoId
+        : this.initialGroup?.profilePicture,
     };
-    this.formSubmit.emit(updatedGroup);
   }
 
   initializeUserOptions(): void {
