@@ -1,0 +1,145 @@
+.table-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 40%;
+}
+
+.mat-elevation-z8 th {
+  text-align: center;
+  background-color: var(--lighter-background-color);
+}
+.mat-elevation-z8 td {
+  text-align: center;
+  background-color: var(--sidebar-color);
+}
+
+.mat-elevation-z8 {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 40%;
+}
+
+.mat-elevation-z8 th {
+  text-align: center;
+  background-color: var(--lighter-background-color);
+}
+
+.mat-elevation-z8 td {
+  text-align: center;
+  background-color: var(--sidebar-color);
+}
+
+.mat-elevation-z8 {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.custom-dropdown-panel {
+  background-color: var(--sidebar-color);
+}
+
+.first-place td {
+  background-color: var(--first-place-color) !important;
+}
+
+.second-place td {
+  background-color: var(--second-place-color) !important;
+}
+
+.third-place td {
+  background-color: var(--third-place-color) !important;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.podium__item {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.podium__rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.podium__name {
+  text-align: center;
+  padding: 0 0.5rem;
+  font-size: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 190px;
+}
+
+.podium__rank.first {
+  font-size: 100px;
+}
+
+.podium__rank.second {
+  font-size: 60px;
+}
+
+.podium__rank.third {
+  font-size: 40px;
+}
+
+.podium__number {
+  width: 27px;
+  height: 75px;
+}
+
+.podium .first {
+  min-height: 250px;
+  background-color: var(--first-place-color);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.podium .second {
+  min-height: 180px;
+  background: var(--second-place-color);
+  border-top-left-radius: 10px;
+}
+
+.podium .third {
+  min-height: 110px;
+  background: var(--third-place-color);
+  border-top-right-radius: 10px;
+}
+
+.profile-image-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.profile-circle {
+  width: 8rem;
+  aspect-ratio: 1/1;
+  background-color: var(--sidebar-color);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+}
+
+input[type="file"] {
+  display: none;
+}
