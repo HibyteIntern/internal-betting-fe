@@ -8,7 +8,17 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith, BehaviorSubject, merge } from 'rxjs';
+
+import { UserProfileService } from 'src/app/service/user-profile.service';
+import {
+  Observable,
+  map,
+  startWith,
+  BehaviorSubject,
+  merge,
+} from 'rxjs';
+import { UserProfile } from '../../../entity/user-profile';
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-autocomplete',
@@ -17,6 +27,7 @@ import { Observable, map, startWith, BehaviorSubject, merge } from 'rxjs';
 })
 export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() label = '';
+  @Input() autocompleteType?: 'user' | 'userGroup';
 
   myControl = new FormControl('');
   @Input() options: string[] = [];
@@ -32,6 +43,10 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Output() selectedOptionsEmmiter: EventEmitter<string[]> = new EventEmitter<
     string[]
   >();
+  userProfile: UserProfile | undefined;
+  userProfiles: { [key: string]: FullUserProfile } = {};
+
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit() {
     this.filteredOptions = merge(
@@ -51,7 +66,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     );
   }
 
-  addItem() {
+  async addItem() {
     let optionsExist = false;
 
     this.filteredOptions.subscribe((elems) => {
@@ -62,6 +77,19 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     });
 
     if (this.myControl.value && optionsExist) {
+      if (this.autocompleteType === 'user') {
+        try {
+          const userProfile = await this.userProfileService
+            .getUserProfileByName(this.myControl.value)
+            .toPromise();
+          if (userProfile) {
+            this.userProfiles[this.myControl.value] = userProfile;
+          }
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      }
+
       this.chips.push(this.myControl.value);
       this.options = this.options.filter(
         (option) => option !== this.myControl.value,
@@ -73,9 +101,10 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   }
 
   removeItem(optionIndex: number) {
-    this.options.push(this.chips[optionIndex]);
+    const optionToRemove = this.chips[optionIndex];
+    this.options.push(optionToRemove);
+    delete this.userProfiles[optionToRemove];
     this.chips = this.chips.filter((_, index) => index !== optionIndex);
-
     this.selectedOptionsEmmiter.emit(this.chips);
   }
 

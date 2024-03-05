@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventRequest } from '../../../entity/event-request.model';
+import { Event } from '../../../entity/event.model';
 import { EventService } from '../../../service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Status } from '../../../entity/Status';
@@ -11,7 +11,7 @@ import { Status } from '../../../entity/Status';
 })
 export class EditEventComponent implements OnInit {
   eventId!: string;
-  formData: EventRequest = new EventRequest();
+  formData: Event = new Event();
   statusOptions: string[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
   minStartsAtDate = new Date();
 
@@ -29,8 +29,8 @@ export class EditEventComponent implements OnInit {
       this.eventId = params['eventId'];
 
       this.eventService.getEventById(this.eventId).subscribe(
-        (data: EventRequest) => {
-          this.formData = new EventRequest(data);
+        (data: Event) => {
+          this.formData = new Event(data);
         },
         () => {
           this.errorMessage = 'Error fetching event data';

@@ -4,9 +4,10 @@ import { Status } from '../../../entity/Status';
 import { EventService } from '../../../service/event.service';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { EventTemplate } from '../../../entity/event-template.model';
-import { BetTemplateType } from '../../../entity/bet-template-type';
 import { UserProfileService } from '../../../service/user-profile.service';
 import { FullUserProfile } from '../../../entity/full-user-profile';
+import { GroupService } from '../../../service/group.service';
+import { FullUserGroupModel } from '../../../entity/full-user-group.model';
 
 @Component({
   selector: 'app-create-event',
@@ -21,7 +22,7 @@ export class CreateEventComponent implements OnInit {
   errorMessage = '';
 
   eventTemplates: EventTemplate[] = [];
-  userGroupsList: string[] = [];
+  userGroupsList: FullUserGroupModel[] = [];
   userProfilesList: FullUserProfile[] = [];
   statusOptions: Status[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
 
@@ -30,6 +31,7 @@ export class CreateEventComponent implements OnInit {
     private eventTemplateService: EventTemplateService,
     private eventService: EventService,
     private userProfilesService: UserProfileService,
+    private groupService: GroupService,
   ) {
     this.eventForm = this.fb.group({
       eventTemplateName: [''],
@@ -39,7 +41,7 @@ export class CreateEventComponent implements OnInit {
       endsAt: [],
       status: [Status.DRAFT],
       selectedTemplate: [''],
-      completeBetTypeDtoList: this.fb.control([]),
+      betTypeDtoList: this.fb.control([]),
       userGroups: this.fb.control([]),
       userProfiles: this.fb.control([]),
     });
@@ -64,21 +66,25 @@ export class CreateEventComponent implements OnInit {
       },
     );
 
+    this.groupService.getAll().subscribe(
+      (groups) => {
+        this.userGroupsList = groups;
+      },
+      (error) => {
+        console.error('Error fetching user groups:', error);
+      },
+    );
+
     this.eventForm.get('eventTemplateName')?.valueChanges.subscribe(() => {
       this.handleEventTemplateChange();
     });
-  }
-
-  private convertBetTemplateType(type: BetTemplateType): string {
-    return type.toString();
   }
 
   private mapEventTemplateToBetTypeList(eventTemplate: EventTemplate) {
     return eventTemplate.betTemplates.map((betTemplate) => {
       return {
         name: betTemplate.name,
-        type: this.convertBetTemplateType(betTemplate.type),
-        multipleChoiceOptions: betTemplate.multipleChoiceOptions || [],
+        options: betTemplate.options || [],
       };
     });
   }
@@ -86,7 +92,7 @@ export class CreateEventComponent implements OnInit {
   handleEventTemplateChange() {
     if (this.eventForm.get('eventTemplateName')?.value === 'Custom') {
       this.eventForm.patchValue({
-        completeBetTypeDtoList: [],
+        betTypeDtoList: [],
       });
       return;
     }
@@ -98,7 +104,7 @@ export class CreateEventComponent implements OnInit {
 
     if (selectedEventTemplate) {
       this.eventForm.patchValue({
-        completeBetTypeDtoList: this.mapEventTemplateToBetTypeList(
+        betTypeDtoList: this.mapEventTemplateToBetTypeList(
           selectedEventTemplate,
         ),
       });

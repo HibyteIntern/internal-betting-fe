@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Competition } from 'src/app/entity/competitions.model';
-import { EventRequest } from 'src/app/entity/event-request.model';
+import { Event } from 'src/app/entity/event.model';
 import { CompetitionService } from 'src/app/service/competition.service';
 import { EventService } from 'src/app/service/event.service';
 import { TagsService } from 'src/app/service/tags.service';
@@ -24,8 +24,8 @@ export class IndexComponent implements OnInit {
   competitions: Competition[] = [];
   selectedCompetitions: Competition[] = [];
 
-  events: EventRequest[] = [];
-  selectedEvents: EventRequest[] = [];
+  events: Event[] = [];
+  selectedEvents: Event[] = [];
 
   constructor(
     protected competitionService: CompetitionService,

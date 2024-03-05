@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize } from 'rxjs';
-import { EventRequest } from '../entity/event-request.model';
+import { Event } from '../entity/event.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,25 +16,22 @@ export class EventService {
 
   constructor(private http: HttpClient) {}
 
-  addEvent(eventRequest: EventRequest): Observable<EventRequest> {
-    return this.http.post<EventRequest>(this.addUrl, eventRequest);
+  addEvent(eventRequest: Event): Observable<Event> {
+    return this.http.post<Event>(this.addUrl, eventRequest);
   }
 
-  getEvents(): Observable<EventRequest[]> {
-    return this.http.get<EventRequest[]>(this.apiUrl);
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.apiUrl);
   }
 
-  getEventById(eventId: string): Observable<EventRequest> {
+  getEventById(eventId: string): Observable<Event> {
     const getUrl = `${this.apiUrl}/get/${eventId}`;
-    return this.http.get<EventRequest>(getUrl);
+    return this.http.get<Event>(getUrl);
   }
 
-  updateEvent(
-    eventId: string,
-    eventRequest: EventRequest,
-  ): Observable<EventRequest> {
+  updateEvent(eventId: string, eventRequest: Event): Observable<Event> {
     const updateUrl = `${this.apiUrl}/edit/${eventId}`;
-    return this.http.put<EventRequest>(updateUrl, eventRequest);
+    return this.http.put<Event>(updateUrl, eventRequest);
   }
 
   deleteEvent(eventId: number): Observable<any> {
@@ -46,11 +43,11 @@ export class EventService {
     return this.http.get<string[]>(this.getEventsUrl + '/get/tags');
   }
 
-  getEventsSearch(query: string): Observable<EventRequest[]> {
+  getEventsSearch(query: string): Observable<Event[]> {
     this.loadingSubject.next(true);
 
     return this.http
-      .get<EventRequest[]>(`${this.getEventsUrl}/get/name`, {
+      .get<Event[]>(`${this.getEventsUrl}/get/name`, {
         params: new HttpParams().set('name', query),
       })
       .pipe(

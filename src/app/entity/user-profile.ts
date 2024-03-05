@@ -1,5 +1,5 @@
-import { Bet } from './Bet';
 import { Role } from './Role';
+import { Bet } from './bet.model';
 
 export interface UserProfile {
   userId?: number;

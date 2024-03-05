@@ -1,9 +1,9 @@
-import { FullUserProfile } from './full-user-profile';
-
 export interface Bet {
   betId?: number;
-  user?: FullUserProfile;
+  userId?: number;
+  betTypeId: number;
   amount: number;
   odds: number;
+  eventId: number;
   value: string;
 }

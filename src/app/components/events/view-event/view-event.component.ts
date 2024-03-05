@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../service/event.service';
-import { EventRequest } from '../../../entity/event-request.model';
+import { Event } from '../../../entity/event.model';
 
 @Component({
   selector: 'app-view-event',
@@ -9,7 +9,7 @@ import { EventRequest } from '../../../entity/event-request.model';
   styleUrls: ['./view-event.component.scss'],
 })
 export class ViewEventComponent implements OnInit {
-  eventRequest?: EventRequest;
+  eventRequest?: Event;
   eventId!: string;
 
   constructor(
@@ -28,8 +28,8 @@ export class ViewEventComponent implements OnInit {
 
   fetchEventData() {
     this.eventService.getEventById(this.eventId).subscribe(
-      (data: EventRequest) => {
-        this.eventRequest = new EventRequest(data);
+      (data: Event) => {
+        this.eventRequest = new Event(data);
       },
       (error) => {
         console.error('Error fetching event data:', error);
