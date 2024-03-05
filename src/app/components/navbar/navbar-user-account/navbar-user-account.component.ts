@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import {Subject, filter, takeUntil} from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -48,11 +48,12 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
           this.fetchUserProfile();
         });
 
-    this.userProfileService.userProfile$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((profile) => {
-        this.userProfile = profile;
-      });}
+      this.userProfileService.userProfile$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((profile) => {
+          this.userProfile = profile;
+        });
+    }
   }
 
   ngOnDestroy(): void {
@@ -63,7 +64,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   fetchUserProfile(): void {
     this.userProfileService.getUserProfile();
   }
-
 
   onLogin() {
     this.router.navigate(['/login']);

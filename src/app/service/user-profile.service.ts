@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -21,9 +21,8 @@ export class UserProfileService {
 
   constructor(
     private http: HttpClient,
-    private avatarService: AvatarService
-  ) {
-  }
+    private avatarService: AvatarService,
+  ) {}
 
   async checkUserProfile(
     userProfileKeycloak: KeycloakProfile,
@@ -94,7 +93,7 @@ export class UserProfileService {
   }
 
   getMeSimple(): Observable<UserProfile> {
-      return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
+    return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
   }
 
   create(userProfile: FullUserProfile): Observable<FullUserProfile> {
@@ -130,9 +129,9 @@ export class UserProfileService {
   }
 
   getPhoto(): Observable<Blob> {
-      return this.http.get(`${this.userProfileUrl}/getPhoto`, {
-        responseType: 'blob',
-      });
+    return this.http.get(`${this.userProfileUrl}/getPhoto`, {
+      responseType: 'blob',
+    });
   }
 
   getPhotoById(userId: number): Observable<Blob> {
@@ -153,7 +152,6 @@ export class UserProfileService {
       params,
     });
   }
-
 
   updateCoins(coins: number) {
     const tempUserProfile = this.userProfileSubject.value;

@@ -1,13 +1,17 @@
 <form [formGroup]="userGroupForm" (ngSubmit)="onSubmit()" class="styled-form">
-  <div *ngIf="isEditMode && initialId !== undefined" class="profile-image-upload">
-    <app-profile-image [file] = "file"
-                       (imageChanged)="handleFileChange($event)"
-                       [viewOrEdit]="'edit'"
-                       [groupOrUser]="'group'"
-                       [id]="initialId"
+  <div
+    *ngIf="isEditMode && initialId !== undefined"
+    class="profile-image-upload"
+  >
+    <app-profile-image
+      [file]="file"
+      (imageChanged)="handleFileChange($event)"
+      [viewOrEdit]="'edit'"
+      [groupOrUser]="'group'"
+      [id]="initialId"
     ></app-profile-image>
   </div>
-  <br>
+  <br />
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Group Name</mat-label>
     <input formControlName="groupName" matInput placeholder="Football Group" />

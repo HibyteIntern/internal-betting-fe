@@ -32,7 +32,7 @@ input[type="file"] {
     transition: opacity 0.2s ease-in-out;
   }
 
-  &:hover{
+  &:hover {
     filter: brightness(0.5);
 
     .edit-icon {
@@ -52,9 +52,8 @@ input[type="file"] {
 }
 
 .big {
-  height:12rem;
-  width:12rem;
+  height: 12rem;
+  width: 12rem;
 }
-
 
 // TODO: edit pen over editable image

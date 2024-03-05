@@ -75,7 +75,7 @@ const routes: Routes = [
   { path: 'user-groups', component: GroupsComponent },
   { path: 'user-groups/create', component: GroupCreateComponent },
   { path: 'user-groups/edit/:id', component: GroupEditComponent },
-  { path: '**', pathMatch: 'full', component: NotFoundPageComponent }
+  { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 
 @NgModule({

@@ -32,7 +32,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
-  allUserProfiles: FullUserProfile[]= [];
+  allUserProfiles: FullUserProfile[] = [];
   selectedUserIds: (number | undefined)[] = [];
   userGroupForm: FormGroup;
   isEditMode = false;
@@ -100,7 +100,10 @@ export class GroupFormComponent implements OnChanges, OnInit {
     const formValue = this.userGroupForm.value;
 
     try {
-      if (typeof this.initialGroup?.userGroupId === 'number' && this.updatedFile) {
+      if (
+        typeof this.initialGroup?.userGroupId === 'number' &&
+        this.updatedFile
+      ) {
         this.groupService
           .addPhoto(this.initialGroup.userGroupId, this.updatedFile)
           .subscribe((photoId) => {
@@ -123,9 +126,10 @@ export class GroupFormComponent implements OnChanges, OnInit {
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
       users: formValue.users ?? [],
-      profilePicture: this.uploadedPhotoId !== undefined
-        ? this.uploadedPhotoId
-        : this.initialGroup?.profilePicture,
+      profilePicture:
+        this.uploadedPhotoId !== undefined
+          ? this.uploadedPhotoId
+          : this.initialGroup?.profilePicture,
     };
   }
 

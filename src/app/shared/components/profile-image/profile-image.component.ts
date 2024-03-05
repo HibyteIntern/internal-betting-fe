@@ -7,19 +7,18 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {UserProfileService} from "../../../service/user-profile.service";
-import {GroupService} from "../../../service/group.service";
-import {FullUserProfile} from "../../../entity/full-user-profile";
+import { UserProfileService } from '../../../service/user-profile.service';
+import { GroupService } from '../../../service/group.service';
+import { FullUserProfile } from '../../../entity/full-user-profile';
 
 @Component({
   selector: 'app-profile-image',
   templateUrl: './profile-image.component.html',
-  styleUrls: ['./profile-image.component.scss']
+  styleUrls: ['./profile-image.component.scss'],
 })
-export class ProfileImageComponent implements OnInit, OnChanges{
-
+export class ProfileImageComponent implements OnInit, OnChanges {
   @Input() file: File | null = null;
   @Output() imageChanged: EventEmitter<File> = new EventEmitter<File>();
   @Input() groupOrUser?: string;
@@ -35,26 +34,33 @@ export class ProfileImageComponent implements OnInit, OnChanges{
     this.displayImage();
   }
 
-  ngOnChanges(changes:SimpleChanges): void {
-    if(changes['avatarImage'] && this.avatarImage){
-      this.displayProfileImage(this.avatarImage, this.profileCircle?.nativeElement as HTMLElement);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['avatarImage'] && this.avatarImage) {
+      this.displayProfileImage(
+        this.avatarImage,
+        this.profileCircle?.nativeElement as HTMLElement,
+      );
     }
-    if(changes['navbarUser'] && this.navbarUser){
+    if (changes['navbarUser'] && this.navbarUser) {
       this.displayImage();
     }
   }
 
-  constructor(private userService: UserProfileService, private groupService: GroupService) { }
+  constructor(
+    private userService: UserProfileService,
+    private groupService: GroupService,
+  ) {}
 
-  getImageType(){
-    return this.viewOrEdit === 'view' ? 'profile-circle-view' : 'profile-circle-edit';
+  getImageType() {
+    return this.viewOrEdit === 'view'
+      ? 'profile-circle-view'
+      : 'profile-circle-edit';
   }
 
   onFileSelect(event: Event): void {
     if (this.viewOrEdit !== 'edit') {
       return;
-    }
-    else {
+    } else {
       const element = event.target as HTMLInputElement;
       const fileList: FileList | null = element.files;
       if (fileList && fileList.length > 0) {
@@ -88,7 +94,7 @@ export class ProfileImageComponent implements OnInit, OnChanges{
       photoService.subscribe((blob) => {
         this.displayProfileImage(
           blob,
-          this.profileCircle?.nativeElement as HTMLElement
+          this.profileCircle?.nativeElement as HTMLElement,
         );
       });
     }
@@ -98,9 +104,9 @@ export class ProfileImageComponent implements OnInit, OnChanges{
     const url = URL.createObjectURL(blobOrFile);
     if (circle) {
       circle.style.backgroundImage = `url(${url})`;
-      if(this.viewOrEdit === 'view') {
+      if (this.viewOrEdit === 'view') {
         circle.classList.add('profile-circle-view');
-        if(this.bigPhoto){
+        if (this.bigPhoto) {
           circle.classList.add('big');
         }
       } else {

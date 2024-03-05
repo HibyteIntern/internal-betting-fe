@@ -1,16 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-account-page-user-profile',
   templateUrl: './account-page-user-profile.component.html',
   styleUrls: ['./account-page-user-profile.component.scss'],
 })
-export class AccountPageUserProfileComponent{
+export class AccountPageUserProfileComponent {
   @Input() username?: string;
   @Input() description?: string;
   @Input() profilePicture?: number;

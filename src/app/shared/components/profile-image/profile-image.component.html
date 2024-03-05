@@ -1,9 +1,11 @@
-<input *ngIf="viewOrEdit === 'edit'"
-       type="file"
-       id="profileImage"
-       (change)="onFileSelect($event)"
-       hidden
-       accept="image/*" />
+<input
+  *ngIf="viewOrEdit === 'edit'"
+  type="file"
+  id="profileImage"
+  (change)="onFileSelect($event)"
+  hidden
+  accept="image/*"
+/>
 <label for="profileImage" *ngIf="viewOrEdit === 'edit'">
   <div #profileCircle class="{{ getImageType() }}">
     <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
@@ -12,4 +14,3 @@
 <div *ngIf="viewOrEdit === 'view'">
   <div #profileCircle class="{{ getImageType() }}"></div>
 </div>
-

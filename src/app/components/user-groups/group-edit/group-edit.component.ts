@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../service/group.service';
