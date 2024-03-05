@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subject, filter, takeUntil } from 'rxjs';
+import {Subject, filter, takeUntil} from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -29,6 +29,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   userProfile: FullUserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
+
   constructor(
     private router: Router,
     private userProfileService: UserProfileService,

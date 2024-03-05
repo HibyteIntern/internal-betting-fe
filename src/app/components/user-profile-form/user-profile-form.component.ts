@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
@@ -20,6 +20,7 @@ export class UserProfileFormComponent implements OnChanges {
   file: File | null = null;
   isLoading = false;
   updatedFile: File | null = null;
+  avatarImage: Blob | File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -101,18 +102,17 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    this.isLoading = true;
-    const userId = String(this.userProfile?.userId);
-    const avatarSvg = this.avatarService.generateAvatar(userId);
+    const avatarSvg = this.avatarService.generateAvatar(
+      this.userProfile?.keycloakId,
+    );
     const avatarFile = await this.avatarService.convertSvgToImageFile(
       avatarSvg,
-      userId,
+      this.userProfile?.keycloakId,
     );
-    if (this.userProfile?.userId) {
-      await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
-    }
-    this.isLoading = false;
-    location.reload();
+    this.updatedFile = avatarFile;
+    this.handleFileChange(this.updatedFile);
+    this.avatarImage = avatarFile;
+    console.log('file', this.updatedFile);
   }
 
   handleFileChange(file: File) {

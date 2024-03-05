@@ -1,9 +1,10 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
   <div class="profile-image-upload">
-    <app-profile-image [file] = "file"
+    <app-profile-image [file] = "updatedFile"
                        (imageChanged)="handleFileChange($event)"
                        [viewOrEdit]="'edit'"
                        [groupOrUser]="'user'"
+                       [avatarImage]="avatarImage"
     ></app-profile-image>
   </div>
 

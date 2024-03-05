@@ -1,13 +1,24 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {UserProfileService} from "../../../service/user-profile.service";
 import {GroupService} from "../../../service/group.service";
+import {FullUserProfile} from "../../../entity/full-user-profile";
 
 @Component({
   selector: 'app-profile-image',
   templateUrl: './profile-image.component.html',
   styleUrls: ['./profile-image.component.scss']
 })
-export class ProfileImageComponent implements OnInit{
+export class ProfileImageComponent implements OnInit, OnChanges{
 
   @Input() file: File | null = null;
   @Output() imageChanged: EventEmitter<File> = new EventEmitter<File>();
@@ -15,11 +26,22 @@ export class ProfileImageComponent implements OnInit{
   @Input() viewOrEdit?: string;
   @Input() id?: number | null;
   @Input() bigPhoto?: boolean;
+  @Input() avatarImage: Blob | File | null = null;
+  @Input() navbarUser: FullUserProfile | null = null;
 
   @ViewChild('profileCircle') profileCircle?: ElementRef;
 
   ngOnInit(): void {
     this.displayImage();
+  }
+
+  ngOnChanges(changes:SimpleChanges): void {
+    if(changes['avatarImage'] && this.avatarImage){
+      this.displayProfileImage(this.avatarImage, this.profileCircle?.nativeElement as HTMLElement);
+    }
+    if(changes['navbarUser'] && this.navbarUser){
+      this.displayImage();
+    }
   }
 
   constructor(private userService: UserProfileService, private groupService: GroupService) { }
@@ -32,13 +54,14 @@ export class ProfileImageComponent implements OnInit{
     if (this.viewOrEdit !== 'edit') {
       return;
     }
-
-    const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
-    if (fileList && fileList.length > 0) {
-      this.file = fileList[0];
-      this.readAndDisplayImage(this.file);
-      this.imageChanged.emit(this.file);
+    else {
+      const element = event.target as HTMLInputElement;
+      const fileList: FileList | null = element.files;
+      if (fileList && fileList.length > 0) {
+        this.file = fileList[0];
+        this.readAndDisplayImage(this.file);
+        this.imageChanged.emit(this.file);
+      }
     }
   }
 
@@ -71,8 +94,8 @@ export class ProfileImageComponent implements OnInit{
     }
   }
 
-  displayProfileImage(blob: Blob, circle: HTMLElement) {
-    const url = URL.createObjectURL(blob);
+  displayProfileImage(blobOrFile: Blob | File, circle: HTMLElement) {
+    const url = URL.createObjectURL(blobOrFile);
     if (circle) {
       circle.style.backgroundImage = `url(${url})`;
       if(this.viewOrEdit === 'view') {

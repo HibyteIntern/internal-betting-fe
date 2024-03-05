@@ -9,7 +9,9 @@
   <div id="user-credits">{{ userProfile?.coins }}</div>
   <app-profile-image
     [groupOrUser]="'user'"
-    [viewOrEdit]="'view'">
+    [viewOrEdit]="'view'"
+    [navbarUser] ="userProfile"
+  >
   </app-profile-image>
 </div>
 
