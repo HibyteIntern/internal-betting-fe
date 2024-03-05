@@ -12,6 +12,7 @@ import {
 import { UserProfileService } from '../../../service/user-profile.service';
 import { GroupService } from '../../../service/group.service';
 import { FullUserProfile } from '../../../entity/full-user-profile';
+import { AvatarService } from '../../../service/avatar.service';
 
 @Component({
   selector: 'app-profile-image',
@@ -25,22 +26,18 @@ export class ProfileImageComponent implements OnInit, OnChanges {
   @Input() viewOrEdit?: string;
   @Input() id?: number | null;
   @Input() bigPhoto?: boolean;
-  @Input() avatarImage: Blob | File | null = null;
   @Input() navbarUser: FullUserProfile | null = null;
+  @Input() keycloakId: string | undefined;
 
   @ViewChild('profileCircle') profileCircle?: ElementRef;
+
+  avatarImage: File | null = null;
 
   ngOnInit(): void {
     this.displayImage();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['avatarImage'] && this.avatarImage) {
-      this.displayProfileImage(
-        this.avatarImage,
-        this.profileCircle?.nativeElement as HTMLElement,
-      );
-    }
     if (changes['navbarUser'] && this.navbarUser) {
       this.displayImage();
     }
@@ -49,6 +46,7 @@ export class ProfileImageComponent implements OnInit, OnChanges {
   constructor(
     private userService: UserProfileService,
     private groupService: GroupService,
+    private avatarService: AvatarService,
   ) {}
 
   getImageType() {
@@ -112,6 +110,28 @@ export class ProfileImageComponent implements OnInit, OnChanges {
       } else {
         circle.classList.add('profile-circle-edit');
       }
+    }
+  }
+
+  async onAddAvatar() {
+    let avatarId: string | number | undefined = undefined;
+    if (this.groupOrUser === 'group' && this.id) {
+      avatarId = this.id.toString();
+    } else if (this.groupOrUser === 'user') {
+      avatarId = this.keycloakId;
+    }
+
+    if (avatarId) {
+      const avatarSvg = this.avatarService.generateAvatar(avatarId);
+      this.avatarImage = await this.avatarService.convertSvgToImageFile(
+        avatarSvg,
+        avatarId,
+      );
+      this.imageChanged.emit(this.avatarImage);
+      this.displayProfileImage(
+        this.avatarImage,
+        this.profileCircle?.nativeElement as HTMLElement,
+      );
     }
   }
 }

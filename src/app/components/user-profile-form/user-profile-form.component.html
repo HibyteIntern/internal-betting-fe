@@ -5,21 +5,10 @@
       (imageChanged)="handleFileChange($event)"
       [viewOrEdit]="'edit'"
       [groupOrUser]="'user'"
-      [avatarImage]="avatarImage"
+      [keycloakId]="userProfile?.keycloakId"
     ></app-profile-image>
   </div>
-
-  <button
-    mat-raised-button
-    color="primary"
-    class="avatar-button"
-    style="color: var(--text-color)"
-    type="button"
-    (click)="onAddAvatar()"
-  >
-    Add avatar
-  </button>
-
+  <br />
   <mat-form-field color="accent" appearance="outline" class="username-field">
     <mat-label>Username</mat-label>
     <input matInput type="text" formControlName="username" />

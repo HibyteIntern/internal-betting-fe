@@ -27,7 +27,6 @@ export class UserProfileFormComponent implements OnChanges {
   file: File | null = null;
   isLoading = false;
   updatedFile: File | null = null;
-  avatarImage: Blob | File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -121,19 +120,6 @@ export class UserProfileFormComponent implements OnChanges {
 
   onCancel() {
     this.location.back();
-  }
-
-  async onAddAvatar() {
-    const avatarSvg = this.avatarService.generateAvatar(
-      this.userProfile?.keycloakId,
-    );
-    const avatarFile = await this.avatarService.convertSvgToImageFile(
-      avatarSvg,
-      this.userProfile?.keycloakId,
-    );
-    this.updatedFile = avatarFile;
-    this.handleFileChange(this.updatedFile);
-    this.avatarImage = avatarFile;
   }
 
   handleFileChange(file: File) {
