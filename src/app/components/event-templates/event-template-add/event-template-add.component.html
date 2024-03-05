@@ -38,21 +38,9 @@
               Must add at least 2 options.
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" color="accent">
-            <mat-label>Bet type</mat-label>
-            <mat-select panelClass="select-dropdown" formControlName="type">
-              <mat-option value="NUMERIC">Numeric</mat-option>
-              <mat-option value="MULTIPLE_CHOICE">Multiple choice</mat-option>
-              <mat-option value="BOOLEAN">Boolean</mat-option>
-              <mat-option value="STRING">Text</mat-option>
-            </mat-select>
-          </mat-form-field>
           <mat-icon fontIcon="delete" (click)="removeBetTemplate(i)"></mat-icon>
         </div>
-        <div
-          formArrayName="multipleChoiceOptions"
-          *ngIf="betTemplate.get('type')?.value === 'MULTIPLE_CHOICE'"
-        >
+        <div formArrayName="options">
           <div
             style="
               margin-bottom: 1rem;
@@ -108,7 +96,12 @@
     >
       Add bet
     </button>
-    <button mat-raised-button color="primary" style="color: var(--text-color)">
+    <button
+      mat-raised-button
+      color="primary"
+      style="color: var(--text-color)"
+      [disabled]="!templateFormGroup.valid"
+    >
       {{ isEditPage ? "Update" : "Submit" }}
     </button>
     <div *ngIf="isLoading" class="lds-dual-ring-container">

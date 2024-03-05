@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CompleteBetType } from '../../../entity/complete-bet-type.model';
+import { BetType } from '../../../entity/bet-type.model';
 
 @Component({
   selector: 'app-add-bet-to-event',
@@ -7,7 +7,7 @@ import { CompleteBetType } from '../../../entity/complete-bet-type.model';
   styleUrls: ['./add-bet-to-event.component.scss'],
 })
 export class AddBetToEventComponent {
-  @Input() betType: CompleteBetType | undefined;
+  @Input() betType: BetType | undefined;
 
   selectedOption = '';
   selectedBooleanOption = 'true';

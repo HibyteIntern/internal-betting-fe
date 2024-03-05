@@ -24,33 +24,17 @@
             Must add at least 2 options.
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" color="accent">
-          <mat-label>Bet type</mat-label>
-          <mat-select panelClass="select-dropdown" formControlName="type">
-            <mat-option value="NUMERIC">Numeric</mat-option>
-            <mat-option value="MULTIPLE_CHOICE">Multiple choice</mat-option>
-            <mat-option value="BOOLEAN">Boolean</mat-option>
-            <mat-option value="STRING">Text</mat-option>
-          </mat-select>
-        </mat-form-field>
         <mat-icon fontIcon="delete" (click)="removeBetType(i)"></mat-icon>
       </div>
 
       <div
-        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
         style="margin-bottom: 1rem; font-weight: bold; filter: brightness(0.7)"
       >
         Options
       </div>
 
-      <div
-        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
-        class="outer-options-container"
-      >
-        <div
-          class="option-text-container"
-          formArrayName="multipleChoiceOptions"
-        >
+      <div class="outer-options-container">
+        <div class="option-text-container" formArrayName="options">
           <div
             *ngFor="let option of getOptions(i).controls; let j = index"
             class="option-text-container"
@@ -88,7 +72,6 @@
       </div>
 
       <mat-icon
-        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
         style="margin-bottom: 0.75rem; margin-left: 0"
         class="add-option-button"
         (click)="addMultipleChoiceOptions(i)"

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EventRequest } from 'src/app/entity/event-request.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Event } from 'src/app/entity/event.model';
 import { UserProfileService } from '../../service/user-profile.service';
 import { FullUserProfile } from '../../entity/full-user-profile';
 
@@ -11,8 +11,8 @@ import { FullUserProfile } from '../../entity/full-user-profile';
     '../../shared/styles/styled-card.scss',
   ],
 })
-export class EventCardComponent {
-  @Input() event: EventRequest = new EventRequest();
+export class EventCardComponent implements OnInit {
+  @Input() event: Event | null = null;
 
   @Output() deleteEmitter = new EventEmitter<void>();
   @Output() viewEmitter = new EventEmitter<void>();
@@ -20,12 +20,13 @@ export class EventCardComponent {
 
   showButtons = false;
   loggedInUser: FullUserProfile | null = null;
-  constructor(private userProfileService: UserProfileService) {
+  constructor(private userProfileService: UserProfileService) {}
+
+  ngOnInit(): void {
     this.userProfileService.userProfile$.subscribe((user) => {
       this.loggedInUser = user;
-      if (this.loggedInUser) {
-        this.showButtons =
-          this.event.creator?.userId === this.loggedInUser.userId;
+      if (user && this.event) {
+        this.showButtons = this.event.creator?.userId === user.userId;
       }
     });
   }

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { EventTemplateService } from '../../../service/event-template.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { multipleChoiceValidator } from '../../../shared/validator/multiple-choice.validator';
-import { multipleChoiceOptionValidator } from '../../../shared/validator/multiple-choice-option.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormService } from '../../../service/form.service';
 import { catchError, of } from 'rxjs';
@@ -70,15 +69,13 @@ export class EventTemplateAddComponent {
     const betTemplateForm = this.reactiveFormBuilder.group(
       {
         name: ['', [Validators.required, Validators.maxLength(50)]],
-        type: ['', Validators.required],
-        multipleChoiceOptions: this.reactiveFormBuilder.array([
-          ['', multipleChoiceOptionValidator()],
-          ['', multipleChoiceOptionValidator()],
+        options: this.reactiveFormBuilder.array([
+          ['', Validators.required],
+          ['', Validators.required],
         ]),
       },
       { validators: multipleChoiceValidator() },
     );
-    this.validateOptionsOnTypeChange(betTemplateForm);
     this.betTemplates.push(betTemplateForm);
   }
 
@@ -87,14 +84,12 @@ export class EventTemplateAddComponent {
   }
 
   getOptions(betTemplateIndex: number): FormArray {
-    return this.betTemplates
-      .at(betTemplateIndex)
-      .get('multipleChoiceOptions') as FormArray;
+    return this.betTemplates.at(betTemplateIndex).get('options') as FormArray;
   }
 
   addMultipleChoiceOptions(betTemplateIndex: number) {
     this.getOptions(betTemplateIndex).push(
-      this.reactiveFormBuilder.control('', multipleChoiceOptionValidator()),
+      this.reactiveFormBuilder.control('', Validators.required),
     );
   }
 
@@ -127,18 +122,5 @@ export class EventTemplateAddComponent {
         .add(this.templateFormGroup.value)
         .subscribe((success: boolean) => this.handleSubmitSuccess(success));
     }
-  }
-
-  private validateOptionsOnTypeChange(betTemplateForm: FormGroup) {
-    betTemplateForm.controls['type'].valueChanges.subscribe(() => {
-      const multipleChoiceOptions = betTemplateForm.get(
-        'multipleChoiceOptions',
-      );
-      if (multipleChoiceOptions instanceof FormArray) {
-        multipleChoiceOptions.controls.forEach((control) => {
-          control.updateValueAndValidity();
-        });
-      }
-    });
   }
 }

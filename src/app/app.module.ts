@@ -57,6 +57,11 @@ import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.direct
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { MatListModule } from '@angular/material/list';
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -71,19 +76,18 @@ import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/
 import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { IndexComponent } from './components/index/index.component';
 import { NotFoundPageComponent } from './components/error-pages/not-found-page/not-found-page.component';
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
+import { MatTableModule } from '@angular/material/table';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
-import { MatListModule } from '@angular/material/list';
-import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
-import { EditEventComponent } from './components/events/edit-event/edit-event.component';
-import { IndexComponent } from './components/index/index.component';
-import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { ConfettiTriggerDirective } from './shared/directive/confetti-trigger.directive';
 import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
 import { authInterceptor } from './interceptor/auth.interceptor';
@@ -173,6 +177,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AccessDeniedPageComponent,
     BetTypeFormComponent,
     ProfileImageComponent,
+    LeaderboardsComponent,
+    ConfettiTriggerDirective,
   ],
   imports: [
     BrowserModule,
@@ -211,6 +217,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatListModule,
     MatSelectModule,
     MatCardModule,
+    MatTableModule,
   ],
   providers: [
     {

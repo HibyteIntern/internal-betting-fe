@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
@@ -96,6 +96,10 @@ export class UserProfileService {
     return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
   }
 
+  getById(userId: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`);
+  }
+
   create(userProfile: FullUserProfile): Observable<FullUserProfile> {
     return this.http.post<FullUserProfile>(this.userProfileUrl, userProfile);
   }
@@ -134,6 +138,13 @@ export class UserProfileService {
     });
   }
 
+  updateCoins(coins: number) {
+    const tempUserProfile = this.userProfileSubject.value;
+    if (tempUserProfile && tempUserProfile.coins)
+      tempUserProfile.coins = tempUserProfile.coins + coins;
+    this.userProfileSubject.next(tempUserProfile);
+  }
+
   getPhotoById(userId: number): Observable<Blob> {
     return this.http.get(`${this.userProfileUrl}/getPhoto/${userId}`, {
       responseType: 'blob',
@@ -151,12 +162,5 @@ export class UserProfileService {
     return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
       params,
     });
-  }
-
-  updateCoins(coins: number) {
-    const tempUserProfile = this.userProfileSubject.value;
-    if (tempUserProfile && tempUserProfile.coins)
-      tempUserProfile.coins = tempUserProfile.coins + coins;
-    this.userProfileSubject.next(tempUserProfile);
   }
 }

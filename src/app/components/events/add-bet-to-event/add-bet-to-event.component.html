@@ -1,29 +1,12 @@
 <form class="styled-form" style="margin-bottom: 15px">
-  <div *ngIf="betType?.type === 'MULTIPLE_CHOICE'">
+  <div>
     <mat-form-field appearance="outline">
       <mat-label>Select an option:</mat-label>
       <mat-select [(ngModel)]="selectedOption">
-        <mat-option
-          *ngFor="let option of betType?.multipleChoiceOptions"
-          [value]="option"
-          >{{ option }}</mat-option
-        >
+        <mat-option *ngFor="let option of betType?.options" [value]="option">{{
+          option
+        }}</mat-option>
       </mat-select>
-    </mat-form-field>
-  </div>
-  <div *ngIf="betType?.type === 'BOOLEAN'">
-    <mat-form-field appearance="outline">
-      <mat-label>Will it happen?</mat-label>
-      <mat-select [(ngModel)]="selectedBooleanOption">
-        <mat-option value="true">Yes</mat-option>
-        <mat-option value="false">No</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div *ngIf="betType?.type === 'NUMERIC' || betType?.type === 'STRING'">
-    <mat-form-field appearance="outline">
-      <mat-label>Your answer:</mat-label>
-      <input matInput [(ngModel)]="answer" />
     </mat-form-field>
   </div>
   <mat-form-field appearance="outline">

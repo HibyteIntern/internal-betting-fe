@@ -46,9 +46,11 @@
         [multiple]="true"
         panelClass="select-dropdown"
       >
-        <mat-option *ngFor="let group of userGroupsList" [value]="group">{{
-          group
-        }}</mat-option>
+        <mat-option
+          *ngFor="let group of userGroupsList"
+          [value]="group.groupName"
+          >{{ group.groupName }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" color="accent">
@@ -106,9 +108,7 @@
       <div class="section-title" style="margin-bottom: 2rem" id="bet-section">
         Bets
       </div>
-      <app-bet-type-form
-        formControlName="completeBetTypeDtoList"
-      ></app-bet-type-form>
+      <app-bet-type-form formControlName="betTypeDtoList"></app-bet-type-form>
     </div>
 
     <mat-form-field appearance="outline" color="accent">

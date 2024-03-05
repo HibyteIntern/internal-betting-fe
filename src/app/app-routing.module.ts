@@ -16,6 +16,8 @@ import { IndexComponent } from './components/index/index.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { authGuard } from './guard/auth.guard';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
 import { GroupsComponent } from './components/user-groups/groups/groups.component';
 import { GroupCreateComponent } from './components/user-groups/group-create/group-create.component';
@@ -23,6 +25,17 @@ import { GroupEditComponent } from './components/user-groups/group-edit/group-ed
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'event-templates', component: EventTemplateBrowserComponent },
+  { path: 'event-templates/create', component: EventTemplateAddComponent },
+  { path: 'create-event', component: CreateEventComponent },
+  { path: 'event-templates/edit/:id', component: EventTemplateAddComponent },
+  { path: 'view-event/:eventId', component: ViewEventComponent },
+  { path: 'edit-event/:eventId', component: EditEventComponent },
+
+  { path: 'user-groups', component: GroupsComponent },
+  { path: 'user-groups/create', component: GroupCreateComponent },
+  { path: 'user-groups/edit/:id', component: GroupEditComponent },
+
   {
     path: 'user-profile',
     canActivate: [authGuard],
@@ -30,7 +43,8 @@ const routes: Routes = [
     children: [{ path: 'edit', component: UserProfileEditComponent }],
   },
   {
-    path: 'event-templates',
+   path: 'competition', component: CompetitionsComponent },
+  { path: 'event-templates',
     canActivate: [authGuard],
     component: EventTemplateBrowserComponent,
   },
@@ -55,6 +69,7 @@ const routes: Routes = [
     component: CreateCompetitionComponent,
   },
   { path: 'competitions/:id', component: ViewCompetitionsComponent },
+  { path: '', component: IndexComponent },
   { path: 'prizes', component: PrizeBrowserComponent },
   {
     path: 'prizes/create',
@@ -67,14 +82,27 @@ const routes: Routes = [
     component: PrizeDrawAddComponent,
   },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
+  { path: 'leaderboards', component: LeaderboardsComponent },
   { path: 'events/create', component: CreateEventComponent },
   { path: 'events/:eventId', component: ViewEventComponent },
   { path: 'events/edit/:eventId', component: EditEventComponent },
+  {
+    path: 'user-groups',
+    canActivate: [authGuard],
+    component: GroupsComponent,
+  },
+  {
+    path: 'user-groups/create',
+    canActivate: [authGuard],
+    component: GroupCreateComponent,
+  },
+  {
+    path: 'user-groups/edit/:id',
+    canActivate: [authGuard],
+    component: GroupEditComponent,
+  },
   { path: '', component: IndexComponent },
   { path: 'denied', component: AccessDeniedPageComponent },
-  { path: 'user-groups', component: GroupsComponent },
-  { path: 'user-groups/create', component: GroupCreateComponent },
-  { path: 'user-groups/edit/:id', component: GroupEditComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 
