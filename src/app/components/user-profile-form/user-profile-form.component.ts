@@ -170,14 +170,19 @@ export class UserProfileFormComponent implements OnChanges {
     const avatarSvg = this.avatarService.generateAvatar(
       this.userProfile?.keycloakId,
     );
-    const avatarFile = await this.avatarService.convertSvgToImageFile(
+    this.file = await this.avatarService.convertSvgToImageFile(
       avatarSvg,
       this.userProfile?.keycloakId,
     );
-    if (this.userProfile?.userId) {
-      await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
-    }
-    this.isLoading = false;
-    location.reload();
+
+    const reader = new FileReader();
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      const circle = document.querySelector('.profile-circle') as HTMLElement;
+      if (circle && e.target && e.target.result) {
+        circle.style.backgroundImage = `url(${e.target.result})`;
+      }
+    };
+    reader.readAsDataURL(this.file);
+
   }
 }
