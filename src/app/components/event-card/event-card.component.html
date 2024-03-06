@@ -24,8 +24,8 @@
   </mat-card-header>
 
   <div class="tags-container">
-    <app-tag>Event</app-tag>
-    <app-tag *ngFor="let tag of event?.tags">{{ tag }}</app-tag>
+    <div class="tag">Event</div>
+    <div class="tag" *ngFor="let tag of event?.tags">{{ tag }}</div>
   </div>
 
   <mat-card-content class="mat-card-content">

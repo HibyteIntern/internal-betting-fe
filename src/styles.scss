@@ -300,6 +300,23 @@ mat-form-field {
   }
 }
 
+.tag {
+  display: inline-block;
+  background-color: var(--accent-color-two);
+  font-size: var(--text-sm);
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius);
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+//general styling classes
+@for $i from 1 through 10 {
+  .mb-#{$i} {
+    margin-bottom: $i rem;
+  }
+}
+
 //media queries for setting the font size, which influences every component that uses rem
 html {
   font-size: 12px;

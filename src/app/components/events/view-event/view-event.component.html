@@ -10,9 +10,9 @@
     Starts on: {{ eventRequest?.startsAt | date }}
   </div>
   <mat-chip-listbox>
-    <app-tag *ngFor="let tag of eventRequest?.tags">
+    <div class="tag" *ngFor="let tag of eventRequest?.tags">
       {{ tag }}
-    </app-tag>
+    </div>
   </mat-chip-listbox>
   <div style="margin-top: 30px; margin-bottom: 30px">
     {{ eventRequest?.description }}

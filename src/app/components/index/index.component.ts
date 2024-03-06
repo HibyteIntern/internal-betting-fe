@@ -141,12 +141,8 @@ export class IndexComponent implements OnInit {
     this.tagSelectorOpened = false;
   }
 
-  handleCompetitionViewClick(competitionId: number) {
-    this.router.navigate(['/competitions/', competitionId]);
-  }
-
-  handleCompetitionEditClick(competitionId: number) {
-    this.router.navigate(['/competitions/edit/', competitionId]);
+  handleEntityClick(entityId: number, route: string) {
+    this.router.navigate([route, entityId]);
   }
 
   handleCompetitionDeleteClick(competitionId: number) {
@@ -161,23 +157,13 @@ export class IndexComponent implements OnInit {
         this.competitionService
           .deleteCompetition(competitionId)
           .subscribe(() => {
-            this.competitionService
-              .getCompetitions()
-              .subscribe((competitions) => {
-                this.competitions = competitions;
-                this.selectCompetitions();
-              });
+            this.competitions = this.competitions.filter(
+              (competition) => competition.id !== competitionId,
+            );
+            this.selectCompetitions();
           });
       }
     });
-  }
-
-  handleEventViewClick(eventId: number) {
-    this.router.navigate(['/events/', eventId]);
-  }
-
-  handleEventEditClick(eventId: number) {
-    this.router.navigate(['/events/edit/', eventId]);
   }
 
   handleEventDeleteClick(eventId: number) {
@@ -190,10 +176,10 @@ export class IndexComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.eventService.deleteEvent(eventId).subscribe(() => {
-          this.eventService.getEvents().subscribe((events) => {
-            this.events = events;
-            this.selectEvents();
-          });
+          this.events = this.events.filter(
+            (event) => eventId !== event.eventId,
+          );
+          this.selectEvents();
         });
       }
     });
