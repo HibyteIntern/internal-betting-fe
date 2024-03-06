@@ -1,45 +1,12 @@
 <app-mainframe [title]="'Create an event'">
-  <form class="styled-form" (ngSubmit)="submitForm()" #eventForm="ngForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Event Name</mat-label>
-      <input
-        name="eventName"
-        matInput
-        placeholder="Ex. Event Name"
-        [(ngModel)]="formData.name"
-        required
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline">
-      <mat-label>Description</mat-label>
-      <textarea
-        name="description"
-        matInput
-        placeholder="Ex. Event Description"
-        [(ngModel)]="formData.description"
-        required
-      ></textarea>
-    </mat-form-field>
-    <br />
-    <!--  creator should be gotten automatically to be implemented when userProfile is complete  -->
-    <mat-form-field appearance="outline">
-      <mat-label>Creator</mat-label>
-      <input
-        name="creator"
-        matInput
-        placeholder="Ex. Creator"
-        [(ngModel)]="formData.creator"
-        required
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline">
+  <form class="app-form" (ngSubmit)="submitForm()" [formGroup]="eventForm">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Event Template</mat-label>
       <mat-select
-        [(ngModel)]="formData.selectedTemplate"
-        name="selectedTemplate"
+        panelClass="select-dropdown"
+        formControlName="eventTemplateName"
       >
+        <mat-option [value]="'Custom'"> Custom </mat-option>
         <mat-option
           *ngFor="let template of eventTemplates"
           [value]="template.name"
@@ -48,24 +15,50 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <div class="section-title">General information</div>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Event Name</mat-label>
+      <input
+        name="eventName"
+        matInput
+        placeholder="Ex. Event Name"
+        formControlName="name"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Description</mat-label>
+      <textarea
+        name="description"
+        matInput
+        placeholder="Ex. Event Description"
+        formControlName="description"
+        required
+      ></textarea>
+    </mat-form-field>
+
+    <div class="section-title">Participants</div>
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>User Groups</mat-label>
-      <mat-select [formControl]="userGroupsControl" multiple>
-        <mat-option *ngFor="let group of userGroupsList" [value]="group">{{
-          group
-        }}</mat-option>
+      <mat-select
+        formControlName="userGroups"
+        [multiple]="true"
+        panelClass="select-dropdown"
+      >
+        <mat-option
+          *ngFor="let group of userGroupsList"
+          [value]="group.groupName"
+          >{{ group.groupName }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
-    <br />
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>User Profiles</mat-label>
       <mat-select
-        [(ngModel)]="formData.userProfiles"
-        multiple
-        name="userProfiles"
+        formControlName="userProfiles"
+        [multiple]="true"
+        panelClass="select-dropdown"
       >
         <mat-option
           *ngFor="let profile of userProfilesList"
@@ -74,61 +67,80 @@
         >
       </mat-select>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <div class="section-title">Time</div>
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Starts At</mat-label>
       <input
         matInput
-        [matDatepicker]="startsAtPicker"
+        [ngxMatDatetimePicker]="startsAtPicker"
+        [min]="minStartsAtDate"
         name="startsAt"
         placeholder="Select a date and time"
-        [(ngModel)]="formData.startsAt"
+        formControlName="startsAt"
         required
       />
       <mat-datepicker-toggle
         matSuffix
-        [for]="startsAtPicker"
+        [for]="$any(startsAtPicker)"
       ></mat-datepicker-toggle>
-      <mat-datepicker #startsAtPicker></mat-datepicker>
+      <ngx-mat-datetime-picker #startsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
-    <br />
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Ends At</mat-label>
       <input
         matInput
-        [matDatepicker]="endsAtPicker"
+        [ngxMatDatetimePicker]="endsAtPicker"
         name="endsAt"
+        [min]="eventForm.get('startsAt')?.value"
         placeholder="Select a date and time"
-        [(ngModel)]="formData.endsAt"
+        formControlName="endsAt"
         required
       />
       <mat-datepicker-toggle
         matSuffix
-        [for]="endsAtPicker"
+        [for]="$any(endsAtPicker)"
       ></mat-datepicker-toggle>
-      <mat-datepicker #endsAtPicker></mat-datepicker>
+      <ngx-mat-datetime-picker #endsAtPicker></ngx-mat-datetime-picker>
     </mat-form-field>
-    <br />
 
-    <mat-form-field appearance="outline">
+    <div class="bets-container">
+      <div class="section-title" style="margin-bottom: 2rem" id="bet-section">
+        Bets
+      </div>
+      <app-bet-type-form
+        formControlName="completeBetTypeDtoList"
+      ></app-bet-type-form>
+    </div>
+
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="formData.status" name="selectedStatus">
+      <mat-select panelClass="select-dropdown" formControlName="status">
         <mat-option *ngFor="let status of statusOptions" [value]="status">
           {{ status }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
 
     <button
       mat-raised-button
       color="accent"
       type="submit"
       [disabled]="!eventForm.valid"
+      style="color: var(--text-color)"
     >
       Submit
     </button>
+
+    <div *ngIf="isLoading" class="lds-dual-ring-container">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div
+      *ngIf="errorMessage"
+      class="form-error-message"
+      style="margin: 0 0 1rem 0"
+    >
+      {{ errorMessage }}
+    </div>
   </form>
 </app-mainframe>

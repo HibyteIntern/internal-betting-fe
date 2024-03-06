@@ -27,6 +27,7 @@ export class CreateCompetitionComponent implements OnInit {
   selectedEvents: string[] = [];
 
   isEditPage = false;
+  isLoading = false;
 
   statusOptions = [
     { value: Status.DRAFT, label: 'Draft' },
@@ -131,6 +132,7 @@ export class CreateCompetitionComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     if (this.isEditPage) {
       this.competitionService
         .updateCompetition(
@@ -138,12 +140,14 @@ export class CreateCompetitionComponent implements OnInit {
           this.competitionForm.value,
         )
         .subscribe(() => {
+          this.isLoading = false;
           this.router.navigate(['/']);
         });
     } else {
       this.competitionService
         .addCompetition(this.competitionForm.value)
         .subscribe(() => {
+          this.isLoading = false;
           this.router.navigate(['/']);
         });
     }

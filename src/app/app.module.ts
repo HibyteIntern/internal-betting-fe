@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginComponent } from './components/login/login.component';
@@ -29,7 +33,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
-import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { MatLegacyChipsModule } from '@angular/material/legacy-chips';
@@ -39,24 +42,20 @@ import { CompetitionCardComponent } from './components/competitions/competition-
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { TagComponent } from './shared/components/tag/tag.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { GroupFormComponent } from './components/user-groups/group-form/group-form.component';
 import { GroupEditComponent } from './components/user-groups/group-edit/group-edit.component';
 import { StopMousePropagationDirective } from './shared/directive/stop-mouse-propagation.directive';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ViewEventComponent } from './components/events/view-event/view-event.component';
-import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { LeftSidebarListComponent } from './components/sidebar/left-sidebar-list/left-sidebar-list.component';
 import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.directive';
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatListModule } from '@angular/material/list';
-import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
-import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { PrizeBrowserComponent } from './components/prizes/prize-browser/prize-browser.component';
 import { PrizeCardComponent } from './components/prizes/prize-card/prize-card.component';
 import { PrizeListComponent } from './components/prizes/prize-browser/prize-list/prize-list.component';
@@ -71,15 +70,23 @@ import { PrizeDrawUserListComponent } from './components/prizes/prize-draw-page/
 import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page/prize-draw-user-list/prize-draw-user-entry/prize-draw-user-entry.component';
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
-import { IndexComponent } from './components/index/index.component';
-import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { NotFoundPageComponent } from './components/error-pages/not-found-page/not-found-page.component';
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import { MatListModule } from '@angular/material/list';
+import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
+import { IndexComponent } from './components/index/index.component';
+import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
+import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
+import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
+import { authInterceptor } from './interceptor/auth.interceptor';
+import { BetTypeFormComponent } from './components/events/bet-type-form/bet-type-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -118,12 +125,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserProfileFormComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
-    HomeComponent,
     AccountPageUserProfileComponent,
     UserTagBtnComponent,
     ViewCompetitionsComponent,
     CompetitionCardComponent,
-    TagComponent,
     GroupFormComponent,
     GroupEditComponent,
     StopMousePropagationDirective,
@@ -155,6 +160,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeDrawUserEntryComponent,
     PrizeDrawEntryInputComponent,
     ConfirmDialogComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
+    NotFoundPageComponent,
+    BetsListComponent,
+    LoginAlertComponent,
+    ClickOutsideDirective,
+    AccessDeniedPageComponent,
+    BetTypeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -189,6 +203,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     {
@@ -197,6 +215,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService],
     },
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
   bootstrap: [AppComponent],
 })

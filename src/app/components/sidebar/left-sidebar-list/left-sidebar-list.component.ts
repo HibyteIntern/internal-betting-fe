@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProfileService } from '../../../service/user-profile.service';
+import { FullUserProfile } from '../../../entity/full-user-profile';
+import { Role } from '../../../entity/Role';
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -7,7 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./left-sidebar-list.component.scss'],
 })
 export class LeftSidebarListComponent {
-  constructor(protected router: Router) {}
+  userProfile: FullUserProfile | null = null;
+  protected readonly Role = Role;
+  constructor(
+    protected router: Router,
+    protected userProfileService: UserProfileService,
+  ) {
+    this.userProfileService.userProfile$.subscribe((userProfile) => {
+      this.userProfile = userProfile;
+    });
+  }
 
   navigateToIndex() {
     this.router.navigate(['/']);
@@ -15,5 +27,16 @@ export class LeftSidebarListComponent {
 
   navigateToCreateCompetition() {
     this.router.navigate(['/competitions/create']);
+  }
+
+  navigateToCreateEvent() {
+    this.router.navigate(['/events/create']);
+  }
+
+  isActiveRoute(route: string): boolean {
+    if (route === '/' && this.router.url === '/') return true;
+    else if (this.router.url !== '/' && route !== '/')
+      return this.router.url.includes(route);
+    return false;
   }
 }

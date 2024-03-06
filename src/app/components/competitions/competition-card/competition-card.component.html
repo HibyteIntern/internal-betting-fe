@@ -1,4 +1,4 @@
-<mat-card class="mat-card">
+<mat-card class="mat-card" (click)="this.viewEmitter.emit()">
   <!-- (click)="emitViewClick()" -->
   <mat-card-header class="mat-card-header">
     <mat-card-title class="mat-card-title">{{
@@ -7,21 +7,30 @@
     <div style="text-transform: capitalize">
       <!-- {{competition.status.toLocaleLowerCase()}}<mat-icon class="icon">{{statusIcon}}</mat-icon> -->
     </div>
-    <div>
-      <mat-icon (click)="this.viewEmitter.emit()" class="icon-hover"
+    <div *ngIf="showButtons">
+      <mat-icon
+        (click)="this.viewEmitter.emit()"
+        class="icon-hover"
+        appClickStopPropagation
         >open_in_new</mat-icon
       >
-      <mat-icon (click)="this.editEmitter.emit()" class="icon-hover"
+      <mat-icon
+        (click)="this.editEmitter.emit()"
+        class="icon-hover"
+        appClickStopPropagation
         >edit</mat-icon
       >
-      <mat-icon (click)="this.deleteEmitter.emit()" class="icon-hover"
+      <mat-icon
+        (click)="this.deleteEmitter.emit()"
+        class="icon-hover"
+        appClickStopPropagation
         >delete</mat-icon
       >
     </div>
   </mat-card-header>
 
   <div class="tags-container">
-    <app-tag>Competition</app-tag>
+    <div class="tag">Competition</div>
   </div>
 
   <mat-card-content class="mat-card-content">

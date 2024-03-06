@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Raleway:wght@400;700&display=swap");
 @import "app/themes/input-themes";
 @import "app/themes/button-themes";
+@import "./app/themes/_variables";
 
 //Color declarations for light mode
 :root {
@@ -19,7 +20,7 @@
   --box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
   --navbar-heigth: 5rem;
 
-  --text-sm: 1.2rem;
+  --text-sm: 1.1rem;
   --text-md: 1.5rem;
   --text-lg: 2rem;
 
@@ -98,6 +99,10 @@ input {
   background: var(--background-color);
 }
 
+.mat-mdc-autocomplete-panel {
+  background-color: var(--background-color) !important;
+}
+
 //Loading spinner
 .lds-dual-ring {
   display: inline-block;
@@ -144,7 +149,7 @@ mat-form-field {
 }
 
 .app-form {
-  width: clamp(550px, 40%, 1200px);
+  width: clamp(550px, 40%, 800px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -168,16 +173,27 @@ mat-form-field {
     width: clamp(300px, 60%, 700px);
     color: var(--text-color);
     margin-bottom: 1rem;
+    font-size: clamp(14px, 1rem, 22px);
+    padding: 1em 2em;
   }
 }
 
 .grid-container {
-  display: grid;
-  grid-gap: 2rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-
-  grid-template-columns: repeat(1, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 0.5rem);
+    margin-right: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -208,15 +224,23 @@ mat-form-field {
     color: var(--text-color);
     background-color: var(--accent-color-one);
     border-radius: var(--border-radius);
-    padding: 1rem 3rem;
-    font-size: var(--text-sm);
+    padding: 0.65em 3em;
+    font-size: clamp(12px, var(--text-sm), 22px);
     border: none;
     transition: all ease-in-out var(--transition-duration);
     cursor: pointer;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
+
+    @media (max-width: $mobile-threshold) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
   }
 }
 
@@ -237,6 +261,8 @@ mat-form-field {
     width: 8rem;
     flex-shrink: 0;
     color: var(--text-color) !important;
+    font-size: 1rem;
+    padding: clamp(8px, 1em, 30px);
   }
   div {
     overflow: hidden;
@@ -248,6 +274,46 @@ mat-form-field {
   }
   @media screen and (max-width: 768px) {
     width: calc(100% - 2rem);
+  }
+}
+
+//styles for error pages
+.error-page-outer-container {
+  width: 100%;
+  margin-top: calc(50vh - var(--navbar-heigth) - 2rem);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  div {
+    .message {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .error-code {
+      font-size: 5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}
+
+.tag {
+  display: inline-block;
+  background-color: var(--accent-color-two);
+  font-size: var(--text-sm);
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius);
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+//general styling classes
+@for $i from 1 through 10 {
+  .mb-#{$i} {
+    margin-bottom: $i rem;
   }
 }
 

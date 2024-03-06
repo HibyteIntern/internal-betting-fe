@@ -1,3 +1,10 @@
 .first-field {
   margin-top: 0.3rem;
 }
+
+.lds-dual-ring {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  width: calc(100% + 8px);
+}

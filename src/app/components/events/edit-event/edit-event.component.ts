@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EventRequest } from '../../../entity/EventRequest';
+import { EventRequest } from '../../../entity/event-request.model';
 import { EventService } from '../../../service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Status } from '../../../entity/Status';
 
 @Component({
   selector: 'app-edit-event',
@@ -11,8 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditEventComponent implements OnInit {
   eventId!: string;
   formData: EventRequest = new EventRequest();
-  eventTemplates: any[] = []; // Add this line
-  statusOptions: string[] = ['DRAFT', 'PUBLISHED', 'CANCELLED'];
+  statusOptions: string[] = [Status.DRAFT, Status.OPEN, Status.CLOSED];
+  minStartsAtDate = new Date();
+
+  isLoading = false;
+  errorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,20 +32,24 @@ export class EditEventComponent implements OnInit {
         (data: EventRequest) => {
           this.formData = new EventRequest(data);
         },
-        (error) => {
-          console.error('Error fetching event data:', error);
+        () => {
+          this.errorMessage = 'Error fetching event data';
         },
       );
     });
   }
 
   submitForm() {
+    this.isLoading = true;
+    this.errorMessage = '';
     this.eventService.updateEvent(this.eventId, this.formData).subscribe(
-      (response) => {
-        this.router.navigate(['/view-event', this.eventId]);
+      () => {
+        this.isLoading = false;
+        this.router.navigate(['/events', this.eventId]);
       },
-      (error) => {
-        console.error('Error updating event:', error);
+      () => {
+        this.errorMessage = 'Error updating event';
+        this.isLoading = false;
       },
     );
   }

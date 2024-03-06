@@ -1,5 +1,11 @@
+@import "./../../themes/_variables";
+
 .search-container {
   width: 30rem;
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
 }
 
 .add-tags-container {
@@ -61,4 +67,8 @@
   .select-tags-container {
     left: -14.5rem;
   }
+}
+
+.grid-container {
+  padding-bottom: 1.5rem;
 }

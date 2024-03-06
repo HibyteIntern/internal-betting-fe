@@ -10,14 +10,7 @@ import {
 import { FormControl } from '@angular/forms';
 
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import {
-  Observable,
-  Subscription,
-  map,
-  startWith,
-  BehaviorSubject,
-  merge,
-} from 'rxjs';
+import { Observable, map, startWith, BehaviorSubject, merge } from 'rxjs';
 import { UserProfile } from '../../../entity/user-profile';
 import { FullUserProfile } from '../../../entity/full-user-profile';
 

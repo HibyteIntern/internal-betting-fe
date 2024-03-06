@@ -1,5 +1,5 @@
 <div id="outer-container">
-  <div class="icon">
+  <div class="icon" [ngClass]="{ 'active-icon': isActiveRoute('/') }">
     <img
       (click)="navigateToIndex()"
       src="assets/icons/created-events-icon.svg"
@@ -7,11 +7,21 @@
     />
     <div class="info-container">Events and competitions</div>
   </div>
-  <div class="icon">
-    <img src="assets/icons/create-event-icon.svg" alt="credits" />
+  <div
+    class="icon"
+    [ngClass]="{ 'active-icon': isActiveRoute('/events/create') }"
+  >
+    <img
+      (click)="navigateToCreateEvent()"
+      src="assets/icons/create-event-icon.svg"
+      alt="credits"
+    />
     <div class="info-container">Create event</div>
   </div>
-  <div class="icon">
+  <div
+    class="icon"
+    [ngClass]="{ 'active-icon': isActiveRoute('/competitions/create') }"
+  >
     <img
       (click)="navigateToCreateCompetition()"
       src="assets/icons/create-competition-icon.svg"
@@ -19,15 +29,29 @@
     />
     <div class="info-container">Create competition</div>
   </div>
-  <div class="icon" [routerLink]="['event-templates']">
+  <div
+    class="icon"
+    [routerLink]="['event-templates']"
+    *ngIf="userProfile?.roles?.includes(Role.ADMIN)"
+    [ngClass]="{ 'active-icon': isActiveRoute('/event-templates') }"
+  >
     <img src="assets/icons/event-template-icon.svg" alt="credits" />
     <div class="info-container">Event templates</div>
   </div>
-  <div class="icon">
+  <div
+    class="icon"
+    *ngIf="userProfile?.roles?.includes(Role.ADMIN)"
+    [ngClass]="{ 'active-icon': isActiveRoute('/users') }"
+  >
     <img src="assets/icons/user-icon.svg" alt="credits" />
     <div class="info-container">Users</div>
   </div>
-  <div class="icon">
+  <div
+    class="icon"
+    [routerLink]="['user-groups']"
+    *ngIf="userProfile?.roles?.includes(Role.ADMIN)"
+    [ngClass]="{ 'active-icon': isActiveRoute('/user-groups') }"
+  >
     <img src="assets/icons/user-group-icon.svg" alt="credits" />
     <div class="info-container">User groups</div>
   </div>

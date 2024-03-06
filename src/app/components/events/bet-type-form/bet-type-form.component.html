@@ -1,0 +1,120 @@
+<form [formGroup]="form">
+  <div formArrayName="betTypes">
+    <div
+      *ngFor="let betType of betTypes.controls; let i = index"
+      [formGroupName]="i"
+      class="bet-container"
+    >
+      <div class="bet-title">
+        {{
+          betType.get("name")?.value ? betType.get("name")?.value : "New bet"
+        }}
+      </div>
+      <div class="bet-name-container">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Bet name</mat-label>
+          <input
+            maxlength="50"
+            matInput
+            placeholder="Red cards"
+            value="2"
+            formControlName="name"
+          />
+          <mat-error *ngIf="form.errors?.['insufficientOptions']">
+            Must add at least 2 options.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Bet type</mat-label>
+          <mat-select panelClass="select-dropdown" formControlName="type">
+            <mat-option value="NUMERIC">Numeric</mat-option>
+            <mat-option value="MULTIPLE_CHOICE">Multiple choice</mat-option>
+            <mat-option value="BOOLEAN">Boolean</mat-option>
+            <mat-option value="STRING">Text</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon fontIcon="delete" (click)="removeBetType(i)"></mat-icon>
+      </div>
+
+      <div
+        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
+        style="margin-bottom: 1rem; font-weight: bold; filter: brightness(0.7)"
+      >
+        Options
+      </div>
+
+      <div
+        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
+        class="outer-options-container"
+      >
+        <div
+          class="option-text-container"
+          formArrayName="multipleChoiceOptions"
+        >
+          <div
+            *ngFor="let option of getOptions(i).controls; let j = index"
+            class="option-text-container"
+          >
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>{{ "Option " + (j + 1) }}</mat-label>
+              <input
+                matInput
+                placeholder="Some option"
+                value="d"
+                [formControlName]="j"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="option-odd-container" formArrayName="odds">
+          <div *ngFor="let odd of getOdds(i).controls; let j = index">
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>Odds</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="Some number"
+                value=""
+                [formControlName]="j"
+              />
+            </mat-form-field>
+            <mat-icon
+              *ngIf="j > 1"
+              fontIcon="delete"
+              (click)="removeMultipleChoiceOption(i, j)"
+            ></mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <mat-icon
+        *ngIf="betType.get('type')?.value === 'MULTIPLE_CHOICE'"
+        style="margin-bottom: 0.75rem; margin-left: 0"
+        class="add-option-button"
+        (click)="addMultipleChoiceOptions(i)"
+        >add</mat-icon
+      >
+
+      <button
+        type="button"
+        mat-stroked-button
+        color="primary"
+        class="delete-bet-button"
+        (click)="removeBetType(i)"
+      >
+        Delete bet
+      </button>
+      <div class="bet-separator"></div>
+    </div>
+  </div>
+  <button
+    type="button"
+    mat-raised-button
+    color="accent"
+    style="color: white"
+    class="add-bet-button"
+    (click)="addBetType()"
+  >
+    Add bet
+  </button>
+</form>

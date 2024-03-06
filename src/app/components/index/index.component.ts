@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Competition } from 'src/app/entity/competitions.model';
-import { EventRequest } from 'src/app/entity/EventRequest';
+import { EventRequest } from 'src/app/entity/event-request.model';
 import { CompetitionService } from 'src/app/service/competition.service';
 import { EventService } from 'src/app/service/event.service';
 import { TagsService } from 'src/app/service/tags.service';
+import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-index',
@@ -30,6 +32,7 @@ export class IndexComponent implements OnInit {
     protected eventService: EventService,
     protected tagsService: TagsService,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -110,6 +113,8 @@ export class IndexComponent implements OnInit {
 
     this.selectCompetitions();
     this.selectEvents();
+    if (this.tagsService.getAvailableTags().length === 0)
+      this.closeTagSelector();
   }
 
   removeTag(tagIndex: number) {
@@ -136,20 +141,47 @@ export class IndexComponent implements OnInit {
     this.tagSelectorOpened = false;
   }
 
-  handleCompetitionViewClick(competitionId: number) {
-    this.router.navigate(['/competitions/', competitionId]);
-  }
-
-  handleCompetitionEditClick(competitionId: number) {
-    this.router.navigate(['/competitions/edit/', competitionId]);
+  handleEntityClick(entityId: number, route: string) {
+    this.router.navigate([route, entityId]);
   }
 
   handleCompetitionDeleteClick(competitionId: number) {
-    this.competitionService.deleteCompetition(competitionId).subscribe(() => {
-      this.competitionService.getCompetitions().subscribe((competitions) => {
-        this.competitions = competitions;
-        this.selectCompetitions();
-      });
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete competition',
+        content: 'Are you sure you want to delete this competition?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.competitionService
+          .deleteCompetition(competitionId)
+          .subscribe(() => {
+            this.competitions = this.competitions.filter(
+              (competition) => competition.id !== competitionId,
+            );
+            this.selectCompetitions();
+          });
+      }
+    });
+  }
+
+  handleEventDeleteClick(eventId: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete event',
+        content: 'Are you sure you want to delete this event?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.eventService.deleteEvent(eventId).subscribe(() => {
+          this.events = this.events.filter(
+            (event) => eventId !== event.eventId,
+          );
+          this.selectEvents();
+        });
+      }
     });
   }
 }

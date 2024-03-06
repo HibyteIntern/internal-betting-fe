@@ -134,6 +134,13 @@ export class UserProfileService {
     });
   }
 
+  updateCoins(coins: number) {
+    const tempUserProfile = this.userProfileSubject.value;
+    if (tempUserProfile && tempUserProfile.coins)
+      tempUserProfile.coins = tempUserProfile.coins + coins;
+    this.userProfileSubject.next(tempUserProfile);
+  }
+
   getPhotoById(userId: number): Observable<Blob> {
     return this.http.get(`${this.userProfileUrl}/getPhoto/${userId}`, {
       responseType: 'blob',

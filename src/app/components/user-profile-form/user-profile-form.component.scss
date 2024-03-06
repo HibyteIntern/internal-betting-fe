@@ -1,49 +1,108 @@
+@import "./../../themes/_variables";
+
 form {
-  margin-left: 70px;
-  margin-top: 100px;
-}
-
-.username-field {
-  display: block;
-  width: 25%; /* sau orice altă valoare mai mică decât 100% */
-  margin-bottom: 10px;
-}
-
-.description-field {
-  display: block;
-  width: 40%;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 button {
-  background-color: var(--accent-color-one);
   color: var(--text-color);
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: clamp(13px, 0.9rem, 16px);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
 }
 
-button[type="submit"] {
-  margin-right: 20px;
+.avatar-button {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  width: 11rem;
+  min-width: 150px;
+}
+
+.end-button {
+  width: 6rem;
+  @media (max-width: $mobile-threshold) {
+    width: calc(50% - 0.5rem);
+  }
+  @media (max-width: 400px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.username-field,
+.description-field {
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.username-field {
+  width: clamp(300px, 25%, 700px);
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
+}
+
+.description-field {
+  width: clamp(450px, 37.5%, 800px);
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
+  }
 }
 
 .profile-image-upload {
-  margin-bottom: 50px;
   text-align: left;
+  width: fit-content;
+  aspect-ratio: 1/1;
+  position: relative;
+  border-radius: 50%;
+
+  .profile-circle {
+    width: 11rem;
+    min-width: 150px;
+    aspect-ratio: 1/1;
+    position: relative;
+    background-color: var(--sidebar-color);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center center;
+    transition: filter 0.2s ease-in-out;
+  }
+
+  .edit-icon {
+    pointer-events: none;
+    position: absolute;
+    scale: 1.5;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &:hover {
+    cursor: pointer;
+    .profile-circle {
+      filter: brightness(0.5);
+    }
+    .edit-icon {
+      opacity: 1;
+    }
+  }
 }
 
-.profile-circle {
-  width: 175px;
-  height: 175px;
-  background-color: var(--sidebar-color);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center center;
+.lds-dual-ring {
+  @media (max-width: $mobile-threshold) {
+    position: relative;
+    left: calc(50% - 40px);
+  }
+}
+
+button[type="submit"] {
+  margin-right: 1rem;
 }
 
 input[type="file"] {

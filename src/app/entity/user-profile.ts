@@ -1,4 +1,5 @@
 import { Bet } from './Bet';
+import { Role } from './Role';
 
 export interface UserProfile {
   userId?: number;
@@ -8,5 +9,6 @@ export interface UserProfile {
   description?: string;
   coins?: number;
   bets?: Bet[];
+  roles?: Role[];
   groups?: number[];
 }

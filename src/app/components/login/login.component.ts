@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoggedIn = await this.authService.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.authService.loadUserProfile();
-      const token = await this.authService.getToken();
-
+      await this.authService.getToken();
       await this.userProfileService.checkUserProfile(this.userProfile);
 
       this.finishLogin = true;
@@ -45,8 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     if (this.finishLogin) {
-      this.subscription = this.userProfileService.getMe().subscribe((user) => {
-        this.router.navigate(['/home']);
+      this.subscription = this.userProfileService.getMe().subscribe(() => {
+        this.router.navigate(['/']);
       });
     }
   }
