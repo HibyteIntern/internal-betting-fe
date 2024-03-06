@@ -73,17 +73,17 @@ const routes: Routes = [
   {
     path: 'user-groups',
     canActivate: [authGuard],
-    component: GroupsComponent
+    component: GroupsComponent,
   },
   {
     path: 'user-groups/create',
     canActivate: [authGuard],
-    component: GroupCreateComponent
+    component: GroupCreateComponent,
   },
   {
     path: 'user-groups/edit/:id',
     canActivate: [authGuard],
-    component: GroupEditComponent
+    component: GroupEditComponent,
   },
   { path: '', component: IndexComponent },
   { path: 'denied', component: AccessDeniedPageComponent },

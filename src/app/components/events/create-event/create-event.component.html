@@ -46,9 +46,11 @@
         [multiple]="true"
         panelClass="select-dropdown"
       >
-        <mat-option *ngFor="let group of userGroupsList" [value]="group.groupName">{{
-          group.groupName
-        }}</mat-option>
+        <mat-option
+          *ngFor="let group of userGroupsList"
+          [value]="group.groupName"
+          >{{ group.groupName }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" color="accent">

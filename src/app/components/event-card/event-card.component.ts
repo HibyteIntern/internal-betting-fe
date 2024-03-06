@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EventRequest } from 'src/app/entity/event-request.model';
 import { UserProfileService } from '../../service/user-profile.service';
 import { FullUserProfile } from '../../entity/full-user-profile';
@@ -26,8 +26,7 @@ export class EventCardComponent implements OnInit {
     this.userProfileService.userProfile$.subscribe((user) => {
       this.loggedInUser = user;
       if (user && this.event) {
-        this.showButtons =
-          this.event.creator?.userId === user.userId;
+        this.showButtons = this.event.creator?.userId === user.userId;
       }
     });
   }
