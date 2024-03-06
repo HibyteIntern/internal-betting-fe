@@ -166,7 +166,6 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    this.isLoading = true;
     const avatarSvg = this.avatarService.generateAvatar(
       this.userProfile?.keycloakId,
     );
