@@ -1,9 +1,7 @@
 <app-mainframe
   [title]="
     isEditPage && editedPrizeDraw
-      ? editedPrizeDraw
-        ? editedPrizeDraw.title
-        : ''
+      ? editedPrizeDraw!.title
       : 'Create new prize draw'
   "
 >
