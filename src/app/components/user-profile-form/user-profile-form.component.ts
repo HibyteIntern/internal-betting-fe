@@ -1,7 +1,14 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
@@ -18,7 +25,6 @@ export class UserProfileFormComponent implements OnChanges {
   uploadedPhotoId?: number;
   originalUserProfile?: FullUserProfile;
   file: File | null = null;
-  isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +33,7 @@ export class UserProfileFormComponent implements OnChanges {
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required], [this.usernameTakenValidator()]],
       description: '',
     });
   }
@@ -52,6 +58,31 @@ export class UserProfileFormComponent implements OnChanges {
       } else {
         console.error('User profile or profile picture is undefined.');
       }
+    }
+  }
+
+  private usernameTakenValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const currentUsername = this.originalUserProfile?.username;
+      if (!control.value || control.value === currentUsername) {
+        return of(null);
+      }
+      return this.userProfileService
+        .isUsernameTaken(control.value, currentUsername)
+        .pipe(
+          map((isTaken) => (isTaken ? { usernameTaken: true } : null)),
+          catchError(() => of(null)),
+        );
+    };
+  }
+
+  displayProfileImage(blob: Blob) {
+    const url = URL.createObjectURL(blob);
+    const circle = document.querySelector('.profile-circle') as HTMLElement;
+    if (circle) {
+      circle.style.backgroundImage = `url(${url})`;
+      circle.style.backgroundSize = 'cover';
+      circle.style.backgroundPosition = 'center';
     }
   }
 
@@ -114,12 +145,10 @@ export class UserProfileFormComponent implements OnChanges {
         '';
     }
 
-    this.isLoading = true;
     this.userProfileService
       .update(updatedUserProfile)
       .pipe(
         finalize(() => {
-          this.isLoading = false;
           location.reload();
           this.location.back();
         }),
@@ -134,17 +163,17 @@ export class UserProfileFormComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    this.isLoading = true;
-    const userId = String(this.userProfile?.userId);
-    const avatarSvg = this.avatarService.generateAvatar(userId);
+    const avatarSvg = this.avatarService.generateAvatar(
+      this.userProfile?.keycloakId,
+    );
     const avatarFile = await this.avatarService.convertSvgToImageFile(
       avatarSvg,
-      userId,
+      this.userProfile?.keycloakId,
     );
     if (this.userProfile?.userId) {
       await this.userProfileService.uploadAvatarAndUpdateProfile(avatarFile);
     }
-    this.isLoading = false;
+
     location.reload();
   }
 }

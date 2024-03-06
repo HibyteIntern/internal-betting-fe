@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
 import { KeycloakProfile } from 'keycloak-js';
 import { AvatarService } from './avatar.service';
@@ -41,11 +41,12 @@ export class UserProfileService {
             userProfileKeycloak.username &&
             userProfile.userId
           ) {
-            const userId = String(userProfile.userId);
-            const avatarSvg = this.avatarService.generateAvatar(userId);
+            const avatarSvg = this.avatarService.generateAvatar(
+              userProfile.keycloakId,
+            );
             const avatarFile = await this.avatarService.convertSvgToImageFile(
               avatarSvg,
-              userId,
+              userProfile.keycloakId,
             );
 
             if (userProfile.userId) {
@@ -110,6 +111,12 @@ export class UserProfileService {
     return this.http.delete<any>(`${this.userProfileUrl}`);
   }
 
+  getUserProfileByName(name: string): Observable<FullUserProfile | undefined> {
+    return this.getAll().pipe(
+      map((profiles) => profiles.find((p) => p.username === name)),
+    );
+  }
+
   addPhoto(photo: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
@@ -133,6 +140,26 @@ export class UserProfileService {
       tempUserProfile.coins = tempUserProfile.coins + coins;
     this.userProfileSubject.next(tempUserProfile);
   }
+
+  getPhotoById(userId: number): Observable<Blob> {
+    return this.http.get(`${this.userProfileUrl}/getPhoto/${userId}`, {
+      responseType: 'blob',
+    });
+  }
+
+  isUsernameTaken(
+    newUsername: string,
+    currentUsername?: string,
+  ): Observable<boolean> {
+    const params = new HttpParams()
+      .set('username', newUsername)
+      .set('currentUsername', currentUsername || '');
+
+    return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
+      params,
+    });
+  }
+
   displayProfileImageForSelector(blob: Blob, selector: string) {
     const circle = document.querySelector(selector) as HTMLElement;
     this.displayProfileImage(blob, circle);
