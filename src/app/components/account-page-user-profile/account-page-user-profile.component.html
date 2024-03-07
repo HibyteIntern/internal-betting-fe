@@ -1,9 +1,8 @@
 <div class="alert-box" appClickOutside (clickOutside)="cancel.emit()">
   <div class="profile-image-upload">
     <app-profile-image
-      [groupOrUser]="'user'"
-      [viewOrEdit]="'view'"
-      [bigPhoto]="true"
+      [image]="blob"
+      [isLargeImage]="true"
     ></app-profile-image>
   </div>
   <div class="username">{{ username }}</div>

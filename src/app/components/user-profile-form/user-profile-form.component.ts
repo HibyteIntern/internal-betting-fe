@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -12,13 +12,14 @@ import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
 import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
+import {ImageService} from "../../service/image.service";
 
 @Component({
   selector: 'app-user-profile-form',
   templateUrl: './user-profile-form.component.html',
   styleUrls: ['./user-profile-form.component.scss'],
 })
-export class UserProfileFormComponent implements OnChanges {
+export class UserProfileFormComponent implements OnChanges, OnInit {
   @Input() userProfile?: FullUserProfile | null;
 
   userProfileForm: FormGroup;
@@ -27,17 +28,26 @@ export class UserProfileFormComponent implements OnChanges {
   file: File | null = null;
   isLoading = false;
   updatedFile: File | null = null;
+  blob: Blob | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private avatarService: AvatarService,
+    private imageService: ImageService,
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
       username: ['', [Validators.required], [this.usernameTakenValidator()]],
       description: '',
     });
+  }
+
+  ngOnInit() {
+    if (this.userProfile) {
+      this.userProfileService.getPhoto().subscribe((blob) => {
+        this.blob = blob;
+      });
+    }
   }
 
   ngOnChanges(): void {

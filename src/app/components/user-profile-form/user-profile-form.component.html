@@ -3,9 +3,9 @@
     <app-profile-image
       [file]="updatedFile"
       (imageChanged)="handleFileChange($event)"
-      [viewOrEdit]="'edit'"
-      [groupOrUser]="'user'"
-      [keycloakId]="userProfile?.keycloakId"
+      [isEditable]="true"
+      [image]="blob"
+      [avatarId]="userProfile?.keycloakId"
     ></app-profile-image>
   </div>
   <br />

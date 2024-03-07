@@ -18,6 +18,7 @@ import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
 import { UserGroupModel } from '../../../entity/user-group.model';
 import { FullUserProfile } from '../../../entity/full-user-profile';
+import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-group-form',
@@ -39,11 +40,15 @@ export class GroupFormComponent implements OnChanges, OnInit {
   uploadedPhotoId?: number;
   updatedFile: File | null = null;
 
+  blob: Blob | undefined;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserProfileService,
     private groupService: GroupService,
     private router: Router,
+    private imageService: ImageService,
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
@@ -93,6 +98,12 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
       this.selectedUserIds = this.initialGroup.users;
       this.initialId = this.initialGroup.userGroupId;
+
+      if (this.isEditMode && this.initialGroup?.userGroupId) {
+        this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe((blob) => {
+          this.blob = blob;
+        });
+      }
     }
   }
 

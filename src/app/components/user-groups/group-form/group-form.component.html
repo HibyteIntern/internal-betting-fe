@@ -6,9 +6,9 @@
     <app-profile-image
       [file]="file"
       (imageChanged)="handleFileChange($event)"
-      [viewOrEdit]="'edit'"
-      [groupOrUser]="'group'"
-      [id]="initialId"
+      [isEditable]="true"
+      [avatarId]="initialId?.toString()"
+      [image]="blob"
     ></app-profile-image>
   </div>
   <br />

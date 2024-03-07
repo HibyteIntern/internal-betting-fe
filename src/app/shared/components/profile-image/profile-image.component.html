@@ -1,12 +1,12 @@
 <input
-  *ngIf="viewOrEdit === 'edit'"
+  *ngIf="isEditable"
   type="file"
   id="profileImage"
   (change)="onFileSelect($event)"
   hidden
   accept="image/*"
 />
-<label for="profileImage" *ngIf="viewOrEdit === 'edit'">
+<label for="profileImage" *ngIf="isEditable">
   <div #profileCircle class="{{ getImageType() }}">
     <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
   </div>
@@ -24,6 +24,6 @@
     </button>
   </div>
 </label>
-<div *ngIf="viewOrEdit === 'view'">
+<div *ngIf="!isEditable">
   <div #profileCircle class="{{ getImageType() }}"></div>
 </div>

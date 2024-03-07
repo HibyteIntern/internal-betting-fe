@@ -29,6 +29,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   userProfile: FullUserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
+  blob: Blob | undefined;
 
   constructor(
     private router: Router,
@@ -53,6 +54,11 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
         .subscribe((profile) => {
           this.userProfile = profile;
         });
+
+      this.userProfileService.getPhoto().subscribe((blob) => {
+        this.blob = blob;
+      } );
+
     }
   }
 

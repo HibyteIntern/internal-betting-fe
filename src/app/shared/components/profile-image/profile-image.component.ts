@@ -9,54 +9,48 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { UserProfileService } from '../../../service/user-profile.service';
-import { GroupService } from '../../../service/group.service';
-import { FullUserProfile } from '../../../entity/full-user-profile';
-import { AvatarService } from '../../../service/avatar.service';
+import {UserProfileService} from '../../../service/user-profile.service';
+import {GroupService} from '../../../service/group.service';
+import {FullUserProfile} from '../../../entity/full-user-profile';
+import {AvatarService} from '../../../service/avatar.service';
+import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-profile-image',
   templateUrl: './profile-image.component.html',
   styleUrls: ['./profile-image.component.scss'],
 })
-export class ProfileImageComponent implements OnInit, OnChanges {
+export class ProfileImageComponent implements OnChanges {
   @Input() file: File | null = null;
   @Output() imageChanged: EventEmitter<File> = new EventEmitter<File>();
-  @Input() groupOrUser?: string;
-  @Input() viewOrEdit?: string;
-  @Input() id?: number | null;
-  @Input() bigPhoto?: boolean;
-  @Input() navbarUser: FullUserProfile | null = null;
-  @Input() keycloakId: string | undefined;
+  @Input() isEditable = false;
+  @Input() isLargeImage?: boolean;
+
+  @Input() image?: Blob;
+  @Input() avatarId?: string;
 
   @ViewChild('profileCircle') profileCircle?: ElementRef;
 
   avatarImage: File | null = null;
 
-  ngOnInit(): void {
-    this.displayImage();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['navbarUser'] && this.navbarUser) {
-      this.displayImage();
+    if (changes['image'] && this.image) {
+      this.displayProfileImage(this.image, this.profileCircle?.nativeElement as HTMLElement);
     }
   }
 
   constructor(
-    private userService: UserProfileService,
-    private groupService: GroupService,
-    private avatarService: AvatarService,
+    private imageService: ImageService
   ) {}
 
   getImageType() {
-    return this.viewOrEdit === 'view'
-      ? 'profile-circle-view'
-      : 'profile-circle-edit';
+    return this.isEditable
+      ? 'profile-circle-edit'
+      : 'profile-circle-view';
   }
 
   onFileSelect(event: Event): void {
-    if (this.viewOrEdit !== 'edit') {
+    if (!this.isEditable) {
       return;
     } else {
       const element = event.target as HTMLInputElement;
@@ -80,31 +74,13 @@ export class ProfileImageComponent implements OnInit, OnChanges {
     reader.readAsDataURL(file);
   }
 
-  displayImage() {
-    let photoService;
-    if (this.groupOrUser === 'group' && this.id) {
-      photoService = this.groupService.getPhoto(this.id);
-    } else if (this.groupOrUser === 'user') {
-      photoService = this.userService.getPhoto();
-    }
-
-    if (photoService) {
-      photoService.subscribe((blob) => {
-        this.displayProfileImage(
-          blob,
-          this.profileCircle?.nativeElement as HTMLElement,
-        );
-      });
-    }
-  }
-
   displayProfileImage(blobOrFile: Blob | File, circle: HTMLElement) {
     const url = URL.createObjectURL(blobOrFile);
     if (circle) {
       circle.style.backgroundImage = `url(${url})`;
-      if (this.viewOrEdit === 'view') {
+      if (!this.isEditable) {
         circle.classList.add('profile-circle-view');
-        if (this.bigPhoto) {
+        if (this.isLargeImage) {
           circle.classList.add('big');
         }
       } else {
@@ -114,24 +90,16 @@ export class ProfileImageComponent implements OnInit, OnChanges {
   }
 
   async onAddAvatar() {
-    let avatarId: string | number | undefined = undefined;
-    if (this.groupOrUser === 'group' && this.id) {
-      avatarId = this.id.toString();
-    } else if (this.groupOrUser === 'user') {
-      avatarId = this.keycloakId;
-    }
-
-    if (avatarId) {
-      const avatarSvg = this.avatarService.generateAvatar(avatarId);
-      this.avatarImage = await this.avatarService.convertSvgToImageFile(
-        avatarSvg,
-        avatarId,
-      );
-      this.imageChanged.emit(this.avatarImage);
-      this.displayProfileImage(
-        this.avatarImage,
-        this.profileCircle?.nativeElement as HTMLElement,
-      );
-    }
+    if (this.avatarId)
+      this.imageService.onAddAvatar(this.avatarId).then((avatarImage) => {
+        if (avatarImage) {
+          this.avatarImage = avatarImage;
+          this.imageChanged.emit(this.avatarImage);
+          this.displayProfileImage(
+            this.avatarImage,
+            this.profileCircle?.nativeElement as HTMLElement,
+          );
+        }
+      });
   }
 }

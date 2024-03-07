@@ -19,11 +19,12 @@ input[type="file"] {
   cursor: pointer;
   background-size: cover;
   background-position: center center;
+  position: relative;
 
   .edit-icon {
     pointer-events: none;
-    position: relative;
-    scale: 1.5;
+    position: absolute;
+    //scale: 1.5;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import {BehaviorSubject, firstValueFrom, Observable} from 'rxjs';
 import { AvatarService } from './avatar.service';
 import { switchMap } from 'rxjs/operators';
 import { FullUserGroupModel } from '../entity/full-user-group.model';
 import { UserGroupModel } from '../entity/user-group.model';
+import {FullUserProfile} from "../entity/full-user-profile";
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,9 @@ export class GroupService {
   ) {
     this.groupUrl = 'http://localhost:8080/api/v1/user-groups';
   }
+
+  private blobSubject: BehaviorSubject<Blob | undefined> = new BehaviorSubject<Blob | undefined>(undefined);
+  private blob$: Observable<Blob | undefined> = this.blobSubject.asObservable();
 
   getAll(): Observable<FullUserGroupModel[]> {
     return this.httpClient.get<FullUserGroupModel[]>(this.groupUrl);
@@ -77,6 +81,14 @@ export class GroupService {
   getPhoto(groupId: number): Observable<Blob> {
     return this.httpClient.get(`${this.groupUrl}/${groupId}/photo`, {
       responseType: 'blob',
+    });
+  }
+
+  getPhoto2(groupId: number): void {
+    this.httpClient.get(`${this.groupUrl}/${groupId}/photo`, {
+      responseType: 'blob',
+    }).subscribe((blob) => {
+      this.blobSubject.next(blob);
     });
   }
 
