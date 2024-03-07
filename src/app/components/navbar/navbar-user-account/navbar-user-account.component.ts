@@ -57,8 +57,7 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
 
       this.userProfileService.getPhoto().subscribe((blob) => {
         this.blob = blob;
-      } );
-
+      });
     }
   }
 

@@ -41,12 +41,11 @@ export class GroupFormComponent implements OnChanges, OnInit {
 
   blob: Blob | undefined;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserProfileService,
     private groupService: GroupService,
-    private router: Router
+    private router: Router,
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
@@ -98,9 +97,11 @@ export class GroupFormComponent implements OnChanges, OnInit {
       this.initialId = this.initialGroup.userGroupId;
 
       if (this.isEditMode && this.initialGroup?.userGroupId) {
-        this.groupService.getPhoto(this.initialGroup?.userGroupId).subscribe((blob) => {
-          this.blob = blob;
-        });
+        this.groupService
+          .getPhoto(this.initialGroup?.userGroupId)
+          .subscribe((blob) => {
+            this.blob = blob;
+          });
       }
     }
   }

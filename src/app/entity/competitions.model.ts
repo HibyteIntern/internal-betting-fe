@@ -1,6 +1,6 @@
 import { Event } from './event.model';
 import { Status } from './Status';
-import {UserProfile} from "./user-profile";
+import { UserProfile } from './user-profile';
 
 export interface Competition {
   id?: number;

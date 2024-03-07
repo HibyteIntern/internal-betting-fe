@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {AvatarService} from '../../../service/avatar.service';
+import { AvatarService } from '../../../service/avatar.service';
 
 @Component({
   selector: 'app-profile-image',
@@ -30,19 +30,17 @@ export class ProfileImageComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['image'] && this.image) {
-      this.displayProfileImage(this.image, this.profileCircle?.nativeElement as HTMLElement);
+      this.displayProfileImage(
+        this.image,
+        this.profileCircle?.nativeElement as HTMLElement,
+      );
     }
   }
 
-  constructor(
-    private avatarService: AvatarService,
-  ) {
-  }
+  constructor(private avatarService: AvatarService) {}
 
   getImageType() {
-    return this.isEditable
-      ? 'profile-circle-edit'
-      : 'profile-circle-view';
+    return this.isEditable ? 'profile-circle-edit' : 'profile-circle-view';
   }
 
   onFileSelect(event: Event): void {
@@ -99,5 +97,4 @@ export class ProfileImageComponent implements OnChanges {
       );
     }
   }
-
 }
