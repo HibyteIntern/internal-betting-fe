@@ -18,7 +18,7 @@ export class CompetitionCardComponent implements OnInit {
     id: 0,
     name: '',
     description: '',
-    creator: '',
+    creator: undefined,
     users: [],
     userGroups: [],
     userProfiles: [],
@@ -33,19 +33,18 @@ export class CompetitionCardComponent implements OnInit {
   @Output() editEmitter = new EventEmitter<void>();
 
   statusIcon = StatusIcons[this.competition.status];
-  showButtons = true;
+  showButtons = false;
   loggedInUser: FullUserProfile | null = null;
 
-  constructor(private userProfileService: UserProfileService) {
-    this.userProfileService.userProfile$.subscribe((user) => {
-      this.loggedInUser = user;
-      if (this.loggedInUser) {
-        // this.showButtons = this.competition.creator.userId === this.loggedInUser.userId;
-      }
-    });
-  }
+  constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
+    this.userProfileService.userProfile$.subscribe((user) => {
+      this.loggedInUser = user;
+      if (this.loggedInUser && this.competition.creator) {
+        this.showButtons = this.competition.creator.userId === this.loggedInUser.userId;
+      }
+    });
     this.statusIcon = StatusIcons[this.competition.status];
   }
 }

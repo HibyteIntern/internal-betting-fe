@@ -1,13 +1,13 @@
 import { Event } from './event.model';
 import { Status } from './Status';
-import { FullUserProfile } from './full-user-profile';
+import {UserProfile} from "./user-profile";
 
 export interface Competition {
   id?: number;
   name: string;
   description: string;
-  creator: string;
-  users: FullUserProfile[];
+  creator?: UserProfile;
+  users: UserProfile[];
   userGroups: string[];
   userProfiles: string[];
   events: Event[];
@@ -19,9 +19,8 @@ export interface Competition {
 export interface CompetitionRequest {
   name: string;
   description: string;
-  users: number[];
   userGroups: string[];
   userProfiles: string[];
-  events: number[];
+  events: string[];
   status: Status;
 }

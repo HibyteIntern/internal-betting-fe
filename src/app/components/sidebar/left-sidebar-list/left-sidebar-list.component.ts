@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfileService } from '../../../service/user-profile.service';
-import { Role } from '../../../entity/Role';
 import { FullUserProfile } from '../../../entity/full-user-profile';
+import { Role } from '../../../entity/Role';
 
 @Component({
   selector: 'app-left-sidebar-list',
@@ -11,6 +11,7 @@ import { FullUserProfile } from '../../../entity/full-user-profile';
 })
 export class LeftSidebarListComponent {
   userProfile: FullUserProfile | null = null;
+  protected readonly Role = Role;
   constructor(
     protected router: Router,
     protected userProfileService: UserProfileService,
@@ -38,6 +39,4 @@ export class LeftSidebarListComponent {
       return this.router.url.includes(route);
     return false;
   }
-
-  protected readonly Role = Role;
 }

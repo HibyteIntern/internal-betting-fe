@@ -2,7 +2,7 @@
   <br />
   <p class="title">Placed bets</p>
   <div *ngFor="let bet of this.bets; let last = last">
-    <p class="title-bet">Title</p>
+    <p class="title-bet">{{ events[bet.eventId] }}</p>
     <div class="bet-item">
       <img
         ngSrc="assets/icons/chips-icon.svg"

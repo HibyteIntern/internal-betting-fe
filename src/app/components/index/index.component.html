@@ -43,15 +43,15 @@
     class="grid-container"
   >
     <app-competition-card
-      (viewEmitter)="handleCompetitionViewClick(competition.id!)"
-      (editEmitter)="handleCompetitionEditClick(competition.id!)"
+      (viewEmitter)="handleEntityClick(competition.id!, '/competitions')"
+      (editEmitter)="handleEntityClick(competition.id!, '/competitions/edit')"
       (deleteEmitter)="handleCompetitionDeleteClick(competition.id!)"
       *ngFor="let competition of selectedCompetitions"
       [competition]="competition"
     />
     <app-event-card
-      (viewEmitter)="handleEventViewClick(event.eventId!)"
-      (editEmitter)="handleEventEditClick(event.eventId!)"
+      (viewEmitter)="handleEntityClick(event.eventId!, '/events')"
+      (editEmitter)="handleEntityClick(event.eventId!, '/events/edit')"
       (deleteEmitter)="handleEventDeleteClick(event.eventId!)"
       *ngFor="let event of selectedEvents"
       [event]="event"

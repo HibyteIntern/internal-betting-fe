@@ -157,7 +157,6 @@ export class LeaderboardsComponent {
           }
         });
         userProfiles.slice(0, 3).forEach((profile, index) => {
-          // Only for the first three
           if (profile?.userId) {
             this.userProfileService
               .getPhotoById(profile?.userId)

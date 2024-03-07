@@ -75,9 +75,9 @@ export class CreateEventComponent implements OnInit {
       },
     );
 
-    this.eventForm.get('eventTemplateName')?.valueChanges.subscribe(() => {
-      this.handleEventTemplateChange();
-    });
+    this.eventForm
+      .get('eventTemplateName')
+      ?.valueChanges.subscribe(() => this.handleEventTemplateChange());
   }
 
   private mapEventTemplateToBetTypeList(eventTemplate: EventTemplate) {
