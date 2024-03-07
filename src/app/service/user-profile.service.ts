@@ -96,6 +96,10 @@ export class UserProfileService {
     return this.http.get<UserProfile>(`${this.userProfileUrl}/getMeSimple`);
   }
 
+  getById(userId: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.userProfileUrl}/${userId}`);
+  }
+
   create(userProfile: FullUserProfile): Observable<FullUserProfile> {
     return this.http.post<FullUserProfile>(this.userProfileUrl, userProfile);
   }

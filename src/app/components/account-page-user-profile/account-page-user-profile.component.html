@@ -1,11 +1,9 @@
-<div class="alert-box">
-  <h2>Account</h2>
-  <div class="profile-content">
-    <div class="profile-image-upload">
-      <div class="profile-circle"></div>
-    </div>
-    <h2 class="username">{{ username }}</h2>
+<div class="alert-box" appClickOutside (clickOutside)="cancel.emit()">
+  <div class="profile-image-upload">
+    <div class="profile-circle"></div>
   </div>
+  <div class="username">{{ username }}</div>
+  <div class="description">{{ description }}</div>
   <div class="alert-box-actions">
     <button
       mat-raised-button

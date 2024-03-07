@@ -1,3 +1,5 @@
+@import "./../../themes/_variables";
+
 .mat-card {
   background-color: var(--card-color);
   padding: 0.5rem 1rem;
@@ -46,5 +48,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @media (max-width: $mobile-threshold) {
+    width: 100%;
   }
 }

@@ -29,7 +29,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
 import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
-import { HomeComponent } from './components/home/home.component';
 import { AccountPageUserProfileComponent } from './components/account-page-user-profile/account-page-user-profile.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { MatLegacyChipsModule } from '@angular/material/legacy-chips';
@@ -54,6 +53,8 @@ import { HideScrollbarDirective } from './shared/directive/hide-scrollbar.direct
 import { RightSidebarComponent } from './components/sidebar/right-sidebar/right-sidebar.component';
 import { AutocompleteComponent } from './shared/components/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BetsListComponent } from './components/bets-list/bets-list.component';
+import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { MatListModule } from '@angular/material/list';
 import { AddBetToEventComponent } from './components/events/add-bet-to-event/add-bet-to-event.component';
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
@@ -72,14 +73,18 @@ import { PrizeDrawUserEntryComponent } from './components/prizes/prize-draw-page
 import { PrizeDrawEntryInputComponent } from './components/prizes/prize-draw-page/prize-draw-entry-input/prize-draw-entry-input.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { IndexComponent } from './components/index/index.component';
-import { BetsListComponent } from './components/bets-list/bets-list.component';
-import { LoginAlertComponent } from './components/login-alert/login-alert.component';
 import { MyGroupsComponent } from './components/sidebar/right-sidebar/my-groups/my-groups.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
+import { MatTableModule } from '@angular/material/table';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import { ConfettiTriggerDirective } from './shared/directive/confetti-trigger.directive';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -118,7 +123,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserProfileFormComponent,
     UserTagBtnComponent,
     CompetitionsComponent,
-    HomeComponent,
     AccountPageUserProfileComponent,
     UserTagBtnComponent,
     ViewCompetitionsComponent,
@@ -155,6 +159,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PrizeDrawUserEntryComponent,
     PrizeDrawEntryInputComponent,
     ConfirmDialogComponent,
+    CreateCompetitionComponent,
+    EventCardComponent,
+    IndexComponent,
+    NotFoundPageComponent,
+    BetsListComponent,
+    LoginAlertComponent,
+    ClickOutsideDirective,
+    LeaderboardsComponent,
+    ConfettiTriggerDirective,
   ],
   imports: [
     BrowserModule,
@@ -189,6 +202,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    MatTableModule,
   ],
   providers: [
     {

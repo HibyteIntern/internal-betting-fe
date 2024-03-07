@@ -12,14 +12,15 @@ import { PrizeDrawPageComponent } from './components/prizes/prize-draw-page/priz
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { ViewEventComponent } from './components/events/view-event/view-event.component';
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ViewCompetitionsComponent } from './components/competitions/view-competition/view-competition.component';
 import { CreateCompetitionComponent } from './components/competitions/create-competition/create-competition.component';
 import { IndexComponent } from './components/index/index.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileEditComponent } from './components/user-profile-edit/user-profile-edit.component';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
+import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,9 +39,8 @@ const routes: Routes = [
     path: 'user-profile',
     canActivate: [AuthGuard],
     component: UserProfileComponent,
-    children: [{ path: 'edit/:id', component: UserProfileEditComponent }],
+    children: [{ path: 'edit', component: UserProfileEditComponent }],
   },
-  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'competition', component: CompetitionsComponent },
   { path: 'event-templates', component: EventTemplateBrowserComponent },
   { path: 'event-templates/create', component: EventTemplateAddComponent },
@@ -53,6 +53,9 @@ const routes: Routes = [
   { path: 'prizes/create', component: PrizeDrawAddComponent },
   { path: 'prizes/edit/:id', component: PrizeDrawAddComponent },
   { path: 'prizes/:id', component: PrizeDrawPageComponent },
+  { path: 'leaderboards', component: LeaderboardsComponent },
+  { path: '', component: IndexComponent },
+  { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 
 @NgModule({

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.finishLogin) {
       this.subscription = this.userProfileService.getMe().subscribe((user) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       });
     }
   }

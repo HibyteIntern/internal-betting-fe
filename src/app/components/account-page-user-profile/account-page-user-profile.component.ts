@@ -16,6 +16,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
 })
 export class AccountPageUserProfileComponent implements OnInit, OnDestroy {
   @Input() username?: string;
+  @Input() description?: string;
   @Input() profilePicture?: number;
   @Output() edit = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<boolean>();

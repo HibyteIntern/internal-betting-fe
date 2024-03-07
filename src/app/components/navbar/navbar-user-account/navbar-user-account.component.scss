@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
 
   height: 100%;
@@ -21,7 +20,8 @@
 
 #user-credits {
   font-size: 1.5rem;
+  width: fit-content;
+  margin-left: 0.5rem;
   font-weight: 600;
-  margin-left: 0.4rem;
   margin-right: 0.5rem;
 }

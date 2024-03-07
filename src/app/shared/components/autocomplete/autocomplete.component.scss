@@ -9,13 +9,13 @@ button {
   color: var(--text-color);
   background-color: var(--accent-color-one);
   border-radius: var(--border-radius);
-  padding: 12px 0;
-  font-size: var(--text-sm);
+  padding: 0.6em 0;
+  font-size: clamp(14px, 1rem, 20px);
   border: none;
   transition: all ease-in-out var(--transition-duration);
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 }

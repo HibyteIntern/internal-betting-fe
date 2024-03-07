@@ -1,65 +1,86 @@
+@import "./../../themes/_variables";
+
 .alert-box {
   position: fixed;
+  z-index: 1000;
   top: 50%;
   left: 50%;
-  width: 500px;
-  padding: 30px;
-  z-index: 100;
-  background: var(--navbar-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 10px;
   transform: translate(-50%, -50%);
-}
+  width: 22rem;
+  box-sizing: border-box;
 
-.alert-box-actions {
-  text-align: right;
-}
+  background-color: var(--navbar-color);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.75rem;
 
-.alert-box-actions button {
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.alert-box-actions button:first-child {
-  margin-right: 20px;
-}
+  .username {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 
-.alert-box-actions button:not(:last-child) {
-  margin-right: 20px;
-}
-
-.profile-image-upload {
-  margin-bottom: 50px;
-  text-align: left;
+  .description {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1rem;
+  }
+  .alert-box-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    button {
+      box-sizing: border-box;
+      padding: 0.7rem;
+      font-size: clamp(12px, 0.8rem, 20px);
+      border-radius: 5px;
+      width: fit-content;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 0.75rem 0;
+    }
+    button:first-child {
+      margin-right: 1rem;
+    }
+    button:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+  @media (max-width: $mobile-threshold) {
+    .alert-box-actions {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+      button {
+        width: 100%;
+        height: 2.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      button:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  }
 }
 
 .profile-circle {
-  width: 150px;
-  height: 150px;
+  width: 12rem;
+  aspect-ratio: 1/1;
   background-color: var(--sidebar-color);
   border-radius: 50%;
-  display: inline-block;
   background-size: cover;
   background-position: center center;
 }
 
 input[type="file"] {
   display: none;
-}
-
-.profile-content {
-  margin-top: 50px;
-  margin-left: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-
-.username {
-  margin-bottom: 80px;
-  margin-left: 50px;
 }
