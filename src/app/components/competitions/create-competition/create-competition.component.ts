@@ -67,7 +67,7 @@ export class CreateCompetitionComponent implements OnInit {
             users: competition.users,
             userProfiles: competition.userProfiles,
             userGroups: competition.userGroups,
-            events: competition.events,
+            events: competition.events.map(event => event.name),
             status: competition.status,
           });
 
