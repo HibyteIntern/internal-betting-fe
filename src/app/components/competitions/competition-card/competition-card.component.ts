@@ -18,7 +18,7 @@ export class CompetitionCardComponent implements OnInit {
     id: 0,
     name: '',
     description: '',
-    creator: '',
+    creator: undefined,
     users: [],
     userGroups: [],
     userProfiles: [],
