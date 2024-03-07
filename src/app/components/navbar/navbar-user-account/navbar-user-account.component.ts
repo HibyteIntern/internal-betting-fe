@@ -29,6 +29,8 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
   userProfile: FullUserProfile | null = null;
   showAlertBox = false;
   isLoggedIn = false;
+  blob: Blob | undefined;
+
   constructor(
     private router: Router,
     private userProfileService: UserProfileService,
@@ -51,10 +53,11 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((profile) => {
           this.userProfile = profile;
-          if (profile?.userId) {
-            this.fetchProfileImage();
-          }
         });
+
+      this.userProfileService.getPhoto().subscribe((blob) => {
+        this.blob = blob;
+      });
     }
   }
 
@@ -65,27 +68,6 @@ export class NavbarUserAccountComponent implements OnInit, OnDestroy {
 
   fetchUserProfile(): void {
     this.userProfileService.getUserProfile();
-  }
-
-  fetchProfileImage() {
-    this.userProfileService
-      .getPhoto()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        (blob) => {
-          if (blob.size > 0) {
-            this.userProfileService.displayProfileImageForSelector(
-              blob,
-              '#account-image',
-            );
-          } else {
-            console.error('Fetched blob is empty.');
-          }
-        },
-        (error) => {
-          console.error('Error fetching profile image:', error);
-        },
-      );
   }
 
   onLogin() {

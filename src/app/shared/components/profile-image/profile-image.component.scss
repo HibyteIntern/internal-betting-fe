@@ -1,0 +1,60 @@
+input[type="file"] {
+  display: none;
+}
+
+.profile-image-upload {
+  text-align: left;
+  width: fit-content;
+  aspect-ratio: 1/1;
+  position: relative;
+  border-radius: 50%;
+}
+
+.profile-circle-edit {
+  width: 175px;
+  height: 175px;
+  background-color: var(--sidebar-color);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+
+  .edit-icon {
+    pointer-events: none;
+    position: absolute;
+    //scale: 1.5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &:hover {
+    filter: brightness(0.5);
+
+    .edit-icon {
+      opacity: 1;
+    }
+  }
+}
+
+.profile-circle-view {
+  height: 3rem;
+  width: 3rem;
+  margin: 0.5rem;
+  background-color: var(--sidebar-color);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.big {
+  height: 12rem;
+  width: 12rem;
+}
+
+// TODO: edit pen over editable image

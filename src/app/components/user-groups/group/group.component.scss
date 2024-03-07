@@ -17,18 +17,6 @@
   word-wrap: break-word;
 }
 
-.profile-circle {
-  height: 2rem;
-  width: 2rem;
-  margin-right: 1rem;
-  background-color: var(--sidebar-color);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center center;
-}
-
 .name-and-pic {
   display: flex;
   flex-direction: row;

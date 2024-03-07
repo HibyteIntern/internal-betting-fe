@@ -51,49 +51,6 @@ button {
   }
 }
 
-.profile-image-upload {
-  text-align: left;
-  width: fit-content;
-  aspect-ratio: 1/1;
-  position: relative;
-  border-radius: 50%;
-
-  .profile-circle {
-    width: 11rem;
-    min-width: 150px;
-    aspect-ratio: 1/1;
-    position: relative;
-    background-color: var(--sidebar-color);
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center center;
-    transition: filter 0.2s ease-in-out;
-  }
-
-  .edit-icon {
-    pointer-events: none;
-    position: absolute;
-    scale: 1.5;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  &:hover {
-    cursor: pointer;
-    .profile-circle {
-      filter: brightness(0.5);
-    }
-    .edit-icon {
-      opacity: 1;
-    }
-  }
-}
-
 .lds-dual-ring {
   @media (max-width: $mobile-threshold) {
     position: relative;
@@ -103,8 +60,4 @@ button {
 
 button[type="submit"] {
   margin-right: 1rem;
-}
-
-input[type="file"] {
-  display: none;
 }

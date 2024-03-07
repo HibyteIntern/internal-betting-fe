@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -10,7 +10,6 @@ import {
 } from '@angular/forms';
 import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
-import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
 
 @Component({
@@ -18,7 +17,7 @@ import { UserProfileService } from 'src/app/service/user-profile.service';
   templateUrl: './user-profile-form.component.html',
   styleUrls: ['./user-profile-form.component.scss'],
 })
-export class UserProfileFormComponent implements OnChanges {
+export class UserProfileFormComponent implements OnChanges, OnInit {
   @Input() userProfile?: FullUserProfile | null;
 
   userProfileForm: FormGroup;
@@ -26,11 +25,12 @@ export class UserProfileFormComponent implements OnChanges {
   originalUserProfile?: FullUserProfile;
   file: File | null = null;
   isLoading = false;
+  updatedFile: File | null = null;
+  blob: Blob | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private avatarService: AvatarService,
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({
@@ -39,26 +39,18 @@ export class UserProfileFormComponent implements OnChanges {
     });
   }
 
+  ngOnInit() {
+    if (this.userProfile) {
+      this.userProfileService.getPhoto().subscribe((blob) => {
+        this.blob = blob;
+      });
+    }
+  }
+
   ngOnChanges(): void {
     if (this.userProfile) {
       this.originalUserProfile = { ...this.userProfile };
-
       this.userProfileForm.patchValue(this.userProfile);
-
-      if (
-        this.userProfile &&
-        this.userProfile.userId &&
-        this.userProfile.profilePicture
-      ) {
-        this.userProfileService.getPhoto().subscribe((blob) => {
-          this.userProfileService.displayProfileImageForSelector(
-            blob,
-            '.profile-circle',
-          );
-        });
-      } else {
-        console.error('User profile or profile picture is undefined.');
-      }
     }
   }
 
@@ -77,39 +69,11 @@ export class UserProfileFormComponent implements OnChanges {
     };
   }
 
-  displayProfileImage(blob: Blob) {
-    const url = URL.createObjectURL(blob);
-    const circle = document.querySelector('.profile-circle') as HTMLElement;
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.style.backgroundSize = 'cover';
-      circle.style.backgroundPosition = 'center';
-    }
-  }
-
-  onFileSelect(event: Event): void {
-    const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
-    if (fileList && fileList.length > 0) {
-      this.file = fileList[0];
-      const reader = new FileReader();
-
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const circle = document.querySelector('.profile-circle') as HTMLElement;
-        if (circle && e.target && e.target.result) {
-          circle.style.backgroundImage = `url(${e.target.result})`;
-        }
-      };
-
-      reader.readAsDataURL(this.file);
-    }
-  }
-
   async onSubmit() {
-    if (this.file) {
+    if (this.updatedFile) {
       try {
         this.uploadedPhotoId = await this.userProfileService
-          .addPhoto(this.file)
+          .addPhoto(this.updatedFile)
           .toPromise();
       } catch (error) {
         console.error('Error uploading photo:', error);
@@ -165,23 +129,7 @@ export class UserProfileFormComponent implements OnChanges {
     this.location.back();
   }
 
-  async onAddAvatar() {
-    const avatarSvg = this.avatarService.generateAvatar(
-      this.userProfile?.keycloakId,
-    );
-    this.file = await this.avatarService.convertSvgToImageFile(
-      avatarSvg,
-      this.userProfile?.keycloakId,
-    );
-
-    const reader = new FileReader();
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      const circle = document.querySelector('.profile-circle') as HTMLElement;
-      if (circle && e.target && e.target.result) {
-        circle.style.backgroundImage = `url(${e.target.result})`;
-      }
-    };
-    reader.readAsDataURL(this.file);
-
+  handleFileChange(file: File) {
+    this.updatedFile = file;
   }
 }

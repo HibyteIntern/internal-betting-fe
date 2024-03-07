@@ -71,16 +71,3 @@
     }
   }
 }
-
-.profile-circle {
-  width: 12rem;
-  aspect-ratio: 1/1;
-  background-color: var(--sidebar-color);
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center center;
-}
-
-input[type="file"] {
-  display: none;
-}

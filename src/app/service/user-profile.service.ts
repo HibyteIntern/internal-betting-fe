@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders , HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { FullUserProfile } from '../entity/full-user-profile';
@@ -162,18 +162,5 @@ export class UserProfileService {
     return this.http.get<boolean>(`${this.userProfileUrl}/isUsernameTaken`, {
       params,
     });
-  }
-
-  displayProfileImageForSelector(blob: Blob, selector: string) {
-    const circle = document.querySelector(selector) as HTMLElement;
-    this.displayProfileImage(blob, circle);
-  }
-
-  displayProfileImage(blob: Blob, circle: HTMLElement) {
-    const url = URL.createObjectURL(blob);
-    if (circle) {
-      circle.style.backgroundImage = `url(${url})`;
-      circle.classList.add('profile-image');
-    }
   }
 }

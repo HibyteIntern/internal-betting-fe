@@ -27,6 +27,8 @@ import { FullUserProfile } from '../../../entity/full-user-profile';
 export class GroupFormComponent implements OnChanges, OnInit {
   @Input() initialGroup: UserGroupModel | null | undefined;
   @Output() formSubmit = new EventEmitter<UserGroupModel>();
+  file: File | null = null;
+  initialId?: number | null;
 
   userOptions: string[] = [];
   selectedUsers: string[] = [];
@@ -35,6 +37,9 @@ export class GroupFormComponent implements OnChanges, OnInit {
   userGroupForm: FormGroup;
   isEditMode = false;
   uploadedPhotoId?: number;
+  updatedFile: File | null = null;
+
+  blob: Blob | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,25 +94,44 @@ export class GroupFormComponent implements OnChanges, OnInit {
       });
 
       this.selectedUserIds = this.initialGroup.users;
+      this.initialId = this.initialGroup.userGroupId;
 
-      if (this.initialGroup.userGroupId && this.initialGroup.profilePicture) {
+      if (this.isEditMode && this.initialGroup?.userGroupId) {
         this.groupService
-          .getPhoto(this.initialGroup.userGroupId)
+          .getPhoto(this.initialGroup?.userGroupId)
           .subscribe((blob) => {
-            this.userService.displayProfileImageForSelector(
-              blob,
-              '.profile-circle',
-            );
+            this.blob = blob;
           });
-      } else {
-        console.error('User profile or profile picture is undefined.');
       }
     }
   }
 
   onSubmit() {
     const formValue = this.userGroupForm.value;
-    const updatedGroup: UserGroupModel = {
+
+    try {
+      if (
+        typeof this.initialGroup?.userGroupId === 'number' &&
+        this.updatedFile
+      ) {
+        this.groupService
+          .addPhoto(this.initialGroup.userGroupId, this.updatedFile)
+          .subscribe((photoId) => {
+            this.uploadedPhotoId = photoId;
+            const updatedGroup = this.createUpdatedGroup(formValue);
+            this.formSubmit.emit(updatedGroup);
+          });
+      } else {
+        const updatedGroup = this.createUpdatedGroup(formValue);
+        this.formSubmit.emit(updatedGroup);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  }
+
+  private createUpdatedGroup(formValue: any): UserGroupModel {
+    return {
       userGroupId: this.initialGroup ? this.initialGroup.userGroupId : null,
       groupName: formValue.groupName ?? '',
       description: formValue.description ?? '',
@@ -117,7 +141,6 @@ export class GroupFormComponent implements OnChanges, OnInit {
           ? this.uploadedPhotoId
           : this.initialGroup?.profilePicture,
     };
-    this.formSubmit.emit(updatedGroup);
   }
 
   initializeUserOptions(): void {
@@ -144,28 +167,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
     return users && users.length >= 2 ? null : { noUsersSelected: true };
   }
 
-  onFileSelect(event: Event): void {
-    const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
-    if (fileList && fileList.length > 0) {
-      const file = fileList[0];
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const circle = document.querySelector('.profile-circle') as HTMLElement;
-        if (circle && e.target && e.target.result) {
-          circle.style.backgroundImage = `url(${e.target.result})`;
-        }
-      };
-      reader.readAsDataURL(file);
-      if (typeof this.initialGroup?.userGroupId === 'number') {
-        this.groupService
-          .addPhoto(this.initialGroup.userGroupId, file)
-          .subscribe((photoId) => {
-            this.uploadedPhotoId = photoId;
-          });
-      } else {
-        console.error('User ID is undefined');
-      }
-    }
+  handleFileChange(file: File) {
+    this.updatedFile = file;
   }
 }

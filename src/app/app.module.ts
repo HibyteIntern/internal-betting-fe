@@ -91,6 +91,7 @@ import { ClickOutsideDirective } from './shared/directive/click-outside.directiv
 import { AccessDeniedPageComponent } from './components/error-pages/access-denied-page/access-denied-page.component';
 import { authInterceptor } from './interceptor/auth.interceptor';
 import { BetTypeFormComponent } from './components/events/bet-type-form/bet-type-form.component';
+import { ProfileImageComponent } from './shared/components/profile-image/profile-image.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -173,6 +174,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ClickOutsideDirective,
     AccessDeniedPageComponent,
     BetTypeFormComponent,
+    ProfileImageComponent,
     LeaderboardsComponent,
     ConfettiTriggerDirective,
   ],

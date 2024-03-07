@@ -1,0 +1,29 @@
+<input
+  *ngIf="isEditable"
+  type="file"
+  id="profileImage"
+  (change)="onFileSelect($event)"
+  hidden
+  accept="image/*"
+/>
+<label for="profileImage" *ngIf="isEditable">
+  <div #profileCircle class="{{ getImageType() }}">
+    <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+  </div>
+  <div>
+    <br />
+    <button
+      mat-raised-button
+      color="primary"
+      class="avatar-button"
+      style="color: var(--text-color)"
+      type="button"
+      (click)="onAddAvatar()"
+    >
+      Add avatar
+    </button>
+  </div>
+</label>
+<div *ngIf="!isEditable">
+  <div #profileCircle class="{{ getImageType() }}"></div>
+</div>

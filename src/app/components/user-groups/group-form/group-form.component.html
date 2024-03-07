@@ -1,17 +1,17 @@
 <form [formGroup]="userGroupForm" (ngSubmit)="onSubmit()" class="styled-form">
-  <div *ngIf="isEditMode" class="profile-image-upload">
-    <input
-      type="file"
-      id="profileImage"
-      (change)="onFileSelect($event)"
-      hidden
-      accept="image/*"
-    />
-    <label for="profileImage">
-      <div class="profile-circle"></div>
-    </label>
-    <!-- TODO: extract profile image in a component <app-profile-image [image]="getBlob()"></app-profile-image>-->
+  <div
+    *ngIf="isEditMode && initialId !== undefined"
+    class="profile-image-upload"
+  >
+    <app-profile-image
+      [file]="file"
+      (imageChanged)="handleFileChange($event)"
+      [isEditable]="true"
+      [avatarId]="initialId?.toString()"
+      [image]="blob"
+    ></app-profile-image>
   </div>
+  <br />
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Group Name</mat-label>
     <input formControlName="groupName" matInput placeholder="Football Group" />

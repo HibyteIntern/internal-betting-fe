@@ -7,7 +7,7 @@
     style="margin-left: 0.75rem"
   />
   <div id="user-credits">{{ userProfile?.coins }}</div>
-  <div id="account-image"></div>
+  <app-profile-image [image]="blob"> </app-profile-image>
 </div>
 
 <div *ngIf="this.isLoggedIn">

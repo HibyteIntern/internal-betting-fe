@@ -12,7 +12,7 @@ export class AvatarService {
     });
   }
 
-  convertSvgToImageFile(svg: string, userId?: string): Promise<File> {
+  convertSvgToImageFile(svg: string, userId?: string | number): Promise<File> {
     return new Promise((resolve, reject) => {
       const svgElement = new Blob([svg], {
         type: 'image/svg+xml;charset=utf-8',

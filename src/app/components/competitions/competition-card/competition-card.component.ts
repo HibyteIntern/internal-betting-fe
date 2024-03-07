@@ -42,7 +42,8 @@ export class CompetitionCardComponent implements OnInit {
     this.userProfileService.userProfile$.subscribe((user) => {
       this.loggedInUser = user;
       if (this.loggedInUser && this.competition.creator) {
-        this.showButtons = this.competition.creator.userId === this.loggedInUser.userId;
+        this.showButtons =
+          this.competition.creator.userId === this.loggedInUser.userId;
       }
     });
     this.statusIcon = StatusIcons[this.competition.status];

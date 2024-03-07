@@ -1,29 +1,14 @@
 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
   <div class="profile-image-upload">
-    <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
-    <input
-      type="file"
-      id="profileImage"
-      (change)="onFileSelect($event)"
-      hidden
-      accept="image/*"
-    />
-    <label for="profileImage">
-      <div class="profile-circle"></div>
-    </label>
+    <app-profile-image
+      [file]="updatedFile"
+      (imageChanged)="handleFileChange($event)"
+      [isEditable]="true"
+      [image]="blob"
+      [avatarId]="userProfile?.keycloakId"
+    ></app-profile-image>
   </div>
-
-  <button
-    mat-raised-button
-    color="primary"
-    class="avatar-button"
-    style="color: var(--text-color)"
-    type="button"
-    (click)="onAddAvatar()"
-  >
-    Add avatar
-  </button>
-
+  <br />
   <mat-form-field color="accent" appearance="outline" class="username-field">
     <mat-label>Username</mat-label>
     <input matInput type="text" formControlName="username" />

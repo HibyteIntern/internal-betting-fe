@@ -43,8 +43,11 @@ const routes: Routes = [
     children: [{ path: 'edit', component: UserProfileEditComponent }],
   },
   {
-   path: 'competition', component: CompetitionsComponent },
-  { path: 'event-templates',
+    path: 'competition',
+    component: CompetitionsComponent,
+  },
+  {
+    path: 'event-templates',
     canActivate: [authGuard],
     component: EventTemplateBrowserComponent,
   },
