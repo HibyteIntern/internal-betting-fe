@@ -4,16 +4,11 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {UserProfileService} from '../../../service/user-profile.service';
-import {GroupService} from '../../../service/group.service';
-import {FullUserProfile} from '../../../entity/full-user-profile';
 import {AvatarService} from '../../../service/avatar.service';
-import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-profile-image',
@@ -40,8 +35,9 @@ export class ProfileImageComponent implements OnChanges {
   }
 
   constructor(
-    private imageService: ImageService
-  ) {}
+    private avatarService: AvatarService,
+  ) {
+  }
 
   getImageType() {
     return this.isEditable
@@ -90,16 +86,18 @@ export class ProfileImageComponent implements OnChanges {
   }
 
   async onAddAvatar() {
-    if (this.avatarId)
-      this.imageService.onAddAvatar(this.avatarId).then((avatarImage) => {
-        if (avatarImage) {
-          this.avatarImage = avatarImage;
-          this.imageChanged.emit(this.avatarImage);
-          this.displayProfileImage(
-            this.avatarImage,
-            this.profileCircle?.nativeElement as HTMLElement,
-          );
-        }
-      });
+    if (this.avatarId) {
+      const avatarSvg = this.avatarService.generateAvatar(this.avatarId);
+      this.avatarImage = await this.avatarService.convertSvgToImageFile(
+        avatarSvg,
+        this.avatarId,
+      );
+      this.imageChanged.emit(this.avatarImage);
+      this.displayProfileImage(
+        this.avatarImage,
+        this.profileCircle?.nativeElement as HTMLElement,
+      );
+    }
   }
+
 }

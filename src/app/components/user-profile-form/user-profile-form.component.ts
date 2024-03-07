@@ -10,9 +10,7 @@ import {
 } from '@angular/forms';
 import { Observable, catchError, finalize, map, of } from 'rxjs';
 import { FullUserProfile } from 'src/app/entity/full-user-profile';
-import { AvatarService } from 'src/app/service/avatar.service';
 import { UserProfileService } from 'src/app/service/user-profile.service';
-import {ImageService} from "../../service/image.service";
 
 @Component({
   selector: 'app-user-profile-form',
@@ -33,7 +31,6 @@ export class UserProfileFormComponent implements OnChanges, OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private imageService: ImageService,
     private location: Location,
   ) {
     this.userProfileForm = this.formBuilder.group({

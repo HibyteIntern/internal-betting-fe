@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserProfileService} from "../../service/user-profile.service";
-import {ImageService} from "../../service/image.service";
 
 @Component({
   selector: 'app-account-page-user-profile',
@@ -17,7 +16,7 @@ export class AccountPageUserProfileComponent implements OnInit {
 
   blob: Blob | undefined;
 
-  constructor(private userService: UserProfileService, private imageService: ImageService) {
+  constructor(private userService: UserProfileService) {
   }
 
   ngOnInit(): void {

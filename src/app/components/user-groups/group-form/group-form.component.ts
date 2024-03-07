@@ -18,7 +18,6 @@ import { GroupService } from '../../../service/group.service';
 import { Router } from '@angular/router';
 import { UserGroupModel } from '../../../entity/user-group.model';
 import { FullUserProfile } from '../../../entity/full-user-profile';
-import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-group-form',
@@ -47,8 +46,7 @@ export class GroupFormComponent implements OnChanges, OnInit {
     private formBuilder: FormBuilder,
     private userService: UserProfileService,
     private groupService: GroupService,
-    private router: Router,
-    private imageService: ImageService,
+    private router: Router
   ) {
     this.userGroupForm = this.formBuilder.group({
       groupName: [this.initialGroup?.groupName || '', Validators.required],
