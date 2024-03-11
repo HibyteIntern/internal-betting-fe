@@ -1,3 +1,4 @@
+// @ts-ignore
 export const environment = {
-  baseUrl: window['env']['baseUrl'] ,
+  baseUrl: (window as any).env.baseUrl,
 };
