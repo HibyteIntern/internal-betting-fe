@@ -43,7 +43,7 @@ jobs:
         run: docker login docker.hq-hydra.hibyte.ro -u ${{ secrets.HIBYTE_NEXUS_USER }} -p ${{ secrets.HIBYTE_NEXUS_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t $REPO:${GITHUB_REF##*/} -t $REPO:${GITHUB_SHA::8} .
+        run: docker build -t hibet-fe .
 
       - name: Publish Docker image
         run: |
