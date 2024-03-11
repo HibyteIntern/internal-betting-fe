@@ -1,0 +1,53 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    env:
+      REPO: docker.hq-hydra.hibyte.ro/hibyte
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Extract tag from GITHUB_REF
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Extract Tag Name
+        id: extract_tag
+        run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Angular Project
+        run: npm run build --progress=true
+
+      - name: Login to Docker Hub
+        run: docker login docker.hq-hydra.hibyte.ro -u ${{ secrets.HIBYTE_NEXUS_USER }} -p ${{ secrets.HIBYTE_NEXUS_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t $REPO:${GITHUB_REF##*/} -t $REPO:${GITHUB_SHA::8} .
+
+      - name: Publish Docker image
+        run: |
+          version_tag=${{ env.VERSION }}
+          image_name=hibet-fe
+          docker tag $image_name:latest $REPO/$image_name:$version_tag
+          docker push $REPO/$image_name:$version_tag
