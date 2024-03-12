@@ -17,9 +17,9 @@ COPY . /app
 RUN cd /app && node --max_old_space_size=8600 node_modules/@angular/cli/bin/ng build --configuration production internal-betting-fe && ls -l -a && pwd
 RUN pwd && ls -l -a /app/dist/internal-betting-fe
 
-FROM httpd:2.4
+FROM httpd:2.4-alpine
 RUN rm -rf /usr/local/apache2/htdocs/*
-
+RUN apk add gettext
 RUN pwd && ls -l -a
 COPY .htaccess /usr/local/apache2/htdocs/
 COPY --from=builder /app/dist/internal-betting-fe /usr/local/apache2/htdocs/
