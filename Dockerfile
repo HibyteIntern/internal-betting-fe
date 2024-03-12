@@ -30,4 +30,4 @@ RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.co
 RUN sed -i '/LoadModule deflate_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
 RUN sed -i '/AllowOverride/s/None/All/' /usr/local/apache2/conf/httpd.conf
 
-CMD ["docker-start.sh"]
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/local/apache2/htdocs/assets/env.template.js > /usr/local/apache2/htdocs/assets/env.js && httpd-foreground"]
